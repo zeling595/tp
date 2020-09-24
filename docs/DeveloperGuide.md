@@ -236,27 +236,34 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* receptionist at a small hotel
+* has to handle the checking in and checking out of hotel guests
+* has to manage other details of hotel stay (e.g. guest information, bill)
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* can type reasonably fast
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: allows receptionist to handle the checking in and out of hotel guests 
+faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                                                         | So that I …​                                                            |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`  | hotel receptionist                         | [EPIC] can check-in and check-out both walk-in guests and reservations.                             |                                                                        |
+| `* * *`  | hotel receptionist                         | answer walk-in guests’ queries about which rooms are available for a block of dates                 | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist                         | register guests with a particular room in our system                                                | can keep track of the rooms occupied.                                  |
+| `* * *`  | hotel receptionist                         | check out guests from a particular room in our system and make the room available again             | other guests can check in                                              |
+| `*`      | hotel receptionist                         | [EPIC] manage the rooms we have available in our system .                                           |                                                                        |
+| `*`      | hotel receptionist                         | edit the rooms’ type and price                                                                      | upgrade/downgrade a room                                               |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
+| `* * *`  | hotel receptionist                         | create new customer profiles as they book rooms                                                     | keep track of their past bookings                                      |
+| `* *`    | hotel receptionist                         | search the room he/she has booked with the name/phone number/passport no                            | locate details of persons without having to go through the entire list |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of guests’ billings                                                               |                                                                        |
+| `* * *`  | hotel receptionist                         | bill them by the number of nights they stay in a particular room                                    | I can bill them when they check out                                    |
 
 *{More to be added}*
 
@@ -398,15 +405,22 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 records of bookings without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should have a UI that looks like a modern desktop app.
+5.  A receptionist new to the app should be able to pick it up quickly.
+6.  Should provide helpful prompts and guides receptionist to accomplish tasks. 
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Receptionist**: User of the application as defined in the target user profile.
+* **Hotel Guest**: The customer of the hotel who will be checking in and out of the hotel.
+* **Booking**: Records that track the information of a Hotel Guest's stay with the hotel.
+* **Room**: The hotel room that the Hotel Guest is staying in.
 
 --------------------------------------------------------------------------------------------------------------------
 
