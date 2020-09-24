@@ -249,14 +249,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                                                         | So that I …​                                                            |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`  | hotel receptionist                         | [EPIC] can check-in and check-out both walk-in guests and reservations.                             |                                                                        |
+| `* * *`  | hotel receptionist                         | answer walk-in guests’ queries about which rooms are available for a block of dates                 | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist                         | register guests with a particular room in our system                                                | can keep track of the rooms occupied.                                  |
+| `* * *`  | hotel receptionist                         | check out guests from a particular room in our system and make the room available again             | other guests can check in                                              |
+| `*`      | hotel receptionist                         | [EPIC] manage the rooms we have available in our system .                                           |                                                                        |
+| `*`      | hotel receptionist                         | edit the rooms’ type and price                                                                      | upgrade/downgrade a room                                               |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
+| `* * *`  | hotel receptionist                         | create new customer profiles as they book rooms                                                     | keep track of their past bookings                                      |
+| `* *`    | hotel receptionist                         | search the room he/she has booked with the name/phone number/passport no                            | locate details of persons without having to go through the entire list |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of guests’ billings                                                               |                                                                        |
+| `* * *`  | hotel receptionist                         | bill them by the number of nights they stay in a particular room                                    | I can bill them when they check out                                    |
 
 *{More to be added}*
 
