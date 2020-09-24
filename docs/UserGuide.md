@@ -16,7 +16,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
 1. Download the latest `conciergebook.jar` from [here](https://github.com/AY2021S1-CS2103-W14-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ConciergeBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -156,17 +156,17 @@ Examples:
 ### Checking in guest: `checkIn`
 Checks in a guest into the hotel.
 
-Format: checkIn ic/GUEST_IC id/ROOM_ID sd/START_DATE ed/END_DATE
+Format: checkIn checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE
 
 * Checks in the guest into the specified ROOM_ID
 * The roomId refers to the unique identifier of the room
-* The guest IC and room ID must be unique.
+* The guest name and phone number and room ID must be unique.
 * The room ID must be a valid room number.
 * GUEST_IC needs to be a 5 lettered-string, with the first as a character and the remaining 4 as numbers
 Dates have to be in the format YYYY-MM-DD.
 
 Examples:
-* checkIn ic/S7894 id/4102 sd/2020-09-14 ed/2020-09-17 checks in a guest whose IC is S7894 into room 4102 from 
+* checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17 checks in a guest whose name is James Ho and phone number is 22224444 into room 4102 from 
 14 September 2020 to 17 September 2020.
 
 
@@ -186,7 +186,7 @@ Examples:
 ### Listing hotel rooms: `listRoom`
 Lists the hotel rooms with some optional filters.
 
-Format: listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE
+Format: `listRoom [sd/START_DATE] [ed/END_DATE] [rt/ROOM_TYPE]`
 
 * Lists all the hotel rooms if none of the arguments are provided.
 * Both START_DATE and END_DATE have to be provided to list all the hotel rooms that are available from the START_DATE to END_DATE.
@@ -196,6 +196,18 @@ Format: listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE
 Examples:
 * listRoom sd/2020-09-14 ed/2020-09-17 lists all the hotel rooms which are available from Sept 14 2020 to Sept 17 2020.
 * listRoom rt/single lists all the hotel rooms of single type.
+
+
+### Listing bookings: `listBooking`
+Lists the bookings with some optional filters.
+
+Format: `listBooking [sd/START_DATE] [ed/END_DATE]`
+
+* Lists all the bookings if none of the arguments are provided.
+* Dates have to be in the format YYYY-MM-DD
+
+Examples:
+* listBooking sd/2020-09-14 ed/2020-09-17 lists all the bookings which are from Sept 14 2020 to Sept 17 2020.
 
 ### Clearing all entries : `clear`
 
@@ -211,7 +223,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ConciergeBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 
@@ -236,9 +248,10 @@ Action | Format, Examples
 **Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
-**Check In** | `checkIn ic/GUEST_IC id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn ic/S7894 id/4102 sd/2020-09-14 ed/2020-09-17`
+**Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
 **Check Out** | `checkOut ROOM_ID`
 **list Room** | `listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE`<br> e.g., `listRoom sd/2020-09-14 ed/2020-09-17`
+**list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 
 

@@ -236,71 +236,195 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* receptionist at a small hotel
+* has to handle the checking in and checking out of hotel guests
+* has to manage other details of hotel stay (e.g. guest information, bill)
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* can type reasonably fast
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: allows receptionist to handle the checking in and out of hotel guests 
+faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                                                         | So that I …​                                                            |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`  | hotel receptionist                         | [EPIC] can check-in and check-out both walk-in guests and reservations.                             |                                                                        |
+| `* * *`  | hotel receptionist                         | answer walk-in guests’ queries about which rooms are available for a block of dates                 | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist                         | register guests with a particular room in our system                                                | can keep track of the rooms occupied.                                  |
+| `* * *`  | hotel receptionist                         | check out guests from a particular room in our system and make the room available again             | other guests can check in                                              |
+| `*`      | hotel receptionist                         | [EPIC] manage the rooms we have available in our system .                                           |                                                                        |
+| `*`      | hotel receptionist                         | edit the rooms’ type and price                                                                      | upgrade/downgrade a room                                               |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
+| `* * *`  | hotel receptionist                         | create new customer profiles as they book rooms                                                     | keep track of their past bookings                                      |
+| `* *`    | hotel receptionist                         | search the room he/she has booked with the name/phone number/passport no                            | locate details of persons without having to go through the entire list |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of guests’ billings                                                               |                                                                        |
+| `* * *`  | hotel receptionist                         | bill them by the number of nights they stay in a particular room                                    | I can bill them when they check out                                    |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ConciergeBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case `UC01`: Add a person profile**  
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User inputs the person's information
+2.  ConciergeBook creates the person's profile
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+1a. Person's information is invalid  
+    1a1. ConciergeBook requests for the correct data.  
+    1a2. User enters new data.
+    Steps 1a1-1a2 are repeated until the data entered are correct.
+    Use case resumes from step 2.
 
   Use case ends.
+  
+**Use case `UC02`: Delete a person profile**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1.  User finds the person to delete.
+2.  User inputs the person's information to delete him/her.
+3.  ConciergeBook deletes the person's profile
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+2a. Person's information cannot be found.  
+  2a1. ConciergeBook alerts user that person's information cannot be found.  
+  
+Use case ends.
+
+**Use case `UC03`: Edit a person profile**
+
+**MSS**
+
+1.  User finds the person to edit.
+2.  User inputs the person's updated information to edit his/her profile.
+3.  ConciergeBook updates the person's profile
+
+    Use case ends.
+
+**Extensions**
+
+1a. Person's information cannot be found.  
+  1a1. ConciergeBook alerts user that person's information cannot be found.  
+
+2a.  Updated information is invalid.  
+  2a1.  ConciergeBook requests for correct data.  
+  2a2.  User enters new data.
+  Steps 2a1-2a2 are repeated until the data entered are correct.
+  Use case resumes from step 3.
+
+Use case ends.
+
+**Use case `UC04`: List room**  
+
+**MSS**  
+
+1. User inputs the start date and end date and optionally room type.  
+2. ConciergeBook lists out all the available rooms.  
+
+Use case ends.
+
+**Extension**
+1a. Start date and/or end date is in invalid format.  
+	1a1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+1b.  End date is earlier than start date.  
+	1b1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+	
+1c. Room type is in invalid.  
+	1c1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+
+**Use case `UC05`: Check in a person**  
+
+**MSS**
+
+1. User finds person.  
+2. User inputs the person’s name, phone number, room Id, start date and end date.  
+3. ConciergeBook searches the person in the database.  
+4. ConciergeBook creates a booking for the person and the room and saves it.  
+
+Use case ends.  
+
+**Extension**  
+
+1a. Person cannot be found.  
+    1a1: User <ins>creates a profile for the person (UC01)</ins>.  
+
+2a. User inputs invalid phone number.  
+    2a1: ConciergeBook throws error message.  
+	Use case resumes at step 1.  
+
+2b. User inputs name and phone number that do not exist in the database.  
+	2b1: ConciergeBook throws error message.  
+	Use case resumes at step 1.  
+
+2c. User inputs invalid roomId.  
+	2c1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+2d. User inputs invalid start date and/or end date.  
+	2d1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+
+2e.  End date is earlier than start date.  
+	2e1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+
+**Use case: `UC06` - List bookings**
+
+**MSS**
+
+1. User inputs optional date, optional name, optional room.  
+2.  ConciergeBook lists all the booking on that date.
+
+Use case ends.
+
+**Extension**  
+1a. User inputs invalid date, name, room.  
+    1a1: ConciergeBook throws an error message.  
+    Use case resumes at step 1.  
+
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 records of bookings without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should have a UI that looks like a modern desktop app.
+5.  A receptionist new to the app should be able to pick it up quickly.
+6.  Should provide helpful prompts and guides receptionist to accomplish tasks. 
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Receptionist**: User of the application as defined in the target user profile.
+* **Hotel Guest**: The customer of the hotel who will be checking in and out of the hotel.
+* **Booking**: Records that track the information of a Hotel Guest's stay with the hotel.
+* **Room**: The hotel room that the Hotel Guest is staying in.
 
 --------------------------------------------------------------------------------------------------------------------
 
