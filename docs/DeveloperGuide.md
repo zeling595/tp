@@ -282,7 +282,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-*1a. Person's information is invalid  
+1a. Person's information is invalid  
     1a1. ConciergeBook requests for the correct data.  
     1a2. User enters new data.
     Steps 1a1-1a2 are repeated until the data entered are correct.
@@ -302,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-*2a. Person's information cannot be found.  
+2a. Person's information cannot be found.  
   2a1. ConciergeBook alerts user that person's information cannot be found.  
   
 Use case ends.
@@ -319,10 +319,10 @@ Use case ends.
 
 **Extensions**
 
-*1a. Person's information cannot be found.  
+1a. Person's information cannot be found.  
   1a1. ConciergeBook alerts user that person's information cannot be found.  
 
-*2a.  Updated information is invalid.  
+2a.  Updated information is invalid.  
   2a1.  ConciergeBook requests for correct data.  
   2a2.  User enters new data.
   Steps 2a1-2a2 are repeated until the data entered are correct.
@@ -340,49 +340,53 @@ Use case ends.
 Use case ends.
 
 **Extension**
-*1a. Start date and/or end date is in invalid format.  
+1a. Start date and/or end date is in invalid format.  
 	1a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
-*1b.  End date is earlier than start date.  
+1b.  End date is earlier than start date.  
 	1b1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 	
-*1c. Room type is in invalid.  
+1c. Room type is in invalid.  
 	1c1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
 
 **Use case `UC05`: Check in a person**  
-Preconditions: Person exists in the database. 
 
 **MSS**
 
-1. User inputs the person’s name, phone number, room Id, start date and end date.  
-2. ConciergeBook searches the person in the database.  
-3. ConciergeBook creates a booking for the person and the room and saves it.  
+1. User finds person.  
+2. User inputs the person’s name, phone number, room Id, start date and end date.  
+3. ConciergeBook searches the person in the database.  
+4. ConciergeBook creates a booking for the person and the room and saves it.  
 
 Use case ends.  
 
 **Extension**  
-*1a. User inputs invalid phone number.  
-    1a1: ConciergeBook throws error message.  
+
+1a. Person cannot be found.  
+    1a1: User <ins>creates a profile for the person (UC01)</ins>.  
+
+2a. User inputs invalid phone number.  
+    2a1: ConciergeBook throws error message.  
 	Use case resumes at step 1.  
 
-*1b. User inputs name and phone number that do not exist in the database.  
-	1b1: ConciergeBook throws error message.  
+2b. User inputs name and phone number that do not exist in the database.  
+	2b1: ConciergeBook throws error message.  
 	Use case resumes at step 1.  
 
-*1c. User inputs invalid roomId.  
-	1c1: ConciergeBook throws error message.   
+2c. User inputs invalid roomId.  
+	2c1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
-*1d. User inputs invalid start date and/or end date.  
-	1d1: ConciergeBook throws error message. 
+2d. User inputs invalid start date and/or end date.  
+	2d1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
-*1e.  End date is earlier than start date.  
-	1e1: ConciergeBook throws error message. 
+2e.  End date is earlier than start date.  
+	2e1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
 **Use case: `UC06` - List bookings**
