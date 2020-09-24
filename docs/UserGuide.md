@@ -186,7 +186,7 @@ Examples:
 ### Listing hotel rooms: `listRoom`
 Lists the hotel rooms with some optional filters.
 
-Format: listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE
+Format: `listRoom [sd/START_DATE] [ed/END_DATE] [rt/ROOM_TYPE]`
 
 * Lists all the hotel rooms if none of the arguments are provided.
 * Both START_DATE and END_DATE have to be provided to list all the hotel rooms that are available from the START_DATE to END_DATE.
@@ -196,6 +196,18 @@ Format: listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE
 Examples:
 * listRoom sd/2020-09-14 ed/2020-09-17 lists all the hotel rooms which are available from Sept 14 2020 to Sept 17 2020.
 * listRoom rt/single lists all the hotel rooms of single type.
+
+
+### Listing bookings: `listBooking`
+Lists the bookings with some optional filters.
+
+Format: `listBooking [sd/START_DATE] [ed/END_DATE]`
+
+* Lists all the bookings if none of the arguments are provided.
+* Dates have to be in the format YYYY-MM-DD
+
+Examples:
+* listBooking sd/2020-09-14 ed/2020-09-17 lists all the bookings which are from Sept 14 2020 to Sept 17 2020.
 
 ### Clearing all entries : `clear`
 
@@ -239,6 +251,7 @@ Action | Format, Examples
 **Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
 **Check Out** | `checkOut ROOM_ID`
 **list Room** | `listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE`<br> e.g., `listRoom sd/2020-09-14 ed/2020-09-17`
+**list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 
 
