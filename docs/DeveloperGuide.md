@@ -236,13 +236,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* receptionist at a small hotel
+* has to handle the checking in and checking out of hotel guests
+* has to manage other details of hotel stay (e.g. guest information, bill)
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* can type reasonably fast
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: allows receptionist to handle the checking in and out of hotel guests 
+faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
 
 ### User stories
@@ -297,15 +299,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 records of bookings without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should have a UI that looks like a modern desktop app.
+5.  A receptionist new to the app should be able to pick it up quickly.
+6.  Should provide helpful prompts and guides receptionist to accomplish tasks. 
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Receptionist**: User of the application as defined in the target user profile.
+* **Hotel Guest**: The customer of the hotel who will be checking in and out of the hotel.
+* **Booking**: Records that track the information of a Hotel Guest's stay with the hotel.
+* **Room**: The hotel room that the Hotel Guest is staying in.
 
 --------------------------------------------------------------------------------------------------------------------
 
