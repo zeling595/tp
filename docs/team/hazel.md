@@ -9,4 +9,10 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
 Given below are my contributions to the project.
 
--none so far-
+* **Documentation**:
+  * User Guide:
+    * Did cosmetic tweaks to existing documentation of features `addPerson`, `findPerson`, `deletePerson`, `editPerson` and `listPerson` [\#72]()
+    * Added documentation for new potential command: `getBill` [\#74]()
+  * Developer Guide:
+    * Updated User Stories 
+
