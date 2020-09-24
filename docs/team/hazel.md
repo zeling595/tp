@@ -11,8 +11,8 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Did cosmetic tweaks to existing documentation of features `addPerson`, `findPerson`, `deletePerson`, `editPerson` and `listPerson` [\#72]()
-    * Added documentation for new potential command: `getBill` [\#74]()
+    * Did cosmetic tweaks to existing documentation of features `addPerson`, `findPerson`, `deletePerson`, `editPerson` and `listPerson` [\#18]()
+    * Added documentation for new potential command: `getBill` [\#18]()
   * Developer Guide:
-    * Updated User Stories 
+    * Updated User Stories [\#29]()
 
