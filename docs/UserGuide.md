@@ -67,31 +67,35 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `addPerson`
 
-Adds a person to the address book.
+Adds a person to the local guestbook. 
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
+* `add n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+### Listing all persons : `listPerson`
 
-Format: `list`
+Lists persons that contain the required phone number.
 
-### Editing a person : `edit`
+Format: `list PHONE_NUMBER`
+* Only phone number of Persons will be searched
+* Only full phone numbers will be matched e.g. `91234567` will not match `91234568`
+* Only returns 1 guest as phone number of persons are unique
+* `PHONE_NUMBER` needs to be have 8 digits 
+
+Examples: 
+* `list 90123456`  will return `Damith`
+
+### Editing a person : `editPerson`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -101,14 +105,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editPerson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editPerson 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `findPerson`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `findPerson KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -118,23 +122,35 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findPerson John` returns `john` and `John Doe`
+* `findPerson alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `deletePerson`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `deletePerson INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listPerson` followed by `deletePerson 2` deletes the 2nd person in the address book.
+* `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
+
+### Viewing a bill: `getBill`
+
+Finds the bill with a room ID and a date (the last day of a booking).
+
+Format: `getBill id/ROOM_ID ed/BOOKING_END_DATE`
+
+* The room ID must be a valid room number
+* Dates have to be in the format YYYY-MM-DD
+
+Examples:
+* `getBill id/2103 ed/2020-09-15` shows the bill for the booking on Room 2103 which ends on 15 Sep 2020. 
 
 ### Clearing all entries : `clear`
 
@@ -155,6 +171,9 @@ AddressBook data are saved in the hard disk automatically after any command that
 ### Archiving data files `[coming in v2.0]`
 
 _{explain the feature here}_
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
