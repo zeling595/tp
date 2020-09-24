@@ -262,32 +262,138 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ConciergeBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case `UC01`: Add a person profile**  
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User inputs the person's information
+2.  ConciergeBook creates the person's profile
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+*1a. Person's information is invalid  
+    1a1. ConciergeBook requests for the correct data.  
+    1a2. User enters new data.
+    Steps 1a1-1a2 are repeated until the data entered are correct.
+    Use case resumes from step 2.
 
   Use case ends.
+  
+**Use case `UC02`: Delete a person profile**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1.  User finds the person to delete.
+2.  User inputs the person's information to delete him/her.
+3.  ConciergeBook deletes the person's profile
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+*2a. Person's information cannot be found.  
+  2a1. ConciergeBook alerts user that person's information cannot be found.  
+  
+Use case ends.
+
+**Use case `UC03`: Edit a person profile**
+
+**MSS**
+
+1.  User finds the person to edit.
+2.  User inputs the person's updated information to edit his/her profile.
+3.  ConciergeBook updates the person's profile
+
+    Use case ends.
+
+**Extensions**
+
+*1a. Person's information cannot be found.  
+  1a1. ConciergeBook alerts user that person's information cannot be found.  
+
+*2a.  Updated information is invalid.  
+  2a1.  ConciergeBook requests for correct data.  
+  2a2.  User enters new data.
+  Steps 2a1-2a2 are repeated until the data entered are correct.
+  Use case resumes from step 3.
+
+Use case ends.
+
+**Use case `UC04`: List room**  
+
+**MSS**  
+
+1. User inputs the start date and end date and optionally room type.  
+2. ConciergeBook lists out all the available rooms.  
+
+Use case ends.
+
+**Extension**
+*1a. Start date and/or end date is in invalid format.  
+	1a1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+*1b.  End date is earlier than start date.  
+	1b1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+	
+*1c. Room type is in invalid.  
+	1c1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+
+**Use case `UC05`: Check in a person**  
+Preconditions: Person exists in the database. 
+
+**MSS**
+
+1. User inputs the person’s name, phone number, room Id, start date and end date.  
+2. ConciergeBook searches the person in the database.  
+3. ConciergeBook creates a booking for the person and the room and saves it.  
+
+Use case ends.  
+
+**Extension**  
+*1a. User inputs invalid phone number.  
+    1a1: ConciergeBook throws error message.  
+	Use case resumes at step 1.  
+
+*1b. User inputs name and phone number that do not exist in the database.  
+	1b1: ConciergeBook throws error message.  
+	Use case resumes at step 1.  
+
+*1c. User inputs invalid roomId.  
+	1c1: ConciergeBook throws error message.   
+	Use case resumes at step 1.  
+
+*1d. User inputs invalid start date and/or end date.  
+	1d1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+
+*1e.  End date is earlier than start date.  
+	1e1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+
+**Use case: `UC06` - List bookings**
+
+**MSS**
+
+1. User inputs optional date, optional name, optional room.  
+2.  ConciergeBook lists all the booking on that date.
+
+Use case ends.
+
+**Extension**
+*1a. invalid date, name, room.
+	1a1: ConciergeBook throws an error message.
+    Use case resumes at step 1.
+
+
+
 
 ### Non-Functional Requirements
 
