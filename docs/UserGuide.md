@@ -93,9 +93,9 @@ Examples:
 
 ### Editing a person : `editPerson`
 
-Edits an existing person in the address book.
+Edits an existing person in the guestbook.
 
-Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -106,7 +106,7 @@ Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 
 Examples:
 *  `editPerson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `editPerson 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editPerson 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating persons by name: `findPerson`
 
@@ -128,7 +128,7 @@ Examples:
 
 ### Deleting a person : `deletePerson`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the guestbook.
 
 Format: `deletePerson INDEX`
 
@@ -137,7 +137,7 @@ Format: `deletePerson INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listPerson` followed by `deletePerson 2` deletes the 2nd person in the address book.
+* `listPerson` followed by `deletePerson 2` deletes the 2nd person in the guestbook.
 * `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
 
 ### Viewing a bill: `getBill`
