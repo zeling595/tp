@@ -398,10 +398,10 @@ Use case ends.
 
 Use case ends.
 
-**Extension**
-*1a. invalid date, name, room.
-	1a1: ConciergeBook throws an error message.
-    Use case resumes at step 1.
+**Extension**  
+1a. User inputs invalid date, name, room.  
+    1a1: ConciergeBook throws an error message.  
+    Use case resumes at step 1.  
 
 
 
