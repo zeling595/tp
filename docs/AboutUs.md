@@ -54,12 +54,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
     * Create tests for the app UI.
 
-    * Responsible for documentation of the UI.
+    * Responsible for the documentation of the UI.
 
 
 ### Hazel Tan
 
-<img src="images/hazel1603.png" width="200px">
+<img src="images/hazel16031603.png" width="200px">
 
 [[github](http://github.com/Hazel1603)]
 [[portfolio](team/hazel.md)]
@@ -72,7 +72,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Wu Yujin
 
-<img src="images/sherrywu178.png" width="200px">
+<img src="images/sherrywu178178.png" width="200px">
 
 [[github](https://github.com/SherryWu178)]
 [[portfolio](team/wuyujin.md)]
@@ -80,5 +80,3 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer (Logic and Model)
 * Responsibilities: 
     * Responsible for the tests of Storage.
-
-
