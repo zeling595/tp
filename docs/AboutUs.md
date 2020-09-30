@@ -54,7 +54,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
     * Create tests for the app UI.
 
-    * Responsible for documentation of the UI.
+    * Responsible for the documentation of the UI.
 
 
 ### Hazel Tan
@@ -80,5 +80,3 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer (Logic and Model)
 * Responsibilities: 
     * Responsible for the tests of Storage.
-
-
