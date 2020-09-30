@@ -59,7 +59,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Hazel Tan
 
-<img src="images/hazel16031603.png" width="200px">
+<img src="images/hazel1603.png" width="200px">
 
 [[github](http://github.com/Hazel1603)]
 [[portfolio](team/hazel.md)]
@@ -72,7 +72,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Wu Yujin
 
-<img src="images/sherrywu178178.png" width="200px">
+<img src="images/sherrywu178.png" width="200px">
 
 [[github](https://github.com/SherryWu178)]
 [[portfolio](team/wuyujin.md)]
