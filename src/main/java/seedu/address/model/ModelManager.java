@@ -100,6 +100,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithId(Integer id) {
+        requireNonNull(id);
+        return addressBook.hasPersonWithId(id);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
