@@ -52,7 +52,7 @@ public class Person {
      * Every field must be present and not null. Used for creating a Person with existing id.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Integer id) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, id);
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -134,7 +134,8 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getId())
+        builder.append("Id: ")
+                .append(getId())
                 .append(" Name: ")
                 .append(getName())
                 .append(" Phone: ")
