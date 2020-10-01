@@ -19,7 +19,9 @@ public class RoomBook implements ReadOnlyRoomBook {
         return rooms.getComplementRooms(unavailableRooms);
     }
 
-    public void addRoom(Room r) { rooms.add(r); }
+    public void addRoom(Room r) {
+        rooms.add(r);
+    }
 
     /// room level operations
     public boolean hasRoom(int roomId) {
@@ -31,5 +33,4 @@ public class RoomBook implements ReadOnlyRoomBook {
     public ObservableList<Room> getRoomList() {
         return rooms.asUnmodifiableObservableList();
     }
-
 }

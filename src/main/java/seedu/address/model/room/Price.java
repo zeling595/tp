@@ -7,6 +7,10 @@ public class Price {
 
     public final int value;
 
+    /**
+     * Constructs a {@code Price}
+     * @param value a valid Price.
+     */
     public Price (int value) {
         requireNonNull(value);
         checkArgument(value >= 0);

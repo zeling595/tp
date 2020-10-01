@@ -1,16 +1,15 @@
 package seedu.address.model.room;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.room.exceptions.DuplicateRoomException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.room.exceptions.DuplicateRoomException;
 
 public class UniqueRoomList implements Iterable<Room> {
 
@@ -33,7 +32,7 @@ public class UniqueRoomList implements Iterable<Room> {
      */
     public ObservableList<Room> getComplementRooms(ObservableList<Room> input) {
         ObservableList<Room> ret = FXCollections.observableArrayList();
-        for(int k = 0; k < internalRoomList.size(); k++) {
+        for (int k = 0; k < internalRoomList.size(); k++) {
             Room curr = internalRoomList.get(k);
             if (!input.contains(curr)) {
                 ret.add(curr);
