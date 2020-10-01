@@ -28,23 +28,16 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Sets next available id to be used
-     */
-    public static void setNextAvailableId(Integer id) {
-        Person.nextAvailableId = id;
-    }
-
-    /**
      * Every field must be present and not null. Used for creating a new Person with a unique id.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.id = nextAvailableId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = nextAvailableId;
         nextAvailableId += 1;
     }
 
@@ -53,15 +46,24 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Integer id) {
         requireAllNonNull(name, phone, email, address, tags, id);
-        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
-    public Integer getId() { return id; }
+    /**
+     * Sets next available id to be used
+     */
+    public static void setNextAvailableId(Integer id) {
+        Person.nextAvailableId = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;
