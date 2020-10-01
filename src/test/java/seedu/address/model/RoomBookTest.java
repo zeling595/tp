@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalRooms.ROOM_1;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
 
 public class RoomBookTest {
 

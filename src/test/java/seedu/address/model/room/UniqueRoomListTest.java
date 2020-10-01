@@ -1,13 +1,5 @@
 package seedu.address.model.room;
 
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.room.exceptions.DuplicateRoomException;
-
-import java.util.List;
-import javafx.collections.FXCollections;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -19,6 +11,15 @@ import static seedu.address.testutil.TypicalRooms.ROOM_3;
 import static seedu.address.testutil.TypicalRooms.ROOM_4;
 import static seedu.address.testutil.TypicalRooms.ROOM_5;
 import static seedu.address.testutil.TypicalRooms.ROOM_6;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.room.exceptions.DuplicateRoomException;
+
 
 public class UniqueRoomListTest {
 
@@ -47,7 +48,7 @@ public class UniqueRoomListTest {
 
     @Test
     public void getComplementRooms_returnsCorrectList() {
-        List<Room> rooms = FXCollections.observableArrayList(ROOM_1,ROOM_2,ROOM_3, ROOM_4, ROOM_5, ROOM_6);
+        List<Room> rooms = FXCollections.observableArrayList(ROOM_1, ROOM_2, ROOM_3, ROOM_4, ROOM_5, ROOM_6);
         uniqueRoomList.setRooms(rooms);
         ObservableList<Room> input = FXCollections.observableArrayList(ROOM_1, ROOM_3, ROOM_6);
         ObservableList<Room> output = uniqueRoomList.getComplementRooms(input);
@@ -55,7 +56,7 @@ public class UniqueRoomListTest {
     }
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueRoomList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+            uniqueRoomList.asUnmodifiableObservableList().remove(0));
     }
 }

@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Address;
 
 public class PriceTest {
 
     @Test
     public void constructor_invalidPrice_throwsIllegalArgumentException() {
-        int invalidPrice= -15;
+        int invalidPrice = -15;
         assertThrows(IllegalArgumentException.class, () -> new Price(invalidPrice));
     }
 

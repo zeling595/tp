@@ -6,12 +6,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class RoomIDTest {
+public class RoomIdTest {
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        int invalidRoomID= 123;
-        assertThrows(IllegalArgumentException.class, () -> new RoomID(invalidRoomID));
+        int invalidRoomId = 123;
+        assertThrows(IllegalArgumentException.class, () -> new RoomID(invalidRoomId));
     }
 
     @Test
