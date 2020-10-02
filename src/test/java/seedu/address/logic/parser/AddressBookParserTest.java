@@ -4,9 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,8 +96,23 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_remark() throws Exception {
-        assertTrue(parser.parseCommand(CheckInCommand.COMMAND_WORD) instanceof CheckInCommand);
+    public void parseCommand_checkIn() throws Exception {
+        final int personalId = 123;
+        final int roomId = 2103;
+        final String startDate = "2020-06-22";
+        final String endDate = "2020-11-29";
+
+
+        CheckInCommand command = (CheckInCommand) parser.parseCommand(CheckInCommand.COMMAND_WORD + " "
+            + PREFIX_PERSONAL_ID + personalId + " "
+            + PREFIX_ROOM_ID + roomId + " "
+            + PREFIX_START_DATE + startDate + " "
+            + PREFIX_END_DATE + endDate);
+
+        assertEquals(new CheckInCommand(personalId, roomId,
+                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+                command);
     }
 
     @Test

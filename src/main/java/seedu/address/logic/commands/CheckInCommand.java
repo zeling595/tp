@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.LocalDate;
 
 /**
  * Encapsulates the Check In feature.
@@ -25,8 +28,44 @@ public class CheckInCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "checkIn command not implemented yet";
 
+    public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
+
+    private final int personalId;
+    private final int roomId;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+
+    public CheckInCommand(int personalId, int roomId, LocalDate startDate, LocalDate endDate) {
+        requireAllNonNull(personalId, roomId, startDate, endDate);
+
+        this.personalId = personalId;
+        this.roomId = roomId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, personalId, roomId, startDate, endDate));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CheckInCommand)) {
+            return false;
+        }
+
+        // state check
+        CheckInCommand e = (CheckInCommand) other;
+        return personalId == e.personalId
+                && roomId == e.roomId
+                && startDate.equals(e.startDate)
+                && endDate.equals(e.endDate);
     }
 }
