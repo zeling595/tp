@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CheckInCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,17 +27,30 @@ public class CheckInCommandParser implements Parser<CheckInCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CheckInCommand parse(String args) throws ParseException {
+        System.out.println(args);
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE);
-
+        String res = argMultimap.getValue(PREFIX_PERSONAL_ID).get();
+        System.out.println(res);
+        int personalId = Integer.parseInt(argMultimap.getValue(PREFIX_PERSONAL_ID).orElse("nth2"));
+        int roomId = Integer.parseInt(argMultimap.getValue(PREFIX_ROOM_ID).orElse("nth3"));
         try {
-            int personalId = Integer.parseInt(argMultimap.getValue(PREFIX_PERSONAL_ID).orElse(""));
-            int roomId = Integer.parseInt(argMultimap.getValue(PREFIX_ROOM_ID).orElse(""));
+
+            // check if roomId is valid
+            // need to check if it exists in our rooms array - to be implemented soon
+
+            // check if room stay of the person clashes with another person's - to be implemented soon
+
             LocalDate startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).orElse(""),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate endDate = LocalDate.parse(argMultimap.getValue(PREFIX_END_DATE).orElse(""),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            if (!startDate.isBefore(endDate)) {
+                throw new ParseException("Start Date must be before End Date!");
+            }
+            System.out.println(new CheckInCommand(personalId, roomId, startDate, endDate));
 
             return new CheckInCommand(personalId, roomId, startDate, endDate);
         } catch (NumberFormatException e) {

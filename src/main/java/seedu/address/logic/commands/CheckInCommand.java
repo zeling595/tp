@@ -17,11 +17,11 @@ public class CheckInCommand extends Command {
     public static final String COMMAND_WORD = "checkIn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a person into the hotel.\n"
-            + "Parameters: " + PREFIX_PERSONAL_ID + "/[PERSONAL_ID] (must be a positive integer) "
+            + "Parameters: " + PREFIX_PERSONAL_ID + "[PERSONAL_ID] (must be a positive integer) "
             + PREFIX_ROOM_ID + "[ROOM_ID] (must be a valid room number) "
             + PREFIX_START_DATE + "[START_DATE] (in the format YYYY-MM-DD) "
             + PREFIX_END_DATE + "[END_DATE] (in the format YYYY-MM-DD)\n"
-            + "Example: " + COMMAND_WORD + PREFIX_PERSONAL_ID + "/69 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PERSONAL_ID + "69 "
             + PREFIX_ROOM_ID + "4102 "
             + PREFIX_START_DATE + "2020-09-14 "
             + PREFIX_END_DATE + "2020-09-17";
