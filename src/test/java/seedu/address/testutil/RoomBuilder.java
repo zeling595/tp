@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.room.Price;
 import seedu.address.model.room.Room;
-import seedu.address.model.room.RoomID;
 
 /**
  * A utility class to help with building Room objects.

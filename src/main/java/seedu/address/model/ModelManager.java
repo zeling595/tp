@@ -130,27 +130,32 @@ public class ModelManager implements Model {
     //=========== RoomBook ===================================================================================
 
     @Override
-    public void addRoom(Room r){
+    public void addRoom(Room r) {
         this.roomBook.addRoom(r);
     }
 
     @Override
-    public void setRooms(List<Room> rooms){
+    public void setRooms(List<Room> rooms) {
         this.roomBook.setRooms(rooms);
     }
 
     @Override
-    public void resetData(ReadOnlyRoomBook newData){
+    public void resetData(ReadOnlyRoomBook newData) {
         this.roomBook.resetData(newData);
     }
 
     @Override
-    public boolean hasRoom(int roomId){
+    public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
 
     @Override
-    public ReadOnlyRoomBook getRoomBook(){
+    public Room getRoom(int roomId) {
+        return this.roomBook.getRoom(roomId);
+    }
+
+    @Override
+    public ReadOnlyRoomBook getRoomBook() {
         return this.roomBook;
     }
 

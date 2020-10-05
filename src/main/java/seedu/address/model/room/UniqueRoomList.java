@@ -24,6 +24,17 @@ public class UniqueRoomList implements Iterable<Room> {
         return internalRoomList.stream().anyMatch(n -> n.getRoomID() == (roomId));
     }
 
+    public Room getRoom(int roomId) {
+        Room ret = new Room(-1, -1);
+        for (int k = 0; k < internalRoomList.size(); k++) {
+            Room curr = internalRoomList.get(k); // get the roomID
+            if (curr.getRoomID() == roomId) {
+                ret = curr;
+            }
+        }
+        return ret;
+    }
+
     /**
      * Returns an {@code ObservableList} of roomIDs that are not in the input
      * @param input {@code ObservableList} of roomIDs

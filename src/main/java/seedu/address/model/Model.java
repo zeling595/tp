@@ -91,6 +91,8 @@ public interface Model {
 
     boolean hasRoom(int roomId);
 
+    Room getRoom(int roomId);
+
     ReadOnlyRoomBook getRoomBook();
 
     /** Returns an unmodifiable view of the filtered person list */

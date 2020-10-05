@@ -17,7 +17,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRoomBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
 import seedu.address.testutil.PersonBuilder;
@@ -143,27 +147,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addRoom(Room r){
+        public void addRoom(Room r) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setRooms(List<Room> rooms){
+        public void setRooms(List<Room> rooms) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyRoomBook newData){
+        public void resetData(ReadOnlyRoomBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasRoom(int roomId){
+        public boolean hasRoom(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyRoomBook getRoomBook(){
+        public Room getRoom(int roomId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyRoomBook getRoomBook() {
             throw new AssertionError("This method should not be called.");
         }
 

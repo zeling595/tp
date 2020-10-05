@@ -50,13 +50,13 @@ public class UniqueRoomListTest {
     public void getComplementRooms_returnsCorrectList() {
         List<Room> rooms = FXCollections.observableArrayList(ROOM_1, ROOM_2, ROOM_3, ROOM_4, ROOM_5, ROOM_6);
         uniqueRoomList.setRooms(rooms);
-        List<Integer> roomId = FXCollections.observableArrayList(   ROOM_1.getRoomID(),
+        List<Integer> roomId = FXCollections.observableArrayList(ROOM_1.getRoomID(),
                                                                     ROOM_2.getRoomID(),
                                                                     ROOM_3.getRoomID(),
                                                                     ROOM_4.getRoomID(),
                                                                     ROOM_5.getRoomID(),
                                                                     ROOM_6.getRoomID());
-        ObservableList<Integer> input = FXCollections.observableArrayList(  ROOM_1.getRoomID(),
+        ObservableList<Integer> input = FXCollections.observableArrayList(ROOM_1.getRoomID(),
                                                                             ROOM_3.getRoomID(),
                                                                             ROOM_6.getRoomID());
         List<Integer> output = uniqueRoomList.getComplementRooms(input);
