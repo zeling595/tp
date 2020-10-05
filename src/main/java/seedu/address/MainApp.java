@@ -2,8 +2,11 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,8 +22,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRoomBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RoomBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.room.Room;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -68,6 +74,16 @@ public class MainApp extends Application {
         ui = new UiManager(logic);
     }
 
+    private ReadOnlyRoomBook initRooms() {
+        logger.info("=============================[ Initializing roomData ]===========================");
+        RoomBook ret = new RoomBook();
+        final List<Room> roomData = IntStream.rangeClosed(2103, 2133)
+                                                .mapToObj(x -> new Room(100, x))
+                                                .collect(Collectors.toList());
+
+        ret.setRooms(roomData);
+        return ret;
+    }
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
@@ -76,6 +92,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyRoomBook roomData = initRooms();
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -90,7 +108,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, roomData);
     }
 
     private void initLogging(Config config) {
