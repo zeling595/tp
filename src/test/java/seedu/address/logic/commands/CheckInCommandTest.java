@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for CheckInCommand.
  */
 public class CheckInCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook());
 
     @Test
     public void execute() {
