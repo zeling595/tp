@@ -29,7 +29,6 @@ public class CheckInCommandParser implements Parser<CheckInCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CheckInCommand parse(String args) throws ParseException {
-        System.out.println(args);
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE);
