@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.room.Room;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,19 +22,21 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final RoomBook roomBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyRoomBook roomBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.roomBook = new RoomBook(roomBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
 
@@ -43,7 +47,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new RoomBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -122,6 +126,39 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    //=========== RoomBook ===================================================================================
+
+    @Override
+    public void addRoom(Room r) {
+        this.roomBook.addRoom(r);
+    }
+
+    @Override
+    public void setRooms(List<Room> rooms) {
+        this.roomBook.setRooms(rooms);
+    }
+
+    @Override
+    public void resetData(ReadOnlyRoomBook newData) {
+        this.roomBook.resetData(newData);
+    }
+
+    @Override
+    public boolean hasRoom(int roomId) {
+        return this.roomBook.hasRoom(roomId);
+    }
+
+    @Override
+    public Room getRoom(int roomId) {
+        return this.roomBook.getRoom(roomId);
+    }
+
+    @Override
+    public ReadOnlyRoomBook getRoomBook() {
+        return this.roomBook;
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
