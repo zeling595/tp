@@ -1,5 +1,6 @@
 package seedu.address.model.booking;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
@@ -75,6 +76,31 @@ public class Booking {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    /**
+     * Returns the number of the nights of a booking.
+     */
+    public int getDuration() {
+        long noOfDaysBetween = DAYS.between(startDate, endDate);
+        int duration = (int) noOfDaysBetween;
+        return duration;
+    }
+
+    /**
+     * Returns true if two booking conflict with each other.
+     *
+     * @param otherBooking Another Booking object.
+     * @return a boolean.
+     */
+    public boolean ifConflict(Booking otherBooking) {
+        LocalDate start = getStartDate();
+        LocalDate end = getEndDate();
+        LocalDate otherBookingStart = otherBooking.getStartDate();
+        LocalDate otherBookingEnd = otherBooking.getEndDate();
+
+        return otherBookingStart.isBefore(end) && otherBookingEnd.isAfter(start);
+
     }
 
 
