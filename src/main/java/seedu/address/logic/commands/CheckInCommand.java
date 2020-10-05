@@ -1,13 +1,15 @@
 package seedu.address.logic.commands;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Encapsulates the Check In feature.
@@ -35,6 +37,14 @@ public class CheckInCommand extends Command {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    /**
+     * Creates a CheckInCommand.
+     *
+     * @param personalId the personalId of the person checking in
+     * @param roomId the roomId of the room that the person is checking into
+     * @param startDate the start date of the booking
+     * @param endDate the end date of the booking
+     */
     public CheckInCommand(int personalId, int roomId, LocalDate startDate, LocalDate endDate) {
         requireAllNonNull(personalId, roomId, startDate, endDate);
 

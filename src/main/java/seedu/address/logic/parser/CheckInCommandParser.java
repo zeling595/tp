@@ -2,21 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckInCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

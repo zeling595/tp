@@ -9,16 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,8 +41,6 @@ public class CheckInCommandParserTest {
                 VALID_START_DATE_AMY,
                 VALID_END_DATE_AMY);
         assertParseSuccess(parser, userInput, expectedCommand);
-//        parser.parse(userInput);
-
     }
 
     @Test

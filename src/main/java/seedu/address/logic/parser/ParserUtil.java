@@ -132,6 +132,13 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}
+     *
+     * @param date the date entered by the user
+     * @return the date as a LocalDate
+     * @throws ParseException if the given {@code date} is invalid
+     */
     public static LocalDate parseDate(String date) throws ParseException {
         try {
             LocalDate newDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
