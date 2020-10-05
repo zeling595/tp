@@ -3,8 +3,6 @@ package seedu.address.model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.UniqueBookingList;
 
-import static java.util.Objects.requireNonNull;
-
 public class BookingBook implements ReadOnlyBookingBook {
     private final UniqueBookingList bookings;
 
@@ -25,7 +23,7 @@ public class BookingBook implements ReadOnlyBookingBook {
     }
 
     @Override
-    public void setBookingInactive(int RoomID) {
-        bookings.setBookingInactive(RoomID);
+    public void setBookingInactive(int roomID) {
+        bookings.setBookingInactive(roomID);
     }
 }
