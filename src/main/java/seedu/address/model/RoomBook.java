@@ -15,7 +15,6 @@ public class RoomBook implements ReadOnlyRoomBook {
     public RoomBook() {}
 
     /// list level operations
-    // change to list of integers
     public ObservableList<Room> getAvailableRooms(ObservableList<Room> unavailableRooms) {
         return rooms.getComplementRooms(unavailableRooms);
     }
