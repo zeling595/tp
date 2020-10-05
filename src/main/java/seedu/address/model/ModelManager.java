@@ -35,6 +35,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        // Initialize the nextAvailableId of Person class so that each new person gets a unique id
+        Integer nextAvailableId = this.addressBook.getPersonList().stream()
+                .mapToInt(Person::getId).max().orElse(0) + 1;
+        Person.setNextAvailableId(nextAvailableId);
     }
 
     public ModelManager() {
@@ -92,6 +97,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonWithId(Integer id) {
+        requireNonNull(id);
+        return addressBook.hasPersonWithId(id);
     }
 
     @Override

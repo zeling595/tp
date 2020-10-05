@@ -3,9 +3,11 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
@@ -86,6 +88,22 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPersonWithId_nullId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasPersonWithId(null));
+    }
+
+    @Test
+    public void hasPersonWithId_personNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasPersonWithId(0));
+    }
+
+    @Test
+    public void hasPersonWithId_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(AMY);
+        assertTrue(modelManager.hasPersonWithId(VALID_ID_AMY));
     }
 
     @Test
