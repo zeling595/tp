@@ -65,7 +65,7 @@ public class CheckInCommand extends Command {
         CheckInCommand e = (CheckInCommand) other;
         return personalId == e.personalId
                 && roomId == e.roomId
-                && startDate.equals(e.startDate)
-                && endDate.equals(e.endDate);
+                && startDate.isEqual(e.startDate)
+                && endDate.isEqual(e.endDate);
     }
 }

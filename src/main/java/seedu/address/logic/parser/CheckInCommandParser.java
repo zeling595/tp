@@ -10,9 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,35 +33,30 @@ public class CheckInCommandParser implements Parser<CheckInCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE);
-        String res = argMultimap.getValue(PREFIX_PERSONAL_ID).get();
-        System.out.println(res);
-        int personalId = Integer.parseInt(argMultimap.getValue(PREFIX_PERSONAL_ID).orElse("nth2"));
-        int roomId = Integer.parseInt(argMultimap.getValue(PREFIX_ROOM_ID).orElse("nth3"));
-        try {
 
-            // check if roomId is valid
-            // need to check if it exists in our rooms array - to be implemented soon
 
-            // check if room stay of the person clashes with another person's - to be implemented soon
-
-            LocalDate startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).orElse(""),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            LocalDate endDate = LocalDate.parse(argMultimap.getValue(PREFIX_END_DATE).orElse(""),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-            if (!startDate.isBefore(endDate)) {
-                throw new ParseException("Start Date must be before End Date!");
-            }
-            System.out.println(new CheckInCommand(personalId, roomId, startDate, endDate));
-
-            return new CheckInCommand(personalId, roomId, startDate, endDate);
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE), e);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE), e);
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID, PREFIX_START_DATE, PREFIX_END_DATE)
+            || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
         }
 
+        int personalId = ParserUtil.parsePersonalId(argMultimap.getValue(PREFIX_PERSONAL_ID).get());
+        int roomId = ParserUtil.parseRoomId(argMultimap.getValue(PREFIX_ROOM_ID).get());
+        LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
+        LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
 
+        if (!startDate.isBefore(endDate)) {
+            throw new ParseException("Start Date must be before End Date!");
+        }
+        System.out.println(new CheckInCommand(personalId, roomId, startDate, endDate));
+        return new CheckInCommand(personalId, roomId, startDate, endDate);
+    }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -93,6 +96,56 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String personal Id} into a {@code int}.
+     *
+     * @param id personal id as entered by user
+     * @return personal id as an integer
+     * @throws ParseException if the given {@code personal Id} is invalid
+     */
+    public static int parsePersonalId(String id) throws ParseException {
+        requireNonNull(id);
+        try {
+            int personalId = Integer.parseInt(id);
+            return personalId;
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid Personal Id");
+        }
+    }
+
+    /**
+     * Parses a {@code String personal Id} into a {@code int}.
+     *
+     * @param id room id as entered by user
+     * @return room id as an integer
+     * @throws ParseException if the given {@code personal Id} is invalid
+     */
+    public static int parseRoomId(String id) throws ParseException {
+        requireNonNull(id);
+        try {
+            // check for valid room number
+            if (id.length() != 4) {
+                throw new ParseException("Enter a valid room id");
+            }
+
+            // check if room exists and available in hotel - to be implemented
+
+            int roomId = Integer.parseInt(id);
+            return roomId;
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid Personal Id");
+        }
+    }
+
+    public static LocalDate parseDate(String date) throws ParseException {
+        try {
+            LocalDate newDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return newDate;
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid Date");
+        }
     }
 
     /**

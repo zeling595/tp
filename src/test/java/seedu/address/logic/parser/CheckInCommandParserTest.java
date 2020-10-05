@@ -1,6 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.END_DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PERSONAL_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ROOM_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.START_DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
@@ -27,16 +35,17 @@ public class CheckInCommandParserTest {
     @Test
     public void parse_valuesSpecified_success() throws ParseException {
         // have remark
-        String userInput = PREFIX_PERSONAL_ID + nonEmptyPersonalId + " "
-                + PREFIX_ROOM_ID + nonEmptyRoomId + " "
-                + PREFIX_START_DATE + startDate + " "
-                + PREFIX_END_DATE + endDate;
-        CheckInCommand expectedCommand = new CheckInCommand(Integer.parseInt(nonEmptyPersonalId),
-                Integer.parseInt(nonEmptyRoomId),
-                LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//        assertParseSuccess(parser, userInput, expectedCommand);
-        parser.parse(userInput);
+        String userInput = PERSONAL_ID_DESC_AMY
+                + ROOM_ID_DESC_AMY
+                + START_DATE_DESC_AMY
+                + END_DATE_DESC_AMY;
+
+        CheckInCommand expectedCommand = new CheckInCommand(VALID_PERSONAL_ID_AMY,
+                VALID_ROOM_ID_AMY,
+                VALID_START_DATE_AMY,
+                VALID_END_DATE_AMY);
+        assertParseSuccess(parser, userInput, expectedCommand);
+//        parser.parse(userInput);
 
     }
 

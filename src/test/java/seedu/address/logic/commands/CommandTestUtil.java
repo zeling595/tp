@@ -52,7 +52,7 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-05",
+    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
