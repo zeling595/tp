@@ -67,6 +67,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the id is in the address book.
+     */
+    public boolean hasPersonWithId(Integer id) {
+        requireNonNull(id);
+        return persons.hasPersonWithId(id);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
