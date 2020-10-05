@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.room.Room;
 
 /**
  * The API of the Model component.
@@ -76,6 +78,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void addRoom(Room r);
+
+    void setRooms(List<Room> rooms);
+
+    void resetData(ReadOnlyRoomBook newData);
+
+    boolean hasRoom(int roomId);
+
+    ReadOnlyRoomBook getRoomBook();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +96,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
 }

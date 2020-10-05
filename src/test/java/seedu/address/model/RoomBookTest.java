@@ -21,13 +21,13 @@ public class RoomBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(roomBook.hasRoom(ROOM_1.getRoomID().id));
+        assertFalse(roomBook.hasRoom(ROOM_1.getRoomID()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         roomBook.addRoom(ROOM_1);
-        assertTrue(roomBook.hasRoom(ROOM_1.getRoomID().id));
+        assertTrue(roomBook.hasRoom(ROOM_1.getRoomID()));
     }
 
     @Test

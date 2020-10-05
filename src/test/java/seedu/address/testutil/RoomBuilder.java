@@ -8,11 +8,11 @@ import seedu.address.model.room.RoomID;
  * A utility class to help with building Room objects.
  */
 public class RoomBuilder {
-    public static final RoomID DEFAULT_ROOMID = new RoomID(1234);
-    public static final Price DEFAULT_PRICE = new Price(50);
+    public static final int DEFAULT_ROOMID = 1234;
+    public static final int DEFAULT_PRICE = 100;
 
-    private RoomID roomId;
-    private Price price;
+    private int roomId;
+    private int price;
 
     /**
      * Default Constructor for RoomBuilder.
@@ -34,19 +34,19 @@ public class RoomBuilder {
     /**
      * Sets RoomBuilder with new RoomID.
      * @param roomId new RoomID
-     * @return a {@code RoomBuilder} with modified {@code RoomID}
+     * @return a {@code RoomBuilder} with modified roomID
      */
-    public RoomBuilder withRoomID(RoomID roomId) {
+    public RoomBuilder withRoomID(int roomId) {
         this.roomId = roomId;
         return this;
     }
 
     /**
-     * Sets RoomBuilder with new Price.
-     * @param price new Price
-     * @return a {@code RoomBuilder} with modified {@code Price}
+     * Sets RoomBuilder with new Price
+     * @param price Price for room
+     * @return a {@code RoomBuilder} with modified price
      */
-    public RoomBuilder withPrice(Price price) {
+    public RoomBuilder withPrice(int price) {
         this.price = price;
         return this;
     }

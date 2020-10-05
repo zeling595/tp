@@ -21,19 +21,18 @@ public class UniqueRoomList implements Iterable<Room> {
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(int roomId) {
-        RoomID curr = new RoomID(roomId);
-        return internalRoomList.stream().anyMatch(n -> n.getRoomID().equals(curr));
+        return internalRoomList.stream().anyMatch(n -> n.getRoomID() == (roomId));
     }
 
     /**
-     * Returns an {@code ObservableList} of rooms that are not in the input
-     * @param input {@code ObservableList} of rooms
+     * Returns an {@code ObservableList} of roomIDs that are not in the input
+     * @param input {@code ObservableList} of roomIDs
      * @return {@code ObservableList} of rooms
      */
-    public ObservableList<Room> getComplementRooms(ObservableList<Room> input) {
-        ObservableList<Room> ret = FXCollections.observableArrayList();
+    public ObservableList<Integer> getComplementRooms(ObservableList<Integer> input) {
+        ObservableList<Integer> ret = FXCollections.observableArrayList();
         for (int k = 0; k < internalRoomList.size(); k++) {
-            Room curr = internalRoomList.get(k);
+            int curr = internalRoomList.get(k).getRoomID(); // get the roomID
             if (!input.contains(curr)) {
                 ret.add(curr);
             }

@@ -50,9 +50,22 @@ public class UniqueRoomListTest {
     public void getComplementRooms_returnsCorrectList() {
         List<Room> rooms = FXCollections.observableArrayList(ROOM_1, ROOM_2, ROOM_3, ROOM_4, ROOM_5, ROOM_6);
         uniqueRoomList.setRooms(rooms);
-        ObservableList<Room> input = FXCollections.observableArrayList(ROOM_1, ROOM_3, ROOM_6);
-        ObservableList<Room> output = uniqueRoomList.getComplementRooms(input);
-        assertTrue(output.contains(ROOM_2) && output.contains(ROOM_4) && output.contains(ROOM_5));
+        List<Integer> roomId = FXCollections.observableArrayList(   ROOM_1.getRoomID(),
+                                                                    ROOM_2.getRoomID(),
+                                                                    ROOM_3.getRoomID(),
+                                                                    ROOM_4.getRoomID(),
+                                                                    ROOM_5.getRoomID(),
+                                                                    ROOM_6.getRoomID());
+        ObservableList<Integer> input = FXCollections.observableArrayList(  ROOM_1.getRoomID(),
+                                                                            ROOM_3.getRoomID(),
+                                                                            ROOM_6.getRoomID());
+        List<Integer> output = uniqueRoomList.getComplementRooms(input);
+        assertTrue(output.contains(ROOM_2.getRoomID())
+                            && output.contains(ROOM_4.getRoomID())
+                            && output.contains(ROOM_5.getRoomID())
+                            && !output.contains(ROOM_1.getRoomID())
+                            && !output.contains(ROOM_3.getRoomID())
+                            && !output.contains(ROOM_6.getRoomID()));
     }
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {

@@ -5,23 +5,23 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Room {
 
     // Identity fields
-    private final Price price;
-    private final RoomID roomID;
+    private final int price;
+    private final int roomID;
 
     /**
      * Every field must be present and not null.
      */
-    public Room(Price price, RoomID roomID) {
+    public Room(int price, int roomID) {
         requireAllNonNull(price, roomID);
         this.price = price;
         this.roomID = roomID;
     }
 
-    public RoomID getRoomID() {
+    public int getRoomID() {
         return this.roomID;
     }
 
-    public Price getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
@@ -34,8 +34,8 @@ public class Room {
         }
 
         return otherRoom != null
-                && otherRoom.getPrice().equals(getPrice())
-                && otherRoom.getRoomID().equals(getRoomID());
+                && otherRoom.getPrice() == (getPrice())
+                && otherRoom.getRoomID() == (getRoomID());
     }
 
     @Override

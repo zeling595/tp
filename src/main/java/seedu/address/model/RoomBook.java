@@ -1,8 +1,13 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.UniqueRoomList;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 public class RoomBook implements ReadOnlyRoomBook {
 
@@ -14,13 +19,28 @@ public class RoomBook implements ReadOnlyRoomBook {
 
     public RoomBook() {}
 
+    public RoomBook(ReadOnlyRoomBook tobeCopied) {
+        this();
+        resetData(tobeCopied);
+    }
+
     /// list level operations
-    public ObservableList<Room> getAvailableRooms(ObservableList<Room> unavailableRooms) {
+    public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
         return rooms.getComplementRooms(unavailableRooms);
     }
 
     public void addRoom(Room r) {
         rooms.add(r);
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms.setRooms(rooms);
+    }
+
+    public void resetData(ReadOnlyRoomBook newData) {
+        requireNonNull(newData);
+
+        setRooms(newData.getRoomList());
     }
 
     /// room level operations
