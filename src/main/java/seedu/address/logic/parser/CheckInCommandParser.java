@@ -47,7 +47,7 @@ public class CheckInCommandParser implements Parser<CheckInCommand> {
         if (!startDate.isBefore(endDate)) {
             throw new ParseException("Start Date must be before End Date!");
         }
-        System.out.println(new CheckInCommand(personalId, roomId, startDate, endDate));
+
         return new CheckInCommand(personalId, roomId, startDate, endDate);
     }
 
