@@ -125,13 +125,6 @@ public class ParserUtil {
     public static int parseRoomId(String id) throws ParseException {
         requireNonNull(id);
         try {
-            // check for valid room number
-            if (id.length() != 4) {
-                throw new ParseException("Enter a valid room id");
-            }
-
-            // check if room exists and available in hotel - to be implemented
-
             int roomId = Integer.parseInt(id);
             return roomId;
         } catch (NumberFormatException e) {
