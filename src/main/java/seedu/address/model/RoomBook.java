@@ -40,8 +40,6 @@ public class RoomBook implements ReadOnlyRoomBook {
         this.rooms.setRooms(rooms);
     }
 
-
-
     /**
      * Resets the existing data of this {@code RoomBook} with {@code newData}.
      */

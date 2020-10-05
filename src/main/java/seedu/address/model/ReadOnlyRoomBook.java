@@ -10,7 +10,7 @@ public interface ReadOnlyRoomBook {
 
     /**
      * Returns an unmodifiable view of the Room list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate rooms.
      */
     ObservableList<Room> getRoomList();
 
