@@ -93,7 +93,7 @@ public class Booking {
      * @param otherBooking Another Booking object.
      * @return a boolean.
      */
-    public boolean ifConflict(Booking otherBooking) {
+    public boolean hasConflict(Booking otherBooking) {
         LocalDate start = getStartDate();
         LocalDate end = getEndDate();
         LocalDate otherBookingStart = otherBooking.getStartDate();
