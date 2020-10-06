@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
 
@@ -94,6 +95,22 @@ public interface Model {
     Room getRoom(int roomId);
 
     ReadOnlyRoomBook getRoomBook();
+
+    // booking
+    void addBooking(Booking b);
+
+    void setBookings(List<Booking> bookings);
+
+    void resetData(ReadOnlyBookingBook newData);
+
+    // boolean hasBooking(int roomId);
+
+    Booking getBooking(int roomId);
+
+    ReadOnlyBookingBook getBookingBook();
+
+    void setBookingInactive(int roomId);
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
