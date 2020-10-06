@@ -1,11 +1,16 @@
 package seedu.address.model.util;
 
+import java.awt.print.Book;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.BookingBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookingBook;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -46,6 +51,31 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static Booking[] getSampleBookings() {
+        return new Booking[] {
+                new Booking(1234, 1, LocalDate.of(2020, 1, 1),
+                        LocalDate.of(2020, 1, 2), true, 1),
+                new Booking(1235, 2, LocalDate.of(2020, 1, 1),
+                        LocalDate.of(2020, 1, 3), true, 2),
+                new Booking(1236, 3, LocalDate.of(2020, 2, 2),
+                        LocalDate.of(2020, 2, 22), true, 3),
+                new Booking(1237, 4, LocalDate.of(2019, 3, 1),
+                        LocalDate.of(2020, 3, 12), false, 4),
+                new Booking(1238, 5, LocalDate.of(2019, 1, 10),
+                        LocalDate.of(2020, 1, 13), false, 5),
+                new Booking(1235, 6, LocalDate.of(2019, 6, 1),
+                        LocalDate.of(2020, 6, 20), false, 6),
+        };
+    }
+
+    public static ReadOnlyBookingBook getSampleBookingBook() {
+        BookingBook sampleBb = new BookingBook();
+        for (Booking sampleBooking : getSampleBookings()) {
+            sampleBb.addBooking(sampleBooking);
+        }
+        return sampleBb;
     }
 
     /**
