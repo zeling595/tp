@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.UniqueBookingList;
 
@@ -13,16 +14,18 @@ public class BookingBook implements ReadOnlyBookingBook {
     public BookingBook() {}
 
     @Override
+    public ObservableList<Booking> getBookingList() {
+        return bookings.asUnmodifiableObservableList();
+    }
+
     public void addBooking(Booking bookingToAdd) {
         bookings.add(bookingToAdd);
     }
 
-    @Override
     public Booking getBooking(int roomID) {
         return bookings.getBooking(roomID);
     }
 
-    @Override
     public void setBookingInactive(int roomID) {
         bookings.setBookingInactive(roomID);
     }

@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
+import seedu.address.model.person.Person;
 
 public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
@@ -55,6 +56,13 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
 
         internalList.set(index, editedBooking);
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Booking> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
     }
 
     @Override
