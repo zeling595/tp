@@ -54,7 +54,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=========================[ Initializing AddressBook & BookingBook ]=======================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -63,7 +63,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AddressBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
+        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage);
 
         initLogging(config);
 

@@ -27,9 +27,9 @@ public class TypicalBookings {
     public static final Booking BOOKING_6 = new Booking(1235, 1,  startDate_3, endDate_3, false);
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Booking BOOKING_AMY = new Booking(4102, 23, VALID_START_DATE_AMY,
+    public static final Booking BOOKING_AMY = new Booking(VALID_ROOM_ID_AMY, VALID_PERSONAL_ID_AMY, VALID_START_DATE_AMY,
             VALID_END_DATE_AMY, false);
-    public static final Booking BOOKING_BOB = new Booking(2301, 12, VALID_START_DATE_BOB,
+    public static final Booking BOOKING_BOB = new Booking(VALID_ROOM_ID_BOB, VALID_PERSONAL_ID_BOB, VALID_START_DATE_BOB,
             VALID_END_DATE_BOB, false);
 
     private TypicalBookings() {} // prevents instantiation
