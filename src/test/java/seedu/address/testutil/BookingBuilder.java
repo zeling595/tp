@@ -7,10 +7,10 @@ import java.time.LocalDate;
 public class BookingBuilder {
 
     public static final Integer DEFAULT_ID = 1;
-    public static final String DEFAULT_ROOM_ID = "1001";
-    public static final String DEFAULT_PERSON_ID = "1";
-    public static final String DEFAULT_START_DATE = "2020-10-20";
-    public static final String DEFAULT_END_DATE = "2020-10-25";
+    public static final Integer DEFAULT_ROOM_ID = 1001;
+    public static final Integer DEFAULT_PERSON_ID = 1;
+    public static final LocalDate DEFAULT_START_DATE = LocalDate.of(2020, 10, 20);
+    public static final LocalDate DEFAULT_END_DATE = LocalDate.of(2020, 10, 25);
     public static final boolean DEFAULT_IS_ACTIVE = false;
 
     private Integer id;
@@ -25,10 +25,10 @@ public class BookingBuilder {
      */
     public BookingBuilder() {
         id = DEFAULT_ID;
-        roomId = Integer.parseInt(DEFAULT_ROOM_ID);
-        personId = Integer.parseInt(DEFAULT_PERSON_ID);
-        startDate = LocalDate.parse(DEFAULT_START_DATE);
-        endDate = LocalDate.parse(DEFAULT_END_DATE);
+        roomId = DEFAULT_ROOM_ID;
+        personId = DEFAULT_PERSON_ID;
+        startDate = DEFAULT_START_DATE;
+        endDate = DEFAULT_END_DATE;
         isActive = DEFAULT_IS_ACTIVE;
     }
 
@@ -47,32 +47,32 @@ public class BookingBuilder {
     /**
      * Sets the roomId of the {@code Booking} that we are building.
      */
-    public BookingBuilder withRoomId(String roomId) {
-        this.roomId = Integer.parseInt(roomId);
+    public BookingBuilder withRoomId(Integer roomId) {
+        this.roomId = roomId;
         return this;
     }
 
     /**
      * Sets the {@code personId} of the {@code Booking} that we are building.
      */
-    public BookingBuilder withPersonId(String personId) {
-        this.personId = Integer.parseInt(personId);
+    public BookingBuilder withPersonId(Integer personId) {
+        this.personId = personId;
         return this;
     }
 
     /**
      * Sets the {@code startDate} of the {@code Booking} that we are building.
      */
-    public BookingBuilder withStartDate(String StartDate) {
-        this.startDate = LocalDate.parse(StartDate);
+    public BookingBuilder withStartDate(LocalDate StartDate) {
+        this.startDate = StartDate;
         return this;
     }
 
     /**
      * Sets the {@code endDate} of the {@code Booking} that we are building.
      */
-    public BookingBuilder withEndDate(String endDate) {
-        this.endDate = LocalDate.parse(endDate);
+    public BookingBuilder withEndDate(LocalDate endDate) {
+        this.endDate = endDate;
         return this;
     }
 
