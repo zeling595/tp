@@ -1,10 +1,10 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.UniqueBookingList;
-
-import static java.util.Objects.requireNonNull;
 
 public class BookingBook implements ReadOnlyBookingBook {
     private final UniqueBookingList bookings;
