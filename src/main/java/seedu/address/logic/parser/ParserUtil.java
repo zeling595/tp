@@ -120,7 +120,7 @@ public class ParserUtil {
      *
      * @param id room id as entered by user
      * @return room id as an integer
-     * @throws ParseException if the given {@code personal Id} is invalid
+     * @throws ParseException if the given {@code room Id} is invalid
      */
     public static int parseRoomId(String id) throws ParseException {
         requireNonNull(id);
@@ -128,7 +128,7 @@ public class ParserUtil {
             int roomId = Integer.parseInt(id);
             return roomId;
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid Personal Id");
+            throw new ParseException("Invalid Room Id");
         }
     }
 
