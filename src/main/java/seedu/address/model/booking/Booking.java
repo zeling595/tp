@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 public class Booking {
-    private static Integer nextAvailableId;
+    private static Integer nextAvailableId = 0;
 
     // Identity fields
     private final Integer id;
@@ -94,6 +94,10 @@ public class Booking {
      * @return a boolean.
      */
     public boolean hasConflict(Booking otherBooking) {
+        if (otherBooking.getRoomId() != otherBooking.getRoomId()) {
+            return false;
+        }
+
         LocalDate start = getStartDate();
         LocalDate end = getEndDate();
         LocalDate otherBookingStart = otherBooking.getStartDate();
@@ -124,7 +128,7 @@ public class Booking {
                 && otherBooking.getPersonId().equals(getPersonId())
                 && otherBooking.getStartDate().equals(getStartDate())
                 && otherBooking.getEndDate().equals(getEndDate())
-                && otherBooking.isActive();
+                && otherBooking.isActive() == isActive();
     }
 
     @Override
