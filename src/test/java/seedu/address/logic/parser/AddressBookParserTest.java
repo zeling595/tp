@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckInCommand;
+import seedu.address.logic.commands.CheckOutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -115,6 +116,15 @@ public class AddressBookParserTest {
                 LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
                 command);
+    }
+
+    @Test
+    public void parseCommand_checkOut() throws Exception {
+        final int roomId = 2103;
+        CheckOutCommand command = (CheckOutCommand) parser.parseCommand(CheckOutCommand.COMMAND_WORD + " "
+            + PREFIX_ROOM_ID + roomId);
+
+        assertEquals(new CheckOutCommand(roomId), command);
     }
 
     @Test
