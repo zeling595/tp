@@ -44,6 +44,10 @@ public class ModelManager implements Model {
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
+
+        Integer nextAvailableIdBooking = this.addressBook.getPersonList().stream()
+                .mapToInt(Person::getId).max().orElse(0) + 1;
+        Person.setNextAvailableId(nextAvailableIdBooking);
     }
 
     public ModelManager() {

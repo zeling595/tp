@@ -31,6 +31,22 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
     }
 
+    /**
+     * Returns true if the list contains an equivalent booking as the given argument.
+     */
+    public boolean contains(Booking toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Returns true if the list contains a booking with the given id
+     */
+    public boolean hasBookingWithId(Integer id) {
+        requireNonNull(id);
+        return internalList.stream().anyMatch(booking -> booking.getId().equals(id));
+    }
+
     public Booking getBooking(int roomID) {
         requireNonNull(roomID);
         return internalList.stream()

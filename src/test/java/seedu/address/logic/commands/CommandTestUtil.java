@@ -52,12 +52,17 @@ public class CommandTestUtil {
     public static final int VALID_ROOM_ID_BOB = 2301;
     public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+    // Booking Values
+    public static final int VALID_BOOKING_ID_AMY = 1;
+    public static final int VALID_BOOKING_ID_BOB = 2;
+    public static final int BOOKING_DURATION_AMY = 5;
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
