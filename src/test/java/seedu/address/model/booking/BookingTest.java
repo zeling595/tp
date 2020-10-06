@@ -47,7 +47,7 @@ public class BookingTest {
         assertFalse((BOOKING_AMY.equals(editedBookingAmy)));
 
         // different isActive -> return false
-        editedBookingAmy = new BookingBuilder(BOOKING_AMY).withIsActive(false).build();
+        editedBookingAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
         assertFalse((BOOKING_AMY.equals(editedBookingAmy)));
 
         //different Booking Id -> return false

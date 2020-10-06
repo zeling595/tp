@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.booking.Booking;
-import seedu.address.model.booking.BookingBook;
+import seedu.address.model.BookingBook;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
