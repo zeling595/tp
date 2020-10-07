@@ -90,18 +90,18 @@ public interface Model {
 
     void resetData(ReadOnlyRoomBook newData);
 
+    void resetData(ReadOnlyBookingBook newData);
+
     boolean hasRoom(int roomId);
 
     Room getRoom(int roomId);
 
     ReadOnlyRoomBook getRoomBook();
-
     // booking
+
     void addBooking(Booking b);
 
     void setBookings(List<Booking> bookings);
-
-    void resetData(ReadOnlyBookingBook newData);
 
     // boolean hasBooking(int roomId);
 

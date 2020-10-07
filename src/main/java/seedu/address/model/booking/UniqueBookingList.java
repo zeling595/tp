@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();

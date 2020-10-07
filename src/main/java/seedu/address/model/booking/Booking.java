@@ -94,7 +94,7 @@ public class Booking {
      * @return a boolean.
      */
     public boolean hasConflict(Booking otherBooking) {
-        if (otherBooking.getRoomId() != otherBooking.getRoomId()) {
+        if (!otherBooking.getRoomId().equals(getRoomId())) {
             return false;
         }
 

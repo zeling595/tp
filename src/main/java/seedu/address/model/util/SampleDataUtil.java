@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
@@ -55,18 +54,18 @@ public class SampleDataUtil {
 
     public static Booking[] getSampleBookings() {
         return new Booking[] {
-                new Booking(1234, 1, LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2020, 1, 2), true, 1),
-                new Booking(1235, 2, LocalDate.of(2020, 1, 1),
-                        LocalDate.of(2020, 1, 3), true, 2),
-                new Booking(1236, 3, LocalDate.of(2020, 2, 2),
-                        LocalDate.of(2020, 2, 22), true, 3),
-                new Booking(1237, 4, LocalDate.of(2019, 3, 1),
-                        LocalDate.of(2020, 3, 12), false, 4),
-                new Booking(1238, 5, LocalDate.of(2019, 1, 10),
-                        LocalDate.of(2020, 1, 13), false, 5),
-                new Booking(1235, 6, LocalDate.of(2020, 6, 1),
-                        LocalDate.of(2020, 6, 20), false, 6),
+            new Booking(1234, 1, LocalDate.of(2020, 1, 1),
+                    LocalDate.of(2020, 1, 2), true, 1),
+            new Booking(1235, 2, LocalDate.of(2020, 1, 1),
+                    LocalDate.of(2020, 1, 3), true, 2),
+            new Booking(1236, 3, LocalDate.of(2020, 2, 2),
+                    LocalDate.of(2020, 2, 22), true, 3),
+            new Booking(1237, 4, LocalDate.of(2019, 3, 1),
+                    LocalDate.of(2020, 3, 12), false, 4),
+            new Booking(1238, 5, LocalDate.of(2019, 1, 10),
+                    LocalDate.of(2020, 1, 13), false, 5),
+            new Booking(1235, 6, LocalDate.of(2020, 6, 1),
+                    LocalDate.of(2020, 6, 20), false, 6),
         };
     }
 

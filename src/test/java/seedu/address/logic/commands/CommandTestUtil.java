@@ -62,7 +62,7 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse("2020-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-12",
+    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-09",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     // Booking Values

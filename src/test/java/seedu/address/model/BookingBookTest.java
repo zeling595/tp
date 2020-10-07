@@ -42,6 +42,7 @@ public class BookingBookTest {
     public void resetData_withDuplicateBookings_throwsDuplicateBookingException() {
         // Two booking with the same identity fields
         Booking editedBookingAmy = new BookingBuilder(BOOKING_BOB)
+                .withId(VALID_BOOKING_ID_AMY)
                 .withRoomId(VALID_ROOM_ID_AMY)
                 .withPersonId(VALID_PERSONAL_ID_AMY)
                 .withStartDate(VALID_START_DATE_AMY)
@@ -74,7 +75,8 @@ public class BookingBookTest {
     public void hasBooking_bookingWithSameIdentityFieldsInBookingBook_returnsTrue() {
         bookingBook.addBooking(BOOKING_AMY);
         Booking editedBookingAmy = new BookingBuilder(BOOKING_BOB)
-                .withRoomId(VALID_BOOKING_ID_AMY)
+                .withId(VALID_BOOKING_ID_AMY)
+                .withRoomId(VALID_ROOM_ID_AMY)
                 .withPersonId(VALID_PERSONAL_ID_AMY)
                 .withStartDate(VALID_START_DATE_AMY)
                 .withEndDate(VALID_END_DATE_AMY).build();

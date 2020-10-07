@@ -31,7 +31,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -153,6 +154,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void resetData(ReadOnlyBookingBook newData) {
+        this.bookingBook.resetData(newData);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
@@ -177,11 +183,6 @@ public class ModelManager implements Model {
     @Override
     public void setBookings(List<Booking> bookings) {
         this.bookingBook.setBookings(bookings);
-    }
-
-    @Override
-    public void resetData(ReadOnlyBookingBook newData) {
-        this.bookingBook.resetData(newData);
     }
 
     @Override
