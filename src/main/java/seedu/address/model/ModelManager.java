@@ -47,6 +47,11 @@ public class ModelManager implements Model {
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
+
+        // Initialize the nextAvailableId of Person class so that each new person gets a unique id
+        Integer nextAvailableIdBooking = this.bookingBook.getBookingList().stream()
+                .mapToInt(Booking::getId).max().orElse(0) + 1;
+        Booking.setNextAvailableId(nextAvailableIdBooking);
     }
 
     public ModelManager() {
@@ -227,6 +232,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

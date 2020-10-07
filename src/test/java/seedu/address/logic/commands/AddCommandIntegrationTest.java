@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
+import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(), getTypicalBookingBook());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().withId(0).build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(), model.getBookingBook());
         Person.setNextAvailableId(0);
         expectedModel.addPerson(validPerson);
 

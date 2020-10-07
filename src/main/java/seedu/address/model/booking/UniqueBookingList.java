@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
@@ -18,13 +19,34 @@ public class UniqueBookingList implements Iterable<Booking> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
+     * Returns true if the list contains an equivalent booking as the given argument.
+     */
+    public boolean contains(Booking toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Returns true if the list contains a booking with the given id
+     */
+    public boolean hasBookingWithId(Integer id) {
+        requireNonNull(id);
+        return internalList.stream().anyMatch(booking -> booking.getId().equals(id));
+    }
+
+    /**
      * Adds a booking to the list.
      * The booking must not already exist in the list.
      */
     public void add(Booking toAdd) {
         requireNonNull(toAdd);
+        // check duplicate
+        if (contains(toAdd)) {
+            throw new DuplicateBookingException();
+        }
         // check if conflict
         boolean hasConflict;
+
         hasConflict = internalList.stream().anyMatch(booking -> booking.hasConflict(toAdd));
         if (hasConflict) {
             throw new ConflictingBookingException();

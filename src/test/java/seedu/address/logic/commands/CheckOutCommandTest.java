@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
+import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for CheckOutCommand.
  */
 class CheckOutCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(), getTypicalBookingBook());
 
     @Test
     public void equals() {

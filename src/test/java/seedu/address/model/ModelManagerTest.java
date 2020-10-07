@@ -9,6 +9,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.BookingBookBuilder;
 
 public class ModelManagerTest {
 
@@ -29,6 +32,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new BookingBook(), new BookingBook(modelManager.getBookingBook()));
     }
 
     @Test
@@ -48,6 +52,8 @@ public class ModelManagerTest {
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
+
+        // modifying bookingBooking file path
     }
 
     @Test
@@ -117,10 +123,12 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         RoomBook roomBook = new RoomBook();
+        BookingBook bookingBook = new BookingBookBuilder().withBooking(BOOKING_AMY).withBooking(BOOKING_BOB).build();
+        BookingBook differentBookingBook = new BookingBook();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, roomBook);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, roomBook);
+        modelManager = new ModelManager(addressBook, userPrefs, roomBook, bookingBook);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, roomBook, bookingBook);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -133,12 +141,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, roomBook)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, roomBook, bookingBook)));
+
+        // different bookingBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, roomBook, differentBookingBook)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, roomBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, roomBook, bookingBook)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -146,6 +157,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, roomBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, roomBook, bookingBook)));
+
     }
 }

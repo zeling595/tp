@@ -65,7 +65,7 @@ public class SampleDataUtil {
                         LocalDate.of(2020, 3, 12), false, 4),
                 new Booking(1238, 5, LocalDate.of(2019, 1, 10),
                         LocalDate.of(2020, 1, 13), false, 5),
-                new Booking(1235, 6, LocalDate.of(2019, 6, 1),
+                new Booking(1235, 6, LocalDate.of(2020, 6, 1),
                         LocalDate.of(2020, 6, 20), false, 6),
         };
     }

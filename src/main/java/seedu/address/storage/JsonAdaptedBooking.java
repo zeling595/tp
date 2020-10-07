@@ -1,11 +1,14 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.Booking;
 
-import java.time.LocalDate;
+
 
 public class JsonAdaptedBooking {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Booking's %s field is missing!";
@@ -22,9 +25,12 @@ public class JsonAdaptedBooking {
      */
     @JsonCreator
     public JsonAdaptedBooking(@JsonProperty("id") Integer id,
-                             @JsonProperty("roomId") Integer roomId, @JsonProperty("personId") Integer personId,
-                             @JsonProperty("startDate") LocalDate startDate, @JsonProperty("endDate") LocalDate endDate,
-                             @JsonProperty("isActive") Boolean isActive) {
+                              @JsonProperty("roomId") Integer roomId,
+                              @JsonProperty("personId") Integer personId,
+                              @JsonProperty("startDate") LocalDate startDate,
+                              @JsonProperty("endDate") LocalDate endDate,
+                              @JsonProperty("isActive") Boolean isActive) {
+
         this.id = id;
         this.roomId = roomId;
         this.personId = personId;
