@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 public class Booking {
-    private static Integer nextAvailableId = 0;
+    private static Integer nextAvailableId;
 
     // Identity fields
     private final Integer id;
@@ -16,13 +16,13 @@ public class Booking {
     private final Integer personId;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final Boolean isActive;
+    private final boolean isActive;
 
 
     /**
      * Every field must be present and not null. Used for creating a new Booking with a unique id.
      */
-    public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, Boolean isActive) {
+    public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive) {
         requireAllNonNull(roomId, personId, startDate, endDate);
         this.roomId = roomId;
         this.personId = personId;
@@ -36,7 +36,7 @@ public class Booking {
     /**
      * Every field must be present and not null. Used for creating a Booking with an existing id.
      */
-    public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, Boolean isActive,
+    public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive,
                    Integer id) {
         requireAllNonNull(roomId, personId, startDate, endDate, id);
         this.roomId = roomId;

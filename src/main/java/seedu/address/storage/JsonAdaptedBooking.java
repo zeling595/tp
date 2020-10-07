@@ -30,6 +30,7 @@ public class JsonAdaptedBooking {
                               @JsonProperty("startDate") LocalDate startDate,
                               @JsonProperty("endDate") LocalDate endDate,
                               @JsonProperty("isActive") Boolean isActive) {
+
         this.id = id;
         this.roomId = roomId;
         this.personId = personId;

@@ -18,14 +18,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyRoomBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.RoomBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.room.Room;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -94,7 +87,9 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyBookingBook> bookingBookOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyBookingBook bookingData;
         ReadOnlyRoomBook roomData = initRooms();
 
         try {
@@ -103,6 +98,13 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+
+            bookingBookOptional = storage.readBookingBook();
+            if (!bookingBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample BookingBook");
+            }
+            bookingData = bookingBookOptional.orElseGet(SampleDataUtil::getSampleBookingBook);
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
@@ -111,7 +113,23 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, roomData);
+
+        // read bookingBook data
+        try {
+            bookingBookOptional = storage.readBookingBook();
+            if (!bookingBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample BookingBook");
+            }
+            bookingData = bookingBookOptional.orElseGet(SampleDataUtil::getSampleBookingBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty BookingBook");
+            bookingData = new BookingBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookingBook");
+            bookingData = new BookingBook();
+        }
+
+        return new ModelManager(initialData, userPrefs, roomData, bookingData);
     }
 
     private void initLogging(Config config) {

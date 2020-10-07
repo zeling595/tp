@@ -4,32 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
+import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
     private final ObservableList<Booking> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
-    /**
-     * Adds a booking to the list.
-     * The booking must not already exist in the list.
-     */
-    public void add(Booking toAdd) {
-        requireNonNull(toAdd);
-        // check if conflict
-        boolean hasConflict;
-        hasConflict = internalList.stream().anyMatch(booking -> booking.hasConflict(toAdd));
-        if (hasConflict) {
-            throw new ConflictingBookingException();
-        } else {
-            internalList.add(toAdd);
-        }
-    }
 
     /**
      * Returns true if the list contains an equivalent booking as the given argument.
@@ -47,17 +34,42 @@ public class UniqueBookingList implements Iterable<Booking> {
         return internalList.stream().anyMatch(booking -> booking.getId().equals(id));
     }
 
-    public Booking getBooking(int roomID) {
-        requireNonNull(roomID);
+    /**
+     * Adds a booking to the list.
+     * The booking must not already exist in the list.
+     */
+    public void add(Booking toAdd) {
+        requireNonNull(toAdd);
+        // check duplicate
+        if (contains(toAdd)) {
+            throw new DuplicateBookingException();
+        }
+        // check if conflict
+        boolean hasConflict;
+
+        hasConflict = internalList.stream().anyMatch(booking -> booking.hasConflict(toAdd));
+        if (hasConflict) {
+            throw new ConflictingBookingException();
+        } else {
+            internalList.add(toAdd);
+        }
+    }
+
+    public Booking getBooking(int roomId) {
+        requireNonNull(roomId);
         return internalList.stream()
-                .filter(booking -> booking.getId() == roomID)
+                .filter(booking -> booking.getId() == roomId)
                 .filter(Booking::isActive)
                 .findFirst().orElseThrow(() -> new BookingNotFoundException());
     }
 
-    public void setBookingInactive(int roomID) {
-        requireNonNull(roomID);
-        Booking booking = getBooking(roomID);
+    /**
+     * Set a booking to inactive. Create new booking and set.
+     * @param roomId The id of the room to be set inactive
+     */
+    public void setBookingInactive(int roomId) {
+        requireNonNull(roomId);
+        Booking booking = getBooking(roomId);
         Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
                 booking.getStartDate(), booking.getEndDate(), false);
         setBooking(booking, editedBooking);
@@ -71,6 +83,38 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
 
         internalList.set(index, editedBooking);
+    }
+
+    public void setBookings(UniqueBookingList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code bookings}.
+     * {@code bookings} must not contain duplicate bookings.
+     */
+    public void setBookings(List<Booking> bookings) {
+        requireAllNonNull(bookings);
+        if (!bookingsAreUnique(bookings)) {
+            throw new DuplicateBookingException();
+        }
+
+        internalList.setAll(bookings);
+    }
+
+    /**
+     * Returns true if {@code bookings} contains only unique bookings.
+     */
+    private boolean bookingsAreUnique(List<Booking> bookings) {
+        for (int i = 0; i < bookings.size() - 1; i++) {
+            for (int j = i + 1; j < bookings.size(); j++) {
+                if (bookings.get(i).equals(bookings.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
