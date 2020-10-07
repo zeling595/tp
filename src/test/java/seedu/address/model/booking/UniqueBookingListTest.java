@@ -1,23 +1,20 @@
 package seedu.address.model.booking;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
+import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.BookingBuilder;
-import seedu.address.testutil.PersonBuilder;
-
-import java.awt.print.Book;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBookings.*;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 
 public class UniqueBookingListTest {
@@ -39,15 +36,6 @@ public class UniqueBookingListTest {
         assertTrue(uniqueBookingList.contains(BOOKING_BOB));
     }
 
-//    @Test
-//    public void contains_bookingWithSameIdentityFieldsInList_returnsTrue() {
-//        uniqueBookingList.add(BOOKING_BOB);
-//        Booking editedBookingBob = new BookingBuilder()
-//        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-//                .build();
-//        assertTrue(uniquePersonList.contains(editedAlice));
-//    }
-
     @Test
     public void add_nullBooking_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueBookingList.add(null));
@@ -59,7 +47,6 @@ public class UniqueBookingListTest {
         assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.add(BOOKING_BOB));
     }
 
-    // problematic
     @Test
     public void add_conflictingBooking_throwsConflictingBookingException() {
         uniqueBookingList.add(BOOKING_AMY);

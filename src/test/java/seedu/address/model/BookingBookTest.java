@@ -1,22 +1,30 @@
 package seedu.address.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.booking.Booking;
-import seedu.address.model.booking.exception.DuplicateBookingException;
-import seedu.address.testutil.BookingBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
+import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBookings.*;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.testutil.BookingBuilder;
 
 public class BookingBookTest {
     private final BookingBook bookingBook = new BookingBook();

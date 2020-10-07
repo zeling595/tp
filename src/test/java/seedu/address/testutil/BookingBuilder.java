@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.booking.Booking;
-
 import java.time.LocalDate;
+
+import seedu.address.model.booking.Booking;
 
 public class BookingBuilder {
 
@@ -63,8 +63,8 @@ public class BookingBuilder {
     /**
      * Sets the {@code startDate} of the {@code Booking} that we are building.
      */
-    public BookingBuilder withStartDate(LocalDate StartDate) {
-        this.startDate = StartDate;
+    public BookingBuilder withStartDate(LocalDate startDate) {
+        this.startDate = startDate;
         return this;
     }
 
