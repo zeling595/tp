@@ -114,6 +114,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getBookingBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBookingBookFilePath(Path bookingBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -190,6 +200,21 @@ public class AddCommandTest {
 
         @Override
         public void setBookings(List<Booking> bookings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBookingBook(ReadOnlyBookingBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasBooking(Booking booking) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasBookingWithId(Integer roomId) {
             throw new AssertionError("This method should not be called.");
         }
 

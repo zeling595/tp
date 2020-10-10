@@ -18,7 +18,7 @@ public class Booking {
     private final LocalDate endDate;
     private final boolean isActive;
 
-
+    
     /**
      * Every field must be present and not null. Used for creating a new Booking with a unique id.
      */
