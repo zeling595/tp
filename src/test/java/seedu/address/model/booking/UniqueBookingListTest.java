@@ -3,13 +3,15 @@ package seedu.address.model.booking;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBookings.*;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
+import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
 
-import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -19,9 +21,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.BookingBuilder;
 
 
@@ -106,7 +105,8 @@ public class UniqueBookingListTest {
     public void setBooking_editedBookingConflictWithBooking_throwsConflictBookingException() {
         uniqueBookingList.add(BOOKING_AMY);
         uniqueBookingList.add(BOOKING_BOB);
-        assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.setBooking(BOOKING_BOB, CONFLICT_AMY_BOOKING_CHLOE));
+        assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.setBooking(
+                BOOKING_BOB, CONFLICT_AMY_BOOKING_CHLOE));
     }
 
     @Test
@@ -164,7 +164,7 @@ public class UniqueBookingListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
+            -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
     }
 
 }
