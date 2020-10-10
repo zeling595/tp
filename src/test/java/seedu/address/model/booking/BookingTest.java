@@ -1,15 +1,23 @@
 package seedu.address.model.booking;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.BookingBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.BOOKING_DURATION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalBookings.BOOKING_1;
-import static seedu.address.testutil.TypicalBookings.BOOKING_2;
-import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.BookingBuilder;
 
 
 public class BookingTest {
@@ -17,19 +25,19 @@ public class BookingTest {
     @Test
     public void hasConflict() {
         // other booking has same startDate, earlier endDate -> return true
-        Booking conflictedAmy1 = new BookingBuilder(BOOKING_AMY).
-                withEndDate(LocalDate.of(2020, 10,11)).build();
+        Booking conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
+                .withEndDate(LocalDate.of(2020, 10, 11)).build();
         assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // other booking has later startDate, same endDate -> return true
-        conflictedAmy1 = new BookingBuilder(BOOKING_AMY).
-                withStartDate(LocalDate.of(2020, 10,3)).build();
+        conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
+                .withStartDate(LocalDate.of(2020, 10, 3)).build();
         assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // booking A starts on the day in which Booking B ends
         conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
                 .withStartDate(VALID_END_DATE_AMY)
-                .withEndDate(LocalDate.of(2020, 10,11)).build();
+                .withEndDate(LocalDate.of(2020, 10, 11)).build();
         assertFalse(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // booking B starts on the day in which Booking A ends
@@ -39,12 +47,12 @@ public class BookingTest {
     @Test
     public void getDuration() {
         // same value -> return true
-        int Duration = BOOKING_AMY.getDuration();
-        assertEquals(Duration, BOOKING_DURATION_AMY);
+        int duration = BOOKING_AMY.getDuration();
+        assertEquals(duration, BOOKING_DURATION_AMY);
 
         // different value -> return false
-        Duration = 6;
-        assertNotEquals(Duration, BOOKING_DURATION_AMY);
+        int duration1 = 6;
+        assertNotEquals(duration1, BOOKING_DURATION_AMY);
     }
 
     @Test

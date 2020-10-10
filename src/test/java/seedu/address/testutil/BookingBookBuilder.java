@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.BookingBook;
 import seedu.address.model.booking.Booking;
-import seedu.address.model.person.Person;
 
 public class BookingBookBuilder {
     private BookingBook bookingBook;

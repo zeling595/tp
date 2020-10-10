@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
-import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
