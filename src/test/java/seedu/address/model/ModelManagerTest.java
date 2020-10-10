@@ -3,10 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBookings.*;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
+import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -145,7 +148,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasBookingWithId_BookingNotInBookingBook_returnsFalse() {
+    public void hasBookingWithId_bookingNotInBookingBook_returnsFalse() {
         assertFalse(modelManager.hasBookingWithId(0));
     }
 
