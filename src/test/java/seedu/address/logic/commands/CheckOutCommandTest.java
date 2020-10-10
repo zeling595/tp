@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
 import static seedu.address.testutil.TypicalBookings.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
