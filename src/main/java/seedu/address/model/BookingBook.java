@@ -56,6 +56,11 @@ public class BookingBook implements ReadOnlyBookingBook {
         bookings.add(bookingToAdd);
     }
 
+    /**
+     * Get an active room.
+     * @param roomID
+     * @return An active room with matching room Id.
+     */
     public Booking getBooking(int roomID) {
         return bookings.getBooking(roomID);
     }

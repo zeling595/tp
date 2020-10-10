@@ -49,9 +49,12 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_AMY = 23;
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
+    public static final int VALID_PERSONAL_ID_DAN = 4;
     public static final int VALID_ROOM_ID_AMY = 4102;
     public static final int VALID_ROOM_ID_BOB = 2301;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 4102;
+    public static final int VALID_ROOM_ID_DAN = 2302;
+    public static final int INVALID_ROOM_ID = 1;
     public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
@@ -64,10 +67,17 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-09",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse("2020-11-11",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
 
     // Booking Values
     public static final int VALID_BOOKING_ID_AMY = 1;
     public static final int VALID_BOOKING_ID_BOB = 2;
+    public static final int CONFLICT_AMY_VALID_BOOKING_ID_CHLOE = 1;
+    public static final int VALID_BOOKING_ID_DAN = 4;
     public static final int BOOKING_DURATION_AMY = 5;
 
 
