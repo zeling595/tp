@@ -71,7 +71,7 @@ public class UniqueBookingList implements Iterable<Booking> {
         requireNonNull(roomId);
         Booking booking = getBooking(roomId);
         Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
-                booking.getStartDate(), booking.getEndDate(), false);
+                booking.getStartDate(), booking.getEndDate(), false, booking.getId());
         setBooking(booking, editedBooking);
     }
 
