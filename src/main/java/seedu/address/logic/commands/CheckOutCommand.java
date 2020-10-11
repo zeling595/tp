@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.BookingNotFoundException;
 
 /**
  * Checks out guest with room id
@@ -15,6 +17,9 @@ public class CheckOutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks out person from hotel. "
             + "Parameters: " + PREFIX_ROOM_ID + "[ROOM_ID] (must be a valid room number)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ROOM_ID + "2100";
+
+    public static final String MESSAGE_SUCCESS = "Successfully booked out: %s";
+    public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
 
     private final int roomId;
 
@@ -29,7 +34,16 @@ public class CheckOutCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format("%s", this.roomId));
+        Booking booking;
+
+        try {
+            booking = model.getBooking(roomId);
+        } catch (BookingNotFoundException e) {
+            throw new CommandException(MESSAGE_BOOKING_MISSING);
+        }
+
+        model.setBookingInactive(roomId);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
     }
 
     @Override

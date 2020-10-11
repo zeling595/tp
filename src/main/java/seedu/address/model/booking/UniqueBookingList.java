@@ -57,9 +57,10 @@ public class UniqueBookingList implements Iterable<Booking> {
     public Booking getBooking(int roomId) {
         requireNonNull(roomId);
         return internalList.stream()
-                .filter(booking -> booking.getId() == roomId)
+                .filter(booking -> booking.getRoomId().equals(roomId))
                 .filter(Booking::isActive)
-                .findFirst().orElseThrow(() -> new BookingNotFoundException());
+                .findFirst()
+                .orElseThrow(() -> new BookingNotFoundException());
     }
 
     /**
@@ -70,7 +71,7 @@ public class UniqueBookingList implements Iterable<Booking> {
         requireNonNull(roomId);
         Booking booking = getBooking(roomId);
         Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
-                booking.getStartDate(), booking.getEndDate(), false);
+                booking.getStartDate(), booking.getEndDate(), false, booking.getId());
         setBooking(booking, editedBooking);
     }
 
@@ -79,6 +80,19 @@ public class UniqueBookingList implements Iterable<Booking> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new BookingNotFoundException();
+        }
+
+        if (!target.equals(editedBooking) && contains(editedBooking)) {
+            throw new DuplicateBookingException();
+        }
+
+        boolean hasConflict;
+
+        hasConflict = internalList.stream()
+                .filter(booking -> !booking.equals(target))
+                .anyMatch(booking -> booking.hasConflict(editedBooking));
+        if (hasConflict) {
+            throw new ConflictingBookingException();
         }
 
         internalList.set(index, editedBooking);

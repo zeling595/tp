@@ -3,11 +3,18 @@ package seedu.address.model.booking;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -78,13 +85,86 @@ public class UniqueBookingListTest {
     }
 
     @Test
-    public void setBooking_editedBookingHasSameIdentity_success() {
+    public void setBooking_editedBookingIsDifferentBooking_success() {
         uniqueBookingList.add(BOOKING_AMY);
         Booking editedBookingAmy = new BookingBuilder(BOOKING_AMY).withRoomId(VALID_ROOM_ID_BOB).build();
         uniqueBookingList.setBooking(BOOKING_AMY, editedBookingAmy);
         UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
         expectedUniqueBookingList.add(editedBookingAmy);
         assertEquals(expectedUniqueBookingList, uniqueBookingList);
+    }
+
+    @Test
+    public void setBooking_editedBookingsSameBooking_throwsDuplicateBookingException() {
+        uniqueBookingList.add(BOOKING_BOB);
+        uniqueBookingList.add(BOOKING_AMY);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBooking(BOOKING_AMY, BOOKING_BOB));
+    }
+
+    @Test
+    public void setBooking_editedBookingConflictWithBooking_throwsConflictBookingException() {
+        uniqueBookingList.add(BOOKING_AMY);
+        uniqueBookingList.add(BOOKING_BOB);
+        assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.setBooking(
+                BOOKING_BOB, CONFLICT_AMY_BOOKING_CHLOE));
+    }
+
+    @Test
+    public void getBooking_roomIdExistAndRoomActive() {
+        uniqueBookingList.add(BOOKING_AMY);
+        uniqueBookingList.add(ACTIVE_BOOKING_DAN);
+        Booking expectedBooking = uniqueBookingList.getBooking(VALID_ROOM_ID_DAN);
+        assertEquals(expectedBooking, ACTIVE_BOOKING_DAN);
+    }
+
+    @Test
+    public void getBooking_roomIdDoNotExist_throwsBookingNotFoundException() {
+        uniqueBookingList.add(BOOKING_BOB);
+        uniqueBookingList.add(BOOKING_AMY);
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.getBooking(INVALID_ROOM_ID));
+    }
+
+    // no test for setBookingInactive yet, set false anyway
+
+    @Test
+    public void setBookings_nullUniqueBookingList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBookings((UniqueBookingList) null));
+    }
+
+    @Test
+    public void setBookings_uniqueBookingList_replacesOwnListWithProvidedUniqueBookingList() {
+        uniqueBookingList.add(BOOKING_BOB);
+        UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
+        expectedUniqueBookingList.add(BOOKING_AMY);
+        uniqueBookingList.setBookings(expectedUniqueBookingList);
+        assertEquals(expectedUniqueBookingList, uniqueBookingList);
+    }
+
+    @Test
+    public void setBookings_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBookings((List<Booking>) null));
+    }
+
+    @Test
+    public void setBookings_list_replacesOwnListWithProvidedList() {
+        uniqueBookingList.add(BOOKING_AMY);
+        List<Booking> bookingList = Collections.singletonList(BOOKING_BOB);
+        uniqueBookingList.setBookings(bookingList);
+        UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
+        expectedUniqueBookingList.add(BOOKING_BOB);
+        assertEquals(expectedUniqueBookingList, uniqueBookingList);
+    }
+
+    @Test
+    public void setBookings_listWithDuplicateBookings_throwsDuplicateBookingException() {
+        List<Booking> listWithDuplicateBookings = Arrays.asList(BOOKING_AMY, BOOKING_AMY);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(listWithDuplicateBookings));
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+            -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
     }
 
 }
