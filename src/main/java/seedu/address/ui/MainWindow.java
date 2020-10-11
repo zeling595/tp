@@ -111,7 +111,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        mainDisplayPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,6 +176,13 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            mainDisplayPlaceholder.getChildren().clear();
+            if (commandResult.isShowPersonList()) {
+                mainDisplayPlaceholder.getChildren().add(personListPanel.getRoot());
+            } else if (commandResult.isShowBookingList()) {
+                mainDisplayPlaceholder.getChildren().clear();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
