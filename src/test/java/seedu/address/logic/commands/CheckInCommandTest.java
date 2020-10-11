@@ -57,14 +57,6 @@ public class CheckInCommandTest {
     }
 
     @Test
-    public void execute() {
-        assertCommandFailure(new CheckInCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
-                VALID_START_DATE_AMY, VALID_END_DATE_AMY), model,
-                String.format(MESSAGE_ARGUMENTS, VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
-                        VALID_START_DATE_AMY, VALID_END_DATE_AMY));
-    }
-
-    @Test
     public void equals() {
         final CheckInCommand standardCommand = new CheckInCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY);
