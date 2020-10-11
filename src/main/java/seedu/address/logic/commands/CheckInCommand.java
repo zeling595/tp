@@ -58,7 +58,6 @@ public class CheckInCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-//        throw new CommandException(String.format(MESSAGE_ARGUMENTS, personalId, roomId, startDate, endDate));
         Booking booking;
 
         if (!model.hasPersonWithId(personalId)) {
