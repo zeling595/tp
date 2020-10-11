@@ -20,8 +20,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookingBook;
 import seedu.address.model.ReadOnlyRoomBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
 import seedu.address.testutil.PersonBuilder;
@@ -162,6 +164,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetData(ReadOnlyBookingBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasRoom(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,6 +180,31 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyRoomBook getRoomBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addBooking(Booking b) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBookings(List<Booking> bookings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Booking getBooking(int roomId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyBookingBook getBookingBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBookingInactive(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
 

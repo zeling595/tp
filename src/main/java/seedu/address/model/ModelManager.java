@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
 
@@ -23,13 +24,15 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final RoomBook roomBook;
+    private final BookingBook bookingBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyRoomBook roomBook) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -37,6 +40,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.roomBook = new RoomBook(roomBook);
+        this.bookingBook = new BookingBook(bookingBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
 
@@ -44,10 +48,15 @@ public class ModelManager implements Model {
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
+
+        // Initialize the nextAvailableId of Person class so that each new person gets a unique id
+        Integer nextAvailableIdBooking = this.bookingBook.getBookingList().stream()
+                .mapToInt(Booking::getId).max().orElse(0) + 1;
+        Booking.setNextAvailableId(nextAvailableIdBooking);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new RoomBook());
+        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -145,6 +154,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void resetData(ReadOnlyBookingBook newData) {
+        this.bookingBook.resetData(newData);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
@@ -157,6 +171,33 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyRoomBook getRoomBook() {
         return this.roomBook;
+    }
+
+    //=========== BookingBook ===================================================================================
+
+    @Override
+    public void addBooking(Booking b) {
+        this.bookingBook.addBooking(b);
+    }
+
+    @Override
+    public void setBookings(List<Booking> bookings) {
+        this.bookingBook.setBookings(bookings);
+    }
+
+    @Override
+    public Booking getBooking(int roomId) {
+        return this.bookingBook.getBooking(roomId);
+    }
+
+    @Override
+    public ReadOnlyBookingBook getBookingBook() {
+        return this.bookingBook;
+    }
+
+    @Override
+    public void setBookingInactive(int roomId) {
+        this.bookingBook.setBookingInactive(roomId);
     }
 
 
@@ -192,6 +233,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
