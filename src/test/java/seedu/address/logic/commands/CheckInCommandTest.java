@@ -39,16 +39,21 @@ public class CheckInCommandTest {
     @Test void execute_success() throws CommandException {
         model.addPerson(AMY);
 
+        // stub
+        // when i create a new booking on line 42, my booking ID++
+        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        final int testBookingId = 7;
+
         Booking booking = new Booking(VALID_ROOM_ID_AMY, VALID_PERSONAL_ID_AMY,
-                VALID_START_DATE_AMY, VALID_END_DATE_AMY, true);
+                VALID_START_DATE_AMY, VALID_END_DATE_AMY, true, testBookingId);
 
         CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY);
+
         assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
                 command.execute(model).getFeedbackToUser());
 
-        // problem: when i create a new booking on line 42, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+
     }
 
     @Test
