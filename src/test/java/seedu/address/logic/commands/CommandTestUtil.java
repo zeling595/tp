@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
-    public static final int VALID_ROOM_ID_AMY = 4102;
-    public static final int VALID_ROOM_ID_BOB = 2301;
+    public static final int VALID_ROOM_ID_AMY = 1235;
+    public static final int VALID_ROOM_ID_BOB = 1236;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 4102;
     public static final int VALID_ROOM_ID_DAN = 2302;
     public static final int INVALID_ROOM_ID = 1;

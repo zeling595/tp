@@ -32,7 +32,7 @@ public class CheckInCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
     public static final String MESSAGE_PERSONAL_ID_MISSING = "No valid personalId can be found.";
     public static final String MESSAGE_ROOM_ID_MISSING = "No valid roomId can be be found";
-    public static final String MESSAGE_SUCCESS = "Successfully checked out: %s";
+    public static final String MESSAGE_SUCCESS = "Successfully checked in: %s";
 
     private final int personalId;
     private final int roomId;
