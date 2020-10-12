@@ -1,17 +1,10 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.commands.GetBillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -26,15 +19,14 @@ public class GetBillCommandParser implements Parser<GetBillCommand> {
      */
     @Override
     public GetBillCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROOM_ID);
+        ArgumentMultimap argMultiMap =
+                ArgumentTokenizer.tokenize(args, PREFIX_ROOM_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ROOM_ID)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultiMap.getValue(PREFIX_ROOM_ID).isEmpty() || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE));
         }
 
-        int roomId = ParserUtil.parseRoomId(argMultimap.getValue(PREFIX_ROOM_ID).get());
+        int roomId = ParserUtil.parseRoomId(argMultiMap.getValue(PREFIX_ROOM_ID).get());
 
         return new GetBillCommand(roomId);
     }
