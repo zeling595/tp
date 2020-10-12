@@ -3,15 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CheckOutCommand;
 import seedu.address.logic.commands.GetBillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

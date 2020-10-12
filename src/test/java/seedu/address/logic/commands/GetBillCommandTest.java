@@ -1,17 +1,20 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.GetBillCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.room.Room;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for GetBillCommand.
@@ -22,7 +25,15 @@ public class GetBillCommandTest {
             getTypicalBookingBook());
 
     @Test
-    public void execute() {
-        assertCommandFailure(new GetBillCommand(VALID_ROOM_ID_DAN), model, MESSAGE_NOT_IMPLEMENTED_YET);
+    public void execute_success() throws CommandException {
+        model.addBooking(ACTIVE_BOOKING_DAN);
+        Booking booking = model.getBooking(VALID_ROOM_ID_DAN);
+        Room room = model.getRoom(VALID_ROOM_ID_DAN);
+        int pricePerNight = room.getPrice();
+
+        GetBillCommand command = new GetBillCommand(VALID_ROOM_ID_DAN);
+        assertEquals(String.format(GetBillCommand.MESSAGE_SUCCESS_GET_BILL, VALID_ROOM_ID_DAN,
+                booking.getDuration() * pricePerNight),
+            command.execute(model).getFeedbackToUser());
     }
 }

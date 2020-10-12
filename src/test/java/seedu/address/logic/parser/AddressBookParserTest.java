@@ -130,7 +130,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_getBill() throws Exception {
-        assertTrue(parser.parseCommand(GetBillCommand.COMMAND_WORD) instanceof GetBillCommand);
+        final int roomId = 4012;
+        GetBillCommand command = (GetBillCommand) parser.parseCommand(GetBillCommand.COMMAND_WORD + " "
+            + PREFIX_ROOM_ID + roomId);
+
+        assertEquals(new GetBillCommand(roomId), command);
     }
 
     @Test
