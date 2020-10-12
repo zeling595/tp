@@ -13,10 +13,7 @@ import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import org.junit.jupiter.api.Test;
 

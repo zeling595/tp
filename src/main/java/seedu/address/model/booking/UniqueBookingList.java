@@ -3,8 +3,11 @@ package seedu.address.model.booking;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -128,6 +131,12 @@ public class UniqueBookingList implements Iterable<Booking> {
             }
         }
         return true;
+    }
+
+    public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
+        return  FXCollections.observableArrayList(internalList.stream().filter(x -> x.hasOverlap(startDate, endDate))
+                                    .map(Booking::getRoomId)
+                                    .collect(Collectors.toList()));
     }
 
     /**
