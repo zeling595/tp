@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final BookingBook bookingBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Booking> filteredBookings;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +45,7 @@ public class ModelManager implements Model {
         this.bookingBook = new BookingBook(bookingBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
 
         // Initialize the nextAvailableId of Person class so that each new person gets a unique id
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
@@ -90,10 +92,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getBookingBookFilePath() {
+        return userPrefs.getBookingBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
+
+    @Override
+    public void setBookingBookFilePath(Path bookingBookFilePath) {
+        requireNonNull(bookingBookFilePath);
+        userPrefs.setBookingBookFilePath(bookingBookFilePath);
+    }
+
 
     //=========== AddressBook ================================================================================
 
@@ -133,11 +147,14 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
     //=========== RoomBook ===================================================================================
+    @Override
+    public ReadOnlyRoomBook getRoomBook() {
+        return this.roomBook;
+    }
 
     @Override
     public void addRoom(Room r) {
@@ -174,12 +191,29 @@ public class ModelManager implements Model {
         return this.roomBook.getRoom(roomId);
     }
 
+    //=========== BookingBook ===================================================================================
+
     @Override
-    public ReadOnlyRoomBook getRoomBook() {
-        return this.roomBook;
+    public void setBookingBook(ReadOnlyBookingBook bookingBook) {
+        this.bookingBook.resetData(bookingBook);
     }
 
-    //=========== BookingBook ===================================================================================
+    @Override
+    public ReadOnlyBookingBook getBookingBook() {
+        return this.bookingBook;
+    }
+
+    @Override
+    public boolean hasBooking(Booking booking) {
+        requireNonNull(booking);
+        return bookingBook.hasBooking(booking);
+    }
+
+    @Override
+    public boolean hasBookingWithId(Integer id) {
+        requireNonNull(id);
+        return bookingBook.hasBookingWithId(id);
+    }
 
     @Override
     public void addBooking(Booking b) {
@@ -199,11 +233,6 @@ public class ModelManager implements Model {
     @Override
     public Booking getBooking(int roomId) {
         return this.bookingBook.getBooking(roomId);
-    }
-
-    @Override
-    public ReadOnlyBookingBook getBookingBook() {
-        return this.bookingBook;
     }
 
     @Override
@@ -229,6 +258,23 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Booking List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        return filteredBookings;
+    }
+
+    @Override
+    public void updateFilteredBookingList(Predicate<Booking> predicate) {
+        requireNonNull(predicate);
+        filteredBookings.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -246,7 +292,8 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredBookings.equals(other.filteredBookings);
     }
 
 }
