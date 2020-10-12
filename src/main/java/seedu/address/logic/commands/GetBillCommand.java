@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,8 +20,34 @@ public class GetBillCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "getBill command not implemented yet";
 
+    public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
+
+    private final int roomId;
+
+    public GetBillCommand(int roomId) {
+        requireAllNonNull(roomId);
+        this.roomId = roomId;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GetBillCommand)) {
+            return false;
+        }
+
+        // state check
+        GetBillCommand e = (GetBillCommand) other;
+        return roomId == e.roomId;
     }
 }
