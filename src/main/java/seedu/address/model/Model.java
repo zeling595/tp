@@ -96,6 +96,8 @@ public interface Model {
 
     Room getRoom(int roomId);
 
+    ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms);
+
     ReadOnlyRoomBook getRoomBook();
     // booking
 

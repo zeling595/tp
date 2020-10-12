@@ -159,6 +159,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
+        return this.roomBook.getAvailableRooms(unavailableRooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
