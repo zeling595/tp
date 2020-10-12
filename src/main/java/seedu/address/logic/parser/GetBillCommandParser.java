@@ -37,7 +37,6 @@ public class GetBillCommandParser implements Parser<GetBillCommand> {
         int roomId = ParserUtil.parseRoomId(argMultimap.getValue(PREFIX_ROOM_ID).get());
 
         return new GetBillCommand(roomId);
-
     }
 
     /**
