@@ -89,10 +89,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getBookingBookFilePath() {
+        return userPrefs.getBookingBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
+
+    @Override
+    public void setBookingBookFilePath(Path bookingBookFilePath) {
+        requireNonNull(bookingBookFilePath);
+        userPrefs.setBookingBookFilePath(bookingBookFilePath);
+    }
+
 
     //=========== AddressBook ================================================================================
 
@@ -132,11 +144,14 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
     //=========== RoomBook ===================================================================================
+    @Override
+    public ReadOnlyRoomBook getRoomBook() {
+        return this.roomBook;
+    }
 
     @Override
     public void addRoom(Room r) {
@@ -168,12 +183,29 @@ public class ModelManager implements Model {
         return this.roomBook.getRoom(roomId);
     }
 
+    //=========== BookingBook ===================================================================================
+
     @Override
-    public ReadOnlyRoomBook getRoomBook() {
-        return this.roomBook;
+    public void setBookingBook(ReadOnlyBookingBook bookingBook) {
+        this.bookingBook.resetData(bookingBook);
     }
 
-    //=========== BookingBook ===================================================================================
+    @Override
+    public ReadOnlyBookingBook getBookingBook() {
+        return this.bookingBook;
+    }
+
+    @Override
+    public boolean hasBooking(Booking booking) {
+        requireNonNull(booking);
+        return bookingBook.hasBooking(booking);
+    }
+
+    @Override
+    public boolean hasBookingWithId(Integer id) {
+        requireNonNull(id);
+        return bookingBook.hasBookingWithId(id);
+    }
 
     @Override
     public void addBooking(Booking b) {
@@ -188,11 +220,6 @@ public class ModelManager implements Model {
     @Override
     public Booking getBooking(int roomId) {
         return this.bookingBook.getBooking(roomId);
-    }
-
-    @Override
-    public ReadOnlyBookingBook getBookingBook() {
-        return this.bookingBook;
     }
 
     @Override

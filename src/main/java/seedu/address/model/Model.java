@@ -48,12 +48,30 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the user prefs' booking book file path.
+     */
+    Path getBookingBookFilePath();
+
+    /**
+     * Sets the user prefs' booking book file path.
+     */
+    void setBookingBookFilePath(Path addressBookFilePath);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Replaces booking book data with the data in {@code bookingBook}.
+     */
+    void setBookingBook(ReadOnlyBookingBook bookingBook);
+
+    /** Returns the BookingBook */
+    ReadOnlyBookingBook getBookingBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -97,7 +115,18 @@ public interface Model {
     Room getRoom(int roomId);
 
     ReadOnlyRoomBook getRoomBook();
+
     // booking
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasBooking(Booking booking);
+
+    /**
+     * Returns true if a person with the id is in the address book.
+     */
+    boolean hasBookingWithId(Integer id);
 
     void addBooking(Booking b);
 
@@ -106,8 +135,6 @@ public interface Model {
     // boolean hasBooking(int roomId);
 
     Booking getBooking(int roomId);
-
-    ReadOnlyBookingBook getBookingBook();
 
     void setBookingInactive(int roomId);
 
