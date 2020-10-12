@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_GENE;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.GENE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -35,7 +36,20 @@ public class CheckInCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
             getTypicalBookingBook());
 
-    @Test void execute_success() throws CommandException {
+    @Test
+    public void constructor_nullStartDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+                null, VALID_END_DATE_GENE));
+    }
+
+    @Test
+    public void constructor_nullEndDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+                VALID_START_DATE_GENE, null));
+    }
+
+    @Test
+    public void execute_success() throws CommandException {
         model.addPerson(GENE);
 
         // stub
