@@ -7,10 +7,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Booking}'s {@code startDate} matches any of the keywords given.
  */
-public class BookingContainsStartDatePredicate implements Predicate<Booking> {
+public class BookingMatchesStartDatePredicate implements Predicate<Booking> {
     private final LocalDate startDate;
 
-    public BookingContainsStartDatePredicate(LocalDate startDate) {
+    public BookingMatchesStartDatePredicate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -22,8 +22,8 @@ public class BookingContainsStartDatePredicate implements Predicate<Booking> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BookingContainsStartDatePredicate // instanceof handles nulls
-                && startDate.equals(((BookingContainsStartDatePredicate) other).startDate)); // state check
+                || (other instanceof BookingMatchesStartDatePredicate // instanceof handles nulls
+                && startDate.equals(((BookingMatchesStartDatePredicate) other).startDate)); // state check
     }
 
 }

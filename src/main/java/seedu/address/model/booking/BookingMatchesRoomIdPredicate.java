@@ -6,10 +6,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Booking}'s {@code roomId} matches any of the keywords given.
  */
-public class BookingContainsRoomIdPredicate implements Predicate<Booking> {
+public class BookingMatchesRoomIdPredicate implements Predicate<Booking> {
     private final Integer roomId;
 
-    public BookingContainsRoomIdPredicate(Integer roomId) {
+    public BookingMatchesRoomIdPredicate(Integer roomId) {
         this.roomId = roomId;
     }
 
@@ -21,8 +21,8 @@ public class BookingContainsRoomIdPredicate implements Predicate<Booking> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BookingContainsRoomIdPredicate // instanceof handles nulls
-                && roomId.equals(((BookingContainsRoomIdPredicate) other).roomId)); // state check
+                || (other instanceof BookingMatchesRoomIdPredicate // instanceof handles nulls
+                && roomId.equals(((BookingMatchesRoomIdPredicate) other).roomId)); // state check
     }
 
 }

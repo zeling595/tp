@@ -4,25 +4,25 @@ import java.util.function.Predicate;
 
 
 /**
- * Tests that a {@code Booking}'s {@code roomId} matches any of the keywords given.
+ * Tests that a {@code Booking}'s {@code personId} matches any of the keywords given.
  */
-public class BookingMatchesRoomIdPredicate implements Predicate<Booking> {
-    private final Integer roomId;
+public class BookingMatchesPersonIdPredicate implements Predicate<Booking> {
+    private final Integer personId;
 
-    public BookingMatchesRoomIdPredicate(Integer roomId) {
-        this.roomId = roomId;
+    public BookingMatchesPersonIdPredicate(Integer personId) {
+        this.personId = personId;
     }
 
     @Override
     public boolean test(Booking booking) {
-        return roomId.equals(booking.getRoomId());
+        return personId.equals(booking.getPersonId());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BookingMatchesRoomIdPredicate // instanceof handles nulls
-                && roomId.equals(((BookingMatchesRoomIdPredicate) other).roomId)); // state check
+                || (other instanceof BookingMatchesPersonIdPredicate // instanceof handles nulls
+                && personId.equals(((BookingMatchesPersonIdPredicate) other).personId)); // state check
     }
 
 }
