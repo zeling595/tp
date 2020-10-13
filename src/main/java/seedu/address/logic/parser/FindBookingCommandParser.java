@@ -74,7 +74,7 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
         }
 
         if (predicates.size() == 0) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(FindBookingCommand.MESSAGE_USAGE);
         }
 
         return new FindBookingCommand(predicates);
