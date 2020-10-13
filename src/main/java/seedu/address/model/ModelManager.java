@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -176,6 +177,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
+        return this.roomBook.getAvailableRooms(unavailableRooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
@@ -217,6 +223,11 @@ public class ModelManager implements Model {
     @Override
     public void setBookings(List<Booking> bookings) {
         this.bookingBook.setBookings(bookings);
+    }
+
+    @Override
+    public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
+        return this.bookingBook.getUnavailableRooms(startDate, endDate);
     }
 
     @Override

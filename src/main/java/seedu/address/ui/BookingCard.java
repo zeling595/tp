@@ -43,10 +43,11 @@ public class BookingCard extends UiPart<Region> {
         super(FXML);
         this.booking = booking;
         index.setText(displayedIndex + ". ");
-        id.setText(booking.getId().toString());
-        personId.setText(booking.getPersonId().toString());
-        roomId.setText(booking.getRoomId().toString());
-        period.setText(booking.getStartDate().toString() + " - " + booking.getEndDate().toString());
+        id.setText(String.format("Booking ID: %s", booking.getId().toString()));
+        personId.setText(String.format("Person ID: %s", booking.getPersonId().toString()));
+        roomId.setText(String.format("Room ID: %s", booking.getRoomId().toString()));
+        period.setText(String.format("Period: from %s to %s",
+                booking.getStartDate().toString(), booking.getEndDate().toString()));
     }
 
     @Override

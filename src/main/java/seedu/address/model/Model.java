@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -103,6 +104,7 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    // Room Book Methods
     void addRoom(Room r);
 
     void setRooms(List<Room> rooms);
@@ -115,9 +117,11 @@ public interface Model {
 
     Room getRoom(int roomId);
 
+    ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms);
+
     ReadOnlyRoomBook getRoomBook();
 
-    // booking
+    // Booking Book Methods
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -132,6 +136,8 @@ public interface Model {
     void addBooking(Booking b);
 
     void setBookings(List<Booking> bookings);
+
+    ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate);
 
     // boolean hasBooking(int roomId);
 
