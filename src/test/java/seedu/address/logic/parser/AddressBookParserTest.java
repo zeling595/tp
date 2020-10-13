@@ -28,6 +28,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetBillCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -125,6 +126,15 @@ public class AddressBookParserTest {
             + PREFIX_ROOM_ID + roomId);
 
         assertEquals(new CheckOutCommand(roomId), command);
+    }
+
+    @Test
+    public void parseCommand_getBill() throws Exception {
+        final int roomId = 4012;
+        GetBillCommand command = (GetBillCommand) parser.parseCommand(GetBillCommand.COMMAND_WORD + " "
+            + PREFIX_ROOM_ID + roomId);
+
+        assertEquals(new GetBillCommand(roomId), command);
     }
 
     @Test

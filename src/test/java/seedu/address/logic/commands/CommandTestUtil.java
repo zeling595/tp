@@ -36,24 +36,30 @@ public class CommandTestUtil {
     public static final Integer VALID_ID_BOB = 2;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_GENE = "Gene Xiao";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_GENE = "420420420";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_GENE = "gene@nuscomputing.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_GENE = "Streety McStreetFace";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     // Check In Values
+    public static final int VALID_PERSONAL_ID_GENE = 69;
     public static final int VALID_PERSONAL_ID_AMY = 23;
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
     public static final int VALID_ROOM_ID_AMY = 4102;
     public static final int VALID_ROOM_ID_BOB = 2301;
+    public static final int VALID_ROOM_ID_GENE = 1240;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 4102;
-    public static final int VALID_ROOM_ID_DAN = 2302;
+    public static final int VALID_ROOM_ID_DAN = 1237;
     public static final int INVALID_ROOM_ID = 1;
     public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -70,6 +76,10 @@ public class CommandTestUtil {
     public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse("2020-11-11",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-30",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-06-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 

@@ -116,7 +116,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String personal Id} into a {@code int}.
+     * Parses a {@code String room Id} into a {@code int}.
      *
      * @param id room id as entered by user
      * @return room id as an integer
@@ -143,6 +143,22 @@ public class ParserUtil {
         try {
             LocalDate newDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             return newDate;
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid Date");
+        }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code boolean}
+     *
+     * @param bool the boolean entered by the user
+     * @return the boolean as a boolean
+     * @throws ParseException if the given {@code date} is invalid
+     */
+    public static boolean parseBoolean(String bool) throws ParseException {
+        try {
+            boolean isActive = Boolean.parseBoolean(bool);
+            return isActive;
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid Date");
         }
