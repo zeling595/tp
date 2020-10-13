@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -134,9 +133,9 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
-        return  FXCollections.observableArrayList(internalList.stream().filter(x -> x.hasOverlap(startDate, endDate))
-                                    .map(Booking::getRoomId)
-                                    .collect(Collectors.toList()));
+        return FXCollections.observableArrayList(internalList.stream().filter(x -> x.hasOverlap(startDate, endDate))
+                                                                        .map(Booking::getRoomId)
+                                                                        .collect(Collectors.toList()));
     }
 
     /**

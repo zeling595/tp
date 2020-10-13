@@ -108,7 +108,11 @@ public class Booking {
     }
 
     public boolean hasOverlap(LocalDate startDate, LocalDate endDate) {
-        return isActive && startDate.isBefore(this.endDate) && endDate.isAfter(this.startDate);
+        if (this.startDate.isEqual(endDate) || this.endDate.isEqual(startDate)) {
+            return true;
+        } else {
+            return isActive && startDate.isBefore(this.endDate) && endDate.isAfter(this.startDate);
+        }
     }
 
     /**

@@ -26,7 +26,7 @@ public class UniqueRoomListTest {
     private final UniqueRoomList uniqueRoomList = new UniqueRoomList();
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_roomNotInList_returnsFalse() {
         assertFalse(uniqueRoomList.contains(DEFAULT_ROOMID));
     }
 

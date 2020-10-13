@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
