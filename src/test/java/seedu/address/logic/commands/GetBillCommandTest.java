@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
 import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
@@ -14,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.room.Room;
 
 /**
@@ -35,5 +37,13 @@ public class GetBillCommandTest {
         assertEquals(String.format(GetBillCommand.MESSAGE_SUCCESS_GET_BILL, VALID_ROOM_ID_DAN,
                 booking.getDuration() * pricePerNight),
             command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_invalid_booking() throws CommandException {
+        assertThrows(BookingNotFoundException.class, () -> {
+            int bookingId = ACTIVE_BOOKING_DAN.getId();
+            Booking booking = model.getBooking(bookingId);
+        });
     }
 }
