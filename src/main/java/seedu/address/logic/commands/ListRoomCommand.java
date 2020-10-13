@@ -22,7 +22,7 @@ public class ListRoomCommand extends Command {
             + PREFIX_START_DATE + "2020-12-10 "
             + PREFIX_END_DATE + "2020-12-15";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "ListRoom Command not implemented yet";
-    public static final String MESSAGE_SUCCESS = "Successfully retrieved unavailable rooms";
+    public static final String MESSAGE_SUCCESS = "Successfully retrieved available rooms";
 
     private final LocalDate startDate;
     private final LocalDate endDate;
