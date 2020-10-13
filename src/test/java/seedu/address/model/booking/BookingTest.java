@@ -23,7 +23,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.model.booking.exception.CreatePastBookingException;
 import seedu.address.testutil.BookingBuilder;
 
