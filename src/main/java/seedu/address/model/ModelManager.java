@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Booking> filteredBookings;
 
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */

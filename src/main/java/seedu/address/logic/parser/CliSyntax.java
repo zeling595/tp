@@ -15,5 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROOM_ID = new Prefix("rid/");
     public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
+    public static final Prefix PREFIX_IS_ACTIVE = new Prefix("ac/");
+
 
 }
