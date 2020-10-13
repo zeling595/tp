@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.PAST_END_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.PAST_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_GENE;
@@ -65,6 +67,18 @@ public class CheckInCommandTest {
 
         assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
                 command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_pastStartDateAndValidEndDate_throwsCommandException() {
+        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, PAST_START_DATE, VALID_END_DATE_GENE).execute(model));
+    }
+
+    @Test
+    public void execute_pastStartDateAndPastEndDate_throwsCommandException() {
+        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, PAST_START_DATE, PAST_END_DATE).execute(model));
     }
 
     @Test
