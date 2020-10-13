@@ -248,9 +248,10 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Booking List Accessors =============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
-     * {@code versionedBookingBook}
+     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Booking> getFilteredBookingList() {
@@ -280,7 +281,8 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredBookings.equals(other.filteredBookings);
     }
 
 }
