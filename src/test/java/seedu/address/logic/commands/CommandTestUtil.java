@@ -61,7 +61,7 @@ public class CommandTestUtil {
     public static final int VALID_ROOM_ID_BOB = 2301;
     public static final int VALID_ROOM_ID_GENE = 1240;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 4102;
-    public static final int VALID_ROOM_ID_DAN = 2302;
+    public static final int VALID_ROOM_ID_DAN = 1237;
     public static final int INVALID_ROOM_ID = 1;
     public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));

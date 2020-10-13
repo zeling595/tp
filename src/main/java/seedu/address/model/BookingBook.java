@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -82,6 +83,10 @@ public class BookingBook implements ReadOnlyBookingBook {
     public boolean hasBookingWithId(Integer id) {
         requireNonNull(id);
         return bookings.hasBookingWithId(id);
+    }
+
+    public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
+        return bookings.getUnavailableRooms(startDate, endDate);
     }
 
     //// util methods

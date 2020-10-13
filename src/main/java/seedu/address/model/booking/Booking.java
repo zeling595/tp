@@ -107,6 +107,9 @@ public class Booking {
 
     }
 
+    public boolean hasOverlap(LocalDate startDate, LocalDate endDate) {
+        return isActive && startDate.isBefore(this.endDate) && endDate.isAfter(this.startDate);
+    }
 
     /**
      * Returns true if both bookings have the same identity and data fields.

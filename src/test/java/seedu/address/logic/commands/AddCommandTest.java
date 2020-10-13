@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -169,6 +170,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void resetData(ReadOnlyRoomBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -204,6 +209,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public void setBookingBook(ReadOnlyBookingBook newData) {
             throw new AssertionError("This method should not be called.");
         }
