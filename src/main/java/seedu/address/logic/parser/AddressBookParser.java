@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.commands.CheckOutCommand;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetBillCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -77,6 +79,9 @@ public class AddressBookParser {
 
         case CheckOutCommand.COMMAND_WORD:
             return new CheckOutCommandParser().parse(arguments);
+
+        case ListRoomCommand.COMMAND_WORD:
+            return new ListRoomCommandParser().parse(arguments);
 
         case GetBillCommand.COMMAND_WORD:
             return new GetBillCommandParser().parse(arguments);
