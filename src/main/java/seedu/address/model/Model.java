@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.awt.print.Book;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
@@ -158,7 +157,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBookingList(Predicate<Booking> predicate);
-
-
-
 }

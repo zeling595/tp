@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showBookingAtIndex;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOKING;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,6 +35,10 @@ public class ListBookingCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showBookingAtIndex(model, INDEX_FIRST_BOOKING);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW,
+                        expectedModel.getFilteredBookingList().size()),
+                false, false, false, true);
+        assertCommandSuccess(new ListBookingCommand(), model, expectedCommandResult, expectedModel);
     }
 }
