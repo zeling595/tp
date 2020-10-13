@@ -47,7 +47,6 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
 
-
         // Initialize the nextAvailableId of Person class so that each new person gets a unique id
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
                 .mapToInt(Person::getId).max().orElse(0) + 1;
