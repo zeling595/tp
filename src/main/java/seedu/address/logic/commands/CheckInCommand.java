@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.booking.Booking;
 
 /**
  * Encapsulates the Check In feature.
@@ -29,8 +30,10 @@ public class CheckInCommand extends Command {
             + PREFIX_END_DATE + "2020-09-17";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "checkIn command not implemented yet";
-
     public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
+    public static final String MESSAGE_PERSONAL_ID_MISSING = "No valid personalId can be found.";
+    public static final String MESSAGE_ROOM_ID_MISSING = "No valid roomId can be be found";
+    public static final String MESSAGE_SUCCESS = "Successfully checked in: %s";
 
     private final int personalId;
     private final int roomId;
@@ -56,7 +59,19 @@ public class CheckInCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, personalId, roomId, startDate, endDate));
+        Booking booking;
+
+        if (!model.hasPersonWithId(personalId)) {
+            throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
+        }
+
+        if (!model.hasRoom(roomId)) {
+            throw new CommandException(MESSAGE_ROOM_ID_MISSING);
+        }
+
+        booking = new Booking(roomId, personalId, startDate, endDate, true);
+        model.addBooking(booking);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
     }
 
     @Override
