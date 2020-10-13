@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -48,18 +47,15 @@ public class FindBookingCommand extends Command {
         Predicate<Booking> predicate = predicates.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredBookingList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()));
+                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()),
+                false, false, false, true);
     }
 
-    public static <T> boolean listEqualsIgnoreOrder(List<T> list1, List<T> list2) {
-        return new HashSet<>(list1).equals(new HashSet<>(list2));
-    }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindBookingCommand // instanceof handles nulls
-                && listEqualsIgnoreOrder(predicates, ((FindBookingCommand) other).predicates));
-//                predicates.equals(((FindBookingCommand) other).predicates)); // state check
+                && predicates.equals(((FindBookingCommand) other).predicates));
     }
 }

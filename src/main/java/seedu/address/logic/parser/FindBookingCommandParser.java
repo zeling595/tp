@@ -7,13 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindBookingCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesEndDatePredicate;
@@ -21,7 +22,6 @@ import seedu.address.model.booking.BookingMatchesIsActivePredicate;
 import seedu.address.model.booking.BookingMatchesPersonIdPredicate;
 import seedu.address.model.booking.BookingMatchesRoomIdPredicate;
 import seedu.address.model.booking.BookingMatchesStartDatePredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindBookingCommand object
@@ -60,7 +60,6 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
         if (argMultimap.getValue(PREFIX_START_DATE).isPresent()) {
             LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
             predicates.add(new BookingMatchesStartDatePredicate(startDate));
-
         }
 
         if (argMultimap.getValue(PREFIX_END_DATE).isPresent()) {
@@ -72,6 +71,10 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
         if (argMultimap.getValue(PREFIX_IS_ACTIVE).isPresent()) {
             boolean isActive = ParserUtil.parseBoolean(argMultimap.getValue(PREFIX_IS_ACTIVE).get());
             predicates.add(new BookingMatchesIsActivePredicate(isActive));
+        }
+
+        if (predicates.size() == 0) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new FindBookingCommand(predicates);
