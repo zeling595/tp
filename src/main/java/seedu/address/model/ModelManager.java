@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final BookingBook bookingBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Booking> filteredBookings;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.bookingBook = new BookingBook(bookingBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
 
         // Initialize the nextAvailableId of Person class so that each new person gets a unique id
         Integer nextAvailableId = this.addressBook.getPersonList().stream()
@@ -243,6 +245,22 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Booking List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
+     * {@code versionedBookingBook}
+     */
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        return filteredBookings;
+    }
+
+    @Override
+    public void updateFilteredBookingList(Predicate<Booking> predicate) {
+        requireNonNull(predicate);
+        filteredBookings.setPredicate(predicate);
     }
 
     @Override

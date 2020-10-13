@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.awt.print.Book;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,6 +17,7 @@ import seedu.address.model.room.Room;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Booking> PREDICATE_SHOW_ALL_ACTIVE_BOOKINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -147,6 +149,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered booking list */
+    ObservableList<Booking> getFilteredBookingList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBookingList(Predicate<Booking> predicate);
+
 
 
 }
