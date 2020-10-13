@@ -3,11 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
+import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -44,6 +46,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setBookingBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -51,9 +54,8 @@ public class ModelManagerTest {
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setBookingBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
-
-        // modifying bookingBooking file path
     }
 
     @Test
@@ -74,10 +76,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setBookingBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setBookingBookFilePath(null));
+    }
+
+    @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void setBookingBookFilePath_validPath_setsBookingBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setBookingBookFilePath(path);
+        assertEquals(path, modelManager.getBookingBookFilePath());
     }
 
     @Test
@@ -110,6 +124,38 @@ public class ModelManagerTest {
     public void hasPersonWithId_personInAddressBook_returnsTrue() {
         modelManager.addPerson(AMY);
         assertTrue(modelManager.hasPersonWithId(VALID_ID_AMY));
+    }
+
+    @Test
+    public void hasBooking_nullBooking_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasBooking(null));
+    }
+
+    @Test
+    public void hasBooking_bookingNotInBookingBook_returnsFalse() {
+        assertFalse(modelManager.hasBooking(CONFLICT_AMY_BOOKING_CHLOE));
+    }
+
+    @Test
+    public void hasBooking_bookingInBookingBook_returnsTrue() {
+        modelManager.addBooking(BOOKING_AMY);
+        assertTrue(modelManager.hasBooking(BOOKING_AMY));
+    }
+
+    @Test
+    public void hasBookingWithId_nullId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasBookingWithId(null));
+    }
+
+    @Test
+    public void hasBookingWithId_bookingNotInBookingBook_returnsFalse() {
+        assertFalse(modelManager.hasBookingWithId(0));
+    }
+
+    @Test
+    public void hasBookingWithId_bookingInBookingBook_returnsTrue() {
+        modelManager.addBooking(BOOKING_AMY);
+        assertTrue(modelManager.hasBookingWithId(VALID_BOOKING_ID_AMY));
     }
 
     @Test
