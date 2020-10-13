@@ -52,17 +52,17 @@ public class BookingTest {
                 .withEndDate(LocalDate.of(2020, 10, 16))
                 .withIsActive(true)
                 .build();
-        assertFalse(overlapAmy1.hasOverlap(LocalDate.of(2020,10,9),
+        assertFalse(overlapAmy1.hasOverlap(LocalDate.of(2020, 10, 9),
                 LocalDate.of(2020, 10, 11)));
 
         // Case 1: booking ends after startDate but before endDate
         Booking overlapAmy2 = new BookingBuilder(BOOKING_AMY)
                 .withStartDate(LocalDate.of(2020, 10, 7))
-                .withEndDate(LocalDate.of(2020,10, 12))
+                .withEndDate(LocalDate.of(2020, 10, 12))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy2.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
+        assertTrue(overlapAmy2.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 2: booking starts after startDate and ends after endDate
         Booking overlapAmy3 = new BookingBuilder(BOOKING_AMY)
@@ -70,8 +70,8 @@ public class BookingTest {
                 .withEndDate(LocalDate.of(2020, 10, 16))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy3.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
+        assertTrue(overlapAmy3.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 3: booking is within the startDate and endDate
         Booking overlapAmy4 = new BookingBuilder(BOOKING_AMY)
@@ -79,8 +79,8 @@ public class BookingTest {
                 .withEndDate(LocalDate.of(2020, 10, 13))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy4.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
+        assertTrue(overlapAmy4.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 4: booking is on the startDate and endDate
         Booking overlapAmy5 = new BookingBuilder(BOOKING_AMY)
@@ -88,8 +88,8 @@ public class BookingTest {
                 .withEndDate(LocalDate.of(2020, 10, 14))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy5.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
+        assertTrue(overlapAmy5.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // booking starts after endDate
         Booking overlapAmy6 = new BookingBuilder(BOOKING_AMY)
@@ -97,8 +97,8 @@ public class BookingTest {
                 .withEndDate(LocalDate.of(2020, 10, 20))
                 .withIsActive(true)
                 .build();
-        assertFalse(overlapAmy6.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
+        assertFalse(overlapAmy6.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
     }
 
     @Test
