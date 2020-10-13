@@ -1,26 +1,33 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CheckInCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_GENE;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
+import static seedu.address.testutil.TypicalPersons.GENE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.booking.Booking;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for CheckInCommand.
@@ -30,11 +37,34 @@ public class CheckInCommandTest {
             getTypicalBookingBook());
 
     @Test
-    public void execute() {
-        assertCommandFailure(new CheckInCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
-                VALID_START_DATE_AMY, VALID_END_DATE_AMY), model,
-                String.format(MESSAGE_ARGUMENTS, VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
-                        VALID_START_DATE_AMY, VALID_END_DATE_AMY));
+    public void constructor_nullStartDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+                null, VALID_END_DATE_GENE));
+    }
+
+    @Test
+    public void constructor_nullEndDate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+                VALID_START_DATE_GENE, null));
+    }
+
+    @Test
+    public void execute_success() throws CommandException {
+        model.addPerson(GENE);
+
+        // stub
+        // when i create a new booking on line 42, my booking ID++
+        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        final int testBookingId = 7;
+
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+                VALID_START_DATE_GENE, VALID_END_DATE_GENE, true, testBookingId);
+
+        CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+                VALID_START_DATE_GENE, VALID_END_DATE_GENE);
+
+        assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
     }
 
     @Test
