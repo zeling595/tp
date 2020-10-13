@@ -19,10 +19,6 @@ public class TypicalBookings {
     public static final LocalDate ENDDATE_2 = LocalDate.of(2020, 10, 26);
     public static final LocalDate STARTDATE_3 = LocalDate.of(2020, 10, 26);
     public static final LocalDate ENDDATE_3 = LocalDate.of(2020, 10, 27);
-    public static final LocalDate STARTDATE_4 = LocalDate.of(2020, 10, 28);
-    public static final LocalDate ENDDATE_4 = LocalDate.of(2020, 10, 31);
-    public static final LocalDate STARTDATE_5 = LocalDate.of(2020, 11, 1);
-    public static final LocalDate ENDDATE_5 = LocalDate.of(2020, 11, 5);
 
     public static final Booking BOOKING_1 = new Booking(1235, 1, STARTDATE_1, ENDDATE_1,
             false, 1);
@@ -37,21 +33,12 @@ public class TypicalBookings {
     public static final Booking BOOKING_6 = new Booking(1235, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
 
-    public static final Booking BOOKING_7 = new Booking(1238, 1, STARTDATE_4, ENDDATE_4,
-            true, 1); //changed isActive
-    public static final Booking BOOKING_8 = new Booking(1239, 2, STARTDATE_4, ENDDATE_4,
-            true, 2); //changed isActive
-    public static final Booking BOOKING_9 = new Booking(1235, 3, STARTDATE_5, ENDDATE_5,
-            true, 3); //changed isActive
-    public static final Booking BOOKING_10 = new Booking(1240, 4, STARTDATE_5, ENDDATE_5,
-            true, 4); //changed isActive
-
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Booking BOOKING_AMY = new Booking(VALID_ROOM_ID_AMY, VALID_PERSONAL_ID_AMY,
             VALID_START_DATE_AMY, VALID_END_DATE_AMY, false, VALID_BOOKING_ID_AMY);
     public static final Booking BOOKING_BOB = new Booking(VALID_ROOM_ID_BOB, VALID_PERSONAL_ID_BOB,
             VALID_START_DATE_BOB, VALID_END_DATE_BOB, false, VALID_BOOKING_ID_BOB);
-    public static final Booking CONFLICT_AMY_BOOKING_CHLOE = new Booking(CONFLICT_AMY_ROOM_ID_CHLOE_2,
+    public static final Booking CONFLICT_AMY_BOOKING_CHLOE = new Booking(CONFLICT_AMY_ROOM_ID_CHLOE,
             VALID_PERSONAL_ID_CHLOE, CONFLICT_AMY_START_DATE_CHLOE, CONFLICT_AMY_END_DATE_CHLOE,
             false, CONFLICT_AMY_VALID_BOOKING_ID_CHLOE);
     public static final Booking ACTIVE_BOOKING_DAN = new Booking(VALID_ROOM_ID_DAN, VALID_PERSONAL_ID_DAN,
@@ -71,8 +58,7 @@ public class TypicalBookings {
     }
 
     public static List<Booking> getTypicalBookings() {
-        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6,
-                BOOKING_7, BOOKING_8, BOOKING_9, BOOKING_10));
+        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6));
     }
 
 }

@@ -99,15 +99,6 @@ public class BookingTest {
                 .build();
         assertFalse(overlapAmy6.hasOverlap(LocalDate.of(2020,10, 9),
                 LocalDate.of(2020,10, 14)));
-
-        // booking starts on same endDate -> return false
-        Booking overlapAmy7 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(2020, 10, 14))
-                .withEndDate(LocalDate.of(2020, 10, 20))
-                .withIsActive(true)
-                .build();
-        assertTrue(overlapAmy7.hasOverlap(LocalDate.of(2020,10, 9),
-                LocalDate.of(2020,10, 14)));
     }
 
     @Test
