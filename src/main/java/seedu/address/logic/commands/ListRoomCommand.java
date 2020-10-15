@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 public class ListRoomCommand extends Command {
 
     public static final String COMMAND_WORD = "listRoom";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the rooms available within a certain date."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the rooms available within a certain date.\n"
             + "Parameters: "
             + PREFIX_START_DATE + "[START_DATE] (in the format YYYY-MM-DD) "
             + PREFIX_END_DATE + "[END_DATE] (in the format YYYY-MM-DD)\n"
