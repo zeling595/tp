@@ -3,17 +3,21 @@ package seedu.address.model.roomservice;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Abstract class for different types of room service
+ * Class for different types of room service
  */
 public class RoomService {
 
     // Identity fields
-    protected final Integer bookingId;
+    private final Integer bookingId;
+    private final RoomServiceType type;
 
-
-    protected RoomService(Integer bookingId) {
+    /**
+     * Instantiates room service with booking id and type
+     */
+    public RoomService(Integer bookingId, RoomServiceType type) {
         requireAllNonNull(bookingId);
         this.bookingId = bookingId;
+        this.type = type;
     }
 
     public Integer getBookingId() {
@@ -24,7 +28,9 @@ public class RoomService {
         return this.getBookingId().equals(bookingId);
     }
 
-
+    public RoomServiceType getType() {
+        return this.type;
+    }
 
     /**
      * Returns true if both room service have the same booking id
@@ -39,6 +45,7 @@ public class RoomService {
         }
 
         RoomService otherRoomService = (RoomService) other;
-        return otherRoomService.getBookingId().equals(getBookingId());
+        return otherRoomService.getBookingId().equals(getBookingId())
+                && otherRoomService.type == type;
     }
 }
