@@ -33,7 +33,7 @@ public class CheckOutCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
+        assert bookingId >= 0;
         if (!model.hasBookingWithId(bookingId)) {
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
