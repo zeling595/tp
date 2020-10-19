@@ -6,25 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.BOOKING_DURATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NEXT_YEAR;
-import static seedu.address.logic.commands.CommandTestUtil.PAST_END_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.PAST_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.booking.exception.CreatePastBookingException;
 import seedu.address.testutil.BookingBuilder;
 
 
@@ -118,18 +111,6 @@ public class BookingTest {
         // different value -> return false
         int duration1 = 6;
         assertNotEquals(duration1, BOOKING_DURATION_AMY);
-    }
-
-    @Test
-    public void constructor_pastStartDateAndValidEndDate_throwsCreatePastBookingException() {
-        assertThrows(CreatePastBookingException.class, () -> new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
-                PAST_START_DATE, VALID_END_DATE_GENE, true));
-    }
-
-    @Test
-    public void constructor_pastStartDateAndPastEndDate_throwsCreatePastBookingException() {
-        assertThrows(CreatePastBookingException.class, () -> new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
-                PAST_START_DATE, PAST_END_DATE, true));
     }
 
     @Test

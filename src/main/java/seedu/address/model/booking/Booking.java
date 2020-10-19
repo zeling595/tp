@@ -6,9 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import seedu.address.model.booking.exception.CreatePastBookingException;
-
-
 public class Booking {
     private static Integer nextAvailableId;
 
