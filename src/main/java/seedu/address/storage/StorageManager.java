@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyBookingBook;
+import seedu.address.model.ReadOnlyRoomServiceBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -21,16 +22,18 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private BookingBookStorage bookingBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private RoomServiceBookStorage roomServiceBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, BookingBookStorage bookingBookStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          UserPrefsStorage userPrefsStorage, RoomServiceBookStorage roomServiceBookStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.bookingBookStorage = bookingBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.roomServiceBookStorage = roomServiceBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -80,7 +83,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
-    // ================ BookinggBook methods ==============================
+    // ================ BookingBook methods ==============================
 
     @Override
     public Path getBookingBookFilePath() {
@@ -108,5 +111,37 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         bookingBookStorage.saveBookingBook(bookingBook, filePath);
     }
+
+    // ================ RoomServiceBook methods ==============================
+
+    @Override
+    public Path getRoomServiceBookFilePath() {
+        return roomServiceBookStorage.getRoomServiceBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook() throws DataConversionException, IOException {
+        return readRoomServiceBook(roomServiceBookStorage.getRoomServiceBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return roomServiceBookStorage.readRoomServiceBook(filePath);
+    }
+
+    @Override
+    public void saveRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) throws IOException {
+        saveRoomServiceBook(roomServiceBook, roomServiceBookStorage.getRoomServiceBookFilePath());
+    }
+
+    @Override
+    public void saveRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        roomServiceBookStorage.saveRoomServiceBook(roomServiceBook, filePath);
+    }
+
+
 
 }

@@ -28,7 +28,9 @@ import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonBookingBookStorage;
+import seedu.address.storage.JsonRoomServiceBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RoomServiceBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -63,7 +65,9 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         BookingBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
-        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage);
+        RoomServiceBookStorage roomServiceBookStorage =
+                new JsonRoomServiceBookStorage(userPrefs.getRoomServiceBookFilePath());
+        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage, roomServiceBookStorage);
 
         initLogging(config);
 
@@ -102,6 +106,7 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyBookingBook> bookingBookOptional;
+        Optional<ReadOnlyRoomServiceBook> roomServiceBookOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyBookingBook bookingData;
         ReadOnlyRoomServiceBook roomServiceData;
@@ -144,8 +149,20 @@ public class MainApp extends Application {
             bookingData = new BookingBook();
         }
 
-        // TODO : update this after storage is completed
-        roomServiceData = SampleDataUtil.getSampleRoomServiceBook();
+        // read roomServiceBook data
+        try {
+            roomServiceBookOptional = storage.readRoomServiceBook();
+            if (!roomServiceBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample RoomServiceBook");
+            }
+            roomServiceData = roomServiceBookOptional.orElseGet(SampleDataUtil::getSampleRoomServiceBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty RoomServiceBook");
+            roomServiceData = new RoomServiceBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty RoomServiceBook");
+            roomServiceData = new RoomServiceBook();
+        }
 
         return new ModelManager(initialData, userPrefs, roomData, bookingData, roomServiceData);
     }
