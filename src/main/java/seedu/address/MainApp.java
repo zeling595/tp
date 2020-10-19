@@ -23,7 +23,6 @@ import seedu.address.model.room.Double;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.Single;
 import seedu.address.model.room.Suite;
-import seedu.address.model.roomservice.RoomService;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
