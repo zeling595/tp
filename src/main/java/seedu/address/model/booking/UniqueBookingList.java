@@ -99,11 +99,11 @@ public class UniqueBookingList implements Iterable<Booking> {
 
     /**
      * Set a booking to inactive. Create new booking and set.
-     * @param roomId The id of the room to be set inactive
+     * @param bookingId The booking id to be set inactive
      */
-    public void setBookingInactive(int roomId) {
-        requireNonNull(roomId);
-        Booking booking = getBooking(roomId);
+    public void setBookingInactive(int bookingId) {
+        requireNonNull(bookingId);
+        Booking booking = getBookingWithId(bookingId);
         Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
                 booking.getStartDate(), booking.getEndDate(), false, booking.getId());
         setBooking(booking, editedBooking);
