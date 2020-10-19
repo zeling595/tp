@@ -3,6 +3,8 @@ package seedu.address.model.room;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,6 +101,89 @@ public class UniqueRoomList implements Iterable<Room> {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns a {@code String} that lists in rooms according to room types.
+     */
+    public String getAllRooms(ObservableList<Integer> rooms) {
+        ArrayList<Integer> singleRooms = new ArrayList<>();
+        ArrayList<Integer> doubleRooms = new ArrayList<>();
+        ArrayList<Integer> suiteRooms = new ArrayList<>();
+
+        for (int i : rooms) {
+            if (i < 2103) {
+                // do nothing
+            } else if (i < 2113) {
+                singleRooms.add(i);
+            } else if (i < 2123) {
+                doubleRooms.add(i);
+            } else if (i < 2133) {
+                suiteRooms.add(i);
+            } else {
+                // do nothing
+            }
+        }
+
+        String singleRoomsData = "Single Rooms: " + singleRooms.size() + " "
+                + Arrays.toString(singleRooms.toArray()) + "\n";
+        String doubleRoomsData = "Double Rooms: " + doubleRooms.size() + " "
+                + Arrays.toString(doubleRooms.toArray()) + "\n";
+        String suiteRoomsData = "Suite Rooms: " + suiteRooms.size() + " "
+                + Arrays.toString(suiteRooms.toArray()) + "\n";
+
+        return singleRoomsData + doubleRoomsData + suiteRoomsData;
+    }
+
+    /**
+     * Returns a {@code String} that displays only the single rooms available in the {@code rooms}
+     */
+    public String getSingleRooms(ObservableList<Integer> rooms) {
+        ArrayList<Integer> singleRooms = new ArrayList<>();
+        for (int i : rooms) {
+            if (i < 2103) {
+                // do nothing
+            } else if (i < 2113) {
+                singleRooms.add(i);
+            } else {
+                break;
+            }
+        }
+        return "Single Rooms: " + singleRooms.size() + " " + Arrays.toString(singleRooms.toArray()) + "\n";
+    }
+
+    /**
+     * Returns a {@code String} that displays only the double rooms available in the {@code rooms}
+     */
+    public String getDoubleRooms(ObservableList<Integer> rooms) {
+        ArrayList<Integer> doubleRooms = new ArrayList<>();
+        for (int i : rooms) {
+            if (i < 2113) {
+                // do nothing
+            } else if (i < 2123) {
+                doubleRooms.add(i);
+            } else {
+                break;
+            }
+        }
+        return "Double Rooms: " + doubleRooms.size() + " " + Arrays.toString(doubleRooms.toArray()) + "\n";
+    }
+
+    /**
+     * Returns a {@code String} that displays only the suite rooms available in the {@code rooms}
+     */
+    public String getSuiteRooms(ObservableList<Integer> rooms) {
+        ArrayList<Integer> suiteRooms = new ArrayList<>();
+        for (int i : rooms) {
+            if (i < 2123) {
+                // do nothing
+            } else if (i < 2133) {
+                suiteRooms.add(i);
+            } else {
+                break;
+            }
+        }
+        return "Suite Rooms: " + suiteRooms.size() + " " + Arrays.toString(suiteRooms.toArray()) + "\n";
     }
 
 }

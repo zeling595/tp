@@ -17,7 +17,7 @@ import seedu.address.model.room.Room;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Booking> PREDICATE_SHOW_ALL_ACTIVE_BOOKINGS = unused -> true;
+    Predicate<Booking> PREDICATE_SHOW_ALL_BOOKINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -115,6 +115,12 @@ public interface Model {
 
     String displayRooms(ObservableList<Integer> rooms);
 
+    String displaySingleRooms(ObservableList<Integer> rooms);
+
+    String displayDoubleRooms(ObservableList<Integer> rooms);
+
+    String displaySuiteRooms(ObservableList<Integer> rooms);
+
     boolean hasRoom(int roomId);
 
     Room getRoom(int roomId);
@@ -144,6 +150,8 @@ public interface Model {
     void addBooking(Booking b);
 
     void setBookings(List<Booking> bookings);
+
+    void setBooking(Booking target, Booking editedBooking);
 
     ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate);
 
