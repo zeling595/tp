@@ -11,6 +11,9 @@ public class RoomService {
     private final Integer bookingId;
     private final RoomServiceType type;
 
+    /**
+     * Instantiates room service with booking id and type
+     */
     public RoomService(Integer bookingId, RoomServiceType type) {
         requireAllNonNull(bookingId);
         this.bookingId = bookingId;
