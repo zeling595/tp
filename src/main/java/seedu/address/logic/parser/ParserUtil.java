@@ -24,6 +24,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ROOM_ID = "Invalid Room Id";
+    public static final String MESSAGE_INVALID_DATE = "Invalid Date";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -128,7 +130,7 @@ public class ParserUtil {
             int roomId = Integer.parseInt(id);
             return roomId;
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid Room Id");
+            throw new ParseException(MESSAGE_INVALID_ROOM_ID);
         }
     }
 
@@ -144,7 +146,7 @@ public class ParserUtil {
             LocalDate newDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             return newDate;
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid Date");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
     }
 

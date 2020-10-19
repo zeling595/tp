@@ -229,6 +229,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setBooking(Booking target, Booking editedBooking) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
             throw new AssertionError("This method should not be called.");
         }
