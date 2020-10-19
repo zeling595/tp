@@ -59,8 +59,8 @@ public class GetBillCommand extends Command {
         int pricePerNight = room.getPrice();
         int numNights = booking.getDuration();
         int totalPrice = pricePerNight * numNights;
-        System.out.println(model.getRoomServicesForBooking(booking.getId()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice));
+        return new CommandResult(model.getRoomServicesForBooking(booking.getId())
+                + String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice));
     }
 
     @Override
