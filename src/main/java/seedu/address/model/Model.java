@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
 
 /**
  * The API of the Model component.
@@ -164,4 +165,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBookingList(Predicate<Booking> predicate);
+
+
+    /**
+     * Room Service Book Methods
+     */
+    void addRoomService(RoomService rs);
+
+    public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId);
+
+    public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook);
+
+    public ReadOnlyRoomServiceBook getRoomServiceBook();
 }

@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final RoomBook roomBook;
     private final BookingBook bookingBook;
+    private final RoomServiceBook roomServiceBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Booking> filteredBookings;
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.roomBook = new RoomBook(roomBook);
         this.bookingBook = new BookingBook(bookingBook);
+        this.roomServiceBook = new RoomServiceBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
@@ -278,6 +281,27 @@ public class ModelManager implements Model {
     public void updateFilteredBookingList(Predicate<Booking> predicate) {
         requireNonNull(predicate);
         filteredBookings.setPredicate(predicate);
+    }
+
+    //=========== RoomServiceBook ================================================================================
+    @Override
+    public void addRoomService(RoomService rs) {
+        this.roomServiceBook.addRoomService(rs);
+    }
+
+    @Override
+    public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId) {
+        return this.roomServiceBook.getRoomServicesForBooking(bookingId);
+    }
+
+    @Override
+    public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) {
+        this.roomServiceBook.resetData(roomServiceBook);
+    }
+
+    @Override
+    public ReadOnlyRoomServiceBook getRoomServiceBook() {
+        return this.roomServiceBook;
     }
 
     @Override
