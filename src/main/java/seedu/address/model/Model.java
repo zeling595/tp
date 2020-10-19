@@ -111,6 +111,8 @@ public interface Model {
 
     void resetData(ReadOnlyRoomBook newData);
 
+    void resetData(ReadOnlyBookingBook newData);
+
     String displayRooms(ObservableList<Integer> rooms);
 
     boolean hasRoom(int roomId);
@@ -144,8 +146,6 @@ public interface Model {
     Booking getBooking(int roomId);
 
     void setBookingInactive(int roomId);
-
-    void resetData(ReadOnlyBookingBook newData);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

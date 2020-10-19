@@ -42,19 +42,22 @@ public class RoomBook implements ReadOnlyRoomBook {
         this.rooms.setRooms(rooms);
     }
 
+    /**
+     * Returns a {@code String} that lists in rooms according to room types.
+     */
     public String displayRooms(ObservableList<Integer> rooms) {
         ArrayList<Integer> singleRooms = new ArrayList<>();
         ArrayList<Integer> doubleRooms = new ArrayList<>();
         ArrayList<Integer> suiteRooms = new ArrayList<>();
 
-        for(int i : rooms) {
-            if(i < 2103) {
+        for (int i : rooms) {
+            if (i < 2103) {
                 // do nothing
             } else if (i < 2113) {
                 singleRooms.add(i);
-            } else if(i < 2123) {
+            } else if (i < 2123) {
                 doubleRooms.add(i);
-            } else if (i < 2133){
+            } else if (i < 2133) {
                 suiteRooms.add(i);
             } else {
                 // do nothing
