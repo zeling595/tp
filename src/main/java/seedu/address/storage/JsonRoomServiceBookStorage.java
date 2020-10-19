@@ -45,7 +45,7 @@ public class JsonRoomServiceBookStorage implements RoomServiceBookStorage {
     public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath) throws DataConversionException, IOException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableBookingBook> jsonRoomServiceBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableRoomServiceBook> jsonRoomServiceBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableRoomServiceBook.class);
         if (!jsonRoomServiceBook.isPresent()) {
             return Optional.empty();

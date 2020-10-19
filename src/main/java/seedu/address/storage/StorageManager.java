@@ -23,6 +23,7 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private BookingBookStorage bookingBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private RoomServiceBookStorage roomServiceBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -114,13 +115,13 @@ public class StorageManager implements Storage {
     // ================ RoomServiceBook methods ==============================
 
     @Override
-    public Path getServiceRoomBookFilePath() {
+    public Path getRoomServiceBookFilePath() {
         return roomServiceBookStorage.getRoomServiceBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook() throws DataConversionException, IOException {
-        return readServiceBook(roomServiceBookStorage.getRoomServiceBookFilePath());
+        return readRoomServiceBook(roomServiceBookStorage.getRoomServiceBookFilePath());
     }
 
     @Override
@@ -131,12 +132,12 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveRoomServiceBook(ReadOnlyBookingBook bookingBook) throws IOException {
-        saveBookingBook(roomServiceBook, roomServiceBookStorage.getRoomServiceBookFilePath());
+    public void saveRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) throws IOException {
+        saveRoomServiceBook(roomServiceBook, roomServiceBookStorage.getRoomServiceBookFilePath());
     }
 
     @Override
-    public void saveRoomServiceBook(ReadOnlyBookingBook bookingBook, Path filePath) throws IOException {
+    public void saveRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         roomServiceBookStorage.saveRoomServiceBook(roomServiceBook, filePath);
     }
