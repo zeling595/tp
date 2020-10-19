@@ -172,13 +172,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyBookingBook newData) {
-        this.bookingBook.resetData(newData);
+    public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
+        return this.roomBook.getAvailableRooms(unavailableRooms);
     }
 
     @Override
-    public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
-        return this.roomBook.getAvailableRooms(unavailableRooms);
+    public String displayRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.displayRooms(rooms);
     }
 
     @Override
@@ -196,6 +196,11 @@ public class ModelManager implements Model {
     @Override
     public void setBookingBook(ReadOnlyBookingBook bookingBook) {
         this.bookingBook.resetData(bookingBook);
+    }
+
+    @Override
+    public void resetData(ReadOnlyBookingBook newData) {
+        this.bookingBook.resetData(newData);
     }
 
     @Override

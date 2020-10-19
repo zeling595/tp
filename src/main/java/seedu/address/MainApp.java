@@ -29,6 +29,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.RoomBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.room.Room;
+import seedu.address.model.room.Single;
+import seedu.address.model.room.Double;
+import seedu.address.model.room.Suite;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
@@ -83,11 +86,21 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing roomData ]===========================");
         RoomBook ret = new RoomBook();
         final List<Room> roomData = IntStream.rangeClosed(2103, 2133)
-                                                .mapToObj(x -> new Room(100, x))
+                                                .mapToObj(x -> initRoomsHelper(x))
                                                 .collect(Collectors.toList());
 
         ret.setRooms(roomData);
         return ret;
+    }
+
+    private Room initRoomsHelper(int x) {
+        if (x >= 2103 && x < 2113) {
+            return new Single(x);
+        } else if (x < 2123) {
+            return new Double(x);
+        } else {
+            return new Suite(x);
+        }
     }
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>

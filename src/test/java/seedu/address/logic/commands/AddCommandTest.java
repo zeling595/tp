@@ -184,6 +184,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String displayRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasRoom(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
