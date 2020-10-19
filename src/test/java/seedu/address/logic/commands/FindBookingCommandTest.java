@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalBookings.BOOKING_1;
 import static seedu.address.testutil.TypicalBookings.BOOKING_6;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import java.util.Arrays;
@@ -26,9 +27,9 @@ import seedu.address.model.booking.BookingMatchesRoomIdPredicate;
  */
 public class FindBookingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
-            getTypicalBookingBook());
+            getTypicalBookingBook(), getTypicalRoomServiceBook());
     private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(),
-            model.getBookingBook());
+            model.getBookingBook(), model.getRoomServiceBook());
     @Test
     public void equals() {
         BookingMatchesRoomIdPredicate firstPredicate =

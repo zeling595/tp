@@ -1,12 +1,13 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.stream.Collectors;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.roomservice.RoomService;
 
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Manages model for room services.

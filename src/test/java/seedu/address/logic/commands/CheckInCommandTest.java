@@ -21,6 +21,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.GENE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ import seedu.address.model.booking.Booking;
  */
 public class CheckInCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
-            getTypicalBookingBook());
+            getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
     public void constructor_nullStartDate_throwsNullPointerException() {
