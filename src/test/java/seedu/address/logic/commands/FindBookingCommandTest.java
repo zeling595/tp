@@ -76,6 +76,7 @@ public class FindBookingCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookingList());
     }
+    
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
