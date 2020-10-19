@@ -2,15 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -97,10 +89,10 @@ public class CommandTestUtil {
 
 
     // Booking Values
-    public static final int VALID_BOOKING_ID_AMY = 1;
-    public static final int VALID_BOOKING_ID_BOB = 2;
+    public static final int VALID_BOOKING_ID_AMY = 11;
+    public static final int VALID_BOOKING_ID_BOB = 12;
     public static final int CONFLICT_AMY_VALID_BOOKING_ID_CHLOE = 1;
-    public static final int VALID_BOOKING_ID_DAN = 4;
+    public static final int VALID_BOOKING_ID_DAN = 14;
     public static final int BOOKING_DURATION_AMY = 5;
 
 
@@ -139,6 +131,7 @@ public class CommandTestUtil {
     public static final String INVALID_START_DATE_DESC = " " + PREFIX_START_DATE + "2020 02 02"; // 2020-02-02
     public static final String INVALID_END_DATE_DESC = " " + PREFIX_END_DATE + "2020 06 02"; // 2020-02-02
 
+    public static final String BOOKING_ID_DESC_AMY = " " + PREFIX_BOOKING_ID + VALID_BOOKING_ID_AMY;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
