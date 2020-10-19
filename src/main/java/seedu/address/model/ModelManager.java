@@ -239,6 +239,14 @@ public class ModelManager implements Model {
         return bookingBook.hasBookingWithId(id);
     }
 
+    /**
+     * Return booking with this booking id
+     */
+    @Override
+    public Booking getBookingWithId(Integer id) {
+        return bookingBook.getBookingWithId(id);
+    }
+
     @Override
     public void deleteBooking(Booking target) {
         bookingBook.removeBooking(target);
