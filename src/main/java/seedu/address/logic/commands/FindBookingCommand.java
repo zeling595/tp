@@ -26,7 +26,7 @@ public class FindBookingCommand extends Command {
             + PREFIX_ROOM_ID + "[ROOM_ID] (must be a valid room number) "
             + PREFIX_START_DATE + "[START_DATE] (in the format YYYY-MM-DD) "
             + PREFIX_END_DATE + "[END_DATE] (in the format YYYY-MM-DD)\n"
-            + PREFIX_IS_ACTIVE + "[IS_Active] (in the format true or false)\n"
+            + PREFIX_IS_ACTIVE + "[IS_ACTIVE] (in the format true or false)\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM_ID + "3017 "

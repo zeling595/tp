@@ -236,6 +236,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteBooking(Booking target) {
+        bookingBook.removeBooking(target);
+    }
+
+    @Override
     public void addBooking(Booking b) {
         this.bookingBook.addBooking(b);
     }
@@ -313,6 +318,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)

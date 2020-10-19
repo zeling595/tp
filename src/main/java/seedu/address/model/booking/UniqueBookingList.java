@@ -28,11 +28,44 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Returns true if the list contains a booking with the given id
+     * Returns true if the list contains a booking with the given id.
      */
     public boolean hasBookingWithId(Integer id) {
         requireNonNull(id);
         return internalList.stream().anyMatch(booking -> booking.getId().equals(id));
+    }
+
+    /**
+     * Returns the booking with the given id.
+     * The booking must already exist in the list.
+     * Or BookingNotFoundException is thrown.
+     */
+    public Booking getBookingWithId(Integer id) {
+        requireNonNull(id);
+
+        if (!hasBookingWithId(id)) {
+            throw new BookingNotFoundException();
+        }
+
+        return internalList.stream()
+                .filter(booking -> booking.getId().equals(id))
+                .filter(Booking::isActive)
+                .findFirst().get();
+    }
+
+    /**
+     * Remove a booking from the List.
+     * The booking must already exist in the list.
+     * Or BookingNotFoundException is thrown.
+     */
+    public void removeBooking(Booking toRemove) {
+        requireNonNull(toRemove);
+
+        if (!contains(toRemove)) {
+            throw new BookingNotFoundException();
+        }
+
+        internalList.remove(toRemove);
     }
 
     /**
