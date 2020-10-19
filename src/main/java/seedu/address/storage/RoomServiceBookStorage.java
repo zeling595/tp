@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyBookingBook;
 import seedu.address.model.ReadOnlyRoomServiceBook;
 
 /**
@@ -25,19 +24,19 @@ public interface RoomServiceBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyBookingBook> readRoomServiceBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyRoomServiceBook> readRoomServiceBook() throws DataConversionException, IOException;
 
     /**
      * @see #getRoomServiceBookFilePath()
      */
-    Optional<ReadOnlyBookingBook> readRoomServiceBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyRoomServiceBook} to the storage.
-     * @param bookingBook cannot be null.
+     * @param roomServiceBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveRoomServiceBook(ReadOnlyRoomServiceBook bookingBook) throws IOException;
+    void saveRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) throws IOException;
 
     /**
      * @see #saveRoomServiceBook(ReadOnlyRoomServiceBook)
