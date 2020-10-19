@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ROOM_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,9 +15,9 @@ public class CheckOutCommandParserTest {
 
     @Test
     public void parse_valuesSpecified_success() throws ParseException {
-        String userInput = ROOM_ID_DESC_AMY;
+        String userInput = BOOKING_ID_DESC_AMY;
 
-        CheckOutCommand expectedCommand = new CheckOutCommand(VALID_ROOM_ID_AMY);
+        CheckOutCommand expectedCommand = new CheckOutCommand(VALID_BOOKING_ID_AMY);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

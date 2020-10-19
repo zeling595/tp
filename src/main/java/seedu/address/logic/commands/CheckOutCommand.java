@@ -1,49 +1,49 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.booking.Booking;
-import seedu.address.model.booking.exception.BookingNotFoundException;
 
 /**
- * Checks out guest with room id
+ * Checks out guest with booking id
  */
 public class CheckOutCommand extends Command {
 
     public static final String COMMAND_WORD = "checkOut";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks out person from hotel. "
-            + "Parameters: " + PREFIX_ROOM_ID + "[ROOM_ID] (must be a valid room number)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_ROOM_ID + "2100";
+            + "Parameters: " + PREFIX_BOOKING_ID + "[BOOKING_ID] (must be a valid booking id)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_BOOKING_ID + "2100";
 
-    public static final String MESSAGE_SUCCESS = "Successfully booked out: %s";
+    public static final String MESSAGE_SUCCESS = "Successfully checked out: %s";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
+    public static final String MESSAGE_ALREADY_CHECKED_OUT = "You have already checked out from this booking.";
 
-    private final int roomId;
+    private final int bookingId;
 
     /**
      * Creates a CheckOutCommand
-     * @param roomId id of room to check out person from
+     * @param bookingId booking to check out person from
      */
-    public CheckOutCommand(int roomId) {
-        requireAllNonNull(roomId);
-        this.roomId = roomId;
+    public CheckOutCommand(int bookingId) {
+        requireAllNonNull(bookingId);
+        this.bookingId = bookingId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Booking booking;
 
-        try {
-            booking = model.getBooking(roomId);
-        } catch (BookingNotFoundException e) {
+        if (!model.hasBookingWithId(bookingId)) {
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
 
-        model.setBookingInactive(roomId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+        if (!model.getBookingWithId(bookingId).isActive()) {
+            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
+        }
+
+        model.setBookingInactive(bookingId);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getBookingWithId(bookingId)));
     }
 
     @Override
@@ -59,6 +59,6 @@ public class CheckOutCommand extends Command {
         }
 
         CheckOutCommand o = (CheckOutCommand) other;
-        return this.roomId == o.roomId;
+        return this.bookingId == o.bookingId;
     }
 }
