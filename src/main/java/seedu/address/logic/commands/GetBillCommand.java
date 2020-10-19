@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,10 +15,10 @@ public class GetBillCommand extends Command {
 
     public static final String COMMAND_WORD = "getBill";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets total bill for a particular occupied room.\n"
-            + "Parameters: ROOM ID "
-            + PREFIX_ROOM_ID + "[ROOM ID]\n"
+            + "Parameters: BOOKING ID "
+            + PREFIX_BOOKING_ID + "[BOOKING ID]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ROOM_ID + "2302";
+            + PREFIX_BOOKING_ID + "8";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "getBill command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
@@ -26,15 +26,15 @@ public class GetBillCommand extends Command {
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for room id: %1$d is %2$d";
 
-    private final int roomId;
+    private final int bookingId;
 
     /**
      * Creates a GetBillCommand.
-     * @param roomId the room id of which to get the bill for
+     * @param bookingId the room id of which to get the bill for
      */
-    public GetBillCommand(int roomId) {
-        requireAllNonNull(roomId);
-        this.roomId = roomId;
+    public GetBillCommand(int bookingId) {
+        requireAllNonNull(bookingId);
+        this.bookingId = bookingId;
     }
 
     @Override
@@ -42,12 +42,14 @@ public class GetBillCommand extends Command {
         Booking booking;
         Room room;
 
-        if (!model.hasRoom(roomId)) {
+        if (!model.hasBookingWithId(bookingId)) {
             throw new CommandException(MESSAGE_ROOM_MISSING);
         }
 
+        assert model.hasBookingWithId(bookingId)
+
         try {
-            booking = model.getBooking(roomId);
+            booking = model.getBookingWithId(bookingId);
         } catch (BookingNotFoundException e) {
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
@@ -56,6 +58,7 @@ public class GetBillCommand extends Command {
         int pricePerNight = room.getPrice();
         int numNights = booking.getDuration();
         int totalPrice = pricePerNight * numNights;
+        System.out.println(model.getRoomServicesForBooking(booking.getId()));
         return new CommandResult(String.format(MESSAGE_SUCCESS_GET_BILL, roomId, totalPrice));
     }
 
