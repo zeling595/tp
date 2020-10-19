@@ -35,6 +35,7 @@ public class RoomService {
     /**
      * Returns true if both room service have the same booking id
      */
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -47,5 +48,11 @@ public class RoomService {
         RoomService otherRoomService = (RoomService) other;
         return otherRoomService.getBookingId().equals(getBookingId())
                 && otherRoomService.type == type;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("BookingID: %s, Service type: %s, Price: $%s", this.bookingId,
+                this.type.getVerboseName(), this.type.getPrice());
     }
 }

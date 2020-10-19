@@ -142,6 +142,8 @@ public interface Model {
      */
     boolean hasBookingWithId(Integer id);
 
+    Booking getBookingWithId(Integer id);
+
     /**
      * Deletes the given booking.
      * The booking must exist in the booking book.
