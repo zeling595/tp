@@ -100,6 +100,11 @@ public class BookingBook implements ReadOnlyBookingBook {
         return bookings.hasBookingWithId(id);
     }
 
+    public Booking getBookingWithId(Integer id) {
+        requireNonNull(id);
+        return bookings.getBookingWithId(id);
+    }
+
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return bookings.getUnavailableRooms(startDate, endDate);
     }

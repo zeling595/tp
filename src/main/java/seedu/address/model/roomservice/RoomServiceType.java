@@ -1,5 +1,8 @@
 package seedu.address.model.roomservice;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public enum RoomServiceType {
     WIFI("WIFI", "Wifi service", 40),
     DINING("DINING", "Dining in service", 50),
@@ -25,5 +28,9 @@ public enum RoomServiceType {
 
     public Integer getPrice() {
         return this.price;
+    }
+
+    public static String getAllNames() {
+        return Arrays.stream(values()).map(RoomServiceType::getName).collect(Collectors.toList()).toString();
     }
 }
