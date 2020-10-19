@@ -53,6 +53,7 @@ public class MainApp extends Application {
     @Override
     public void init() throws Exception {
         logger.info("=========================[ Initializing AddressBook & BookingBook ]=======================");
+        logger.info("=============================[ Initializing RoomServiceBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());

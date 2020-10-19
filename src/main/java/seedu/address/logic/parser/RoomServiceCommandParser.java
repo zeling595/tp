@@ -19,6 +19,7 @@ public class RoomServiceCommandParser implements Parser<RoomServiceCommand> {
      */
     @Override
     public RoomServiceCommand parse(String args) throws ParseException {
+        assert args != null;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID, PREFIX_ROOM_SERVICE_TYPE);
 

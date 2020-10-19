@@ -47,6 +47,7 @@ public class RoomServiceCommand extends Command {
         }
 
         model.addRoomService(roomService);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, roomService));
     }
 }
