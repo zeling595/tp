@@ -9,7 +9,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyBookingBook;
+import seedu.address.model.ReadOnlyRoomServiceBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RoomServiceBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -109,7 +111,36 @@ public class StorageManager implements Storage {
         bookingBookStorage.saveBookingBook(bookingBook, filePath);
     }
 
-    // ================ BookingBook methods ==============================
+    // ================ RoomServiceBook methods ==============================
+
+    @Override
+    public Path getServiceRoomBookFilePath() {
+        return roomServiceBookStorage.getRoomServiceBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook() throws DataConversionException, IOException {
+        return readServiceBook(roomServiceBookStorage.getRoomServiceBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return roomServiceBookStorage.readRoomServiceBook(filePath);
+    }
+
+    @Override
+    public void saveRoomServiceBook(ReadOnlyBookingBook bookingBook) throws IOException {
+        saveBookingBook(roomServiceBook, roomServiceBookStorage.getRoomServiceBookFilePath());
+    }
+
+    @Override
+    public void saveRoomServiceBook(ReadOnlyBookingBook bookingBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        roomServiceBookStorage.saveRoomServiceBook(roomServiceBook, filePath);
+    }
+
 
 
 }
