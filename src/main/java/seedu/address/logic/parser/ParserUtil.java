@@ -25,6 +25,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ROOM_ID = "Invalid Room Id";
+    public static final String MESSAGE_INVALID_BOOKING_ID = "Invalid Booking Id";
     public static final String MESSAGE_INVALID_DATE = "Invalid Date";
 
     /**
@@ -131,6 +132,18 @@ public class ParserUtil {
             return roomId;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_ROOM_ID);
+        }
+    }
+
+    /**
+     * Parses a {@code String booking Id} into a {@code int}.
+     */
+    public static int parseBookingId(String id) throws ParseException {
+        requireNonNull(id);
+        try {
+            return Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_BOOKING_ID);
         }
     }
 

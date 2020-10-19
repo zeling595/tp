@@ -49,7 +49,6 @@ public class UniqueBookingList implements Iterable<Booking> {
 
         return internalList.stream()
                 .filter(booking -> booking.getId().equals(id))
-                .filter(Booking::isActive)
                 .findFirst().get();
     }
 

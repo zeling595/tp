@@ -87,6 +87,9 @@ public class AddressBookParser {
         case EditBookingCommand.COMMAND_WORD:
             return new EditBookingCommandParser().parse(arguments);
 
+        case RoomServiceCommand.COMMAND_WORD:
+            return new RoomServiceCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

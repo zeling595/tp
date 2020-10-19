@@ -256,6 +256,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Booking getBookingWithId(Integer id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Booking getBooking(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
