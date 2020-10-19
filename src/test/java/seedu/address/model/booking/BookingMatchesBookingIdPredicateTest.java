@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.BookingBuilder;
 
 public class BookingMatchesBookingIdPredicateTest {
@@ -20,7 +21,9 @@ public class BookingMatchesBookingIdPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        BookingMatchesBookingIdPredicate firstPredicateCopy = new BookingMatchesBookingIdPredicate(firstPredicateRoomId);
+        BookingMatchesBookingIdPredicate firstPredicateCopy =
+                new BookingMatchesBookingIdPredicate(firstPredicateRoomId);
+
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -34,15 +37,13 @@ public class BookingMatchesBookingIdPredicateTest {
     }
 
     @Test
-    public void test_BookingMatchesBookingIdPredicate_returnsTrue() {
-        // One keyword
+    public void test_bookingMatchesBookingIdPredicate_returnsTrue() {
         BookingMatchesBookingIdPredicate predicate = new BookingMatchesBookingIdPredicate(1);
         assertTrue(predicate.test(new BookingBuilder().withId(1).build()));
     }
 
     @Test
     public void test_bookingDoesNotMatchBookingId_returnsFalse() {
-        // Zero keywords
         BookingMatchesBookingIdPredicate predicate = new BookingMatchesBookingIdPredicate(2);
         assertFalse(predicate.test(new BookingBuilder().withId(1).build()));
 

@@ -6,14 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.BookingBuilder;
 
 public class BookingMatchesStartDatePredicateTest {
-    LocalDate firstStartDate = LocalDate.of(2020, 10, 20);
-    LocalDate secondStartDate = LocalDate.of(2020, 10, 25);
 
     @Test
     public void equals() {
+        LocalDate firstStartDate = LocalDate.of(2020, 10, 20);
+        LocalDate secondStartDate = LocalDate.of(2020, 10, 25);
 
         BookingMatchesStartDatePredicate firstPredicate = new BookingMatchesStartDatePredicate(firstStartDate);
         BookingMatchesStartDatePredicate secondPredicate = new BookingMatchesStartDatePredicate(secondStartDate);
@@ -37,14 +38,16 @@ public class BookingMatchesStartDatePredicateTest {
 
     @Test
     public void test_bookingMatchesStartDate_returnsTrue() {
-        // One keyword
+        LocalDate firstStartDate = LocalDate.of(2020, 10, 20);
         BookingMatchesStartDatePredicate predicate = new BookingMatchesStartDatePredicate(firstStartDate);
         assertTrue(predicate.test(new BookingBuilder().withStartDate(firstStartDate).build()));
     }
 
     @Test
     public void test_bookingDoesNotMatchStartDate_returnsFalse() {
-        // Zero keywords
+        LocalDate firstStartDate = LocalDate.of(2020, 10, 20);
+        LocalDate secondStartDate = LocalDate.of(2020, 10, 25);
+
         BookingMatchesStartDatePredicate predicate = new BookingMatchesStartDatePredicate(firstStartDate);
         assertFalse(predicate.test(new BookingBuilder().withStartDate(secondStartDate).build()));
 

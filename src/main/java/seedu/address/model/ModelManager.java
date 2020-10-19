@@ -299,9 +299,6 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        System.out.println(filteredPersons);
-        System.out.println(other.filteredPersons);
-
 
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
