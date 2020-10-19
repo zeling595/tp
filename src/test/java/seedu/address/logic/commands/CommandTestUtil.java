@@ -58,10 +58,10 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
 
-    public static final int VALID_ROOM_ID_AMY = 2113;
-    public static final int VALID_ROOM_ID_BOB = 2125;
-    public static final int VALID_ROOM_ID_GENE = 2107;
-    public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2113;
+    public static final int VALID_ROOM_ID_AMY = 2103;
+    public static final int VALID_ROOM_ID_BOB = 2104;
+    public static final int VALID_ROOM_ID_GENE = 2106;
+    public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2103;
     public static final int VALID_ROOM_ID_DAN = 2104;
     public static final int INVALID_ROOM_ID = 1;
 
