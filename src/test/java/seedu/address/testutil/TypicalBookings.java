@@ -20,17 +20,17 @@ public class TypicalBookings {
     public static final LocalDate STARTDATE_3 = LocalDate.of(2020, 10, 26);
     public static final LocalDate ENDDATE_3 = LocalDate.of(2020, 10, 27);
 
-    public static final Booking BOOKING_1 = new Booking(1235, 1, STARTDATE_1, ENDDATE_1,
+    public static final Booking BOOKING_1 = new Booking(2103, 1, STARTDATE_1, ENDDATE_1,
             false, 1);
-    public static final Booking BOOKING_2 = new Booking(1236, 2, STARTDATE_1, ENDDATE_1,
+    public static final Booking BOOKING_2 = new Booking(2104, 2, STARTDATE_1, ENDDATE_1,
             false, 2);
-    public static final Booking BOOKING_3 = new Booking(1237, 3, STARTDATE_2, ENDDATE_2,
+    public static final Booking BOOKING_3 = new Booking(2105, 3, STARTDATE_2, ENDDATE_2,
             false, 3);
-    public static final Booking BOOKING_4 = new Booking(1238, 4, STARTDATE_2, ENDDATE_2,
+    public static final Booking BOOKING_4 = new Booking(2106, 4, STARTDATE_2, ENDDATE_2,
             false, 4);
-    public static final Booking BOOKING_5 = new Booking(1236, 5, STARTDATE_3, ENDDATE_3,
+    public static final Booking BOOKING_5 = new Booking(2104, 5, STARTDATE_3, ENDDATE_3,
             false, 5);
-    public static final Booking BOOKING_6 = new Booking(1235, 1, STARTDATE_3, ENDDATE_3,
+    public static final Booking BOOKING_6 = new Booking(2103, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
 
     // Manually added - Person's details found in {@code CommandTestUtil}

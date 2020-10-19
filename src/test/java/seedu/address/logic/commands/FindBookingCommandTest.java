@@ -60,9 +60,9 @@ public class FindBookingCommandTest {
     @Test
     public void execute_onePredicate_multipleBookingFound() {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 2);
-        BookingMatchesRoomIdPredicate predicate = preparePredicate("rid/1235");
+        BookingMatchesRoomIdPredicate predicate = preparePredicate("rid/2103");
         FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
-        expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(1235));
+        expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(2103));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BOOKING_1, BOOKING_6), model.getFilteredBookingList());
     }

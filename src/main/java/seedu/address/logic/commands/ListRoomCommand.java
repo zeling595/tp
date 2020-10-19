@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +43,7 @@ public class ListRoomCommand extends Command {
         ObservableList<Integer> unavailableRooms = model.getUnavailableRooms(startDate, endDate);
         ObservableList<Integer> availableRooms = model.getAvailableRooms(unavailableRooms);
 
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + Arrays.toString(availableRooms.toArray()));
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + model.displayRooms(availableRooms));
     }
 
     @Override

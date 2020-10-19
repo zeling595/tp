@@ -182,6 +182,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String displayRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.displayRooms(rooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }

@@ -2,18 +2,17 @@ package seedu.address.model.room;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-public class Room {
+public abstract class Room {
 
     // Identity fields
-    private final int price;
-    private final int roomID;
+    protected int price;
+    protected final int roomID;
 
     /**
      * Every field must be present and not null.
      */
-    public Room(int price, int roomID) {
-        requireAllNonNull(price, roomID);
-        this.price = price;
+    public Room(int roomID) {
+        requireAllNonNull(roomID);
         this.roomID = roomID;
     }
 
@@ -23,6 +22,10 @@ public class Room {
 
     public int getPrice() {
         return this.price;
+    }
+
+    public void setPrice(int newPrice) {
+        this.price = newPrice;
     }
 
     /**

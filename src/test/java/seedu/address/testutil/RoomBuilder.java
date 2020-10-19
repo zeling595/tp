@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
 import seedu.address.model.room.Room;
+import seedu.address.model.room.Single;
 
 /**
  * A utility class to help with building Room objects.
  */
 public class RoomBuilder {
-    public static final int DEFAULT_ROOMID = 1234;
+    public static final int DEFAULT_ROOMID = 2103;
     public static final int DEFAULT_PRICE = 100;
 
     private int roomId;
@@ -54,6 +55,8 @@ public class RoomBuilder {
      * @return {@code Room}
      */
     public Room build() {
-        return new Room(this.price, this.roomId);
+        Room ret = new Single(this.roomId);
+        ret.setPrice(this.price);
+        return ret;
     }
 }

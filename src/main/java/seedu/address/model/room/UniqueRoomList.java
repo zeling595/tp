@@ -25,7 +25,7 @@ public class UniqueRoomList implements Iterable<Room> {
     }
 
     public Room getRoom(int roomId) {
-        Room ret = new Room(-1, -1);
+        Room ret = new Single(-1);
         for (int k = 0; k < internalRoomList.size(); k++) {
             Room curr = internalRoomList.get(k); // get the roomID
             if (curr.getRoomID() == roomId) {
