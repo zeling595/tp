@@ -80,7 +80,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
-    // ================ BookinggBook methods ==============================
+    // ================ BookingBook methods ==============================
 
     @Override
     public Path getBookingBookFilePath() {
@@ -108,5 +108,8 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         bookingBookStorage.saveBookingBook(bookingBook, filePath);
     }
+
+    // ================ BookingBook methods ==============================
+
 
 }

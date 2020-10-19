@@ -27,10 +27,6 @@ public class Booking {
     public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive) {
         requireAllNonNull(roomId, personId, startDate, endDate);
 
-        if (startDate.isBefore(LocalDate.now())) {
-            throw new CreatePastBookingException();
-        }
-
         this.roomId = roomId;
         this.personId = personId;
         this.startDate = startDate;
@@ -46,10 +42,6 @@ public class Booking {
     public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive,
                    Integer id) {
         requireAllNonNull(roomId, personId, startDate, endDate, id);
-
-        if (startDate.isBefore(LocalDate.now())) {
-            throw new CreatePastBookingException();
-        }
 
         this.roomId = roomId;
         this.personId = personId;
