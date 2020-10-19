@@ -36,7 +36,8 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook) {
+                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook,
+                        ReadOnlyRoomServiceBook roomServiceBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -45,7 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.roomBook = new RoomBook(roomBook);
         this.bookingBook = new BookingBook(bookingBook);
-        this.roomServiceBook = new RoomServiceBook();
+        this.roomServiceBook = new RoomServiceBook(roomServiceBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
@@ -62,7 +63,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook());
+        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook(), new RoomServiceBook());
     }
 
     //=========== UserPrefs ==================================================================================
