@@ -18,16 +18,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.BookingBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyBookingBook;
-import seedu.address.model.ReadOnlyRoomBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.RoomBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.room.Double;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.Single;
@@ -112,6 +103,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyBookingBook> bookingBookOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyBookingBook bookingData;
+        ReadOnlyRoomServiceBook roomServiceData;
         ReadOnlyRoomBook roomData = initRooms();
 
         try {
@@ -151,7 +143,10 @@ public class MainApp extends Application {
             bookingData = new BookingBook();
         }
 
-        return new ModelManager(initialData, userPrefs, roomData, bookingData);
+        // TODO : update this after storage is completed
+        roomServiceData = SampleDataUtil.getSampleRoomServiceBook();
+
+        return new ModelManager(initialData, userPrefs, roomData, bookingData, roomServiceData);
     }
 
     private void initLogging(Config config) {

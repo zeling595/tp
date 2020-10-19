@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +26,9 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
-                getTypicalBookingBook());
+                getTypicalBookingBook(), getTypicalRoomServiceBook());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(),
-                model.getBookingBook());
+                model.getBookingBook(), model.getRoomServiceBook());
     }
 
     @Test
