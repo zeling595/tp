@@ -115,6 +115,12 @@ public interface Model {
 
     String displayRooms(ObservableList<Integer> rooms);
 
+    String displaySingleRooms(ObservableList<Integer> rooms);
+
+    String displayDoubleRooms(ObservableList<Integer> rooms);
+
+    String displaySuiteRooms(ObservableList<Integer> rooms);
+
     boolean hasRoom(int roomId);
 
     Room getRoom(int roomId);

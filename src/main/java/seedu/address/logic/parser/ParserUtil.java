@@ -190,4 +190,26 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String room type} into a {@code int}.
+     *
+     * @param roomType room type as entered by user
+     * @return room type as an integer
+     * @throws ParseException if the given {@code room type} is invalid
+     */
+    public static int parseRoomType(String roomType) throws ParseException {
+        requireNonNull(roomType);
+        try {
+            int value = Integer.parseInt(roomType.trim());
+
+            if (value >= 1 && value <= 3) {
+                return value;
+            } else {
+                throw new ParseException("Only 1, 2, 3 allowed.");
+            }
+        } catch (NumberFormatException | ParseException e) {
+            throw new ParseException("Invalid Room Type. Only 1, 2, 3 allowed.");
+        }
+    }
 }
