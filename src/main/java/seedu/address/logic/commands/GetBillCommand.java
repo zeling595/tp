@@ -24,7 +24,7 @@ public class GetBillCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
     public static final String MESSAGE_ROOM_MISSING = "No valid room can be found";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
-    public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for room id: %1$d is %2$d";
+    public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for booking id: %1$d is %2$d";
 
     private final int bookingId;
 
@@ -46,7 +46,7 @@ public class GetBillCommand extends Command {
             throw new CommandException(MESSAGE_ROOM_MISSING);
         }
 
-        assert model.hasBookingWithId(bookingId)
+        assert model.hasBookingWithId(bookingId);
 
         try {
             booking = model.getBookingWithId(bookingId);
@@ -54,12 +54,13 @@ public class GetBillCommand extends Command {
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
 
+        int roomId = booking.getRoomId();
         room = model.getRoom(roomId);
         int pricePerNight = room.getPrice();
         int numNights = booking.getDuration();
         int totalPrice = pricePerNight * numNights;
         System.out.println(model.getRoomServicesForBooking(booking.getId()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS_GET_BILL, roomId, totalPrice));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice));
     }
 
     @Override
@@ -76,6 +77,6 @@ public class GetBillCommand extends Command {
 
         // state check
         GetBillCommand e = (GetBillCommand) other;
-        return roomId == e.roomId;
+        return bookingId == e.bookingId;
     }
 }

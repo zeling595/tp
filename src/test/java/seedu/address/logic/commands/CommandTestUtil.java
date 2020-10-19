@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -138,6 +139,9 @@ public class CommandTestUtil {
     public static final String INVALID_ROOM_ID_DESC2 = " " + PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
     public static final String INVALID_START_DATE_DESC = " " + PREFIX_START_DATE + "2020 02 02"; // 2020-02-02
     public static final String INVALID_END_DATE_DESC = " " + PREFIX_END_DATE + "2020 06 02"; // 2020-02-02
+
+    // Get Bill Descriptions
+    public static final String BOOKING_ID_DESC_AMY = " " + PREFIX_BOOKING_ID + VALID_BOOKING_ID_AMY;
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

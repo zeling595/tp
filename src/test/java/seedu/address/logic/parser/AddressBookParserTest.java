@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -130,11 +131,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_getBill() throws Exception {
-        final int roomId = 4012;
+        final int bookingId = 40;
         GetBillCommand command = (GetBillCommand) parser.parseCommand(GetBillCommand.COMMAND_WORD + " "
-            + PREFIX_ROOM_ID + roomId);
+            + PREFIX_BOOKING_ID + bookingId);
 
-        assertEquals(new GetBillCommand(roomId), command);
+        assertEquals(new GetBillCommand(bookingId), command);
     }
 
     @Test
