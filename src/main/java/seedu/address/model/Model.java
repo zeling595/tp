@@ -133,6 +133,12 @@ public interface Model {
      */
     boolean hasBookingWithId(Integer id);
 
+    /**
+     * Deletes the given booking.
+     * The booking must exist in the booking book.
+     */
+    void deleteBooking(Booking target);
+
     void addBooking(Booking b);
 
     void setBookings(List<Booking> bookings);

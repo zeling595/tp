@@ -12,4 +12,6 @@ public class TypicalIndexes {
 
     // booking
     public static final Index INDEX_FIRST_BOOKING = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_BOOKING = Index.fromOneBased(2);
+
 }

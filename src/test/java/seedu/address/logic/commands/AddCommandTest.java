@@ -213,9 +213,16 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void setBookingBook(ReadOnlyBookingBook newData) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteBooking(Booking target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public boolean hasBooking(Booking booking) {
