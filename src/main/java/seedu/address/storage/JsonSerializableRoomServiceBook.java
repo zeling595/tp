@@ -35,7 +35,8 @@ public class JsonSerializableRoomServiceBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableRoomServiceBook}.
      */
     public JsonSerializableRoomServiceBook(ReadOnlyRoomServiceBook source) {
-        roomServices.addAll(source.getRoomServiceList().stream().map(JsonAdaptedRoomService::new).collect(Collectors.toList()));
+        roomServices.addAll(source.getRoomServiceList().stream()
+                .map(JsonAdaptedRoomService::new).collect(Collectors.toList()));
     }
 
     /**
@@ -45,7 +46,7 @@ public class JsonSerializableRoomServiceBook {
      */
     public RoomServiceBook toModelType() throws IllegalValueException {
         RoomServiceBook roomServiceBook = new RoomServiceBook();
-        for (JsonAdaptedRoomService jsonAdaptedRoomService : roomService) {
+        for (JsonAdaptedRoomService jsonAdaptedRoomService : roomServices) {
             RoomService roomService = jsonAdaptedRoomService.toModelType();
             roomServiceBook.addRoomService(roomService);
         }

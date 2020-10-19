@@ -11,7 +11,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyBookingBook;
 import seedu.address.model.ReadOnlyRoomServiceBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.RoomServiceBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -29,11 +28,12 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, BookingBookStorage bookingBookStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          UserPrefsStorage userPrefsStorage, RoomServiceBookStorage roomServiceBookStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.bookingBookStorage = bookingBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.roomServiceBookStorage = roomServiceBookStorage;
     }
 
     // ================ UserPrefs methods ==============================

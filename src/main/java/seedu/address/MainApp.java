@@ -23,12 +23,15 @@ import seedu.address.model.room.Double;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.Single;
 import seedu.address.model.room.Suite;
+import seedu.address.model.roomservice.RoomService;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonBookingBookStorage;
+import seedu.address.storage.JsonRoomServiceBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RoomServiceBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -62,7 +65,9 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         BookingBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
-        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage);
+        RoomServiceBookStorage roomServiceBookStorage =
+                new JsonRoomServiceBookStorage(userPrefs.getRoomServiceBookFilePath());
+        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage, roomServiceBookStorage);
 
         initLogging(config);
 

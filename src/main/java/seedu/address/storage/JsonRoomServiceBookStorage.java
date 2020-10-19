@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyBookingBook;
 import seedu.address.model.ReadOnlyRoomServiceBook;
 
 public class JsonRoomServiceBookStorage implements RoomServiceBookStorage {
@@ -42,7 +41,8 @@ public class JsonRoomServiceBookStorage implements RoomServiceBookStorage {
      * @throws DataConversionException if the file is not in the correct format.
      */
     @Override
-    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyRoomServiceBook> readRoomServiceBook(Path filePath)
+            throws DataConversionException, IOException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableRoomServiceBook> jsonRoomServiceBook = JsonUtil.readJsonFile(

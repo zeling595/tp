@@ -18,6 +18,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path bookingBookFilePath = Paths.get("data" , "bookingbook.json");
 
 
+
     /**
      * Creates a {@code UserPrefs} with default values.
      */

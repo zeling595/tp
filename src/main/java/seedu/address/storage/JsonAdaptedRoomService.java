@@ -1,25 +1,26 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.booking.Booking;
 import seedu.address.model.roomservice.RoomService;
+import seedu.address.model.roomservice.RoomServiceType;
 
 public class JsonAdaptedRoomService {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "RoomService's %s field is missing!";
 
     private final Integer bookingId;
+    private final RoomServiceType type;
 
     /**
-     * Constructs a {@code JsonAdaptedRoomService} with the given booking details.
+     * Constructs a {@code JsonAdaptedRoomService} with the given room service details.
      */
     @JsonCreator
-    public JsonAdaptedRoomService(@JsonProperty("bookingId") Integer bookingId) {
+    public JsonAdaptedRoomService(@JsonProperty("bookingId") Integer bookingId,
+                                  @JsonProperty("type") RoomServiceType type) {
         this.bookingId = bookingId;
+        this.type = type;
     }
 
     /**
@@ -27,6 +28,7 @@ public class JsonAdaptedRoomService {
      */
     public JsonAdaptedRoomService(RoomService source) {
         bookingId = source.getBookingId();
+        type = source.getType();
     }
 
     /**
@@ -34,11 +36,11 @@ public class JsonAdaptedRoomService {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted booking.
      */
-    public Booking toModelType() throws IllegalValueException {
+    public RoomService toModelType() throws IllegalValueException {
 
         if (bookingId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "bookingId"));
         }
-        return new RoomService(bookingId);
+        return new RoomService(bookingId, type);
     }
 }
