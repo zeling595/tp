@@ -81,8 +81,8 @@ public class BookingBook implements ReadOnlyBookingBook {
         return bookings.getBooking(roomID);
     }
 
-    public void setBookingInactive(int roomID) {
-        bookings.setBookingInactive(roomID);
+    public void setBookingInactive(int bookingId) {
+        bookings.setBookingInactive(bookingId);
     }
 
     /**

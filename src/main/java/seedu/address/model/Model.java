@@ -162,7 +162,7 @@ public interface Model {
 
     Booking getBooking(int roomId);
 
-    void setBookingInactive(int roomId);
+    void setBookingInactive(int bookingId);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

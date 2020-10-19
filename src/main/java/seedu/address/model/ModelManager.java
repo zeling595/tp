@@ -277,8 +277,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setBookingInactive(int roomId) {
-        this.bookingBook.setBookingInactive(roomId);
+    public void setBookingInactive(int bookingId) {
+        this.bookingBook.setBookingInactive(bookingId);
     }
 
 
