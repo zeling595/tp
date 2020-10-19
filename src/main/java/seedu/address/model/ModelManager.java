@@ -187,6 +187,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String displaySingleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSingleRooms(rooms);
+    }
+
+    @Override
+    public String displayDoubleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getDoubleRooms(rooms);
+    }
+
+    @Override
+    public String displaySuiteRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSuiteRooms(rooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
