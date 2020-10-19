@@ -185,6 +185,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public String displaySingleRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String displayDoubleRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String displaySuiteRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasRoom(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,13 +225,25 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setBooking(Booking target, Booking editedBooking) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void setBookingBook(ReadOnlyBookingBook newData) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteBooking(Booking target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public boolean hasBooking(Booking booking) {

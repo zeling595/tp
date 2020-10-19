@@ -56,7 +56,7 @@ public class ModelManager implements Model {
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
 
-        // Initialize the nextAvailableId of Person class so that each new person gets a unique id
+        // Initialize the nextAvailableId of Booking class so that each new booking gets a unique id
         Integer nextAvailableIdBooking = this.bookingBook.getBookingList().stream()
                 .mapToInt(Booking::getId).max().orElse(0) + 1;
         Booking.setNextAvailableId(nextAvailableIdBooking);
@@ -191,6 +191,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String displaySingleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSingleRooms(rooms);
+    }
+
+    @Override
+    public String displayDoubleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getDoubleRooms(rooms);
+    }
+
+    @Override
+    public String displaySuiteRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSuiteRooms(rooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
@@ -225,6 +240,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteBooking(Booking target) {
+        bookingBook.removeBooking(target);
+    }
+
+    @Override
     public void addBooking(Booking b) {
         this.bookingBook.addBooking(b);
     }
@@ -234,6 +254,10 @@ public class ModelManager implements Model {
         this.bookingBook.setBookings(bookings);
     }
 
+    @Override
+    public void setBooking(Booking target, Booking editedBooking) {
+        this.bookingBook.setBooking(target, editedBooking);
+    }
     @Override
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return this.bookingBook.getUnavailableRooms(startDate, endDate);
@@ -319,6 +343,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)

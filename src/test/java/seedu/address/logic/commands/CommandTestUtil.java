@@ -27,6 +27,7 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesBookingIdPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditBookingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -118,7 +119,7 @@ public class CommandTestUtil {
     public static final String PERSONAL_ID_DESC_AMY = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_AMY;
     public static final String PERSONAL_ID_DESC_BOB = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_BOB;
     public static final String ROOM_ID_DESC_AMY = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_AMY;
-    public static final String ROOM_ID_DESC_BOB = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_AMY;
+    public static final String ROOM_ID_DESC_BOB = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_BOB;
     public static final String START_DATE_DESC_AMY = " " + PREFIX_START_DATE + VALID_START_DATE_AMY;
     public static final String START_DATE_DESC_BOB = " " + PREFIX_START_DATE + VALID_START_DATE_BOB;
     public static final String END_DATE_DESC_AMY = " " + PREFIX_END_DATE + VALID_END_DATE_AMY;
@@ -132,15 +133,21 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // Invalid Check In Descriptions
-    public static final String INVALID_PERSONAL_ID_DESC = PREFIX_PERSONAL_ID + "a12"; // letters not allowed in PID
-    public static final String INVALID_ROOM_ID_DESC = PREFIX_ROOM_ID + "88"; // roomId supposed to be four digits
-    public static final String INVALID_ROOM_ID_DESC2 = PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
+    public static final String INVALID_PERSONAL_ID_DESC = " " + PREFIX_PERSONAL_ID + "a12"; // letter not allowed in PID
+    public static final String INVALID_ROOM_ID_DESC = " " + PREFIX_ROOM_ID + "88"; // roomId supposed to be four digits
+    public static final String INVALID_ROOM_ID_DESC2 = " " + PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
+    public static final String INVALID_START_DATE_DESC = " " + PREFIX_START_DATE + "2020 02 02"; // 2020-02-02
+    public static final String INVALID_END_DATE_DESC = " " + PREFIX_END_DATE + "2020 06 02"; // 2020-02-02
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditBookingCommand.EditBookingDescriptor DESC_BOOKING_AMY;
+    public static final EditBookingCommand.EditBookingDescriptor DESC_BOOKING_BOB;
 
     public static final int VALID_PRICE = 50;
 
@@ -151,6 +158,11 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BOOKING_AMY = new EditBookingDescriptorBuilder().withRoomId(VALID_ROOM_ID_AMY)
+                .withStartDate(VALID_START_DATE_AMY).withEndDate(VALID_END_DATE_AMY).build();
+        DESC_BOOKING_BOB = new EditBookingDescriptorBuilder().withRoomId(VALID_ROOM_ID_BOB)
+                .withStartDate(VALID_START_DATE_BOB).withEndDate(VALID_END_DATE_BOB).build();
+
     }
 
     /**

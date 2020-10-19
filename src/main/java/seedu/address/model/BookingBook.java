@@ -45,6 +45,16 @@ public class BookingBook implements ReadOnlyBookingBook {
     }
 
     /**
+     * Replaces the given booking {@code target} in the list with {@code editedBooking}.
+     * {@code target} must exist in the booking book.
+     * The booking identity of {@code editedBooking} must not be the same as
+     * another existing booking in the booking book.
+     */
+    public void setBooking(Booking target, Booking editedBooking) {
+        this.bookings.setBooking(target, editedBooking);
+    }
+
+    /**
      * Resets the existing data of this {@code BookingBook} with {@code newData}.
      */
     public void resetData(ReadOnlyBookingBook newData) {
@@ -56,6 +66,11 @@ public class BookingBook implements ReadOnlyBookingBook {
     public void addBooking(Booking bookingToAdd) {
         bookings.add(bookingToAdd);
     }
+
+    public void removeBooking(Booking booking) {
+        bookings.removeBooking(booking);
+    }
+
 
     /**
      * Get an active room.
