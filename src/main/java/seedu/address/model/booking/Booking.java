@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class Booking {
+public class Booking implements Comparable<Booking> {
     private static Integer nextAvailableId;
 
     // Identity fields
@@ -156,6 +156,13 @@ public class Booking {
                 .append(" Active: ")
                 .append(isActive());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Booking o) {
+        if (getStartDate() == null || o.getStartDate() == null)
+            return 0;
+        return getStartDate().compareTo(o.getStartDate());
     }
 
 }
