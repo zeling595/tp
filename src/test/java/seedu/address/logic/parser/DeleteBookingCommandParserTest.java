@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOKING;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,12 @@ public class DeleteBookingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteBookingCommand(INDEX_FIRST_BOOKING));
+        assertParseSuccess(parser, "1", new DeleteBookingCommand(1));
+    }
+
+    @Test
+    public void parse_validArgsWithWhitespaces_returnsDeleteCommand() {
+        assertParseSuccess(parser, " \t 1 \t", new DeleteBookingCommand(1));
     }
 
     @Test

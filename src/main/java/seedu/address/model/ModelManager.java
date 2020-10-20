@@ -356,7 +356,8 @@ public class ModelManager implements Model {
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredBookings.equals(other.filteredBookings);
+                && filteredBookings.equals(other.filteredBookings)
+                && roomServiceBook.equals(other.roomServiceBook);
     }
 
 }

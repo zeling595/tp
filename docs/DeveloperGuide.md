@@ -238,7 +238,7 @@ will be similarly shown as well.
 ##### Aspect: Whether to have a RoomService class
 
 * **Alternative 1 (current choice):** Create a RoomService class.
-  * Pros: No decoupling between RoomService and Booking. We can implement feature without modifying Booking at all.
+  * Pros: Decoupling between RoomService and Booking. We can implement feature without modifying Booking at all.
   * Cons: More work to create model, storage classes for RoomService.
 
 * **Alternative 2:** Stores room services ordered directly in Booking class.

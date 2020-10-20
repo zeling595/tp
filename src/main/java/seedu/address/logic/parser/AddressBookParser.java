@@ -6,7 +6,25 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CheckInCommand;
+import seedu.address.logic.commands.CheckOutCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteBookingCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditBookingCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterRoomCommand;
+import seedu.address.logic.commands.FindBookingCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetBillCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBookingCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListRoomCommand;
+import seedu.address.logic.commands.RoomServiceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
