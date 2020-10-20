@@ -137,11 +137,18 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String booking Id} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param id booking id as entered by user
+     * @return booking id as an integer
+     * @throws ParseException if the given {@code booking Id} is invalid
      */
     public static int parseBookingId(String id) throws ParseException {
         requireNonNull(id);
+        // trim used for deleteBooking
+        String trimmedId = id.trim();
         try {
-            return Integer.parseInt(id);
+            return Integer.parseInt(trimmedId);
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_BOOKING_ID);
         }

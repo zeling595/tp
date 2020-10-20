@@ -229,4 +229,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredBookingList().size());
     }
 
+
+    /**
+     * Updates {@code model}'s filtered list to show only the booking with given {@code bookingId} in the
+     * {@code model}'s booking book.
+     */
+    public static void showBookingWithId(Model model, Integer bookingId) {
+        assertTrue(bookingId < model.getFilteredBookingList().size());
+
+        model.updateFilteredBookingList(new BookingMatchesBookingIdPredicate(bookingId));
+
+        assertEquals(1, model.getFilteredBookingList().size());
+    }
+
 }
