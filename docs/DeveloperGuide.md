@@ -131,7 +131,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented.  
+
+#### Implementation
+
+#### CheckIn feature  
+1.1 Check In: checks in a person into a particular room for a specified range of dates - `checkIn`  
+
+Given below is the example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+
+Step 2. The user executes `checkIn pid/3641 rid/2105 sd/2020-12-25 ed/2020-12-28` command to check in the person, whose
+person ID is 3641, into the room that has a room ID of 2105. The person will be checked in to the room from the start
+date of 25th December 2020 to the end date of 28th December 2020. 
+
+Step 3. If the parameters entered by the user is valid, the application will create a new `booking` with its own unique booking ID that is stored in the `Model`. 
+This `booking` stores the information entered by the user. Else, ConciergeBook will give a display error message
+indicating which of the parameter(s) are invalid.
+
+The following activity diagram summarises what happens when a user executes a `checkIn` command:
+
 
 ### \[Proposed\] Undo/redo feature
 
