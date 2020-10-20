@@ -33,6 +33,9 @@ public class TypicalBookings {
     public static final Booking BOOKING_6 = new Booking(2103, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
 
+    public static final Integer BOOKING_ID_1 = 1;
+    public static final Integer INVALID_BOOKING_ID = 100;
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Booking BOOKING_AMY = new Booking(VALID_ROOM_ID_AMY, VALID_PERSONAL_ID_AMY,
             VALID_START_DATE_AMY, VALID_END_DATE_AMY, false, VALID_BOOKING_ID_AMY);
