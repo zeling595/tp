@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -16,6 +19,7 @@ import seedu.address.model.booking.Booking;
 public class BookingListPanel extends UiPart<Region> {
     private static final String FXML = "BookingListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private ObservableList<Booking> masterData = FXCollections.observableArrayList();
 
     @FXML
     private ListView<Booking> bookingListView;
@@ -25,7 +29,14 @@ public class BookingListPanel extends UiPart<Region> {
      */
     public BookingListPanel(ObservableList<Booking> bookingList) {
         super(FXML);
-        bookingListView.setItems(bookingList);
+        masterData = bookingList;
+        SortedList<Booking> sortedData = new SortedList<>(masterData, new Comparator<Booking>() {
+            @Override
+            public int compare(Booking o1, Booking o2) {
+                return o2.getStartDate().compareTo(o1.getStartDate());
+            }
+        });
+        bookingListView.setItems(sortedData);
         bookingListView.setCellFactory(listView -> new BookingListViewCell());
     }
 
