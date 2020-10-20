@@ -133,6 +133,73 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<!-- Room service feature -->
+### Order Room Service feature 
+
+The order room service feature is facilitated by:
+1. `RoomService` class. `RoomService` objects represent the room service that a person has ordered. It is tied to a
+booking through the bookingId field.
+2. `RoomServiceBook`. RoomServiceBook tracks all the RoomService that has been ordered. It implements the following
+operations that support the order room service feature:
+    1. `RoomServiceBook#addRoomService()` - adds a new room service.
+    2. `RoomServiceBook#getRoomServicesForBooking()` - returns the room services ordered for a particular booking.
+    This gives user access to room services that has been ordered for a particular booking.
+    
+These operations are exposed in the `Model` interface as `Model#addRoomService()`, and
+`Model#getRoomServicesForBooking()` respectively.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the application for the first time. The empty `RoomServiceBook`
+will be instantiated.
+
+Step 2. The user checks in a guest into a room. A new Booking object will be created with a bookingId.
+
+Step 3. The user receives a request from that guest to order room service.
+
+Step 4. The user keys in the `orderRoomService` command, with parameters `bid/BOOKING_ID`, `rst/ROOM_SERVICE_TYPE`,
+where BOOKING_ID is the id of the booking for that guest, and ROOM_SERVICE_TYPE is the type of room service
+to be ordered. 
+
+Step 5. The room service will be added and tracked in the RoomServiceBook. When the user checks out, the bill for
+the room services ordered will be reflected as well.
+
+Given below is the sequence diagram that shows how the orderRoomService operation works (in step 5).
+
+![RoomServiceSequenceDiagram](images/RoomServiceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
+Also, if the booking id that the user keys in is for a booking that has already been checked out, an error
+will be similarly shown as well. 
+
+</div>
+
+#### Design consideration:
+
+##### Aspect: Whether to have a RoomService class
+
+* **Alternative 1 (current choice):** Create a RoomService class.
+  * Pros: No decoupling between RoomService and Booking. We can implement feature without modifying Booking at all.
+  * Cons: More work to create model, storage classes for RoomService.
+
+* **Alternative 2:** Stores room services ordered directly in Booking class.
+  * Pros: More convenient.
+  * Cons: Strong coupling between Booking and feature. Will have to modify Booking if we want to modify our feature.
+  
+##### Aspect: Whether to use subclass or enum to represent different types of RoomService
+
+* **Alternative 1 (current choice):** Use RoomServiceType enum.
+  * Pros: Allow us to easily add new types without creating new classes. Easy storage also (as String).
+  * Cons: Can have limited difference between different types of RoomService.
+
+* **Alternative 2:** Use subclasses extending from RoomService.
+  * Pros: Can have added functionality for different types of RoomService.
+  * Cons: A lot of inconvenience to add new types, and to store and retrieve from disk.
+ 
+
+<!-- Room service feature -->
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
