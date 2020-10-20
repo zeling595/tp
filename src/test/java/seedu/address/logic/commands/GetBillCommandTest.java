@@ -29,15 +29,21 @@ public class GetBillCommandTest {
             getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
-    public void execute_success_noRoomService() throws CommandException {
+    public void execute_success_withRoomService() throws CommandException {
         model.addBooking(ACTIVE_BOOKING_DAN);
         Booking booking = model.getBookingWithId(VALID_BOOKING_ID_DAN);
         Room room = model.getRoom(VALID_ROOM_ID_DAN);
 
         int pricePerNight = room.getPrice();
 
+        String roomServices = "Massaging service: 70\n"
+                + "Wifi service: 40\n"
+                + "Dining in service: 50\n";
+
         GetBillCommand command = new GetBillCommand(VALID_BOOKING_ID_DAN);
-        assertEquals(String.format(GetBillCommand.MESSAGE_SUCCESS_GET_BILL, VALID_BOOKING_ID_DAN,
+        assertEquals(roomServices
+                        + String.format(GetBillCommand.MESSAGE_SUCCESS_GET_BILL,
+                VALID_BOOKING_ID_DAN,
                 booking.getDuration() * pricePerNight),
             command.execute(model).getFeedbackToUser());
     }
