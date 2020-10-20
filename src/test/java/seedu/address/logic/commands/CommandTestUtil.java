@@ -117,6 +117,7 @@ public class CommandTestUtil {
     public static final String END_DATE_DESC_AMY = " " + PREFIX_END_DATE + VALID_END_DATE_AMY;
     public static final String END_DATE_DESC_BOB = " " + PREFIX_END_DATE + VALID_END_DATE_BOB;
 
+    public static final String BOOKING_ID_DESC_BOB = " " + PREFIX_BOOKING_ID + VALID_BOOKING_ID_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

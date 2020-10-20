@@ -2,11 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,16 +16,13 @@ public class EditBookingCommandParser implements Parser<EditBookingCommand> {
     public EditBookingCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ROOM_ID, PREFIX_START_DATE, PREFIX_END_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID, PREFIX_ROOM_ID, PREFIX_START_DATE, PREFIX_END_DATE);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditBookingCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_BOOKING_ID).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBookingCommand.MESSAGE_USAGE));
         }
+
+        Integer bookingId = ParserUtil.parseBookingId(argMultimap.getValue(PREFIX_BOOKING_ID).get());
 
         EditBookingCommand.EditBookingDescriptor editBookingDescriptor = new EditBookingCommand.EditBookingDescriptor();
         if (argMultimap.getValue(PREFIX_ROOM_ID).isPresent()) {
@@ -47,6 +41,6 @@ public class EditBookingCommandParser implements Parser<EditBookingCommand> {
             throw new ParseException(EditBookingCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditBookingCommand(index, editBookingDescriptor);
+        return new EditBookingCommand(bookingId, editBookingDescriptor);
     }
 }
