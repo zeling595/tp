@@ -21,6 +21,6 @@ destroy FilterRoomCommandParser
 AddressBookParser --> LogicManager: throw ParseException("Invalid Command Input.")
 deactivate AddressBookParser
 
- [<-- LogicManager
+[<--LogicManager
 deactivate LogicManager
 @enduml
