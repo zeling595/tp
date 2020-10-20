@@ -182,7 +182,7 @@ The following activity diagram summarises what happens when a user executes a `c
 ##### Aspect: Whether to store the Person in the Room class or create a separate Booking class
 
 * **Alternative 1 (current choice):** Create a Booking class.
-  * Pros: No decoupling between Person and Room. We can implement feature without modifying Room at all.
+  * Pros: No coupling between Person and Room. We can implement feature without modifying Room at all.
   * Cons: More work to create model, storage classes for Booking.
 
 * **Alternative 2:** Stores Person directly in Room class.
