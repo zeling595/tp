@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -18,8 +17,8 @@ public class DeleteBookingCommandParser implements Parser<DeleteBookingCommand> 
      */
     public DeleteBookingCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteBookingCommand(index);
+            Integer bookingId = ParserUtil.parseBookingId(args);
+            return new DeleteBookingCommand(bookingId);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookingCommand.MESSAGE_USAGE), pe);
