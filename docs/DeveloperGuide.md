@@ -151,9 +151,13 @@ Step 3. If the parameters entered by the user is valid, the application will cre
 This `booking` stores the information entered by the user. Else, ConciergeBook will give a display error message
 indicating which of the parameter(s) are invalid.
 
+The following sequence diagram shows how the undo operation works:
+
+
+
 The following activity diagram summarises what happens when a user executes a `checkIn` command:
 
-
+![CheckInActivityDiagram](images/CheckInActivityDiagram.png)
 <!-- Room service feature -->
 ### Order Room Service feature 
 
