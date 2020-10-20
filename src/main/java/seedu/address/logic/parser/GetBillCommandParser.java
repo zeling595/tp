@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import java.util.stream.Stream;
 
@@ -20,15 +20,15 @@ public class GetBillCommandParser implements Parser<GetBillCommand> {
     @Override
     public GetBillCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ROOM_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
 
-        if (argMultiMap.getValue(PREFIX_ROOM_ID).isEmpty() || !argMultiMap.getPreamble().isEmpty()) {
+        if (argMultiMap.getValue(PREFIX_BOOKING_ID).isEmpty() || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE));
         }
 
-        int roomId = ParserUtil.parseRoomId(argMultiMap.getValue(PREFIX_ROOM_ID).get());
+        int bookingId = ParserUtil.parseBookingId(argMultiMap.getValue(PREFIX_BOOKING_ID).get());
 
-        return new GetBillCommand(roomId);
+        return new GetBillCommand(bookingId);
     }
 
     /**

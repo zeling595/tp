@@ -6,8 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
-public class Booking implements Comparable<Booking> {
+public class Booking {
     private static Integer nextAvailableId;
 
     // Identity fields
@@ -24,6 +23,7 @@ public class Booking implements Comparable<Booking> {
      */
     public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive) {
         requireAllNonNull(roomId, personId, startDate, endDate);
+
         this.roomId = roomId;
         this.personId = personId;
         this.startDate = startDate;
@@ -39,6 +39,7 @@ public class Booking implements Comparable<Booking> {
     public Booking(Integer roomId, Integer personId, LocalDate startDate, LocalDate endDate, boolean isActive,
                    Integer id) {
         requireAllNonNull(roomId, personId, startDate, endDate, id);
+
         this.roomId = roomId;
         this.personId = personId;
         this.startDate = startDate;
@@ -107,7 +108,14 @@ public class Booking implements Comparable<Booking> {
 
     }
 
+    /**
+     * Returns true if Booking has overlap with given {@code startDate} and {@code endDate}
+     */
     public boolean hasOverlap(LocalDate startDate, LocalDate endDate) {
+        if (this.startDate.isEqual(startDate) || this.endDate.isEqual(endDate)
+                || this.endDate.isEqual(startDate) || this.startDate.isEqual(endDate)) {
+            return true;
+        }
         return isActive && startDate.isBefore(this.endDate) && endDate.isAfter(this.startDate);
     }
 
@@ -156,13 +164,6 @@ public class Booking implements Comparable<Booking> {
                 .append(" Active: ")
                 .append(isActive());
         return builder.toString();
-    }
-
-    @Override
-    public int compareTo(Booking o) {
-        if (getStartDate() == null || o.getStartDate() == null)
-            return 0;
-        return getStartDate().compareTo(o.getStartDate());
     }
 
 }

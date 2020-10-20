@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
 import static seedu.address.testutil.TypicalBookings.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
@@ -19,15 +20,15 @@ import seedu.address.model.booking.Booking;
  */
 class CheckOutCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            getTypicalRoomBook(), getTypicalBookingBook());
+            getTypicalRoomBook(), getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
     public void execute_success() throws CommandException {
         model.addBooking(ACTIVE_BOOKING_DAN);
-        Booking booking = model.getBooking(VALID_ROOM_ID_DAN);
-        CheckOutCommand command = new CheckOutCommand(VALID_ROOM_ID_DAN);
-        assertEquals(String.format(CheckOutCommand.MESSAGE_SUCCESS, booking),
-                command.execute(model).getFeedbackToUser());
+        CheckOutCommand command = new CheckOutCommand(VALID_BOOKING_ID_DAN);
+        String result = command.execute(model).getFeedbackToUser();
+        Booking booking = model.getBookingWithId(VALID_BOOKING_ID_DAN);
+        assertEquals(String.format(CheckOutCommand.MESSAGE_SUCCESS, booking), result);
     }
 
     @Test

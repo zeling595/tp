@@ -45,6 +45,16 @@ public class BookingBook implements ReadOnlyBookingBook {
     }
 
     /**
+     * Replaces the given booking {@code target} in the list with {@code editedBooking}.
+     * {@code target} must exist in the booking book.
+     * The booking identity of {@code editedBooking} must not be the same as
+     * another existing booking in the booking book.
+     */
+    public void setBooking(Booking target, Booking editedBooking) {
+        this.bookings.setBooking(target, editedBooking);
+    }
+
+    /**
      * Resets the existing data of this {@code BookingBook} with {@code newData}.
      */
     public void resetData(ReadOnlyBookingBook newData) {
@@ -57,6 +67,11 @@ public class BookingBook implements ReadOnlyBookingBook {
         bookings.add(bookingToAdd);
     }
 
+    public void removeBooking(Booking booking) {
+        bookings.removeBooking(booking);
+    }
+
+
     /**
      * Get an active room.
      * @param roomID
@@ -66,8 +81,8 @@ public class BookingBook implements ReadOnlyBookingBook {
         return bookings.getBooking(roomID);
     }
 
-    public void setBookingInactive(int roomID) {
-        bookings.setBookingInactive(roomID);
+    public void setBookingInactive(int bookingId) {
+        bookings.setBookingInactive(bookingId);
     }
 
     /**
@@ -83,6 +98,11 @@ public class BookingBook implements ReadOnlyBookingBook {
     public boolean hasBookingWithId(Integer id) {
         requireNonNull(id);
         return bookings.hasBookingWithId(id);
+    }
+
+    public Booking getBookingWithId(Integer id) {
+        requireNonNull(id);
+        return bookings.getBookingWithId(id);
     }
 
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {

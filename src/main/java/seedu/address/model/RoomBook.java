@@ -41,6 +41,34 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     /**
+     * Returns a {@code String} that lists in rooms according to room types.
+     */
+    public String displayRooms(ObservableList<Integer> input) {
+        return rooms.getAllRooms(input);
+    }
+
+    /**
+     * Returns a {@code String} that lists only Single Rooms.
+     */
+    public String getSingleRooms(ObservableList<Integer> input) {
+        return rooms.getSingleRooms(input);
+    }
+
+    /**
+     * Returns a {@code String} that lists only Double Rooms.
+     */
+    public String getDoubleRooms(ObservableList<Integer> input) {
+        return rooms.getDoubleRooms(input);
+    }
+
+    /**
+     * Returns a {@code String} that lists only Suite Rooms.
+     */
+    public String getSuiteRooms(ObservableList<Integer> input) {
+        return rooms.getSuiteRooms(input);
+    }
+
+    /**
      * Resets the existing data of this {@code RoomBook} with {@code newData}.
      */
     public void resetData(ReadOnlyRoomBook newData) {

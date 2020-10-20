@@ -18,23 +18,19 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.BookingBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyBookingBook;
-import seedu.address.model.ReadOnlyRoomBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.RoomBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
+import seedu.address.model.room.Double;
 import seedu.address.model.room.Room;
+import seedu.address.model.room.Single;
+import seedu.address.model.room.Suite;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonBookingBookStorage;
+import seedu.address.storage.JsonRoomServiceBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RoomServiceBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -59,6 +55,7 @@ public class MainApp extends Application {
     @Override
     public void init() throws Exception {
         logger.info("=========================[ Initializing AddressBook & BookingBook ]=======================");
+        logger.info("=============================[ Initializing RoomServiceBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -68,7 +65,9 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         BookingBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
-        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage);
+        RoomServiceBookStorage roomServiceBookStorage =
+                new JsonRoomServiceBookStorage(userPrefs.getRoomServiceBookFilePath());
+        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage, roomServiceBookStorage);
 
         initLogging(config);
 
@@ -83,11 +82,21 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing roomData ]===========================");
         RoomBook ret = new RoomBook();
         final List<Room> roomData = IntStream.rangeClosed(2103, 2133)
-                                                .mapToObj(x -> new Room(100, x))
+                                                .mapToObj(x -> initRoomsHelper(x))
                                                 .collect(Collectors.toList());
 
         ret.setRooms(roomData);
         return ret;
+    }
+
+    private Room initRoomsHelper(int x) {
+        if (x >= 2103 && x < 2113) {
+            return new Single(x);
+        } else if (x < 2123) {
+            return new Double(x);
+        } else {
+            return new Suite(x);
+        }
     }
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
@@ -97,8 +106,10 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyBookingBook> bookingBookOptional;
+        Optional<ReadOnlyRoomServiceBook> roomServiceBookOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyBookingBook bookingData;
+        ReadOnlyRoomServiceBook roomServiceData;
         ReadOnlyRoomBook roomData = initRooms();
 
         try {
@@ -138,7 +149,22 @@ public class MainApp extends Application {
             bookingData = new BookingBook();
         }
 
-        return new ModelManager(initialData, userPrefs, roomData, bookingData);
+        // read roomServiceBook data
+        try {
+            roomServiceBookOptional = storage.readRoomServiceBook();
+            if (!roomServiceBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample RoomServiceBook");
+            }
+            roomServiceData = roomServiceBookOptional.orElseGet(SampleDataUtil::getSampleRoomServiceBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty RoomServiceBook");
+            roomServiceData = new RoomServiceBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty RoomServiceBook");
+            roomServiceData = new RoomServiceBook();
+        }
+
+        return new ModelManager(initialData, userPrefs, roomData, bookingData, roomServiceData);
     }
 
     private void initLogging(Config config) {

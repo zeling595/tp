@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -123,18 +120,18 @@ public class AddressBookParserTest {
     public void parseCommand_checkOut() throws Exception {
         final int roomId = 2103;
         CheckOutCommand command = (CheckOutCommand) parser.parseCommand(CheckOutCommand.COMMAND_WORD + " "
-            + PREFIX_ROOM_ID + roomId);
+            + PREFIX_BOOKING_ID + roomId);
 
         assertEquals(new CheckOutCommand(roomId), command);
     }
 
     @Test
     public void parseCommand_getBill() throws Exception {
-        final int roomId = 4012;
+        final int bookingId = 40;
         GetBillCommand command = (GetBillCommand) parser.parseCommand(GetBillCommand.COMMAND_WORD + " "
-            + PREFIX_ROOM_ID + roomId);
+            + PREFIX_BOOKING_ID + bookingId);
 
-        assertEquals(new GetBillCommand(roomId), command);
+        assertEquals(new GetBillCommand(bookingId), command);
     }
 
     @Test

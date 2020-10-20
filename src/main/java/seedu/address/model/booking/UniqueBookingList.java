@@ -28,11 +28,43 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Returns true if the list contains a booking with the given id
+     * Returns true if the list contains a booking with the given id.
      */
     public boolean hasBookingWithId(Integer id) {
         requireNonNull(id);
         return internalList.stream().anyMatch(booking -> booking.getId().equals(id));
+    }
+
+    /**
+     * Returns the booking with the given id.
+     * The booking must already exist in the list.
+     * Or BookingNotFoundException is thrown.
+     */
+    public Booking getBookingWithId(Integer id) {
+        requireNonNull(id);
+
+        if (!hasBookingWithId(id)) {
+            throw new BookingNotFoundException();
+        }
+
+        return internalList.stream()
+                .filter(booking -> booking.getId().equals(id))
+                .findFirst().get();
+    }
+
+    /**
+     * Remove a booking from the List.
+     * The booking must already exist in the list.
+     * Or BookingNotFoundException is thrown.
+     */
+    public void removeBooking(Booking toRemove) {
+        requireNonNull(toRemove);
+
+        if (!contains(toRemove)) {
+            throw new BookingNotFoundException();
+        }
+
+        internalList.remove(toRemove);
     }
 
     /**
@@ -67,11 +99,11 @@ public class UniqueBookingList implements Iterable<Booking> {
 
     /**
      * Set a booking to inactive. Create new booking and set.
-     * @param roomId The id of the room to be set inactive
+     * @param bookingId The booking id to be set inactive
      */
-    public void setBookingInactive(int roomId) {
-        requireNonNull(roomId);
-        Booking booking = getBooking(roomId);
+    public void setBookingInactive(int bookingId) {
+        requireNonNull(bookingId);
+        Booking booking = getBookingWithId(bookingId);
         Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
                 booking.getStartDate(), booking.getEndDate(), false, booking.getId());
         setBooking(booking, editedBooking);

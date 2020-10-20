@@ -5,16 +5,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.BookingBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyBookingBook;
+import seedu.address.model.*;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.roomservice.RoomService;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,18 +53,18 @@ public class SampleDataUtil {
     // 2103 - 2133
     public static Booking[] getSampleBookings() {
         return new Booking[] {
-            new Booking(2103, 1, LocalDate.of(2020, 1, 1),
-                    LocalDate.of(2020, 1, 2), true, 1),
-            new Booking(2104, 2, LocalDate.of(2020, 1, 1),
-                    LocalDate.of(2020, 1, 3), true, 2),
-            new Booking(2105, 3, LocalDate.of(2020, 2, 2),
-                    LocalDate.of(2020, 2, 22), true, 3),
-            new Booking(2106, 4, LocalDate.of(2019, 3, 1),
-                    LocalDate.of(2020, 3, 12), false, 4),
-            new Booking(2107, 5, LocalDate.of(2019, 1, 10),
-                    LocalDate.of(2020, 1, 13), false, 5),
-            new Booking(2108, 6, LocalDate.of(2020, 6, 1),
-                    LocalDate.of(2020, 6, 20), false, 6),
+            new Booking(2103, 1, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), true, 1),
+            new Booking(2104, 2, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), true, 2),
+            new Booking(2105, 3, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), true, 3),
+            new Booking(2106, 4, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), false, 4),
+            new Booking(2107, 5, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), false, 5),
+            new Booking(2108, 6, LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(1), false, 6),
         };
     }
 
@@ -76,6 +74,20 @@ public class SampleDataUtil {
             sampleBb.addBooking(sampleBooking);
         }
         return sampleBb;
+    }
+
+    public static RoomService[] getSampleRoomService() {
+        return new RoomService[] {
+
+        };
+    }
+
+    public static ReadOnlyRoomServiceBook getSampleRoomServiceBook() {
+        RoomServiceBook sampleRsb = new RoomServiceBook();
+        for (RoomService sampleRoomService : getSampleRoomService()) {
+            sampleRsb.addRoomService(sampleRoomService);
+        }
+        return sampleRsb;
     }
 
     /**

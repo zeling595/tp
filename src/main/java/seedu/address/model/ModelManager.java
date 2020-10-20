@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final RoomBook roomBook;
     private final BookingBook bookingBook;
+    private final RoomServiceBook roomServiceBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Booking> filteredBookings;
@@ -34,7 +36,8 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook) {
+                        ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook,
+                        ReadOnlyRoomServiceBook roomServiceBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -43,6 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.roomBook = new RoomBook(roomBook);
         this.bookingBook = new BookingBook(bookingBook);
+        this.roomServiceBook = new RoomServiceBook(roomServiceBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
@@ -52,14 +56,14 @@ public class ModelManager implements Model {
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
 
-        // Initialize the nextAvailableId of Person class so that each new person gets a unique id
+        // Initialize the nextAvailableId of Booking class so that each new booking gets a unique id
         Integer nextAvailableIdBooking = this.bookingBook.getBookingList().stream()
                 .mapToInt(Booking::getId).max().orElse(0) + 1;
         Booking.setNextAvailableId(nextAvailableIdBooking);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook());
+        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook(), new RoomServiceBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -182,6 +186,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String displayRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.displayRooms(rooms);
+    }
+
+    @Override
+    public String displaySingleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSingleRooms(rooms);
+    }
+
+    @Override
+    public String displayDoubleRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getDoubleRooms(rooms);
+    }
+
+    @Override
+    public String displaySuiteRooms(ObservableList<Integer> rooms) {
+        return this.roomBook.getSuiteRooms(rooms);
+    }
+
+    @Override
     public boolean hasRoom(int roomId) {
         return this.roomBook.hasRoom(roomId);
     }
@@ -215,6 +239,19 @@ public class ModelManager implements Model {
         return bookingBook.hasBookingWithId(id);
     }
 
+    /**
+     * Return booking with this booking id
+     */
+    @Override
+    public Booking getBookingWithId(Integer id) {
+        return bookingBook.getBookingWithId(id);
+    }
+
+    @Override
+    public void deleteBooking(Booking target) {
+        bookingBook.removeBooking(target);
+    }
+
     @Override
     public void addBooking(Booking b) {
         this.bookingBook.addBooking(b);
@@ -226,6 +263,10 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setBooking(Booking target, Booking editedBooking) {
+        this.bookingBook.setBooking(target, editedBooking);
+    }
+    @Override
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return this.bookingBook.getUnavailableRooms(startDate, endDate);
     }
@@ -236,8 +277,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setBookingInactive(int roomId) {
-        this.bookingBook.setBookingInactive(roomId);
+    public void setBookingInactive(int bookingId) {
+        this.bookingBook.setBookingInactive(bookingId);
     }
 
 
@@ -275,6 +316,27 @@ public class ModelManager implements Model {
         filteredBookings.setPredicate(predicate);
     }
 
+    //=========== RoomServiceBook ================================================================================
+    @Override
+    public void addRoomService(RoomService rs) {
+        this.roomServiceBook.addRoomService(rs);
+    }
+
+    @Override
+    public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId) {
+        return this.roomServiceBook.getRoomServicesForBooking(bookingId);
+    }
+
+    @Override
+    public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) {
+        this.roomServiceBook.resetData(roomServiceBook);
+    }
+
+    @Override
+    public ReadOnlyRoomServiceBook getRoomServiceBook() {
+        return this.roomServiceBook;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -289,6 +351,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)

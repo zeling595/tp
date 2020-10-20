@@ -18,15 +18,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyBookingBook;
-import seedu.address.model.ReadOnlyRoomBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -184,6 +180,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public String displayRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String displaySingleRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String displayDoubleRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String displaySuiteRooms(ObservableList<Integer> rooms) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasRoom(int roomId) {
             throw new AssertionError("This method should not be called.");
         }
@@ -209,13 +225,25 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setBooking(Booking target, Booking editedBooking) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void setBookingBook(ReadOnlyBookingBook newData) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteBooking(Booking target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public boolean hasBooking(Booking booking) {
@@ -224,6 +252,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasBookingWithId(Integer roomId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Booking getBookingWithId(Integer id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -259,6 +292,27 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredBookingList(Predicate<Booking> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //=========== RoomServiceBook ================================================================================
+        @Override
+        public void addRoomService(RoomService rs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyRoomServiceBook getRoomServiceBook() {
             throw new AssertionError("This method should not be called.");
         }
     }

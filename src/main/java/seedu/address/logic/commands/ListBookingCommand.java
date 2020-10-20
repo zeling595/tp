@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACTIVE_BOOKINGS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -16,7 +16,7 @@ public class ListBookingCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_ACTIVE_BOOKINGS);
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         return new CommandResult(
                 String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()),
                 false, false, false, true);

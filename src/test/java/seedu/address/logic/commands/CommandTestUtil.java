@@ -2,15 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -27,6 +19,7 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesBookingIdPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditBookingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -57,39 +50,49 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
-    public static final int VALID_ROOM_ID_AMY = 4102;
-    public static final int VALID_ROOM_ID_BOB = 2301;
-    public static final int VALID_ROOM_ID_GENE = 1240;
-    public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 4102;
-    public static final int VALID_ROOM_ID_DAN = 1237;
+
+    public static final int VALID_ROOM_ID_AMY = 2103;
+    public static final int VALID_ROOM_ID_BOB = 2104;
+    public static final int VALID_ROOM_ID_GENE = 2106;
+    public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2103;
+    public static final int VALID_ROOM_ID_DAN = 2104;
     public static final int INVALID_ROOM_ID = 1;
-    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
+
+    public static final int CURRENT_YEAR = LocalDate.now().getYear();
+    public static final int NEXT_YEAR = CURRENT_YEAR + 1;
+
+    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
+    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-10",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
+    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse("2020-12-12",
+    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse("2020-10-06",
+    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-09",
+    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-09",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse("2020-11-11",
+    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-11",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
+    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-21",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-30",
+    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-01-30",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-06-06",
+    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-06-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate PAST_START_DATE = LocalDate.parse("2001-05-06",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate PAST_END_DATE = LocalDate.parse("2001-05-06",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
 
 
     // Booking Values
-    public static final int VALID_BOOKING_ID_AMY = 1;
-    public static final int VALID_BOOKING_ID_BOB = 2;
+    public static final int VALID_BOOKING_ID_AMY = 11;
+    public static final int VALID_BOOKING_ID_BOB = 12;
     public static final int CONFLICT_AMY_VALID_BOOKING_ID_CHLOE = 1;
-    public static final int VALID_BOOKING_ID_DAN = 4;
+    public static final int VALID_BOOKING_ID_DAN = 14;
     public static final int BOOKING_DURATION_AMY = 5;
 
 
@@ -108,7 +111,7 @@ public class CommandTestUtil {
     public static final String PERSONAL_ID_DESC_AMY = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_AMY;
     public static final String PERSONAL_ID_DESC_BOB = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_BOB;
     public static final String ROOM_ID_DESC_AMY = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_AMY;
-    public static final String ROOM_ID_DESC_BOB = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_AMY;
+    public static final String ROOM_ID_DESC_BOB = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_BOB;
     public static final String START_DATE_DESC_AMY = " " + PREFIX_START_DATE + VALID_START_DATE_AMY;
     public static final String START_DATE_DESC_BOB = " " + PREFIX_START_DATE + VALID_START_DATE_BOB;
     public static final String END_DATE_DESC_AMY = " " + PREFIX_END_DATE + VALID_END_DATE_AMY;
@@ -122,15 +125,23 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // Invalid Check In Descriptions
-    public static final String INVALID_PERSONAL_ID_DESC = PREFIX_PERSONAL_ID + "a12"; // letters not allowed in PID
-    public static final String INVALID_ROOM_ID_DESC = PREFIX_ROOM_ID + "88"; // roomId supposed to be four digits
-    public static final String INVALID_ROOM_ID_DESC2 = PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
+    public static final String INVALID_PERSONAL_ID_DESC = " " + PREFIX_PERSONAL_ID + "a12"; // letter not allowed in PID
+    public static final String INVALID_ROOM_ID_DESC = " " + PREFIX_ROOM_ID + "88"; // roomId supposed to be four digits
+    public static final String INVALID_ROOM_ID_DESC2 = " " + PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
+    public static final String INVALID_START_DATE_DESC = " " + PREFIX_START_DATE + "2020 02 02"; // 2020-02-02
+    public static final String INVALID_END_DATE_DESC = " " + PREFIX_END_DATE + "2020 06 02"; // 2020-02-02
+
+    // Get Bill Descriptions
+    public static final String BOOKING_ID_DESC_AMY = " " + PREFIX_BOOKING_ID + VALID_BOOKING_ID_AMY;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditBookingCommand.EditBookingDescriptor DESC_BOOKING_AMY;
+    public static final EditBookingCommand.EditBookingDescriptor DESC_BOOKING_BOB;
 
     public static final int VALID_PRICE = 50;
 
@@ -141,6 +152,11 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BOOKING_AMY = new EditBookingDescriptorBuilder().withRoomId(VALID_ROOM_ID_AMY)
+                .withStartDate(VALID_START_DATE_AMY).withEndDate(VALID_END_DATE_AMY).build();
+        DESC_BOOKING_BOB = new EditBookingDescriptorBuilder().withRoomId(VALID_ROOM_ID_BOB)
+                .withStartDate(VALID_START_DATE_BOB).withEndDate(VALID_END_DATE_BOB).build();
+
     }
 
     /**

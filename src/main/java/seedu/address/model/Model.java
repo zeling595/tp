@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
 
 /**
  * The API of the Model component.
@@ -17,7 +18,7 @@ import seedu.address.model.room.Room;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Booking> PREDICATE_SHOW_ALL_ACTIVE_BOOKINGS = unused -> true;
+    Predicate<Booking> PREDICATE_SHOW_ALL_BOOKINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -113,6 +114,14 @@ public interface Model {
 
     void resetData(ReadOnlyBookingBook newData);
 
+    String displayRooms(ObservableList<Integer> rooms);
+
+    String displaySingleRooms(ObservableList<Integer> rooms);
+
+    String displayDoubleRooms(ObservableList<Integer> rooms);
+
+    String displaySuiteRooms(ObservableList<Integer> rooms);
+
     boolean hasRoom(int roomId);
 
     Room getRoom(int roomId);
@@ -133,9 +142,19 @@ public interface Model {
      */
     boolean hasBookingWithId(Integer id);
 
+    Booking getBookingWithId(Integer id);
+
+    /**
+     * Deletes the given booking.
+     * The booking must exist in the booking book.
+     */
+    void deleteBooking(Booking target);
+
     void addBooking(Booking b);
 
     void setBookings(List<Booking> bookings);
+
+    void setBooking(Booking target, Booking editedBooking);
 
     ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate);
 
@@ -143,8 +162,7 @@ public interface Model {
 
     Booking getBooking(int roomId);
 
-    void setBookingInactive(int roomId);
-
+    void setBookingInactive(int bookingId);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -163,4 +181,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBookingList(Predicate<Booking> predicate);
+
+
+    /**
+     * Room Service Book Methods
+     */
+    void addRoomService(RoomService rs);
+
+    public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId);
+
+    public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook);
+
+    public ReadOnlyRoomServiceBook getRoomServiceBook();
 }
