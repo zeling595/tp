@@ -3,8 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
@@ -24,6 +23,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.BookingBookBuilder;
+import seedu.address.testutil.TypicalRoomService;
 
 public class ModelManagerTest {
 
@@ -35,6 +35,7 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
         assertEquals(new BookingBook(), new BookingBook(modelManager.getBookingBook()));
+        assertEquals(new RoomServiceBook(), new RoomServiceBook(modelManager.getRoomServiceBook()));
     }
 
     @Test
@@ -166,6 +167,29 @@ public class ModelManagerTest {
     @Test
     public void getFilteredBookingList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredBookingList().remove(0));
+    }
+
+    @Test
+    void addRoomService_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addRoomService(null));
+    }
+
+    @Test
+    void addRoomService_success() {
+        modelManager.addRoomService(TypicalRoomService.ROOM_SERVICE_DAN_DINING);
+        assertEquals(modelManager.getRoomServicesForBooking(VALID_BOOKING_ID_DAN).size(), 1);
+    }
+
+    @Test
+    void getRoomServicesForBooking_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getRoomServicesForBooking(null));
+    }
+
+    @Test
+    void getRoomServicesForBooking_success() {
+        modelManager.addRoomService(TypicalRoomService.ROOM_SERVICE_DAN_DINING);
+        assertTrue(modelManager.getRoomServicesForBooking(
+                VALID_BOOKING_ID_DAN).get(0).equals(TypicalRoomService.ROOM_SERVICE_DAN_DINING));
     }
 
     @Test

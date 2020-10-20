@@ -26,6 +26,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.roomservice.RoomService;
+import seedu.address.model.roomservice.RoomServiceType;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -132,6 +134,14 @@ public class AddressBookParserTest {
             + PREFIX_BOOKING_ID + bookingId);
 
         assertEquals(new GetBillCommand(bookingId), command);
+    }
+
+    @Test
+    public void parseCommand_orderRoomService() throws Exception {
+        RoomServiceCommand command = (RoomServiceCommand) parser.parseCommand(RoomServiceCommand.COMMAND_WORD
+                + " " + PREFIX_BOOKING_ID + "1 " + PREFIX_ROOM_SERVICE_TYPE + RoomServiceType.WIFI.getName());
+
+        assertEquals(new RoomServiceCommand(new RoomService(1, RoomServiceType.WIFI)), command);
     }
 
     @Test

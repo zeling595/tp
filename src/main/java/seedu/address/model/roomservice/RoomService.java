@@ -52,7 +52,7 @@ public class RoomService {
 
     @Override
     public String toString() {
-        return String.format("BookingID: %s, Service type: %s, Price: $%s", this.bookingId,
+        return String.format("[BookingID: %s; Service type: %s; Price: $%s]", this.bookingId,
                 this.type.getVerboseName(), this.type.getPrice());
     }
 }
