@@ -131,7 +131,65 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented.  
+
+#### Implementation
+
+<!-- Check In feature -->
+
+#### CheckIn feature  
+1.1 Check In: checks in a person into a particular room for a specified range of dates - `checkIn`
+
+The check in feature is facilitated by:
+1. `Booking` class. `Booking` objects represent the booking made by the person when checked in.
+2. `BookingBook`. BookingBook tracks all the bookings created. It implements the following
+operation that support the check in feature:
+    `BookingBook#addBooking()` - adds a new booking.
+    
+This operation is exposed in the `Model` interface as `Model#addBooking()`.
+
+Given below is the example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+
+Step 2. The user executes `checkIn pid/3641 rid/2105 sd/2020-12-25 ed/2020-12-28` command to check in the person, whose
+person ID is 3641, into the room that has a room ID of 2105. The person will be checked in to the room from the start
+date of 25th December 2020 to the end date of 28th December 2020. 
+
+Step 3. If the parameters entered by the user is valid, the application will create a new `booking` with its own unique booking ID that is stored in the `Model`. 
+This `booking` stores the information entered by the user. Else, ConciergeBook will give a display error message
+indicating which of the parameter(s) are invalid.
+
+The following sequence diagram shows how the check in operation works:
+![CheckInSequenceDiagram](images/CheckInSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the personal ID or room ID 
+that the user keys into the system does not exist, or the start date and end dates are not in the correct format,
+a CommandException will be thrown and the error will be displayed to the user. Also, if the start date is
+before today's date, or the start date is after the end date, an error message will be similarly shown as well.
+Furthermore, if the user tries to check in a person into a room which is already been booked for that specified period,
+then an error message will be shown to the user as well.
+
+</div>
+
+The following activity diagram summarises what happens when a user executes a `checkIn` command:
+
+![CheckInActivityDiagram](images/CheckInActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: Whether to store the Person in the Room class or create a separate Booking class
+
+* **Alternative 1 (current choice):** Create a Booking class.
+  * Pros: No coupling between Person and Room. We can implement feature without modifying Room at all.
+  * Cons: More work to create model, storage classes for Booking.
+
+* **Alternative 2:** Stores Person directly in Room class.
+  * Pros: More convenient.
+  * Cons: Strong coupling between Person and Room. If we modify our Person object, we will have to modify Room.
+
+<!-- Check In feature -->
 
 <!-- Room service feature -->
 ### Order Room Service feature 

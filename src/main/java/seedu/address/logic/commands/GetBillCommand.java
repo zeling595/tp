@@ -2,11 +2,14 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.room.Room;
+import seedu.address.model.roomservice.RoomService;
+import seedu.address.model.roomservice.RoomServiceType;
 
 /**
  * Calculates the total bill for a particular occupied room.
@@ -22,7 +25,6 @@ public class GetBillCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "getBill command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
-    public static final String MESSAGE_ROOM_MISSING = "No valid room can be found";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for booking id: %1$d is %2$d";
 
@@ -43,7 +45,7 @@ public class GetBillCommand extends Command {
         Room room;
 
         if (!model.hasBookingWithId(bookingId)) {
-            throw new CommandException(MESSAGE_ROOM_MISSING);
+            throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
 
         assert model.hasBookingWithId(bookingId);
@@ -59,7 +61,17 @@ public class GetBillCommand extends Command {
         int pricePerNight = room.getPrice();
         int numNights = booking.getDuration();
         int totalPrice = pricePerNight * numNights;
-        return new CommandResult(model.getRoomServicesForBooking(booking.getId())
+
+        ObservableList<RoomService> roomServices = model.getRoomServicesForBooking(booking.getId());
+
+        String billBreakdown = "";
+
+        for (RoomService roomService : roomServices) {
+            RoomServiceType roomServiceType = roomService.getType();
+            billBreakdown += roomServiceType.getVerboseName() + ": " + roomServiceType.getPrice() + "\n";
+        }
+
+        return new CommandResult(billBreakdown
                 + String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice));
     }
 
