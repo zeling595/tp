@@ -140,27 +140,39 @@ A `Booking` class is created as an association class of the Person and Room clas
 series of other commands associated with Booking are also created. A `Booking` object is created using the `checjIn`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
 
+<!-- Create Booking Class -->
+
 <!-- Find Booking feature -->
 #### Find Booking feature  
 1.1 Find Booking: finds booking(s) with the following parameters:
 `findBooking`
+FindBooking features will be used in different senarios: 
 
-1. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For 
+1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
+is he/she checked into. The user can find the room besed on the customer Id, the start date and the end date of the
+ booking
+                                                            
+2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For 
 example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
-be provided. The user then can use the above information to find out about the bookingId of the Booking. And the Booking
-Id will be used for other commands.
-
+be provided. The user then can use the above information to find out about the booking id which is needed by
+other features.
 
 Given below is the example usage scenario:
-Step 1: As the user launch the App, the Booking book will load the data from memory.
+Step 1: As the user launch the App, the Booking book will load the data from memory, the filteredBookings includes all
+the bookings in the bookingList.
 
 Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
-associated with person 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
-update the filteredList in the model so that the user can view the complete information about the booking(s), which 
-include the room id and isActive state associated with this booking. 
+associated with person id 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+update the filteredList in the model so UI will update to only show the relevant bookings. 
+The user then can view the complete information about the booking(s), 
+including the booking id, the room id, the person id, the start and end date, and the isActive state.
 
-Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking which meet the parameters is found, the filteredList will be empty hence no
-booking will be displayed.
+Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking
+which meet the parameters can be found, the filteredList will be empty hence no
+booking will be displayed in UI.
+
+The following sequence diagram shows how the findBooking operation works:
+![FindBookingDiagram](images/FindBookingDiagram.png)
 
 #### Design consideration:
 Aspect: which parameters should be allowed to use in find Booking?
@@ -169,9 +181,10 @@ Aspect: which parameters should be allowed to use in find Booking?
     - Cons: Not as convenient as the user would have to search up for the personId first
 - Alternative 2: person's name or phone number
     - Pros: More user-friendly as the user only need to key in information once
-    - Cons: There are more senarios involved for one feature. When a booking cannot found, it could be because there is
-    no person information matches up with the given details (the person is not registered in datebase), or due to all
-    fields provided by the customer is wrong.
+    - Cons: There are more complexity involved for one feature. When a booking cannot be found, it could be due to
+    there is no person information matches up with the given details (the person is not present in the database), or 
+    due to a field provided by the customer is incorrect so there is no matching.
+<!-- Find Booking feature -->
 
 <!-- Check In feature -->
 
