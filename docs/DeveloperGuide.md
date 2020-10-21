@@ -131,7 +131,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.  
+This section describes some noteworthy details on how certain features are implemented.
 
 #### Implementation
 
@@ -257,6 +257,64 @@ will be similarly shown as well.
  
 
 <!-- Room service feature -->
+
+<!-- Filter Room feature --> 
+### Filter Room feature 
+#### Description
+ConciergeBook allows our user to run the `CheckIn` Command with a Room ID that is not being occupied 
+between the indicated start and end date. 
+
+Our user can find out which rooms of certain types are available within a stated start and end dates using the 
+`FilterRoom` Command. This room ID can subsequently be used for checking in a guest. 
+
+#### Implementation 
+The Filter Room feature is facilitated by the `FilterRoomCommand`. It has the following fields: 
+* `sd`: The start date
+* `ed`: The end date
+* `typ`: The type of room that the user is filtering. The possible types are `SINGLE` (indicated by `1`), `DOUBLE` 
+(indicated by `2`) and `SUITE` (indicated by `3`). 
+The start date and end date are compulsory fields, while the room type is optional. Omission of the room type will 
+result in displaying rooms of all types. 
+
+Given are several examples of usage scenarios when the user prompts to Filter Rooms: 
+
+**Scenario 1**. When the user provides a command with incomplete compulsory fields (e.g. end date), the 
+`FilterRoomCommandParser` will throw a `ParseException`, informing that the command is invalid and will return a 
+message indicating the correct usage for the `FilterRoomCommand`. 
+
+![RoomServiceSequenceDiagram](images/FilterRoomSequenceDiagram1.png)
+
+A similar flow will occur if the user provides an end date that is earlier that is earlier than the inputted start date. 
+The `FilterRoomCommandParser` will throw a `ParseException(“Start Date must be before End Date!”)`. The same will occur
+if the `typ` parameter is invalid (e.g. not 1, 2, or 3). It will throw a 
+`ParseException(“Invalid Room Type. Only 1, 2, 3 allowed.”)`
+
+**Scenario 2 (Ideal Scenario)**. Here is the Sequence Diagram for the `FilterRoomCommand` for an ideal case 
+(minor method calls are omitted). 
+
+![RoomServiceSequenceDiagram](images/FilterRoomSequenceDiagram2.png)
+
+#### Getting the availableRooms from Model 
+Obtaining the list of rooms of the indicated room type which are available between the start and end date is done 
+in a 3-step process: 
+1. Retrieve the unavailable rooms from the `BookingBook` using the `getUnavailableRooms` method. 
+2. Retrieve a list of available rooms by passing the list of unavailable rooms into the `RoomBook` using the 
+`getAvailableRooms` method. 
+3. The list of available rooms is then filtered by room type, as indicated by the user. 
+
+#### Design consideration:
+##### Aspect: Retrieving available rooms
+**Alternative 1 (current choice)**: Retrieve unavailable rooms from BookingBook first, then retrieve the 
+desired list from RoomBook. 
+* Pros: Ensures that less dependency on the RoomBook. 
+* Cons: Have a slightly lower execution time. 
+
+**Alternative 2**: Rooms should have a field to indicate when they are occupied. 
+* Pros: Reduces a 2-step process into a 1-step process. 
+* Cons: Strong coupling between Room and Booking. 
+Increases the complexity of other commands, such as editBooking and CheckOut due to the increased dependency. 
+
+<!-- Filter Room feature --> 
 
 ### \[Proposed\] Undo/redo feature
 
