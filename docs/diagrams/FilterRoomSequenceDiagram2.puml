@@ -2,32 +2,32 @@
 !include style.puml
 
 box "Logic" LOGIC_COLOR_1
-participant ":LogicManager" as LogicManager
-participant ":AddressBookParser" as AddressBookParser
-participant ":FilterRoomCommandParser" as FilterRoomCommandParser
-participant ":FilterRoomCommand" as FilterRoomCommand
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterRoomCommandParser" as FilterRoomCommandParser LOGIC_COLOR
+participant ":FilterRoomCommand" as FilterRoomCommand LOGIC_COLOR
 end box
 
 box "Model" MODEL+COLOR_T1
-participant ":Model" as Model
-participant ":BookingBook" as BookingBook
-participant ":RoomBook" as RoomBook
+participant ":Model" as Model MODEL_COLOR
+participant ":BookingBook" as BookingBook MODEL_COLOR
+participant ":RoomBook" as RoomBook MODEL_COLOR
 end box
 
-[-> LogicManager: execute("filterRoom sd/2020-11-12 ed/2020-11-15 typ/2")
+[-> LogicManager: execute(filterRoom)
 activate LogicManager
 
-LogicManager -> AddressBookParser: parseCommand("filterRoom sd/2020-11-12 ed/2020-11-15 typ/2")
+LogicManager -> AddressBookParser: parseCommand(filterRoom)
 activate AddressBookParser
 
-AddressBookParser -> FilterRoomCommandParser: parse("sd/2020-11-12 ed/2020-11-15 typ/2")
+AddressBookParser -> FilterRoomCommandParser: parse()
 activate FilterRoomCommandParser
 
 FilterRoomCommandParser --> AddressBookParser
 deactivate FilterRoomCommandParser
 destroy FilterRoomCommandParser
 
-AddressBookParser --> LogicManager: FilterRoomCommand(2020-11-12, 2020-11-15, 2)
+AddressBookParser --> LogicManager: FilterRoomCommand
 deactivate AddressBookParser
 destroy AddressBookParser
 
