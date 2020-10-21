@@ -282,7 +282,7 @@ Given are several examples of usage scenarios when the user prompts to Filter Ro
 `FilterRoomCommandParser` will throw a `ParseException`, informing that the command is invalid and will return a 
 message indicating the correct usage for the `FilterRoomCommand`. 
 
-![RoomServiceSequenceDiagram](images/FilterRoomSequenceDiagram1.png)
+![FilterRoomSequenceDiagram](images/FilterRoomSequenceDiagram1.png)
 
 A similar flow will occur if the user provides an end date that is earlier that is earlier than the inputted start date. 
 The `FilterRoomCommandParser` will throw a `ParseException(“Start Date must be before End Date!”)`. The same will occur
@@ -292,7 +292,7 @@ if the `typ` parameter is invalid (e.g. not 1, 2, or 3). It will throw a
 **Scenario 2 (Ideal Scenario)**. Here is the Sequence Diagram for the `FilterRoomCommand` for an ideal case 
 (minor method calls are omitted). 
 
-![RoomServiceSequenceDiagram](images/FilterRoomSequenceDiagram2.png)
+![FilterRoomSequenceDiagram](images/FilterRoomSequenceDiagram2.png)
 
 #### Getting the availableRooms from Model 
 Obtaining the list of rooms of the indicated room type which are available between the start and end date is done 
@@ -301,6 +301,12 @@ in a 3-step process:
 2. Retrieve a list of available rooms by passing the list of unavailable rooms into the `RoomBook` using the 
 `getAvailableRooms` method. 
 3. The list of available rooms is then filtered by room type, as indicated by the user. 
+
+The following activity diagram summarises what happens when a user executes a `filterRoom` command:
+
+![FilterRoomActivityDiagram](images/FilterRoomActivityDiagram.png)
+
+
 
 #### Design consideration:
 ##### Aspect: Retrieving available rooms

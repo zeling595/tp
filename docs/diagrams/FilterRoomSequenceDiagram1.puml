@@ -1,8 +1,8 @@
 @startuml
-box "Logic" #LightBlue
-participant LogicManager
-participant AddressBookParser
-participant FilterRoomCommandParser
+box "Logic" LOGIC_COLOR_T1
+participant LogicManager LOGIC_COLOR
+participant AddressBookParser LOGIC_COLOR
+participant FilterRoomCommandParser LOGIC_COLOR
 end box
 
 [-> LogicManager: execute("filterRoom sd/2020-11-12")
