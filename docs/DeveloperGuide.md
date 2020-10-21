@@ -258,6 +258,50 @@ will be similarly shown as well.
 
 <!-- Room service feature -->
 
+<!-- Edit booking feature -->
+### Edit Booking feature 
+
+The edit booking feature is facilitated by:
+1. `Booking` class. `Booking` objects represent the target booking to be replaced and edited booking.
+2. `BookingBook`. BookingBook tracks all the bookings created. It implements the following
+operation that support the edit booking feature:
+    `BookingBook#setBooking()` - set the target booking to the edited booking    
+    
+These operation is exposed in the `Model` interface as `Model#setBooking()`.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+
+Step 2. (Optional) The user executes `listBooking` command to list out all the bookings and find out the booking ID of
+the booking to edit.
+
+Step 3. The user executes `editBooking bid/2 rid/2103 sd/2020-12-30 ed/2020-12-31` command to edit booking with booking
+ID 2. The room ID will be overwritten by 2103, start date by 30 December 2020, end date by 31 December 2020. Person ID
+and booking ID cannot be modified. 
+
+Step 4. If the booking ID exists and there is at least one other parameters to edit, the application will create a new
+`booking` to replace the old booking with the booking ID and store it in `Model`. Else, ConciergeBook will display
+error message to show sample usage.
+
+Given below is the sequence diagram that shows how the edit booking operation works (in step 5).
+
+![EditBookingSequenceDiagram](images/EditBookingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
+Also, if the only booking ID is specified, an error message will be shown to ask user to provide at least one field.
+If the edited booking duplicates or conflicts with existing booking, an error message will be shown as well. 
+
+</div>
+
+The following activity diagram summarises what happens when a user executes a `editBooking` command:
+
+![EditBookingActivityDiagram](images/EditBookingActivityDiagram.png)
+
+<!-- Edit booking feature -->
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
