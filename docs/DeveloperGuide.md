@@ -136,23 +136,22 @@ This section describes some noteworthy details on how certain features are imple
 
 <!-- Create Booking Class -->
 #### Booking Class
-A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a 
+A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
 series of other commands associated with Booking are also created. A `Booking` object is created using the `checjIn`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
 
 <!-- Create Booking Class -->
 
 <!-- Find Booking feature -->
-#### Find Booking feature  
+#### Find Booking feature
 1.1 Find Booking: finds booking(s) with the following parameters:
 `findBooking`
-FindBooking features will be used in different senarios: 
+FindBooking features will be used in different senarios:
 
 1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
 is he/she checked into. The user can find the room besed on the customer Id, the start date and the end date of the
- booking
-                                                            
-2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For 
+ booking                                      
+2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For
 example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
 be provided. The user then can use the above information to find out about the booking id which is needed by
 other features.
@@ -201,14 +200,15 @@ This operation is exposed in the `Model` interface as `Model#addBooking()`.
 
 Given below is the example usage scenario:
 
-Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application
 memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
 
 Step 2. The user executes `checkIn pid/3641 rid/2105 sd/2020-12-25 ed/2020-12-28` command to check in the person, whose
 person ID is 3641, into the room that has a room ID of 2105. The person will be checked in to the room from the start
 date of 25th December 2020 to the end date of 28th December 2020. 
 
-Step 3. If the parameters entered by the user is valid, the application will create a new `booking` with its own unique booking ID that is stored in the `Model`. 
+Step 3. If the parameters entered by the user is valid, the application will create a new `booking` with its own unique
+booking ID that is stored in the `Model`. 
 This `booking` stores the information entered by the user. Else, ConciergeBook will give a display error message
 indicating which of the parameter(s) are invalid.
 
