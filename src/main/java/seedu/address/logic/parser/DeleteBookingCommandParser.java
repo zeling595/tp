@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import seedu.address.logic.commands.DeleteBookingCommand;
+import seedu.address.logic.commands.FindBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -16,12 +19,21 @@ public class DeleteBookingCommandParser implements Parser<DeleteBookingCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteBookingCommand parse(String args) throws ParseException {
-        try {
-            Integer bookingId = ParserUtil.parseBookingId(args);
-            return new DeleteBookingCommand(bookingId);
-        } catch (ParseException pe) {
+        requireNonNull(args);
+        String trimmedArgs = args.trim();
+
+        if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookingCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookingCommand.MESSAGE_USAGE));
+        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
+
+        if (argMultimap.getValue(PREFIX_BOOKING_ID).isPresent()) {
+            Integer bookingId = ParserUtil.parseBookingId(argMultimap.getValue(PREFIX_BOOKING_ID).get());
+            return new DeleteBookingCommand(bookingId);
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookingCommand.MESSAGE_USAGE));
         }
     }
 
