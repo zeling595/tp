@@ -133,7 +133,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.  
 
-#### Implementation
+
+<!-- Create Booking Class -->
+#### Booking Class
+A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a 
+series of other commands associated with Booking are also created. A `Booking` object is created using the `checjIn`
+feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
+
+<!-- Find Booking feature -->
+#### Find Booking feature  
+1.1 Find Booking: finds booking(s) with the following parameters:
+`findBooking`
+
+1. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For 
+example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
+be provided. The user then can use the above information to find out about the bookingId of the Booking. And the Booking
+Id will be used for other commands.
+
+
+Given below is the example usage scenario:
+Step 1: As the user launch the App, the Booking book will load the data from memory.
+
+Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
+associated with person 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+update the filteredList in the model so that the user can view the complete information about the booking(s), which 
+include the room id and isActive state associated with this booking. 
+
+Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking which meet the parameters is found, the filteredList will be empty hence no
+booking will be displayed.
+
+#### Design consideration:
+Aspect: which parameters should be allowed to use in find Booking?
+- Alternative 1 (current choice): roomId, personId, startDate, endDate, and isActive state
+    - Pros: Easy to implement.
+    - Cons: Not as convenient as the user would have to search up for the personId first
+- Alternative 2: person's name or phone number
+    - Pros: More user-friendly as the user only need to key in information once
+    - Cons: There are more senarios involved for one feature. When a booking cannot found, it could be because there is
+    no person information matches up with the given details (the person is not registered in datebase), or due to all
+    fields provided by the customer is wrong.
 
 <!-- Check In feature -->
 
