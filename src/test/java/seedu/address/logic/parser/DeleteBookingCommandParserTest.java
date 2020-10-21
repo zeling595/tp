@@ -21,12 +21,12 @@ public class DeleteBookingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteBookingCommand(1));
+        assertParseSuccess(parser, " bid/1", new DeleteBookingCommand(1));
     }
 
     @Test
     public void parse_validArgsWithWhitespaces_returnsDeleteCommand() {
-        assertParseSuccess(parser, " \t 1 \t", new DeleteBookingCommand(1));
+        assertParseSuccess(parser, " \t bid/ 1 \t", new DeleteBookingCommand(1));
     }
 
     @Test
