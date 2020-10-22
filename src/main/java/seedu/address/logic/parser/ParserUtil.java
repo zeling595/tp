@@ -147,6 +147,7 @@ public class ParserUtil {
         requireNonNull(id);
         // trim used for deleteBooking
         String trimmedId = id.trim();
+
         try {
             return Integer.parseInt(trimmedId);
         } catch (NumberFormatException e) {

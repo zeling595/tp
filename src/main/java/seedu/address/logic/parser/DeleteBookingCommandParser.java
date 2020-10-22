@@ -26,6 +26,9 @@ public class DeleteBookingCommandParser implements Parser<DeleteBookingCommand> 
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookingCommand.MESSAGE_USAGE));
         }
+
+        assert !trimmedArgs.isEmpty();
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
 
         if (argMultimap.getValue(PREFIX_BOOKING_ID).isPresent()) {

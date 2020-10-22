@@ -31,6 +31,7 @@ public class DeleteBookingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        assert bookingId > 0;
         if (!model.hasBookingWithId(bookingId)) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_ID);
         }
