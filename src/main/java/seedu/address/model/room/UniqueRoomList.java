@@ -72,7 +72,7 @@ public class UniqueRoomList implements Iterable<Room> {
     public void setRooms(List<Room> rooms) {
         requireAllNonNull(rooms);
         if (!roomsAreUnique(rooms)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateRoomException();
         }
 
         internalRoomList.setAll(rooms);

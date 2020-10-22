@@ -26,7 +26,7 @@ public class TypicalBookings {
             false, 2);
     public static final Booking BOOKING_3 = new Booking(2105, 3, STARTDATE_2, ENDDATE_2,
             false, 3);
-    public static final Booking BOOKING_4 = new Booking(2106, 4, STARTDATE_2, ENDDATE_2,
+    public static final Booking BOOKING_4 = new Booking(2115, 4, STARTDATE_2, ENDDATE_2,
             false, 4);
     public static final Booking BOOKING_5 = new Booking(2104, 5, STARTDATE_3, ENDDATE_3,
             false, 5);
