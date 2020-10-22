@@ -187,21 +187,25 @@ public class ModelManager implements Model {
 
     @Override
     public String displayRooms(ObservableList<Integer> rooms) {
+        logger.info("=============================[ Displaying All Rooms ]===========================");
         return this.roomBook.displayRooms(rooms);
     }
 
     @Override
     public String displaySingleRooms(ObservableList<Integer> rooms) {
+        logger.info("=============================[ Displaying Single Rooms ]===========================");
         return this.roomBook.getSingleRooms(rooms);
     }
 
     @Override
     public String displayDoubleRooms(ObservableList<Integer> rooms) {
+        logger.info("=============================[ Displaying Double Rooms ]===========================");
         return this.roomBook.getDoubleRooms(rooms);
     }
 
     @Override
     public String displaySuiteRooms(ObservableList<Integer> rooms) {
+        logger.info("=============================[ Displaying Suite Rooms ]===========================");
         return this.roomBook.getSuiteRooms(rooms);
     }
 

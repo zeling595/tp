@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -16,6 +19,7 @@ public class FilterRoomCommand extends Command {
             + "Example: " + COMMAND_WORD + " typ/2 sd/2020-11-12 ed/2020-11-15";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
     public static final String MESSAGE_SUCCESS = "Successfully filtered available rooms: \n%s";
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -33,6 +37,7 @@ public class FilterRoomCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert roomType >= 0 && roomType <= 3;
+        logger.info("=============================[ Executing filterRoom ]===========================");
         ObservableList<Integer> unavailableRooms = model.getUnavailableRooms(startDate, endDate);
         ObservableList<Integer> availableRooms = model.getAvailableRooms(unavailableRooms);
         String result = "";
