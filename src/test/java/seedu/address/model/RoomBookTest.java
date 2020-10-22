@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRooms.ROOM_1;
+import static seedu.address.testutil.TypicalRooms.SINGLE_1;
 
 import java.util.Collections;
 
@@ -21,13 +21,13 @@ public class RoomBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(roomBook.hasRoom(ROOM_1.getRoomID()));
+        assertFalse(roomBook.hasRoom(SINGLE_1.getRoomID()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        roomBook.addRoom(ROOM_1);
-        assertTrue(roomBook.hasRoom(ROOM_1.getRoomID()));
+        roomBook.addRoom(SINGLE_1);
+        assertTrue(roomBook.hasRoom(SINGLE_1.getRoomID()));
     }
 
     @Test

@@ -29,19 +29,33 @@ public class FilterRoomCommandTest {
     public void execute_success() throws CommandException {
         LocalDate startDate = LocalDate.of(2020, 10, 15);
         LocalDate endDate = LocalDate.of(2020, 10, 22);
-        int roomType = 1;
-        FilterRoomCommand command = new FilterRoomCommand(startDate, endDate, roomType);
-        ArrayList<Integer> expectedRoomId = new ArrayList<>();
-        expectedRoomId.add(2104);
-        expectedRoomId.add(2105);
-        expectedRoomId.add(2106);
-        expectedRoomId.add(2107);
-        expectedRoomId.add(2108);
-        expectedRoomId.add(2109);
-        String expectedOutput = model.displaySingleRooms(FXCollections.observableArrayList(expectedRoomId));
 
-        assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput),
-                command.execute(model).getFeedbackToUser());
+        // Single Rooms
+        int roomType1 = 1;
+        FilterRoomCommand command1 = new FilterRoomCommand(startDate, endDate, roomType1);
+        ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
+        expectedRoomId1.add(2104);
+        expectedRoomId1.add(2105);
+        expectedRoomId1.add(2106);
+        expectedRoomId1.add(2107);
+        expectedRoomId1.add(2108);
+        String expectedOutput1 = model.displaySingleRooms(FXCollections.observableArrayList(expectedRoomId1));
+
+        assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput1),
+                command1.execute(model).getFeedbackToUser());
+
+        // Double Rooms
+        int roomType2 = 2;
+        FilterRoomCommand command2 = new FilterRoomCommand(startDate, endDate, roomType2);
+        ArrayList<Integer> expectedRoomId2 = new ArrayList<>();
+        expectedRoomId2.add(2113);
+        expectedRoomId2.add(2114);
+        expectedRoomId2.add(2115);
+        expectedRoomId2.add(2116);
+        expectedRoomId2.add(2117);
+        String expectedOutput2 = model.displayDoubleRooms(FXCollections.observableArrayList(expectedRoomId2));
+        assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput2),
+                command2.execute(model).getFeedbackToUser());
     }
 
     @Test

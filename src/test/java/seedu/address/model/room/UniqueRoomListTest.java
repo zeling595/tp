@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOM;
 import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOMID;
-import static seedu.address.testutil.TypicalRooms.ROOM_1;
-import static seedu.address.testutil.TypicalRooms.ROOM_2;
-import static seedu.address.testutil.TypicalRooms.ROOM_3;
-import static seedu.address.testutil.TypicalRooms.ROOM_4;
-import static seedu.address.testutil.TypicalRooms.ROOM_5;
-import static seedu.address.testutil.TypicalRooms.ROOM_6;
+import static seedu.address.testutil.TypicalRooms.DOUBLE_1;
+import static seedu.address.testutil.TypicalRooms.DOUBLE_2;
+import static seedu.address.testutil.TypicalRooms.SINGLE_1;
+import static seedu.address.testutil.TypicalRooms.SINGLE_2;
+import static seedu.address.testutil.TypicalRooms.SUITE_1;
+import static seedu.address.testutil.TypicalRooms.SUITE_2;
 
 import java.util.List;
 
@@ -48,24 +48,18 @@ public class UniqueRoomListTest {
 
     @Test
     public void getComplementRooms_returnsCorrectList() {
-        List<Room> rooms = FXCollections.observableArrayList(ROOM_1, ROOM_2, ROOM_3, ROOM_4, ROOM_5, ROOM_6);
+        List<Room> rooms = FXCollections.observableArrayList(SINGLE_1, SINGLE_2, DOUBLE_1, DOUBLE_2, SUITE_1, SUITE_2);
         uniqueRoomList.setRooms(rooms);
-        List<Integer> roomId = FXCollections.observableArrayList(ROOM_1.getRoomID(),
-                                                                    ROOM_2.getRoomID(),
-                                                                    ROOM_3.getRoomID(),
-                                                                    ROOM_4.getRoomID(),
-                                                                    ROOM_5.getRoomID(),
-                                                                    ROOM_6.getRoomID());
-        ObservableList<Integer> input = FXCollections.observableArrayList(ROOM_1.getRoomID(),
-                                                                            ROOM_3.getRoomID(),
-                                                                            ROOM_6.getRoomID());
+        ObservableList<Integer> input = FXCollections.observableArrayList(SINGLE_1.getRoomID(),
+                                                                            DOUBLE_1.getRoomID(),
+                                                                            SUITE_1.getRoomID());
         List<Integer> output = uniqueRoomList.getComplementRooms(input);
-        assertTrue(output.contains(ROOM_2.getRoomID())
-                            && output.contains(ROOM_4.getRoomID())
-                            && output.contains(ROOM_5.getRoomID())
-                            && !output.contains(ROOM_1.getRoomID())
-                            && !output.contains(ROOM_3.getRoomID())
-                            && !output.contains(ROOM_6.getRoomID()));
+        assertTrue(output.contains(SINGLE_2.getRoomID())
+                            && output.contains(DOUBLE_2.getRoomID())
+                            && output.contains(SUITE_2.getRoomID())
+                            && !output.contains(SINGLE_1.getRoomID())
+                            && !output.contains(DOUBLE_1.getRoomID())
+                            && !output.contains(SUITE_1.getRoomID()));
     }
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {

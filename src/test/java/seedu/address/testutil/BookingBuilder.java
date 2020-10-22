@@ -7,7 +7,7 @@ import seedu.address.model.booking.Booking;
 public class BookingBuilder {
 
     public static final Integer DEFAULT_ID = 1;
-    public static final Integer DEFAULT_ROOM_ID = 1001;
+    public static final Integer DEFAULT_ROOM_ID = 2103;
     public static final Integer DEFAULT_PERSON_ID = 1;
     public static final LocalDate DEFAULT_START_DATE = LocalDate.of(2020, 10, 20);
     public static final LocalDate DEFAULT_END_DATE = LocalDate.of(2020, 10, 25);
