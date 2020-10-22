@@ -81,7 +81,7 @@ public class MainApp extends Application {
     private ReadOnlyRoomBook initRooms() {
         logger.info("=============================[ Initializing roomData ]===========================");
         RoomBook ret = new RoomBook();
-        final List<Room> roomData = IntStream.rangeClosed(2103, 2133)
+        final List<Room> roomData = IntStream.rangeClosed(2103, 2132)
                                                 .mapToObj(x -> initRoomsHelper(x))
                                                 .collect(Collectors.toList());
 
