@@ -22,12 +22,12 @@ public class UniqueRoomList implements Iterable<Room> {
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(int roomId) {
-        assert !internalRoomList.isEmpty();
+        assert roomId >= 2103 && roomId < 2133;
         return internalRoomList.stream().anyMatch(n -> n.getRoomID() == (roomId));
     }
 
     public Room getRoom(int roomId) {
-        assert !internalRoomList.isEmpty();
+        assert roomId >= 2103 && roomId < 2133;
         Room ret = new Single(-1);
         for (int k = 0; k < internalRoomList.size(); k++) {
             Room curr = internalRoomList.get(k); // get the roomID
@@ -60,7 +60,6 @@ public class UniqueRoomList implements Iterable<Room> {
      * The room must not already exist in the list.
      */
     public void add(Room toAdd) {
-        assert !internalRoomList.isEmpty();
         requireNonNull(toAdd);
         if (internalRoomList.contains(toAdd)) {
             throw new DuplicateRoomException();
@@ -73,7 +72,6 @@ public class UniqueRoomList implements Iterable<Room> {
      * {@code persons} must not contain duplicate persons.
      */
     public void setRooms(List<Room> rooms) {
-        assert !internalRoomList.isEmpty();
         requireAllNonNull(rooms);
         if (!roomsAreUnique(rooms)) {
             throw new DuplicateRoomException();
