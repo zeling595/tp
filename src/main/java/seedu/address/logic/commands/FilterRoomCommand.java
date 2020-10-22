@@ -32,6 +32,7 @@ public class FilterRoomCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert roomType >= 0 && roomType <= 3;
         ObservableList<Integer> unavailableRooms = model.getUnavailableRooms(startDate, endDate);
         ObservableList<Integer> availableRooms = model.getAvailableRooms(unavailableRooms);
         String result = "";

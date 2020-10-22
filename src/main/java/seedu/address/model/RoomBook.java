@@ -37,6 +37,7 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     public void setRooms(List<Room> rooms) {
+        assert !rooms.isEmpty();
         this.rooms.setRooms(rooms);
     }
 
