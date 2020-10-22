@@ -40,6 +40,7 @@ public class ModelManager implements Model {
                         ReadOnlyRoomServiceBook roomServiceBook) {
         super();
         requireAllNonNull(addressBook, userPrefs);
+        assert false;
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
