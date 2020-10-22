@@ -24,6 +24,7 @@ public class DeleteBookingCommand extends Command {
     private final Integer bookingId;
 
     public DeleteBookingCommand(Integer bookingId) {
+        assert bookingId > 0;
         this.bookingId = bookingId;
     }
 
