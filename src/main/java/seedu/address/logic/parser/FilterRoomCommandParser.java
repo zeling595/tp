@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.FilterRoomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -16,13 +19,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new {@code FilterRoomCommand} object
  */
 public class FilterRoomCommandParser implements Parser<FilterRoomCommand> {
-
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     /**
      * Parses the given {@code String} of arguments in the context of the {@code FilterRoomCommand}
      * and returns a {@code FilterRoomCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterRoomCommand parse(String args) throws ParseException {
+        logger.info("=============================[ Parsing filterRoom ]===========================");
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_START_DATE, PREFIX_END_DATE,
                 PREFIX_ROOM_TYPE);
