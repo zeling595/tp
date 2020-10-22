@@ -129,7 +129,6 @@ public class ParserUtil {
         requireNonNull(id);
         try {
             int roomId = Integer.parseInt(id);
-            assert roomId > 999;
             return roomId;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_ROOM_ID);
