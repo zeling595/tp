@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOM;
 import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOMID;
-import static seedu.address.testutil.TypicalRooms.SINGLE_1;
-import static seedu.address.testutil.TypicalRooms.SINGLE_2;
 import static seedu.address.testutil.TypicalRooms.DOUBLE_1;
 import static seedu.address.testutil.TypicalRooms.DOUBLE_2;
+import static seedu.address.testutil.TypicalRooms.SINGLE_1;
+import static seedu.address.testutil.TypicalRooms.SINGLE_2;
 import static seedu.address.testutil.TypicalRooms.SUITE_1;
 import static seedu.address.testutil.TypicalRooms.SUITE_2;
 
@@ -50,12 +50,6 @@ public class UniqueRoomListTest {
     public void getComplementRooms_returnsCorrectList() {
         List<Room> rooms = FXCollections.observableArrayList(SINGLE_1, SINGLE_2, DOUBLE_1, DOUBLE_2, SUITE_1, SUITE_2);
         uniqueRoomList.setRooms(rooms);
-//        List<Integer> roomId = FXCollections.observableArrayList(SINGLE_1.getRoomID(),
-//                                                                    SINGLE_2.getRoomID(),
-//                                                                    DOUBLE_1.getRoomID(),
-//                                                                    DOUBLE_2.getRoomID(),
-//                                                                    SUITE_1.getRoomID(),
-//                                                                    SUITE_2.getRoomID());
         ObservableList<Integer> input = FXCollections.observableArrayList(SINGLE_1.getRoomID(),
                                                                             DOUBLE_1.getRoomID(),
                                                                             SUITE_1.getRoomID());

@@ -3,16 +3,13 @@ package seedu.address.model.room;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOM;
-import static seedu.address.testutil.TypicalRooms.SINGLE_1;
 import static seedu.address.testutil.TypicalRooms.DOUBLE_1;
+import static seedu.address.testutil.TypicalRooms.SINGLE_1;
 import static seedu.address.testutil.TypicalRooms.SUITE_1;
 
 import org.junit.jupiter.api.Test;
 
-import org.w3c.dom.DOMErrorHandler;
 import seedu.address.testutil.RoomBuilder;
-
-import java.security.Signature;
 
 public class RoomTest {
 

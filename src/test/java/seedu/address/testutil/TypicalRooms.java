@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.RoomBook;
-import seedu.address.model.room.Room;
 import seedu.address.model.room.Double;
+import seedu.address.model.room.Room;
 import seedu.address.model.room.Single;
 import seedu.address.model.room.Suite;
 
