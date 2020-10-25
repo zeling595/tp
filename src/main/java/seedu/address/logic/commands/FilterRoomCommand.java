@@ -9,14 +9,19 @@ import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+import static seedu.address.logic.parser.CliSyntax.*;
+
 public class FilterRoomCommand extends Command {
     public static final String COMMAND_WORD = "filterRoom";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters rooms that are of the indicated room type "
             + "(if applicable) and are not occupied within the start and end date. \n"
-            + "To filter single rooms, input 1 as the parameter for typ/ \n"
+            + "typ/1 filters single rooms; typ/2 filters double rooms; typ/3 filters suite rooms. "
+            + "Dates should be in the format YYYY-MM-DD. \n"
             + "Parameters: "
-            + "sd/ [STARTDATE] ed/ [ENDDATE] typ/ [ROOMTYPE] (optional) \n"
-            + "Example: " + COMMAND_WORD + " typ/2 sd/2020-11-12 ed/2020-11-15";
+            + PREFIX_START_DATE + "START_DATE "
+            + PREFIX_END_DATE + "END_DATE "
+            + "[" + PREFIX_ROOM_TYPE + "ROOM TYPE] (must be valid room type) \n"
+            + "Example: " + COMMAND_WORD + " sd/2020-11-12 ed/2020-11-15 typ/2";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
     public static final String MESSAGE_SUCCESS = "Successfully filtered available rooms: \n%s";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
@@ -40,6 +45,7 @@ public class FilterRoomCommand extends Command {
         logger.info("=============================[ Executing filterRoom ]===========================");
         ObservableList<Integer> unavailableRooms = model.getUnavailableRooms(startDate, endDate);
         ObservableList<Integer> availableRooms = model.getAvailableRooms(unavailableRooms);
+
         String result = "";
         if (this.roomType == 0) {
             result = model.displayRooms(availableRooms);
