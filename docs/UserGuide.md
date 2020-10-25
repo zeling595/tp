@@ -24,7 +24,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`listBooking`** : Lists all bookings.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -60,7 +60,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -183,20 +183,25 @@ Examples:
 * checkOut 2103 checks out the guest who stays in room 2103.
 
 
-### Listing hotel rooms: `listRoom`
-Lists the hotel rooms with some optional filters.
+### Filtering hotel rooms: `filterRoom`
+Filters the hotel rooms with some optional filters.
 
-Format: `listRoom [sd/START_DATE] [ed/END_DATE] [rt/ROOM_TYPE]`
+Format: `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`
 
-* Lists all the hotel rooms if none of the arguments are provided.
-* Both START_DATE and END_DATE have to be provided to list all the hotel rooms that are available from the START_DATE to END_DATE.
-* Dates have to be in the format YYYY-MM-DD
-* An optional ROOM_TYPE can be provided to filter the list based on the hotel room’s type.
+* Both `START_DATE` and `END_DATE` have to be provided to list all the hotel rooms that are available within those dates.
+* Dates have to be in the format `YYYY-MM-DD`
+* An optional `ROOM_TYPE` can be provided to filter the list based on the hotel room’s type. Only 1, 2, and 3 are accepted 
+as parameters. 1 indicates Single Rooms, 2 indicates Double Rooms, 3 indicates Suite Rooms. 
 
 Examples:
-* listRoom sd/2020-09-14 ed/2020-09-17 lists all the hotel rooms which are available from Sept 14 2020 to Sept 17 2020.
-* listRoom rt/single lists all the hotel rooms of single type.
+* `filterRoom sd/2020-09-14 ed/2020-09-17` filters all the hotel rooms which are available from Sept 14 2020 to Sept 17 2020.
+* `filterRoom sd/2020-11-09 ed/2020-11-15 typ/2` filters all double rooms which are available from Nov 9 2020 to Nov 15 2020.
 
+### Listing hotel rooms: `listRoom`
+
+Shows a list of all rooms in the room book.
+
+Format: `listRoom`
 
 ### Listing bookings: `listBooking`
 Lists the bookings with some optional filters.
@@ -250,7 +255,8 @@ Action | Format, Examples
 **List Person** | `listPerson`
 **Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
 **Check Out** | `checkOut ROOM_ID`
-**list Room** | `listRoom sd/START_DATE ed/END_DATE rt/ROOM_TYPE`<br> e.g., `listRoom sd/2020-09-14 ed/2020-09-17`
+**Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
+**List Room** | `listRoom`
 **list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 
