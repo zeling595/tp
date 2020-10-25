@@ -30,10 +30,17 @@ public class BookingListPanel extends UiPart<Region> {
     public BookingListPanel(ObservableList<Booking> bookingList) {
         super(FXML);
         masterData = bookingList;
+
         SortedList<Booking> sortedData = new SortedList<>(masterData, new Comparator<Booking>() {
             @Override
             public int compare(Booking o1, Booking o2) {
-                return o2.getStartDate().compareTo(o1.getStartDate());
+                if (o1.isActive() && !o2.isActive()) {
+                    return -1;
+                } else if (o2.isActive() && !o1.isActive()) {
+                    return 1;
+                } else {
+                    return o2.getStartDate().compareTo(o1.getStartDate());
+                }
             }
         });
         bookingListView.setItems(sortedData);
