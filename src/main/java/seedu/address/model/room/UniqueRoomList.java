@@ -1,23 +1,23 @@
 package seedu.address.model.room;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.room.exceptions.DuplicateRoomException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.room.exceptions.DuplicateRoomException;
 
 public class UniqueRoomList implements Iterable<Room> {
 
+    public static final Room EMPTY_ROOM = new Single(-1);
     private final ObservableList<Room> internalRoomList = FXCollections.observableArrayList();
     private final ObservableList<Room> internalUnmodifiableRoomList =
             FXCollections.unmodifiableObservableList(internalRoomList);
-    public static final Room EMPTY_ROOM = new Single(-1);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.

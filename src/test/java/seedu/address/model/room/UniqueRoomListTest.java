@@ -1,18 +1,18 @@
 package seedu.address.model.room;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.room.exceptions.DuplicateRoomException;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalRooms.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRooms.*;
+import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.room.exceptions.DuplicateRoomException;
 
 public class UniqueRoomListTest {
 
@@ -73,7 +73,6 @@ public class UniqueRoomListTest {
         List<Room> listWithDuplicateRooms = Arrays.asList(SINGLE_1, SINGLE_1);
         assertThrows(DuplicateRoomException.class, () -> uniqueRoomList.setRooms(listWithDuplicateRooms));
     }
-    
     @Test
     public void get_roomNotInList_returnsEmptyRoom() {
         assertEquals(UniqueRoomList.EMPTY_ROOM, uniqueRoomList.getRoom(DEFAULT_ROOMID));

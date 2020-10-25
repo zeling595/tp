@@ -17,10 +17,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
@@ -172,8 +172,8 @@ public class UniqueBookingListTest {
 
     @Test
     public void getUnavailableRooms_success() {
-        LocalDate sd = LocalDate.of(LocalDate.now().getYear()+1, 12, 9);
-        LocalDate ed = LocalDate.of(LocalDate.now().getYear()+1, 12, 14);
+        LocalDate sd = LocalDate.of(LocalDate.now().getYear() + 1, 12, 9);
+        LocalDate ed = LocalDate.of(LocalDate.now().getYear() + 1, 12, 14);
         uniqueBookingList.add(new BookingBuilder(BOOKING_AMY).withIsActive(true).build());
         uniqueBookingList.add(new BookingBuilder(BOOKING_BOB).withIsActive(true).build());
         ObservableList<Integer> expectedOutput = FXCollections.observableArrayList(2104);

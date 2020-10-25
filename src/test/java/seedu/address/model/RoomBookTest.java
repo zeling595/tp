@@ -1,21 +1,22 @@
 package seedu.address.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.room.Room;
-import seedu.address.model.room.UniqueRoomList;
-import seedu.address.model.room.exceptions.DuplicateRoomException;
-import seedu.address.testutil.RoomBuilder;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalRooms.*;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRooms.*;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.room.Room;
+import seedu.address.model.room.UniqueRoomList;
+import seedu.address.model.room.exceptions.DuplicateRoomException;
+import seedu.address.testutil.RoomBuilder;
 
 public class RoomBookTest {
 
@@ -68,7 +69,7 @@ public class RoomBookTest {
     }
 
     @Test
-    public void hasRoom_roomWithSameIDPrice_returnsTrue() {
+    public void hasRoom_roomWithSameIdPrice_returnsTrue() {
         roomBook.addRoom(DOUBLE_1);
         Room editedDouble1 = new RoomBuilder(SINGLE_1)
                 .withRoomID(DOUBLE_1.getRoomID())
