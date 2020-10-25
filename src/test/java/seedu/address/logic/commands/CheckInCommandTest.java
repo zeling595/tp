@@ -58,7 +58,7 @@ public class CheckInCommandTest {
         // stub
         // when i create a new booking on line 42, my booking ID++
         // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
-        final int testBookingId = 7;
+        final int testBookingId = 8;
 
         Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
                 VALID_START_DATE_GENE, VALID_END_DATE_GENE, true, testBookingId);

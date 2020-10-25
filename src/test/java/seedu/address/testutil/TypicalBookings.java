@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.*;
 
+import java.security.PublicKey;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,9 @@ public class TypicalBookings {
     public static final LocalDate STARTDATE_3 = LocalDate.of(2020, 10, 26);
     public static final LocalDate ENDDATE_3 = LocalDate.of(2020, 10, 27);
 
+    public static final LocalDate EDITED_ENDDATE_1 = LocalDate.of(2020, 10, 24);
+    public static final LocalDate START_DATE_AFTER_END_DATE_1 = STARTDATE_1.plusMonths(1);
+
     public static final Booking BOOKING_1 = new Booking(2103, 1, STARTDATE_1, ENDDATE_1,
             false, 1);
     public static final Booking BOOKING_2 = new Booking(2104, 2, STARTDATE_1, ENDDATE_1,
@@ -32,8 +36,14 @@ public class TypicalBookings {
             false, 5);
     public static final Booking BOOKING_6 = new Booking(2103, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
+    public static final Booking BOOKING_7_SAME_PID_AS_1 = new Booking(2108, 1, STARTDATE_2, ENDDATE_2,
+            false, 7);
 
+    public static final Integer EDITED_ROOM_ID_1 = 2106;
+    public static final Integer CONFLICT_ROOM_ID_1 = 2104;
+    public static final Integer DUPLICATE_ROOM_ID_1 = 2103;
     public static final Integer BOOKING_ID_1 = 1;
+    public static final Integer BOOKING_ID_7 = 7;
     public static final Integer INVALID_BOOKING_ID = 100;
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -61,7 +71,7 @@ public class TypicalBookings {
     }
 
     public static List<Booking> getTypicalBookings() {
-        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6));
+        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6, BOOKING_7_SAME_PID_AS_1));
     }
 
 }

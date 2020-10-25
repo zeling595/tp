@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -38,6 +39,7 @@ public class EditBookingCommand extends Command {
     public static final String MESSAGE_CONFLICTING_BOOKING =
             "This booking conflicts with another booking in the booking book.";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
+    public static final String MESSAGE_START_DATE_NOT_BEFORE_END_DATE = "Start Date must be before End Date!";
 
     private final Integer bookingId;
     private final EditBookingCommand.EditBookingDescriptor editBookingDescriptor;
@@ -59,6 +61,7 @@ public class EditBookingCommand extends Command {
         assert bookingId >= 0;
         requireNonNull(model);
 
+        // invalid booking id
         if (!model.hasBookingWithId(bookingId)) {
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
@@ -66,8 +69,13 @@ public class EditBookingCommand extends Command {
         Booking bookingToEdit = model.getBookingWithId(bookingId);
         Booking editedBooking = createEditedBooking(bookingToEdit, editBookingDescriptor);
 
+        // start date after end date
+        if (!editedBooking.getStartDate().isBefore(editedBooking.getEndDate())) {
+            throw new CommandException(MESSAGE_START_DATE_NOT_BEFORE_END_DATE);
+        }
+
         // duplicate booking
-        if (!bookingToEdit.equals(editedBooking) && model.hasBooking(editedBooking)) {
+        if (!bookingToEdit.isSameBooking(editedBooking) && model.hasBooking(editedBooking)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
         }
 
@@ -80,7 +88,8 @@ public class EditBookingCommand extends Command {
 
         model.setBooking(bookingToEdit, editedBooking);
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking),
+                false, false, false, true);
     }
 
     @Override

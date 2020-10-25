@@ -5,13 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBookings.BOOKING_1;
-import static seedu.address.testutil.TypicalBookings.BOOKING_2;
-import static seedu.address.testutil.TypicalBookings.BOOKING_3;
-import static seedu.address.testutil.TypicalBookings.BOOKING_4;
-import static seedu.address.testutil.TypicalBookings.BOOKING_5;
-import static seedu.address.testutil.TypicalBookings.BOOKING_6;
-import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
+import static seedu.address.testutil.TypicalBookings.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
@@ -93,12 +87,12 @@ public class FindBookingCommandTest {
 
     @Test
     public void execute_oneIsActivePredicate_multipleBookingFound() {
-        String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 6);
+        String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 7);
         BookingMatchesIsActivePredicate predicate = prepareIsActivePredicate("ac/false");
         FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
         expectedModel.updateFilteredBookingList(new BookingMatchesIsActivePredicate(false));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6),
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6, BOOKING_7_SAME_PID_AS_1),
                 model.getFilteredBookingList());
     }
 

@@ -67,7 +67,7 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
+    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-13",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));

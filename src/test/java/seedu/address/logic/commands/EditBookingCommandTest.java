@@ -9,17 +9,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.EditBookingCommand.MESSAGE_BOOKING_MISSING;
-import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
-import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
-import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
+import static seedu.address.logic.commands.EditBookingCommand.*;
+import static seedu.address.testutil.TypicalBookings.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.BookingBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
 import seedu.address.testutil.BookingBuilder;
 import seedu.address.testutil.EditBookingDescriptorBuilder;
@@ -30,7 +32,8 @@ public class EditBookingCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Booking editedBooking = new BookingBuilder().build();
+        Booking editedBooking = new BookingBuilder().withRoomId(VALID_ROOM_ID_BOB).withStartDate(VALID_START_DATE_BOB)
+                .withEndDate(VALID_END_DATE_BOB).build();
         EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder(editedBooking).build();
         EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
 
@@ -49,10 +52,10 @@ public class EditBookingCommandTest {
         Booking firstBooking = model.getBookingWithId(BOOKING_ID_1);
 
         BookingBuilder bookingInList = new BookingBuilder(firstBooking);
-        Booking editedBooking = bookingInList.withRoomId(VALID_ROOM_ID_BOB).withStartDate(VALID_START_DATE_BOB).build();
+        Booking editedBooking = bookingInList.withRoomId(EDITED_ROOM_ID_1).withEndDate(EDITED_ENDDATE_1).build();
 
         EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
-                .withRoomId(VALID_ROOM_ID_BOB).withStartDate(VALID_START_DATE_BOB).build();
+                .withRoomId(EDITED_ROOM_ID_1).withEndDate(EDITED_ENDDATE_1).build();
         EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
 
         String expectedMessage = String.format(EditBookingCommand.MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking);
@@ -100,6 +103,7 @@ public class EditBookingCommandTest {
         assertCommandSuccess(editBookingCommand, model, expectedMessage, expectedModel);
     }
 
+
     @Test
     public void execute_invalidBookingIndexUnfilteredList_failure() {
         EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
@@ -107,6 +111,33 @@ public class EditBookingCommandTest {
         EditBookingCommand editBookingCommand = new EditBookingCommand(INVALID_BOOKING_ID, descriptor);
 
         assertCommandFailure(editBookingCommand, model, MESSAGE_BOOKING_MISSING);
+    }
+
+    @Test
+    public void execute_startDateAfterEndDate_failure() {
+        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
+                .withStartDate(START_DATE_AFTER_END_DATE_1).build();
+        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
+
+        assertCommandFailure(editBookingCommand, model, MESSAGE_START_DATE_NOT_BEFORE_END_DATE);
+    }
+
+    @Test
+    public void execute_ConflictingBooking_failure() {
+        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
+                .withRoomId(CONFLICT_ROOM_ID_1).build();
+        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
+
+        assertCommandFailure(editBookingCommand, model, MESSAGE_CONFLICTING_BOOKING);
+    }
+
+    @Test
+    public void execute_DuplicateBooking_failure() {
+        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
+                .withRoomId(DUPLICATE_ROOM_ID_1).withStartDate(STARTDATE_1).withEndDate(ENDDATE_1).build();
+        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_7, descriptor);
+
+        assertCommandFailure(editBookingCommand, model, MESSAGE_DUPLICATE_BOOKING);
     }
 
     @Test
