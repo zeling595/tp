@@ -215,7 +215,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Room getRoom(int roomId) {
+    public Room getRoom(Integer roomId) {
         return this.roomBook.getRoom(roomId);
     }
 
@@ -270,6 +270,7 @@ public class ModelManager implements Model {
     public void setBooking(Booking target, Booking editedBooking) {
         this.bookingBook.setBooking(target, editedBooking);
     }
+
     @Override
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return this.bookingBook.getUnavailableRooms(startDate, endDate);

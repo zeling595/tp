@@ -78,7 +78,7 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     /// room level operations
-    public boolean hasRoom(int roomId) {
+    public boolean hasRoom(Integer roomId) {
         return rooms.contains(roomId);
     }
 
