@@ -116,7 +116,7 @@ public class UniqueBookingList implements Iterable<Booking> {
             throw new BookingNotFoundException();
         }
 
-        if (!target.equals(editedBooking) && contains(editedBooking)) {
+        if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
             throw new DuplicateBookingException();
         }
 

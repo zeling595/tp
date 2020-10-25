@@ -9,12 +9,17 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.ConflictingBookingException;
+import seedu.address.model.booking.exception.DuplicateBookingException;
 
 public class EditBookingCommand extends Command {
     public static final String COMMAND_WORD = "editBooking";
@@ -44,6 +49,8 @@ public class EditBookingCommand extends Command {
     private final Integer bookingId;
     private final EditBookingCommand.EditBookingDescriptor editBookingDescriptor;
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
     /**
      * @param bookingId of the booking in the filtered booking list to edit
      * @param editBookingDescriptor details to edit the booking with
@@ -60,9 +67,11 @@ public class EditBookingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         assert bookingId >= 0;
         requireNonNull(model);
+        logger.info("=============================[ Executing editBooking ]===========================");
 
         // invalid booking id
         if (!model.hasBookingWithId(bookingId)) {
+            logger.log(Level.WARNING, "invalid booking ID");
             throw new CommandException(MESSAGE_BOOKING_MISSING);
         }
 
@@ -71,23 +80,22 @@ public class EditBookingCommand extends Command {
 
         // start date after end date
         if (!editedBooking.getStartDate().isBefore(editedBooking.getEndDate())) {
+            logger.log(Level.WARNING, "start date after end date");
             throw new CommandException(MESSAGE_START_DATE_NOT_BEFORE_END_DATE);
         }
 
-        // duplicate booking
-        if (!bookingToEdit.isSameBooking(editedBooking) && model.hasBooking(editedBooking)) {
+        try {
+            model.setBooking(bookingToEdit, editedBooking);
+        } catch (ConflictingBookingException ce) {
+            logger.log(Level.WARNING, "conflicting booking");
+            throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
+        } catch (DuplicateBookingException de) {
+            logger.log(Level.WARNING, "duplicated booking");
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
         }
 
-        // conflicting booking
-        boolean hasConflict = false;
-        hasConflict = model.getFilteredBookingList().stream().anyMatch(booking -> editedBooking.hasConflict(booking));
-        if (!bookingToEdit.equals(editedBooking) && hasConflict) {
-            throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
-        }
-
-        model.setBooking(bookingToEdit, editedBooking);
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
+        logger.info("=============================[ editBooking success ]===========================");
         return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking),
                 false, false, false, true);
     }

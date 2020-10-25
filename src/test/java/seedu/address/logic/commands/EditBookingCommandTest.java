@@ -123,24 +123,6 @@ public class EditBookingCommandTest {
     }
 
     @Test
-    public void execute_ConflictingBooking_failure() {
-        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
-                .withRoomId(CONFLICT_ROOM_ID_1).build();
-        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
-
-        assertCommandFailure(editBookingCommand, model, MESSAGE_CONFLICTING_BOOKING);
-    }
-
-    @Test
-    public void execute_DuplicateBooking_failure() {
-        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
-                .withRoomId(DUPLICATE_ROOM_ID_1).withStartDate(STARTDATE_1).withEndDate(ENDDATE_1).build();
-        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_7, descriptor);
-
-        assertCommandFailure(editBookingCommand, model, MESSAGE_DUPLICATE_BOOKING);
-    }
-
-    @Test
     public void equals() {
         final EditBookingCommand standardCommand = new EditBookingCommand(BOOKING_ID_1, DESC_BOOKING_AMY);
 
