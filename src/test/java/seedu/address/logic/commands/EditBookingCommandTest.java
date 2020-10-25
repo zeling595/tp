@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
@@ -9,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.EditBookingCommand.MESSAGE_BOOKING_MISSING;
 import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
 import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
