@@ -45,7 +45,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addPerson n/NAME`, `NAME` is a parameter which can be used as `addPerson n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `bid/BOOKING_ID [sd/START_DATE]` can be used for find booking command with optional parameter start date.
@@ -74,8 +74,8 @@ Adds a person to the local guestbook.
 Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
-* `add n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
+* `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
+* `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
 
 
 ### Listing all persons : `listPerson`
@@ -213,13 +213,13 @@ Format: `listBooking`
 Examples:
 * listBooking lists all the bookings.
 
-### Editing a person : `editBooking`
+### Editing a booking : `editBooking`
 
 Edits an existing booking in the booking book.
 
 Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
 
-* Edits the booking with booking ID `BOOKING_ID`. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The edited booking cannot be a duplicate booking or conflicts with any existing booking.
@@ -227,6 +227,20 @@ Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
 Examples:
 *  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
 *  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+
+### Ordering Room Service : `orderRoomService`
+
+Order room service for a particular booking.
+
+Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
+
+* Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
+* The booking id must be the id of a currently active booking.
+* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
+
+Examples:
+*  `orderRoomService bid/1 rst/WIFI` Orders WIFI room service for booking with ID `1`.
+*  `orderRoomService bid/2 rst/DINING` Orders DINING room service for booking with ID `2`.
 
 ### Clearing all entries : `clear`
 
@@ -274,6 +288,7 @@ Action | Format, Examples
 **List Booking** | `listBooking`<br> e.g., `listBooking`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
+**Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 
 **Help** | `help`
