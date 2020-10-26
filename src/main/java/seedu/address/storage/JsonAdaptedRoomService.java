@@ -24,7 +24,7 @@ public class JsonAdaptedRoomService {
     }
 
     /**
-     * Converts a given {@code RoomService} into this class for Jackson use.
+     * Converts a given {@code RoomService} into this class for JSON use.
      */
     public JsonAdaptedRoomService(RoomService source) {
         bookingId = source.getBookingId();
@@ -32,7 +32,7 @@ public class JsonAdaptedRoomService {
     }
 
     /**
-     * Converts this Jackson-friendly adapted booking object into the model's {@code RoomService} object.
+     * Converts this JSON-friendly adapted booking object into the model's {@code RoomService} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted booking.
      */
