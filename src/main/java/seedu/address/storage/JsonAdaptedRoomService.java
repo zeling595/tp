@@ -41,6 +41,11 @@ public class JsonAdaptedRoomService {
         if (bookingId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "bookingId"));
         }
+
+        if (type == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "type"));
+        }
+
         return new RoomService(bookingId, type);
     }
 }
