@@ -30,7 +30,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
    * **`deleteBooking`**`bid/3` : Deletes the booking with booking ID 3.
 
-   * **`clear`** : Deletes all bookings.
+   * **`clear`** : Deletes all bookings and guests.
 
    * **`exit`** : Exits the app.
 
@@ -204,7 +204,7 @@ Examples:
 * `listRoom typ/3` will list all the suite rooms in the Room Book. 
 
 ### Listing bookings: `listBooking`
-Lists the bookings sorted by active and inactive and within which most recent to least recent.
+Lists the bookings sorted by most recent to least recent. Active bookings will be listed before inactive bookings.
 
 Format: `listBooking`
 
@@ -271,7 +271,8 @@ Action | Format, Examples
 **Check Out** | `checkOut ROOM_ID`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`
-**list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
+**List Booking** | `listBooking`<br> e.g., `listBooking`
+**Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 
 
