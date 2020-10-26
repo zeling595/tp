@@ -28,8 +28,14 @@ class RoomServiceCommandParserTest {
         assertParseSuccess(
                 parser, input, new RoomServiceCommand(new RoomService(1, RoomServiceType.WIFI)));
 
-        String input2 = " " + PREFIX_ROOM_SERVICE_TYPE + RoomServiceType.WIFI.getName() + " " + PREFIX_BOOKING_ID + "1";
+        String input2 = " " + PREFIX_ROOM_SERVICE_TYPE
+                + RoomServiceType.DINING.getName() + " " + PREFIX_BOOKING_ID + "1";
         assertParseSuccess(
-                parser, input2, new RoomServiceCommand(new RoomService(1, RoomServiceType.WIFI)));
+                parser, input2, new RoomServiceCommand(new RoomService(1, RoomServiceType.DINING)));
+
+        String input3 = " " + PREFIX_ROOM_SERVICE_TYPE
+                + RoomServiceType.MASSAGE.getName() + " " + PREFIX_BOOKING_ID + "1";
+        assertParseSuccess(
+                parser, input3, new RoomServiceCommand(new RoomService(1, RoomServiceType.MASSAGE)));
     }
 }
