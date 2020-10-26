@@ -5,13 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
 import static seedu.address.testutil.TypicalBookings.EDITED_ENDDATE_1;
 import static seedu.address.testutil.TypicalBookings.EDITED_ROOM_ID_1;
@@ -76,21 +70,6 @@ public class EditBookingCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1,
-                new EditBookingCommand.EditBookingDescriptor());
-        Booking editedBooking = model.getBookingWithId(BOOKING_ID_1);
-
-        String expectedMessage = String.format(EditBookingCommand.MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking);
-
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new UserPrefs(), model.getRoomBook(),
-                new BookingBook(model.getBookingBook()), model.getRoomServiceBook());
-
-        assertCommandSuccess(editBookingCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
 
         Booking bookingInFilteredList = model.getBookingWithId(BOOKING_ID_1);
@@ -134,7 +113,7 @@ public class EditBookingCommandTest {
                 .withRoomId(1000).build();
         EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
 
-        assertCommandFailure(editBookingCommand, model, MESSAGE_ROOM_ID_MISSING);
+        assertBookingBookCommandFailure(editBookingCommand, model, MESSAGE_ROOM_ID_MISSING);
     }
 
     @Test

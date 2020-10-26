@@ -14,6 +14,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.BookingBook;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesBookingIdPredicate;
@@ -202,6 +203,24 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the booking book, filtered booking list and selected booking in {@code actualModel} remain unchanged
+     */
+    public static void assertBookingBookCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        BookingBook expectedBookingBook = new BookingBook(actualModel.getBookingBook());
+        List<Booking> expectedFilteredList = new ArrayList<>(actualModel.getFilteredBookingList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedBookingBook, actualModel.getBookingBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredBookingList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

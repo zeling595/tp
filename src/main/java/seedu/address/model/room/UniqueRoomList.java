@@ -22,7 +22,6 @@ public class UniqueRoomList implements Iterable<Room> {
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(int roomId) {
-        assert roomId >= 2103 && roomId < 2133;
         return internalRoomList.stream().anyMatch(n -> n.getRoomID() == (roomId));
     }
 

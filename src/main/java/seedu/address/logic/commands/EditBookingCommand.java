@@ -84,7 +84,7 @@ public class EditBookingCommand extends Command {
         }
 
         // invalid room id, 2103 - 2132
-        if (editedBooking.getRoomId() > 2132 || editedBooking.getRoomId() < 2103) {
+        if (!model.hasRoom(editedBooking.getRoomId())) {
             logger.log(Level.WARNING, "invalid room id");
             throw new CommandException(MESSAGE_ROOM_ID_MISSING);
         }

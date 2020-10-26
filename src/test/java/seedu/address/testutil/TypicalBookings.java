@@ -35,14 +35,9 @@ public class TypicalBookings {
             false, 5);
     public static final Booking BOOKING_6 = new Booking(2103, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
-    public static final Booking BOOKING_7_SAME_PID_AS_1 = new Booking(2108, 1, STARTDATE_2, ENDDATE_2,
-            false, 7);
 
     public static final Integer EDITED_ROOM_ID_1 = 2106;
-    public static final Integer CONFLICT_ROOM_ID_1 = 2104;
-    public static final Integer DUPLICATE_ROOM_ID_1 = 2103;
     public static final Integer BOOKING_ID_1 = 1;
-    public static final Integer BOOKING_ID_7 = 7;
     public static final Integer INVALID_BOOKING_ID = 100;
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -70,8 +65,7 @@ public class TypicalBookings {
     }
 
     public static List<Booking> getTypicalBookings() {
-        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6,
-                BOOKING_7_SAME_PID_AS_1));
+        return new ArrayList<>(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6));
     }
 
 }
