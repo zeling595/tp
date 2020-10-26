@@ -24,10 +24,6 @@ public class ListRoomCommandParser implements Parser<ListRoomCommand> {
             roomType = ParserUtil.parseRoomType(argMultimap.getValue(PREFIX_ROOM_TYPE).get());
         }
 
-        if (roomType < 0 || roomType > 3) {
-            throw new ParseException("Invalid Room Type. Only 1, 2 and 3 accepted.");
-        }
-
         return new ListRoomCommand(roomType);
     }
 }
