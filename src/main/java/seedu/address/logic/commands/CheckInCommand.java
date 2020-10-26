@@ -70,9 +70,13 @@ public class CheckInCommand extends Command {
             throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
         }
 
+        assert model.hasPersonWithId(personalId);
+
         if (!model.hasRoom(roomId)) {
             throw new CommandException(MESSAGE_ROOM_ID_MISSING);
         }
+
+        assert model.hasRoom(roomId);
 
         if (startDate.isBefore(LocalDate.now())) {
             throw new CommandException(MESSAGE_PAST_BOOKING);
