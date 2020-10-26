@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
-import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
+import static seedu.address.commons.core.Messages.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -37,7 +36,7 @@ public class EditBookingCommand extends Command {
 
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
+
 
     private final Integer bookingId;
     private final EditBookingCommand.EditBookingDescriptor editBookingDescriptor;
