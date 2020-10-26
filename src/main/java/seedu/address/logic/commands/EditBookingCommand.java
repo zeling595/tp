@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_BOOKING;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
+import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -78,7 +80,13 @@ public class EditBookingCommand extends Command {
         // start date after end date
         if (!editedBooking.getStartDate().isBefore(editedBooking.getEndDate())) {
             logger.log(Level.WARNING, "start date after end date");
-            throw new CommandException(MESSAGE_START_DATE_NOT_BEFORE_END_DATE);
+            throw new CommandException(MESSAGE_INVALID_START_END_DATE);
+        }
+
+        // invalid room id, 2103 - 2132
+        if (editedBooking.getRoomId() > 2132 || editedBooking.getRoomId() < 2103) {
+            logger.log(Level.WARNING, "invalid room id");
+            throw new CommandException(MESSAGE_ROOM_ID_MISSING);
         }
 
         try {

@@ -128,7 +128,7 @@ public class Booking {
             return true;
         }
 
-        return  otherBooking.getRoomId().equals(getRoomId())
+        return otherBooking.getRoomId().equals(getRoomId())
                 && otherBooking.getPersonId().equals(getPersonId())
                 && otherBooking.getStartDate().equals(getStartDate())
                 && otherBooking.getEndDate().equals(getEndDate())

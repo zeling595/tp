@@ -92,7 +92,8 @@ public class FindBookingCommandTest {
         FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
         expectedModel.updateFilteredBookingList(new BookingMatchesIsActivePredicate(false));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6, BOOKING_7_SAME_PID_AS_1),
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6,
+                BOOKING_7_SAME_PID_AS_1),
                 model.getFilteredBookingList());
     }
 

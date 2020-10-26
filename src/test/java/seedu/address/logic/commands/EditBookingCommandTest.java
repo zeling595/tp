@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
+import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOOKING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
@@ -11,10 +13,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
+import static seedu.address.testutil.TypicalBookings.EDITED_ENDDATE_1;
+import static seedu.address.testutil.TypicalBookings.EDITED_ROOM_ID_1;
 import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
+import static seedu.address.testutil.TypicalBookings.START_DATE_AFTER_END_DATE_1;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.logic.commands.EditBookingCommand.*;
-import static seedu.address.testutil.TypicalBookings.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
@@ -122,7 +125,16 @@ public class EditBookingCommandTest {
                 .withStartDate(START_DATE_AFTER_END_DATE_1).build();
         EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
 
-        assertCommandFailure(editBookingCommand, model, MESSAGE_START_DATE_NOT_BEFORE_END_DATE);
+        assertCommandFailure(editBookingCommand, model, MESSAGE_INVALID_START_END_DATE);
+    }
+
+    @Test
+    public void execute_invalidRoomId_failure() {
+        EditBookingCommand.EditBookingDescriptor descriptor = new EditBookingDescriptorBuilder()
+                .withRoomId(1000).build();
+        EditBookingCommand editBookingCommand = new EditBookingCommand(BOOKING_ID_1, descriptor);
+
+        assertCommandFailure(editBookingCommand, model, MESSAGE_ROOM_ID_MISSING);
     }
 
     @Test
