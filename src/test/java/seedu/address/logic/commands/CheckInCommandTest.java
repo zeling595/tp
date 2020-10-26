@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
+import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_VALID_BOOKING_ID_CHLOE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_END_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_START_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOUBLEROOM_ID1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOUBLEROOM_ID2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
@@ -15,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_SINGLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_CHLOE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_SINGLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
@@ -30,7 +35,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_SING
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID3;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.GENE;
 import static seedu.address.testutil.TypicalPersons.SINGLE_HARRY;
@@ -265,6 +272,16 @@ public class CheckInCommandTest {
     public void execute_invalidRoomIdTwo_throwsCommandException() {
         assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
                 INVALID_ROOM_ID_HIGH, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
+    }
+
+    @Test
+    public void execute_conflictingBooking_throwsCommandException() {
+        model.addBooking(BOOKING_AMY);
+
+        CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_CHLOE, CONFLICT_AMY_VALID_BOOKING_ID_CHLOE,
+                VALID_START_DATE_GENE, VALID_END_DATE_GENE);
+        assertCommandFailure(command, model, MESSAGE_CONFLICTING_BOOKING);
+
     }
 
     @Test
