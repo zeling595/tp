@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -22,12 +24,13 @@ public class EditBookingCommand extends Command {
     // cannot edit person id
     // at least one field is edited
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the booking identified "
-            + "by the index number used in the displayed booking list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_BOOKING_ID + "[BOOKING_ID] (must be a valid booking id)"
+            + "by the index number used in the displayed booking list. \n"
+            + "Existing values will be overwritten by the input values. "
+            + "Dates should be in the format YYYY-MM-DD. \n"
+            + "Parameters: " + PREFIX_BOOKING_ID + "BOOKING_ID (must be a valid booking id)"
             + "[" + PREFIX_ROOM_ID + "ROOM ID] "
             + "[" + PREFIX_START_DATE + "START DATE] "
-            + "[" + PREFIX_END_DATE + "END DATE] "
+            + "[" + PREFIX_END_DATE + "END DATE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ROOM_ID + "2103 "
             + PREFIX_START_DATE + "2020-12-25";
@@ -35,9 +38,6 @@ public class EditBookingCommand extends Command {
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
-    public static final String MESSAGE_CONFLICTING_BOOKING =
-            "This booking conflicts with another booking in the booking book.";
-    public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
 
     private final Integer bookingId;
     private final EditBookingCommand.EditBookingDescriptor editBookingDescriptor;
