@@ -78,7 +78,7 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     /// room level operations
-    public boolean hasRoom(int roomId) {
+    public boolean hasRoom(Integer roomId) {
         return rooms.contains(roomId);
     }
 
@@ -90,5 +90,12 @@ public class RoomBook implements ReadOnlyRoomBook {
     @Override
     public ObservableList<Room> getRoomList() {
         return rooms.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RoomBook // instanceof handles nulls
+                && rooms.equals(((RoomBook) other).rooms));
     }
 }

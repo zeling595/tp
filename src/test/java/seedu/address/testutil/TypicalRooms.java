@@ -18,11 +18,11 @@ public class TypicalRooms {
     public static final Room DEFAULT_ROOM = new Single(2103);
     public static final int DEFAULT_ROOMID = 2103;
 
-    public static final Room SINGLE_1 = new Single(2104);
-    public static final Room SINGLE_2 = new Single(2105);
-    public static final Room SINGLE_3 = new Single(2106);
-    public static final Room SINGLE_4 = new Single(2107);
-    public static final Room SINGLE_5 = new Single(2108);
+    public static final Room SINGLE_1 = new Single(2103);
+    public static final Room SINGLE_2 = new Single(2104);
+    public static final Room SINGLE_3 = new Single(2105);
+    public static final Room SINGLE_4 = new Single(2106);
+    public static final Room SINGLE_5 = new Single(2107);
 
     public static final Room DOUBLE_1 = new Double(2113);
     public static final Room DOUBLE_2 = new Double(2114);

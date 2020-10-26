@@ -32,7 +32,7 @@ public class RoomTest {
         assertFalse(SINGLE_1.equals(editedRoom1));
 
         // different price only -> return false
-        editedRoom1 = new RoomBuilder(SINGLE_1).withPrice(200).build();
+        editedRoom1 = new RoomBuilder(SINGLE_1).withPrice(DOUBLE_1.getPrice()).build();
         assertFalse(SINGLE_1.equals(editedRoom1));
 
         // same roomID and price -> return true
