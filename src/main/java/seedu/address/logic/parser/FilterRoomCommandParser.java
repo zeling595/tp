@@ -48,6 +48,10 @@ public class FilterRoomCommandParser implements Parser<FilterRoomCommand> {
             roomType = ParserUtil.parseRoomType(argMultimap.getValue(PREFIX_ROOM_TYPE).get());
         }
 
+        if (roomType < 1 || roomType > 3) {
+            throw new ParseException("Invalid Room Type. Only 1, 2 and 3 allowed.");
+        }
+
         return new FilterRoomCommand(startDate, endDate, roomType);
     }
 
