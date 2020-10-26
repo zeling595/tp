@@ -10,7 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
@@ -45,6 +48,8 @@ public class CheckInCommand extends Command {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
     /**
      * Creates a CheckInCommand.
      *
@@ -65,6 +70,8 @@ public class CheckInCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Booking booking;
+        assert roomId > 0;
+        logger.info(String.format("Checking in person with id %s into room %s", personalId, roomId));
 
         if (!model.hasPersonWithId(personalId)) {
             throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
