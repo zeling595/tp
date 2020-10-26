@@ -80,16 +80,9 @@ Examples:
 
 ### Listing all persons : `listPerson`
 
-Lists persons that contain the required phone number.
+Lists all persons in the address book.
 
-Format: `list PHONE_NUMBER`
-* Only phone number of Persons will be searched
-* Only full phone numbers will be matched e.g. `91234567` will not match `91234568`
-* Only returns 1 guest as phone number of persons are unique
-* `PHONE_NUMBER` needs to be have 8 digits 
-
-Examples: 
-* `list 90123456`  will return `Damith`
+Format: `listPerson`
 
 ### Editing a person : `editPerson`
 
@@ -201,7 +194,14 @@ Examples:
 
 Shows a list of all rooms in the room book.
 
-Format: `listRoom`
+Format: `listRoom [typ/ROOM_TYPE]`
+
+* An optional `ROOM_TYPE` can be provided to filter the list based on the hotel room’s type. Only 1, 2, and 3 are accepted 
+  as parameters. 1 indicates Single Rooms, 2 indicates Double Rooms, 3 indicates Suite Rooms. 
+
+Examples:
+* `listRoom` will list all the rooms in the Room Book. 
+* `listRoom typ/3` will list all the suite rooms in the Room Book. 
 
 ### Listing bookings: `listBooking`
 Lists the bookings with some optional filters.
