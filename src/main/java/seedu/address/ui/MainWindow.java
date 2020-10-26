@@ -185,8 +185,10 @@ public class MainWindow extends UiPart<Stage> {
 
             mainDisplayPlaceholder.getChildren().clear();
             if (commandResult.isShowPersonList()) {
+                logger.info("Displaying person list in UI");
                 mainDisplayPlaceholder.getChildren().add(personListPanel.getRoot());
             } else if (commandResult.isShowBookingList()) {
+                logger.info("Displaying booking list in UI");
                 mainDisplayPlaceholder.getChildren().add(bookingListPanel.getRoot());
             }
 

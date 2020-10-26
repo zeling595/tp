@@ -16,11 +16,11 @@ public class CheckOutCommandParser implements Parser<CheckOutCommand> {
     public CheckOutCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
-
         if (argMultiMap.getValue(PREFIX_BOOKING_ID).isEmpty() || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckOutCommand.MESSAGE_USAGE));
         }
 
+        assert argMultiMap.getValue(PREFIX_BOOKING_ID).isPresent();
         int bookingId = ParserUtil.parseBookingId(argMultiMap.getValue(PREFIX_BOOKING_ID).get());
 
         return new CheckOutCommand(bookingId);
