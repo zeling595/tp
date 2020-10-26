@@ -71,6 +71,11 @@ public class CheckInCommandTest {
     }
 
     @Test
+    public void execute_singleRoomSuccess() throws CommandException {
+
+    }
+
+    @Test
     public void execute_pastStartDateAndValidEndDate_throwsCommandException() {
         assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE,
                 VALID_ROOM_ID_GENE, PAST_START_DATE, VALID_END_DATE_GENE).execute(model));

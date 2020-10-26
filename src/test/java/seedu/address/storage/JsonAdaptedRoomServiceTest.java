@@ -65,7 +65,5 @@ public class JsonAdaptedRoomServiceTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BOOKING_ID);
         assertThrows(IllegalValueException.class, expectedMessage, roomService::toModelType);
     }
-
-
 }
 
