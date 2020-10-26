@@ -39,6 +39,8 @@ public class FilterRoomCommandTest {
         expectedRoomId1.add(2106);
         expectedRoomId1.add(2107);
         expectedRoomId1.add(2108);
+        expectedRoomId1.add(2110);
+        expectedRoomId1.add(2112);
         String expectedOutput1 = model.displaySingleRooms(FXCollections.observableArrayList(expectedRoomId1));
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput1),
@@ -53,6 +55,7 @@ public class FilterRoomCommandTest {
         expectedRoomId2.add(2115);
         expectedRoomId2.add(2116);
         expectedRoomId2.add(2117);
+        expectedRoomId2.add(2122);
         String expectedOutput2 = model.displayDoubleRooms(FXCollections.observableArrayList(expectedRoomId2));
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput2),
                 command2.execute(model).getFeedbackToUser());

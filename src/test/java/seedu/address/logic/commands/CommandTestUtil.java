@@ -67,14 +67,14 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
     public static final int VALID_PERSONAL_ID_SUITE_HARRY = 422;
 
-    public static final int VALID_SINGLEROOM_ID1 = 2103;
-    public static final int VALID_SINGLEROOM_ID2 = 2192;
+    public static final int VALID_SINGLEROOM_ID1 = 2104;
+    public static final int VALID_SINGLEROOM_ID2 = 2110;
     public static final int VALID_SINGLEROOM_ID3 = 2112;
     public static final int VALID_DOUBLEROOM_ID1 = 2113;
     public static final int VALID_DOUBLEROOM_ID2 = 2186;
     public static final int VALID_DOUBLEROOM_ID3 = 2122;
     public static final int VALID_SUITEROOM_ID1 = 2123;
-    public static final int VALID_SUITEROOM_ID2 = 2149;
+    public static final int VALID_SUITEROOM_ID2 = 2049;
     public static final int VALID_SUITEROOM_ID3 = 2132;
 
     public static final int VALID_ROOM_ID_AMY = 2103;
