@@ -83,6 +83,7 @@ public class CommandTestUtil {
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2103;
     public static final int VALID_ROOM_ID_DAN = 2104;
     public static final int INVALID_ROOM_ID = 1;
+    public static final int INVALID_ROOM_ID_HIGH = 9999;
 
     public static final int CURRENT_YEAR = LocalDate.now().getYear();
     public static final int NEXT_YEAR = CURRENT_YEAR + 1;

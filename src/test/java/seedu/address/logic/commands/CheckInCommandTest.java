@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_END_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOUBLEROOM_ID1;
@@ -251,6 +253,18 @@ public class CheckInCommandTest {
 
         assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
                 command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_invalidRoomIdOne_throwsCommandException() {
+        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
+                INVALID_ROOM_ID, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
+    }
+
+    @Test
+    public void execute_invalidRoomIdTwo_throwsCommandException() {
+        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
+                INVALID_ROOM_ID_HIGH, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
     }
 
     @Test
