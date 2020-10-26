@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
@@ -12,12 +13,13 @@ import seedu.address.model.Model;
 public class CheckOutCommand extends Command {
 
     public static final String COMMAND_WORD = "checkOut";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks out person from hotel. "
-            + "Parameters: " + PREFIX_BOOKING_ID + "[BOOKING_ID] (must be a valid booking id)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_BOOKING_ID + "2100";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks out person from hotel. \n"
+            + "Parameters: "
+            + PREFIX_BOOKING_ID + "BOOKING_ID (must be a valid booking id)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_BOOKING_ID + "2107";
 
     public static final String MESSAGE_SUCCESS = "Successfully checked out: %s";
-    public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_ALREADY_CHECKED_OUT = "You have already checked out from this booking.";
 
     private final int bookingId;
