@@ -32,7 +32,7 @@ public class TypicalRooms {
     public static final Room DOUBLE_4 = new Double(2116);
     public static final Room DOUBLE_5 = new Double(2117);
     public static final Room DOUBLE_MIDDLE = new Double(2092);
-    public static final Room DOUBLE_END = new Double(2122);
+    public static final Room DOUBLE_END = new Double(2120);
 
     public static final Room SUITE_1 = new Suite(2123);
     public static final Room SUITE_2 = new Suite(2124);
