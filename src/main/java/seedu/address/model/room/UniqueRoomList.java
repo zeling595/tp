@@ -14,6 +14,7 @@ import seedu.address.model.room.exceptions.DuplicateRoomException;
 
 public class UniqueRoomList implements Iterable<Room> {
 
+    public static final Room EMPTY_ROOM = new Single(-1);
     private final ObservableList<Room> internalRoomList = FXCollections.observableArrayList();
     private final ObservableList<Room> internalUnmodifiableRoomList =
             FXCollections.unmodifiableObservableList(internalRoomList);
@@ -26,9 +27,21 @@ public class UniqueRoomList implements Iterable<Room> {
         return internalRoomList.stream().anyMatch(n -> n.getRoomID() == (roomId));
     }
 
+    /**
+     * Adds a Room to the list.
+     * The room must not already exist in the list.
+     */
+    public void add(Room toAdd) {
+        requireNonNull(toAdd);
+        if (internalRoomList.contains(toAdd)) {
+            throw new DuplicateRoomException();
+        }
+        internalRoomList.add(toAdd);
+    }
+
     public Room getRoom(int roomId) {
         assert roomId >= 2103 && roomId < 2133;
-        Room ret = new Single(-1);
+        Room ret = EMPTY_ROOM;
         for (int k = 0; k < internalRoomList.size(); k++) {
             Room curr = internalRoomList.get(k); // get the roomID
             if (curr.getRoomID() == roomId) {
@@ -55,16 +68,9 @@ public class UniqueRoomList implements Iterable<Room> {
         return ret;
     }
 
-    /**
-     * Adds a Room to the list.
-     * The room must not already exist in the list.
-     */
-    public void add(Room toAdd) {
-        requireNonNull(toAdd);
-        if (internalRoomList.contains(toAdd)) {
-            throw new DuplicateRoomException();
-        }
-        internalRoomList.add(toAdd);
+    public void setRooms(UniqueRoomList replacement) {
+        requireNonNull(replacement);
+        internalRoomList.setAll(replacement.internalRoomList);
     }
 
     /**
@@ -188,4 +194,10 @@ public class UniqueRoomList implements Iterable<Room> {
         return "Suite Rooms: " + suiteRooms.size() + " " + Arrays.toString(suiteRooms.toArray()) + "\n";
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueRoomList // instanceof handles nulls
+                && internalRoomList.equals(((UniqueRoomList) other).internalRoomList));
+    }
 }

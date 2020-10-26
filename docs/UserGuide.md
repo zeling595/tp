@@ -1,4 +1,4 @@
-``---
+---
 layout: page
 title: User Guide
 ---
@@ -26,11 +26,11 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
    * **`listBooking`** : Lists all bookings.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`checkIn`**`pid/7 rid/2103 sd/2021-12-12 ed/2021-12-13` : Checks in a person with ID `7` to room `2103` from `2021-12-12` to `2021-12-13`.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`deleteBooking`**`bid/3` : Deletes the booking with booking ID 3.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all bookings and guests.
 
    * **`exit`** : Exits the app.
 
@@ -48,7 +48,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `bid/BOOKING_ID [sd/START_DATE]` can be used for find booking command with optional parameter start date.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -204,15 +204,29 @@ Examples:
 * `listRoom typ/3` will list all the suite rooms in the Room Book. 
 
 ### Listing bookings: `listBooking`
-Lists the bookings with some optional filters.
+Lists the bookings sorted by most recent to least recent. Active bookings will be listed before inactive bookings.
 
-Format: `listBooking [sd/START_DATE] [ed/END_DATE]`
+Format: `listBooking`
 
-* Lists all the bookings if none of the arguments are provided.
-* Dates have to be in the format YYYY-MM-DD
+* Lists all the bookings.
 
 Examples:
-* listBooking sd/2020-09-14 ed/2020-09-17 lists all the bookings which are from Sept 14 2020 to Sept 17 2020.
+* listBooking lists all the bookings.
+
+### Editing a person : `editBooking`
+
+Edits an existing booking in the booking book.
+
+Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
+
+* Edits the booking with booking ID `BOOKING_ID`. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* The edited booking cannot be a duplicate booking or conflicts with any existing booking.
+
+Examples:
+*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
+*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
 
 ### Clearing all entries : `clear`
 
@@ -257,7 +271,8 @@ Action | Format, Examples
 **Check Out** | `checkOut ROOM_ID`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`
-**list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
+**List Booking** | `listBooking`<br> e.g., `listBooking`
+**Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 
 

@@ -41,6 +41,7 @@ public class RoomServiceBook implements ReadOnlyRoomServiceBook {
      */
     public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId) {
         requireNonNull(bookingId);
+        assert bookingId >= 0;
         return internalRoomServiceList.stream().filter(rs -> rs.belongsToBooking(bookingId)).collect(
                 Collectors.toCollection(FXCollections::observableArrayList)
         );

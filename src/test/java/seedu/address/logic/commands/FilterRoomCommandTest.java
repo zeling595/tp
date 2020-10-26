@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
@@ -26,7 +28,7 @@ public class FilterRoomCommandTest {
             getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
-    public void execute_success() throws CommandException {
+    public void execute_success_single() throws CommandException {
         LocalDate startDate = LocalDate.of(2020, 10, 15);
         LocalDate endDate = LocalDate.of(2020, 10, 22);
 
@@ -34,6 +36,7 @@ public class FilterRoomCommandTest {
         int roomType1 = 1;
         FilterRoomCommand command1 = new FilterRoomCommand(startDate, endDate, roomType1);
         ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
+        expectedRoomId1.add(2103);
         expectedRoomId1.add(2104);
         expectedRoomId1.add(2105);
         expectedRoomId1.add(2106);
@@ -45,6 +48,12 @@ public class FilterRoomCommandTest {
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput1),
                 command1.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_success_double() throws CommandException {
+        LocalDate startDate = LocalDate.of(2020, 10, 15);
+        LocalDate endDate = LocalDate.of(2020, 10, 22);
 
         // Double Rooms
         int roomType2 = 2;
@@ -60,6 +69,56 @@ public class FilterRoomCommandTest {
         String expectedOutput2 = model.displayDoubleRooms(FXCollections.observableArrayList(expectedRoomId2));
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput2),
                 command2.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_success_suite() throws CommandException {
+        LocalDate startDate = LocalDate.of(2020, 10, 15);
+        LocalDate endDate = LocalDate.of(2020, 10, 22);
+
+        // Suite Rooms
+        int roomType1 = 3;
+        FilterRoomCommand command3 = new FilterRoomCommand(startDate, endDate, roomType1);
+        ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
+        expectedRoomId1.add(2123);
+        expectedRoomId1.add(2124);
+        expectedRoomId1.add(2125);
+        expectedRoomId1.add(2126);
+        expectedRoomId1.add(2127);
+        String expectedOutput3 = model.displaySuiteRooms(FXCollections.observableArrayList(expectedRoomId1));
+
+        assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput3),
+                command3.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_success_all() throws CommandException {
+        LocalDate startDate = LocalDate.of(2020, 10, 15);
+        LocalDate endDate = LocalDate.of(2020, 10, 22);
+
+        // All room types
+        int roomType = 0;
+        FilterRoomCommand command4 = new FilterRoomCommand(startDate, endDate, roomType);
+        ArrayList<Integer> expectedRoomId4 = new ArrayList<>();
+        expectedRoomId4.add(2103);
+        expectedRoomId4.add(2104);
+        expectedRoomId4.add(2105);
+        expectedRoomId4.add(2106);
+        expectedRoomId4.add(2107);
+        expectedRoomId4.add(2113);
+        expectedRoomId4.add(2114);
+        expectedRoomId4.add(2115);
+        expectedRoomId4.add(2116);
+        expectedRoomId4.add(2117);
+        expectedRoomId4.add(2123);
+        expectedRoomId4.add(2124);
+        expectedRoomId4.add(2125);
+        expectedRoomId4.add(2126);
+        expectedRoomId4.add(2127);
+        String expectedOutput3 = model.displayRooms(FXCollections.observableArrayList(expectedRoomId4));
+
+        assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput3),
+                command4.execute(model).getFeedbackToUser());
     }
 
     @Test
