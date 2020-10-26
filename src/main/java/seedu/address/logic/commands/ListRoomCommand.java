@@ -32,17 +32,17 @@ public class ListRoomCommand extends Command {
         ObservableList<Room> roomList = model.getRoomBook().getRoomList();
         ObservableList<Integer> retList = FXCollections.observableArrayList(roomList.stream()
                 .map(Room::getRoomID).collect(Collectors.toList()));
-
+        String result = "";
         if (roomType == 0) {
-            model.displayRooms(retList);
+            result = model.displayRooms(retList);
         } else if (roomType == 1) {
-            model.displaySingleRooms(retList);
+            result = model.displaySingleRooms(retList);
         } else if (roomType == 2) {
-            model.displayDoubleRooms(retList);
+            result = model.displayDoubleRooms(retList);
         } else if (roomType == 3) {
-            model.displaySuiteRooms(retList);
+            result = model.displaySuiteRooms(retList);
         }
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + model.displayRooms(retList));
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + result);
     }
 
     @Override
