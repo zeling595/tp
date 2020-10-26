@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import seedu.address.logic.commands.DeleteBookingCommand;
-import seedu.address.logic.commands.FindBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,7 +23,7 @@ public class DeleteBookingCommandParser implements Parser<DeleteBookingCommand> 
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookingCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookingCommand.MESSAGE_USAGE));
         }
 
         assert !trimmedArgs.isEmpty();

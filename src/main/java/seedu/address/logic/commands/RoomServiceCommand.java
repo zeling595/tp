@@ -16,7 +16,8 @@ public class RoomServiceCommand extends Command {
             + "Valid room types are: "
             + RoomServiceType.getAllNames()
             + "\n"
-            + "Parameters: " + PREFIX_BOOKING_ID + "BOOKING_ID "
+            + "Parameters: "
+            + PREFIX_BOOKING_ID + "BOOKING_ID "
             + PREFIX_ROOM_SERVICE_TYPE + "TYPE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_BOOKING_ID + "3 "
