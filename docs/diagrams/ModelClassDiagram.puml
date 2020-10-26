@@ -9,7 +9,13 @@ Interface ReadOnlyAddressBook <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
 Class AddressBook
-Class ReadOnlyAddressBook
+Interface ReadOnlyAddressBook <<Interface>>
+Class BookingBook
+Interface ReadOnlyBookingBook <<Interface>>
+Class RoomBook
+Interface ReadOnlyRoomBook <<Interface>>
+Class RoomServiceBook
+Interface ReadOnlyRoomServiceBook <<Interface>>
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -27,16 +33,39 @@ Class UniquePersonList
 Package Tag {
 Class Tag
 }
+
+Package Booking {
+Class Booking
+Class UniqueBookingList
+}
+
+Package Room {
+Abstract Room
+Class Single
+Class Double
+Class Suite
+Class UniqueRoomList
+}
+
+Package RoomService {
+Class RoomService
+}
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AddressBook ..|> ReadOnlyAddressBook
+RoomServiceBook ..|> ReadOnlyRoomServiceBook
+BookingBook ..|> ReadOnlyBookingBook
+RoomBook ..|> ReadOnlyRoomBook
 
 ModelManager .up.|> Model
 Model .right.> ObservableList
 ModelManager o--> "1" AddressBook
+ModelManager o------> "1" RoomBook
+ModelManager o--> "1" BookingBook
+ModelManager o-------> "1" RoomServiceBook
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
@@ -48,9 +77,21 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+BookingBook *--> "1" UniqueBookingList
+UniqueBookingList o--> "*" Booking
+
+RoomBook *--> "1" UniqueRoomList
+UniqueRoomList o--> "*" Room
+Single .up.|> Room
+Double .up.|> Room
+Suite .up.|> Room
+
+RoomServiceBook *--> "*" RoomService
+
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"1" Person : filtered list
+ModelManager -->"1" Booking : filtered list
 @enduml
