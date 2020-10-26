@@ -91,4 +91,11 @@ public class RoomBook implements ReadOnlyRoomBook {
     public ObservableList<Room> getRoomList() {
         return rooms.asUnmodifiableObservableList();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RoomBook // instanceof handles nulls
+                && rooms.equals(((RoomBook) other).rooms));
+    }
 }
