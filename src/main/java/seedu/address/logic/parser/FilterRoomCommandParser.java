@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.FilterRoomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,7 +42,7 @@ public class FilterRoomCommandParser implements Parser<FilterRoomCommand> {
         int roomType = 0;
 
         if (!startDate.isBefore(endDate)) {
-            throw new ParseException("Start Date must be before End Date!");
+            throw new ParseException(Messages.MESSAGE_INVALID_START_END_DATE);
         }
 
         if (argMultimap.getValue(PREFIX_ROOM_TYPE).isPresent()) {
