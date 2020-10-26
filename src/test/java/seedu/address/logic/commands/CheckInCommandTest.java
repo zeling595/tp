@@ -25,6 +25,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUITEROOM_ID3;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.GENE;
@@ -187,6 +190,63 @@ public class CheckInCommandTest {
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
         CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID2,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
+
+        assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_suiteRoomSuccessOne() throws CommandException {
+        model.addPerson(SINGLE_HARRY);
+
+        // stub
+        // when i create a new booking, my booking ID++
+        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        final int testBookingId = 7;
+
+        Booking booking = new Booking(VALID_SUITEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
+
+        CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID1,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
+
+        assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_suiteRoomSuccessTwo() throws CommandException {
+        model.addPerson(SINGLE_HARRY);
+
+        // stub
+        // when i create a new booking, my booking ID++
+        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        final int testBookingId = 7;
+
+        Booking booking = new Booking(VALID_SUITEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
+
+        CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID2,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
+
+        assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_suiteRoomSuccessThree() throws CommandException {
+        model.addPerson(SINGLE_HARRY);
+
+        // stub
+        // when i create a new booking, my booking ID++
+        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        final int testBookingId = 7;
+
+        Booking booking = new Booking(VALID_SUITEROOM_ID3, VALID_PERSONAL_ID_SINGLE_HARRY,
+                VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
+
+        CheckInCommand command = new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID3,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(CheckInCommand.MESSAGE_SUCCESS, booking),

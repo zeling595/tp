@@ -74,7 +74,7 @@ public class CommandTestUtil {
     public static final int VALID_DOUBLEROOM_ID2 = 2120;
     public static final int VALID_DOUBLEROOM_ID3 = 2122;
     public static final int VALID_SUITEROOM_ID1 = 2123;
-    public static final int VALID_SUITEROOM_ID2 = 2049;
+    public static final int VALID_SUITEROOM_ID2 = 2129;
     public static final int VALID_SUITEROOM_ID3 = 2132;
 
     public static final int VALID_ROOM_ID_AMY = 2103;
