@@ -53,12 +53,6 @@ public class HomePagePanel extends UiPart<Region> {
     class RecentBookingCell extends ListCell<Booking> {
         @Override
         protected void updateItem(Booking booking, boolean empty) {
-            if (getIndex() > 4) {
-                setGraphic(null);
-                setText(null);
-                return;
-            }
-
             super.updateItem(booking, empty);
             if (empty || booking == null) {
                 setGraphic(null);

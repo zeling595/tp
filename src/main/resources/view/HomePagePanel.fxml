@@ -13,7 +13,7 @@
         <Label fx:id="suiteRoomsText" />
     </VBox>
     <Region minHeight="12" maxHeight="12" prefHeight="12" />
-    <VBox maxHeight="180" minHeight="180" prefHeight="180" fx:id="recentBookingsGroup">
+    <VBox maxHeight="166" minHeight="166" prefHeight="166" fx:id="recentBookingsGroup">
         <Label fx:id="recentBookingsTitle" />
         <ListView fx:id="recentBookingsView" />
     </VBox>
