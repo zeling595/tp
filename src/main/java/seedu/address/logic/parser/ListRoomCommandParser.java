@@ -1,13 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ListRoomCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_TYPE;
 
+import seedu.address.logic.commands.ListRoomCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 public class ListRoomCommandParser implements Parser<ListRoomCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code ListRoomCommand}
+     * and returns a {@code ListRoomCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ListRoomCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
