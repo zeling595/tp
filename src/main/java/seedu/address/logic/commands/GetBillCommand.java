@@ -26,7 +26,8 @@ public class GetBillCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "getBill command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
-    public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for booking id: %1$d is %2$d";
+    public static final String MESSAGE_SUCCESS_GET_BILL = "Nett bill for booking id %1$d = $%2$d";
+    public static final String MESSAGE_NIGHTS_STAYED = "Number of nights stayed: %1$d";
 
     private final int bookingId;
 
@@ -58,22 +59,31 @@ public class GetBillCommand extends Command {
 
         int roomId = booking.getRoomId();
         room = model.getRoom(roomId);
+
         int pricePerNight = room.getPrice();
         int numNights = booking.getDuration();
         int totalPrice = pricePerNight * numNights;
 
+        assert numNights > 0;
         ObservableList<RoomService> roomServices = model.getRoomServicesForBooking(booking.getId());
-
-        String billBreakdown = "";
+        String servicesBillBreakdown = "";
 
         for (RoomService roomService : roomServices) {
             RoomServiceType roomServiceType = roomService.getType();
-            billBreakdown += roomServiceType.getVerboseName() + ": " + roomServiceType.getPrice() + "\n";
+            servicesBillBreakdown += roomServiceType.getVerboseName() + ": $" + roomServiceType.getPrice() + "\n";
             totalPrice += roomServiceType.getPrice();
         }
 
-        return new CommandResult(billBreakdown
-                + String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice));
+        String resultMessage = String.format(MESSAGE_NIGHTS_STAYED, numNights) + "\n";
+        if (!servicesBillBreakdown.isEmpty()) {
+            resultMessage += "Room services ordered:\n";
+            resultMessage += servicesBillBreakdown + "\n";
+        } else {
+            resultMessage += "No room services ordered\n";
+        }
+        resultMessage += String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice);
+
+        return new CommandResult(resultMessage);
     }
 
     @Override
