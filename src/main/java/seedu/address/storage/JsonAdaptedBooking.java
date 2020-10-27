@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_ID;
-import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
+import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 
 import java.time.LocalDate;
 
