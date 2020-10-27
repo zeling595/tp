@@ -112,7 +112,7 @@ public class UniqueRoomListTest {
                 SINGLE_2.getRoomID(), DOUBLE_1.getRoomID(), DOUBLE_2.getRoomID(),
                 SUITE_1.getRoomID(), SUITE_2.getRoomID());
         String actualOutput = uniqueRoomList.getAllRooms(rooms);
-        Integer[] singleRooms = {2103, 2104};
+        Integer[] singleRooms = {2104, 2105};
         Integer[] doubleRooms = {2113, 2114};
         Integer[] suiteRooms = {2123, 2124};
 
@@ -129,7 +129,7 @@ public class UniqueRoomListTest {
                 SINGLE_2.getRoomID(), DOUBLE_1.getRoomID(), DOUBLE_2.getRoomID(),
                 SUITE_1.getRoomID(), SUITE_2.getRoomID());
         String actualOutput = uniqueRoomList.getSingleRooms(rooms);
-        Integer[] singleRooms = {2103, 2104};
+        Integer[] singleRooms = {2104, 2105};
 
         String expectedOutput = "Single Rooms: " + singleRooms.length + " " + Arrays.toString(singleRooms) + "\n";
 

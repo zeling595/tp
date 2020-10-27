@@ -9,17 +9,24 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GetBillCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class GetBillCommandParserTest {
     private GetBillCommandParser parser = new GetBillCommandParser();
 
     @Test
-    public void parse_valuesSpecified_success() throws ParseException {
+    public void parse_valuesSpecified_success() {
         String userInput = BOOKING_ID_DESC_AMY;
 
         GetBillCommand expectedCommand = new GetBillCommand(VALID_BOOKING_ID_AMY);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_prefixMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE);
+        String userInput = "12";
+
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test

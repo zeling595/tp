@@ -2,19 +2,34 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DOUBLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SUITE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DOUBLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SUITE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DOUBLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SUITE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_DOUBLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_SUITE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DOUBLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SUITE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -76,6 +91,21 @@ public class TypicalPersons {
     public static final Person GENE = new PersonBuilder()
             .withId(VALID_PERSONAL_ID_GENE).withName(VALID_NAME_GENE).withPhone(VALID_PHONE_GENE)
             .withEmail(VALID_EMAIL_GENE).withAddress(VALID_ADDRESS_GENE).withTags(VALID_TAG_FRIEND).build();
+
+    public static final Person SINGLE_HARRY = new PersonBuilder()
+            .withId(VALID_PERSONAL_ID_SINGLE_HARRY).withName(VALID_NAME_SINGLE_HARRY)
+            .withPhone(VALID_PHONE_SINGLE_HARRY).withEmail(VALID_EMAIL_SINGLE_HARRY)
+            .withAddress(VALID_ADDRESS_SINGLE_HARRY).withTags(VALID_TAG_FRIEND).build();
+
+    public static final Person DOUBLE_HARRY = new PersonBuilder()
+            .withId(VALID_PERSONAL_ID_DOUBLE_HARRY).withName(VALID_NAME_DOUBLE_HARRY)
+            .withPhone(VALID_PHONE_DOUBLE_HARRY).withEmail(VALID_EMAIL_DOUBLE_HARRY)
+            .withAddress(VALID_ADDRESS_DOUBLE_HARRY).withTags(VALID_TAG_FRIEND).build();
+
+    public static final Person SUITE_HARRY = new PersonBuilder()
+            .withId(VALID_PERSONAL_ID_SUITE_HARRY).withName(VALID_NAME_SUITE_HARRY)
+            .withPhone(VALID_PHONE_SUITE_HARRY).withEmail(VALID_EMAIL_SUITE_HARRY)
+            .withAddress(VALID_ADDRESS_SUITE_HARRY).withTags(VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -36,11 +36,14 @@ public class FilterRoomCommandTest {
         int roomType1 = 1;
         FilterRoomCommand command1 = new FilterRoomCommand(startDate, endDate, roomType1);
         ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
-        expectedRoomId1.add(2103);
+        //        expectedRoomId1.add(2103);
         expectedRoomId1.add(2104);
         expectedRoomId1.add(2105);
         expectedRoomId1.add(2106);
         expectedRoomId1.add(2107);
+        expectedRoomId1.add(2108);
+        expectedRoomId1.add(2110);
+        expectedRoomId1.add(2112);
         String expectedOutput1 = model.displaySingleRooms(FXCollections.observableArrayList(expectedRoomId1));
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput1),
@@ -61,6 +64,8 @@ public class FilterRoomCommandTest {
         expectedRoomId2.add(2115);
         expectedRoomId2.add(2116);
         expectedRoomId2.add(2117);
+        expectedRoomId2.add(2120);
+        expectedRoomId2.add(2122);
         String expectedOutput2 = model.displayDoubleRooms(FXCollections.observableArrayList(expectedRoomId2));
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput2),
                 command2.execute(model).getFeedbackToUser());
@@ -80,6 +85,8 @@ public class FilterRoomCommandTest {
         expectedRoomId1.add(2125);
         expectedRoomId1.add(2126);
         expectedRoomId1.add(2127);
+        expectedRoomId1.add(2129);
+        expectedRoomId1.add(2132);
         String expectedOutput3 = model.displaySuiteRooms(FXCollections.observableArrayList(expectedRoomId1));
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput3),
@@ -95,21 +102,28 @@ public class FilterRoomCommandTest {
         int roomType = 0;
         FilterRoomCommand command4 = new FilterRoomCommand(startDate, endDate, roomType);
         ArrayList<Integer> expectedRoomId4 = new ArrayList<>();
-        expectedRoomId4.add(2103);
+        //        expectedRoomId4.add(2103);
         expectedRoomId4.add(2104);
         expectedRoomId4.add(2105);
         expectedRoomId4.add(2106);
         expectedRoomId4.add(2107);
+        expectedRoomId4.add(2108);
+        expectedRoomId4.add(2110);
+        expectedRoomId4.add(2112);
         expectedRoomId4.add(2113);
         expectedRoomId4.add(2114);
         expectedRoomId4.add(2115);
         expectedRoomId4.add(2116);
         expectedRoomId4.add(2117);
+        expectedRoomId4.add(2120);
+        expectedRoomId4.add(2122);
         expectedRoomId4.add(2123);
         expectedRoomId4.add(2124);
         expectedRoomId4.add(2125);
         expectedRoomId4.add(2126);
         expectedRoomId4.add(2127);
+        expectedRoomId4.add(2129);
+        expectedRoomId4.add(2132);
         String expectedOutput3 = model.displayRooms(FXCollections.observableArrayList(expectedRoomId4));
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput3),

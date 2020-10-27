@@ -140,7 +140,7 @@ Finds the bill with a room ID and a date (the last day of a booking).
 Format: `getBill id/ROOM_ID ed/BOOKING_END_DATE`
 
 * The room ID must be a valid room number
-* Dates have to be in the format YYYY-MM-DD
+* Dates have to be in the format yyyy-MM-dd
 
 Examples:
 * `getBill id/2103 ed/2020-09-15` shows the bill for the booking on Room 2103 which ends on 15 Sep 2020. 
