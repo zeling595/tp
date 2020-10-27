@@ -28,6 +28,7 @@ public class GetBillCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
     public static final String MESSAGE_SUCCESS_GET_BILL = "Nett bill for booking id %1$d = $%2$d";
     public static final String MESSAGE_NIGHTS_STAYED = "Number of nights stayed: %1$d";
+    public static final String MESSAGE_PRICE_PER_NIGHT = "Price per night: $%1$d";
 
     private final int bookingId;
 
@@ -75,6 +76,7 @@ public class GetBillCommand extends Command {
         }
 
         String resultMessage = String.format(MESSAGE_NIGHTS_STAYED, numNights) + "\n";
+        resultMessage += String.format(MESSAGE_PRICE_PER_NIGHT, pricePerNight) + "\n";
         if (!servicesBillBreakdown.isEmpty()) {
             resultMessage += "Room services ordered:\n";
             resultMessage += servicesBillBreakdown + "\n";
