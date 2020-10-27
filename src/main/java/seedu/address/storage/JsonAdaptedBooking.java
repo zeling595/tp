@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ROOM_ID;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
+
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -65,6 +68,8 @@ public class JsonAdaptedBooking {
 
         if (roomId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "roomId"));
+        } else if (roomId > 2132 || roomId < 2103) {
+            throw new IllegalValueException(MESSAGE_INVALID_ROOM_ID);
         }
         final Integer modelRoomId = roomId;
 
@@ -75,12 +80,12 @@ public class JsonAdaptedBooking {
 
         if (startDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "startDate"));
+        } else if (endDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "endDate"));
+        } else if (!startDate.isBefore(endDate)) {
+            throw new IllegalValueException(MESSAGE_INVALID_START_END_DATE);
         }
         final LocalDate modelStartDate = startDate;
-
-        if (endDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "endDate"));
-        }
         final LocalDate modelEndDate = endDate;
 
         final boolean modelIsActive = isActive;

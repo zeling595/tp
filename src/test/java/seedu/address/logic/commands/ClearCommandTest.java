@@ -8,10 +8,7 @@ import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
 
 public class ClearCommandTest {
 
@@ -30,6 +27,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 model.getRoomBook(), model.getBookingBook(), model.getRoomServiceBook());
         expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setBookingBook(new BookingBook());
+        expectedModel.setRoomServiceBook(new RoomServiceBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

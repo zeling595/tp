@@ -20,6 +20,9 @@ public class TypicalBookings {
     public static final LocalDate STARTDATE_3 = LocalDate.of(2020, 10, 26);
     public static final LocalDate ENDDATE_3 = LocalDate.of(2020, 10, 27);
 
+    public static final LocalDate EDITED_ENDDATE_1 = LocalDate.of(2020, 10, 24);
+    public static final LocalDate START_DATE_AFTER_END_DATE_1 = STARTDATE_1.plusMonths(1);
+
     public static final Booking BOOKING_1 = new Booking(2103, 1, STARTDATE_1, ENDDATE_1,
             false, 1);
     public static final Booking BOOKING_2 = new Booking(2104, 2, STARTDATE_1, ENDDATE_1,
@@ -33,6 +36,7 @@ public class TypicalBookings {
     public static final Booking BOOKING_6 = new Booking(2103, 1, STARTDATE_3, ENDDATE_3,
             false, 6);
 
+    public static final Integer EDITED_ROOM_ID_1 = 2106;
     public static final Integer BOOKING_ID_1 = 1;
     public static final Integer INVALID_BOOKING_ID = 100;
 

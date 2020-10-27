@@ -14,6 +14,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.BookingBook;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesBookingIdPredicate;
@@ -32,15 +33,27 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_GENE = "Gene Xiao";
+    public static final String VALID_NAME_SINGLE_HARRY = "Harry SingleLover";
+    public static final String VALID_NAME_DOUBLE_HARRY = "Harry DoubleLover";
+    public static final String VALID_NAME_SUITE_HARRY = "Harry SuiteLover";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_GENE = "420420420";
+    public static final String VALID_PHONE_SINGLE_HARRY = "111222333";
+    public static final String VALID_PHONE_DOUBLE_HARRY = "222111333";
+    public static final String VALID_PHONE_SUITE_HARRY = "333111222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_GENE = "gene@nuscomputing.com";
+    public static final String VALID_EMAIL_SINGLE_HARRY = "singleharry@nus.com";
+    public static final String VALID_EMAIL_DOUBLE_HARRY = "doubleharry@nus.com";
+    public static final String VALID_EMAIL_SUITE_HARRY = "suiteharry@nus.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_GENE = "Streety McStreetFace";
+    public static final String VALID_ADDRESS_SINGLE_HARRY = "Block 111, Single Street";
+    public static final String VALID_ADDRESS_DOUBLE_HARRY = "Block 222, Double Street";
+    public static final String VALID_ADDRESS_SUITE_HARRY = "Block 333, Suite Street";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -51,12 +64,27 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
 
+    public static final int VALID_PERSONAL_ID_SINGLE_HARRY = 420;
+    public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
+    public static final int VALID_PERSONAL_ID_SUITE_HARRY = 422;
+
+    public static final int VALID_SINGLEROOM_ID1 = 2104;
+    public static final int VALID_SINGLEROOM_ID2 = 2110;
+    public static final int VALID_SINGLEROOM_ID3 = 2112;
+    public static final int VALID_DOUBLEROOM_ID1 = 2113;
+    public static final int VALID_DOUBLEROOM_ID2 = 2120;
+    public static final int VALID_DOUBLEROOM_ID3 = 2122;
+    public static final int VALID_SUITEROOM_ID1 = 2123;
+    public static final int VALID_SUITEROOM_ID2 = 2129;
+    public static final int VALID_SUITEROOM_ID3 = 2132;
+
     public static final int VALID_ROOM_ID_AMY = 2103;
     public static final int VALID_ROOM_ID_BOB = 2104;
     public static final int VALID_ROOM_ID_GENE = 2106;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2103;
     public static final int VALID_ROOM_ID_DAN = 2104;
     public static final int INVALID_ROOM_ID = 1;
+    public static final int INVALID_ROOM_ID_HIGH = 9999;
 
     public static final int CURRENT_YEAR = LocalDate.now().getYear();
     public static final int NEXT_YEAR = CURRENT_YEAR + 1;
@@ -67,7 +95,7 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
+    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-13",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -86,6 +114,18 @@ public class CommandTestUtil {
     public static final LocalDate PAST_END_DATE = LocalDate.parse("2001-05-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+    public static final LocalDate VALID_START_DATE_SINGLE_HARRY = LocalDate.parse(NEXT_YEAR + "-03-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse(NEXT_YEAR + "-05-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_DOUBLE_HARRY = LocalDate.parse(NEXT_YEAR + "-06-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_DOUBLE_HARRY = LocalDate.parse(NEXT_YEAR + "-07-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_SUITE_HARRY = LocalDate.parse(NEXT_YEAR + "-08-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_SUITE_HARRY = LocalDate.parse(NEXT_YEAR + "-09-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 
     // Booking Values
@@ -95,6 +135,9 @@ public class CommandTestUtil {
     public static final int VALID_BOOKING_ID_DAN = 14;
     public static final int BOOKING_DURATION_AMY = 5;
 
+    public static final int VALID_BOOKING_ID_SINGLE_HARRY = 105;
+    public static final int VALID_BOOKING_ID_DOUBLE_HARRY = 205;
+    public static final int VALID_BOOKING_ID_SUITE_HARRY = 305;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -202,6 +245,24 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the booking book, filtered booking list and selected booking in {@code actualModel} remain unchanged
+     */
+    public static void assertBookingBookCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        BookingBook expectedBookingBook = new BookingBook(actualModel.getBookingBook());
+        List<Booking> expectedFilteredList = new ArrayList<>(actualModel.getFilteredBookingList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedBookingBook, actualModel.getBookingBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredBookingList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

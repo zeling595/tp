@@ -120,6 +120,22 @@ public class Booking {
     }
 
     /**
+     * Returns true if the room id, person id, start date, end date are the same.
+     * @param otherBooking the other booking to compare.
+     */
+    public boolean isSameBooking(Booking otherBooking) {
+        if (otherBooking.equals(this)) {
+            return true;
+        }
+
+        return otherBooking.getRoomId().equals(getRoomId())
+                && otherBooking.getPersonId().equals(getPersonId())
+                && otherBooking.getStartDate().equals(getStartDate())
+                && otherBooking.getEndDate().equals(getEndDate())
+                && otherBooking.isActive() == isActive();
+    }
+
+    /**
      * Returns true if both bookings have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

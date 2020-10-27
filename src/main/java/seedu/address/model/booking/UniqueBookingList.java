@@ -24,7 +24,7 @@ public class UniqueBookingList implements Iterable<Booking> {
      */
     public boolean contains(Booking toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameBooking);
     }
 
     /**
@@ -116,7 +116,7 @@ public class UniqueBookingList implements Iterable<Booking> {
             throw new BookingNotFoundException();
         }
 
-        if (!target.equals(editedBooking) && contains(editedBooking)) {
+        if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
             throw new DuplicateBookingException();
         }
 

@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
+import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
@@ -59,5 +64,32 @@ public class GetBillCommandTest {
             int bookingId = ACTIVE_BOOKING_DAN.getId();
             Booking booking = model.getBooking(bookingId);
         });
+    }
+
+    @Test
+    public void nonExistentBooking() throws CommandException {
+        GetBillCommand command = new GetBillCommand(INVALID_BOOKING_ID);
+        assertCommandFailure(command, model, MESSAGE_BOOKING_MISSING);
+    }
+
+    @Test
+    public void equals() {
+        final GetBillCommand standardCommand = new GetBillCommand(VALID_BOOKING_ID_DAN);
+
+        // same values -> returns true
+        GetBillCommand commandWithSameValues = new GetBillCommand(VALID_BOOKING_ID_DAN);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> return false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different bookingId -> return false
+        assertFalse(standardCommand.equals(new GetBillCommand(VALID_BOOKING_ID_DAN + 1)));
     }
 }

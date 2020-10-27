@@ -124,7 +124,7 @@ public interface Model {
 
     boolean hasRoom(int roomId);
 
-    Room getRoom(int roomId);
+    Room getRoom(Integer roomId);
 
     ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms);
 

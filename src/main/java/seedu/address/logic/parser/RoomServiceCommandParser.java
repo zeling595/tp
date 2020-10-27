@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_SERVICE_TYPE;
 
 import java.util.stream.Stream;
 
@@ -27,6 +28,9 @@ public class RoomServiceCommandParser implements Parser<RoomServiceCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoomServiceCommand.MESSAGE_USAGE));
         }
+
+        assert argMultimap.getValue(PREFIX_BOOKING_ID).isPresent();
+        assert argMultimap.getValue(PREFIX_ROOM_SERVICE_TYPE).isPresent();
 
         Integer bookingId = ParserUtil.parseBookingId(argMultimap.getValue(PREFIX_BOOKING_ID).get());
         String type = argMultimap.getValue(PREFIX_ROOM_SERVICE_TYPE).get();

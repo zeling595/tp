@@ -18,10 +18,13 @@ public class ListRoomCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully retrieved all rooms";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
+    private final int roomType;
     /**
      * Creates a ListRoomCommand.
      */
-    public ListRoomCommand() {}
+    public ListRoomCommand(int roomType) {
+        this.roomType = roomType;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -29,8 +32,17 @@ public class ListRoomCommand extends Command {
         ObservableList<Room> roomList = model.getRoomBook().getRoomList();
         ObservableList<Integer> retList = FXCollections.observableArrayList(roomList.stream()
                 .map(Room::getRoomID).collect(Collectors.toList()));
-
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + model.displayRooms(retList));
+        String result = "";
+        if (roomType == 0) {
+            result = model.displayRooms(retList);
+        } else if (roomType == 1) {
+            result = model.displaySingleRooms(retList);
+        } else if (roomType == 2) {
+            result = model.displayDoubleRooms(retList);
+        } else if (roomType == 3) {
+            result = model.displaySuiteRooms(retList);
+        }
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + result);
     }
 
     @Override

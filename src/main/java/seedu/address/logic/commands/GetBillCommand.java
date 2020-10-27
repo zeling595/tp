@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
@@ -18,14 +19,13 @@ public class GetBillCommand extends Command {
 
     public static final String COMMAND_WORD = "getBill";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets total bill for a particular occupied room.\n"
-            + "Parameters: BOOKING ID "
-            + PREFIX_BOOKING_ID + "[BOOKING ID]\n"
+            + "Parameters: "
+            + PREFIX_BOOKING_ID + "BOOKING ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_BOOKING_ID + "8";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "getBill command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Room id: %1$d";
-    public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_SUCCESS_GET_BILL = "Total bill for booking id: %1$d is %2$d";
 
     private final int bookingId;
