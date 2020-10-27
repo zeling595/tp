@@ -133,19 +133,6 @@ Examples:
 * `listPerson` followed by `deletePerson 2` deletes the 2nd person in the guestbook.
 * `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
 
-### Viewing a bill: `getBill`
-
-Finds the bill with a room ID and a date (the last day of a booking).
-
-Format: `getBill id/ROOM_ID ed/BOOKING_END_DATE`
-
-* The room ID must be a valid room number
-* Dates have to be in the format yyyy-MM-dd
-
-Examples:
-* `getBill id/2103 ed/2020-09-15` shows the bill for the booking on Room 2103 which ends on 15 Sep 2020. 
-
-
 ### Checking in guest: `checkIn`
 
 Checks in a guest into the hotel.
@@ -167,6 +154,7 @@ Example:
 from 12 December 2020 to 25 December 2020.
 
 ### Checking out guest: `checkOut`
+
 Checks out a guest from the hotel.
 
 Format: `checkOut bid/BOOKING_ID`
@@ -175,9 +163,20 @@ Format: `checkOut bid/BOOKING_ID`
 * The `BOOKING_ID` refers to the unique identifier of the booking. 
 * The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
 
-Examples:
+Example:
 * `checkOut bid/42` checks out the guest from his room with the valid booking Id of `42`.
 
+### Viewing a bill: `getBill`
+
+Finds the bill of a specified booking Id.  
+
+Format: `getBill bid/BOOKING_ID`
+
+* The `BOOKING_ID` refers to the unique identifier of the booking.  
+* The `BOOKING_ID` must be a valid booking Id in the BookingBook.  
+
+Example:
+* `getBill bid/6` shows the bill for the booking Id `6`.  
 
 ### Filtering hotel rooms: `filterRoom`
 Filters the hotel rooms with some optional filters.
