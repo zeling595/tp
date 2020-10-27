@@ -17,6 +17,7 @@ public class Messages {
 
     // room
     public static final String MESSAGE_ROOM_ID_MISSING = "No valid roomId can be be found.";
+    public static final String MESSAGE_INVALID_ROOM_ID = "Invalid roomId.";
 
     // booking
     public static final String MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX = "The bookingId index is invalid.";
