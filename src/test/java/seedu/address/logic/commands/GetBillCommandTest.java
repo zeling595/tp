@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
+import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -23,8 +24,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.exception.BookingNotFoundException;
-import seedu.address.model.room.Room;
-import seedu.address.model.roomservice.RoomService;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for GetBillCommand.
@@ -37,25 +36,31 @@ public class GetBillCommandTest {
     @Test
     public void execute_success_withRoomService() throws CommandException {
         model.addBooking(ACTIVE_BOOKING_DAN);
-        Booking booking = model.getBookingWithId(VALID_BOOKING_ID_DAN);
-        Room room = model.getRoom(VALID_ROOM_ID_DAN);
 
-        int pricePerNight = room.getPrice();
-
-        String roomServices = "Massaging service: 70\n"
-                + "Wifi service: 40\n"
-                + "Dining in service: 50\n";
+        String expected = "Number of nights stayed: 10\n"
+                + "Price per night: $70\n"
+                + "Room services ordered:\n"
+                + "Massaging service: $70\n"
+                + "Wifi service: $40\n"
+                + "Dining in service: $50\n"
+                + "\n"
+                + "Nett bill for booking id 14 = $860";
 
         GetBillCommand command = new GetBillCommand(VALID_BOOKING_ID_DAN);
-        int totalPrice = booking.getDuration() * pricePerNight;
-        for (RoomService rs : model.getRoomServicesForBooking(VALID_BOOKING_ID_DAN)) {
-            totalPrice += rs.getType().getPrice();
-        }
-        assertEquals(roomServices
-                        + String.format(GetBillCommand.MESSAGE_SUCCESS_GET_BILL,
-                VALID_BOOKING_ID_DAN,
-                totalPrice),
-            command.execute(model).getFeedbackToUser());
+        assertEquals(expected, command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_success_withNoRoomService() throws CommandException {
+        model.addBooking(BOOKING_BOB);
+        String expected = "Number of nights stayed: 1\n"
+                + "Price per night: $70\n"
+                + "No room services ordered\n"
+                + "Nett bill for booking id 12 = $70";
+
+        GetBillCommand command = new GetBillCommand(VALID_BOOKING_ID_BOB);
+        assertEquals(expected, command.execute(model).getFeedbackToUser());
+
     }
 
     @Test
