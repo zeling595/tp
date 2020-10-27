@@ -56,7 +56,7 @@ public class JsonAdaptedBookingTest {
     public void toModelType_invalidRoomId_throwsIllegalValueException() {
         JsonAdaptedBooking booking = new JsonAdaptedBooking(VALID_ID,
                 INVALID_ROOM_ID, VALID_PERSON_ID, VALID_START_DATE, VALID_END_DATE, VALID_IS_ACTIVE);
-        String expectedMessage = Messages.MESSAGE_INVALID_ROOM_ID;
+        String expectedMessage = Messages.MESSAGE_ROOM_ID_MISSING;
         assertThrows(IllegalValueException.class, expectedMessage, booking::toModelType);
     }
 

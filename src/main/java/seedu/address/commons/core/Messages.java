@@ -16,8 +16,10 @@ public class Messages {
     public static final String MESSAGE_PERSONAL_ID_MISSING = "No existing personalId can be found.";
 
     // room
-    public static final String MESSAGE_ROOM_ID_MISSING = "No existing roomId can be be found.";
-    public static final String MESSAGE_INVALID_ROOM_ID = "Invalid roomId.";
+    public static final String MESSAGE_ROOM_ID_MISSING = "No existing roomId can be be found. "
+            + "RoomId should be within 2103 to 2132.";
+    public static final String MESSAGE_INVALID_ROOM_TYPE = "Invalid Room Type. Only 1, 2, 3 allowed.\n"
+            + "1 for Single Rooms.\n2 for Double Rooms. \n3 for Suite Rooms.";
 
     // booking
     public static final String MESSAGE_INVALID_BOOKING_DISPLAYED_ID = "The bookingId provided is invalid.";
