@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_ID_HIGH;
-import static seedu.address.logic.commands.CommandTestUtil.PAST_END_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.PAST_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOUBLEROOM_ID1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOUBLEROOM_ID2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
@@ -265,18 +263,6 @@ public class CheckInCommandTest {
     public void execute_invalidRoomIdTwo_throwsCommandException() {
         assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
                 INVALID_ROOM_ID_HIGH, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
-    }
-
-    @Test
-    public void execute_pastStartDateAndValidEndDate_throwsCommandException() {
-        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE,
-                VALID_ROOM_ID_GENE, PAST_START_DATE, VALID_END_DATE_GENE).execute(model));
-    }
-
-    @Test
-    public void execute_pastStartDateAndPastEndDate_throwsCommandException() {
-        assertThrows(CommandException.class, () -> new CheckInCommand(VALID_PERSONAL_ID_GENE,
-                VALID_ROOM_ID_GENE, PAST_START_DATE, PAST_END_DATE).execute(model));
     }
 
     @Test

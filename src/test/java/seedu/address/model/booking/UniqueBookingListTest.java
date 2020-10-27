@@ -172,8 +172,8 @@ public class UniqueBookingListTest {
 
     @Test
     public void getUnavailableRooms_success() {
-        LocalDate sd = LocalDate.of(LocalDate.now().getYear() + 1, 12, 9);
-        LocalDate ed = LocalDate.of(LocalDate.now().getYear() + 1, 12, 14);
+        LocalDate sd = LocalDate.of(2020, 12, 9);
+        LocalDate ed = LocalDate.of(2020, 12, 14);
         uniqueBookingList.add(new BookingBuilder(BOOKING_AMY).withIsActive(true).build());
         uniqueBookingList.add(new BookingBuilder(BOOKING_BOB).withIsActive(true).build());
         ObservableList<Integer> expectedOutput = FXCollections.observableArrayList(2104);

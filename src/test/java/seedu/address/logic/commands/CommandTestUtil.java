@@ -86,45 +86,38 @@ public class CommandTestUtil {
     public static final int INVALID_ROOM_ID = 1;
     public static final int INVALID_ROOM_ID_HIGH = 9999;
 
-    public static final int CURRENT_YEAR = LocalDate.now().getYear();
-    public static final int NEXT_YEAR = CURRENT_YEAR + 1;
-
-    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-05",
+    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-10",
+    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
+    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-13",
+    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse("2020-12-13",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-06",
+    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse("2020-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-09",
+    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-09",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-11",
+    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse("2020-11-11",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-21",
+    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-01-30",
+    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-30",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-06-06",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate PAST_START_DATE = LocalDate.parse("2001-05-06",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate PAST_END_DATE = LocalDate.parse("2001-05-06",
+    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-06-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-    public static final LocalDate VALID_START_DATE_SINGLE_HARRY = LocalDate.parse(NEXT_YEAR + "-03-25",
+    public static final LocalDate VALID_START_DATE_SINGLE_HARRY = LocalDate.parse("2020-03-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse(NEXT_YEAR + "-05-25",
+    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse("2020-05-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_DOUBLE_HARRY = LocalDate.parse(NEXT_YEAR + "-06-25",
+    public static final LocalDate VALID_START_DATE_DOUBLE_HARRY = LocalDate.parse("2020-06-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_DOUBLE_HARRY = LocalDate.parse(NEXT_YEAR + "-07-25",
+    public static final LocalDate VALID_END_DATE_DOUBLE_HARRY = LocalDate.parse("2020-07-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_SUITE_HARRY = LocalDate.parse(NEXT_YEAR + "-08-25",
+    public static final LocalDate VALID_START_DATE_SUITE_HARRY = LocalDate.parse("2020-08-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_SUITE_HARRY = LocalDate.parse(NEXT_YEAR + "-09-25",
+    public static final LocalDate VALID_END_DATE_SUITE_HARRY = LocalDate.parse("2020-09-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 

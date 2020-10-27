@@ -85,10 +85,6 @@ public class CheckInCommand extends Command {
 
         assert model.hasRoom(roomId);
 
-        if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(MESSAGE_PAST_BOOKING);
-        }
-
         booking = new Booking(roomId, personalId, startDate, endDate, true);
         int bookingId = booking.getId();
 
