@@ -146,7 +146,7 @@ guestbook prior to this.**
 `ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
 are from `ROOM_ID` 2123 to 2132.  
 * The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
-
+* `START_DATE` must be before `END_DATE`  
 * All the fields must be provided.
 
 Example:
@@ -283,13 +283,13 @@ Action | Format, Examples
 **Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
-**Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
-**Check Out** | `checkOut ROOM_ID`
+**Check In** | `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
+**Check Out** | `checkOut bid/BOOKING_ID`<br> e.g., `checkOut bid/42`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`
 **List Booking** | `listBooking`<br> e.g., `listBooking`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
-**Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
+**Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
 **Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 
