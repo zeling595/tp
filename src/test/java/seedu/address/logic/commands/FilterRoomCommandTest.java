@@ -36,7 +36,7 @@ public class FilterRoomCommandTest {
         int roomType1 = 1;
         FilterRoomCommand command1 = new FilterRoomCommand(startDate, endDate, roomType1);
         ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
-        //        expectedRoomId1.add(2103);
+        expectedRoomId1.add(2103);
         expectedRoomId1.add(2104);
         expectedRoomId1.add(2105);
         expectedRoomId1.add(2106);
@@ -102,7 +102,7 @@ public class FilterRoomCommandTest {
         int roomType = 0;
         FilterRoomCommand command4 = new FilterRoomCommand(startDate, endDate, roomType);
         ArrayList<Integer> expectedRoomId4 = new ArrayList<>();
-        //        expectedRoomId4.add(2103);
+        expectedRoomId4.add(2103);
         expectedRoomId4.add(2104);
         expectedRoomId4.add(2105);
         expectedRoomId4.add(2106);

@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -242,7 +243,7 @@ public class ParserUtil {
                 throw new ParseException("Only 1, 2, 3 allowed.");
             }
         } catch (NumberFormatException | ParseException e) {
-            throw new ParseException("Invalid Room Type. Only 1, 2, 3 allowed.");
+            throw new ParseException(Messages.MESSAGE_INVALID_ROOM_TYPE);
         }
     }
 }
