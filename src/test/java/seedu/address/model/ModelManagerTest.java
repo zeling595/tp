@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOM;
+import static seedu.address.testutil.TypicalRooms.DEFAULT_ROOMID;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -167,6 +169,28 @@ public class ModelManagerTest {
     @Test
     public void getFilteredBookingList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredBookingList().remove(0));
+    }
+
+    @Test
+    public void hasRoom_roomNotInRoomBook_returnsFalse() {
+        assertFalse(modelManager.hasRoom(2103));
+    }
+
+    @Test
+    public void hasRoom_roomInRoomBook_returnsTrue() {
+        modelManager.addRoom(DEFAULT_ROOM);
+        assertTrue(modelManager.hasRoom(DEFAULT_ROOMID));
+    }
+
+    @Test
+    public void getRoom_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getRoom(null));
+    }
+
+    @Test
+    public void getRoom_success() {
+        modelManager.addRoom(DEFAULT_ROOM);
+        assertTrue(modelManager.getRoom(DEFAULT_ROOMID).equals(DEFAULT_ROOM));
     }
 
     @Test

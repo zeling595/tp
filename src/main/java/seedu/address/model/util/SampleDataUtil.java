@@ -54,17 +54,17 @@ public class SampleDataUtil {
     public static Booking[] getSampleBookings() {
         return new Booking[] {
             new Booking(2103, 1, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), true, 1),
+                LocalDate.now().plusMonths(1).plusDays(1), true, 1),
             new Booking(2104, 2, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), true, 2),
+                LocalDate.now().plusMonths(1).plusDays(1), true, 2),
             new Booking(2105, 3, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), true, 3),
+                LocalDate.now().plusMonths(1).plusDays(1), true, 3),
             new Booking(2106, 4, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), false, 4),
+                LocalDate.now().plusMonths(1).plusDays(1), false, 4),
             new Booking(2107, 5, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), false, 5),
+                LocalDate.now().plusMonths(1).plusDays(1), false, 5),
             new Booking(2108, 6, LocalDate.now().plusMonths(1),
-                LocalDate.now().plusMonths(1), false, 6),
+                LocalDate.now().plusMonths(1).plusDays(1), false, 6),
         };
     }
 

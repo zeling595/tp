@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import java.util.logging.Logger;
 
@@ -20,8 +21,9 @@ public class DeleteBookingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the booking identified by bookingId.\n"
-            + "Parameters: BOOKING_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: "
+            + PREFIX_BOOKING_ID + "BOOKING_ID (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + PREFIX_BOOKING_ID + " 1";
 
     public static final String MESSAGE_DELETE_BOOKING_SUCCESS = "Deleted Booking: %1$s";
 

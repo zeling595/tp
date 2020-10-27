@@ -63,7 +63,6 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
         if (argMultimap.getValue(PREFIX_END_DATE).isPresent()) {
             LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
             predicates.add(new BookingMatchesEndDatePredicate(endDate));
-
         }
 
         if (argMultimap.getValue(PREFIX_IS_ACTIVE).isPresent()) {

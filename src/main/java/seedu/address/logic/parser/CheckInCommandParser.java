@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -39,7 +40,7 @@ public class CheckInCommandParser implements Parser<CheckInCommand> {
         LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
 
         if (!startDate.isBefore(endDate)) {
-            throw new ParseException("Start Date must be before End Date!");
+            throw new ParseException(MESSAGE_INVALID_START_END_DATE);
         }
 
         return new CheckInCommand(personalId, roomId, startDate, endDate);

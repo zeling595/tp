@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.CheckInCommand.MESSAGE_PERSONAL_ID_MISSING;
-import static seedu.address.logic.commands.CheckInCommand.MESSAGE_ROOM_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
@@ -27,13 +27,14 @@ public class FindBookingCommand extends Command {
 
     public static final String COMMAND_WORD = "findBooking";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the active booking in booking book "
-            + "associated with the personId, roomId, start and end date, isActive and show as a list with one item.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the active bookings in booking book "
+            + "associated with the personId, roomId, start and end date, isActive and show as a list. \n"
+            + "There must at least be 1 parameter. Dates should be in the format YYYY-MM-DD. \n"
             + "Parameters:"
-            + PREFIX_ROOM_ID + "[ROOM_ID] (must be a valid room number) "
-            + PREFIX_START_DATE + "[START_DATE] (in the format YYYY-MM-DD) "
-            + PREFIX_END_DATE + "[END_DATE] (in the format YYYY-MM-DD)\n"
-            + PREFIX_IS_ACTIVE + "[IS_ACTIVE] (in the format true or false)\n"
+            + "[" + PREFIX_ROOM_ID + "ROOM_ID] (must be a valid room number) "
+            + "[" + PREFIX_START_DATE + "START_DATE] "
+            + "[" + PREFIX_END_DATE + "END_DATE] "
+            + "[" + PREFIX_IS_ACTIVE + "IS_ACTIVE] (in the format true or false)\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM_ID + "3017 "

@@ -88,7 +88,7 @@ public class AddressBookParser {
             return new ListBookingCommand();
 
         case ListRoomCommand.COMMAND_WORD:
-            return new ListRoomCommand();
+            return new ListRoomCommandParser().parse(arguments);
 
         case FilterRoomCommand.COMMAND_WORD:
             return new FilterRoomCommandParser().parse(arguments);
