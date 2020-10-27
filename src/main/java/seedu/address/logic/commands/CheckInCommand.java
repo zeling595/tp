@@ -27,10 +27,10 @@ public class CheckInCommand extends Command {
     public static final String COMMAND_WORD = "checkIn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a person into the hotel. "
-            + "Dates should be in the format YYYY-MM-DD. \n"
+            + "Dates should be in the format yyyy-MM-dd. \n"
             + "Parameters: "
-            + PREFIX_PERSONAL_ID + "PERSONAL_ID (must be a positive integer) "
-            + PREFIX_ROOM_ID + "ROOM_ID (must be a valid room number) "
+            + PREFIX_PERSONAL_ID + "PERSONAL_ID (must be an existing personal Id) "
+            + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "
             + PREFIX_START_DATE + "START_DATE "
             + PREFIX_END_DATE + "END_DATE \n"
             + "Example: " + COMMAND_WORD + " "
