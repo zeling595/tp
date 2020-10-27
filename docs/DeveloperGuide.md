@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](hhttps://github.com/AY2021S1-CS2103-W14-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103-W14-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103-W14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,9 +62,9 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103-W14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BookingListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -78,7 +78,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103-W14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,13 +97,14 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103-W14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book, booking book, room book and room service book data.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Booking>` that can be 'observed' 
+e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
@@ -121,7 +122,7 @@ The `Model`,
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the address book, booking book and room service book data in json format and read it back.
 
 ### Common classes
 
@@ -537,17 +538,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                     | I want to …​                                                                                         | So that I …​                                                            |
 | -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
-| `* * *`  | hotel receptionist                         | [EPIC] can check-in and check-out both walk-in guests and reservations.                             |                                                                        |
-| `* * *`  | hotel receptionist                         | answer walk-in guests’ queries about which rooms are available for a block of dates                 | know which rooms I can check them in                                   |
-| `* * *`  | hotel receptionist                         | register guests with a particular room in our system                                                | can keep track of the rooms occupied.                                  |
+| `* * *`  | hotel receptionist                         | [EPIC] can check-in and check-out guests.                                                           |                                                                        |
+| `* * *`  | hotel receptionist                         | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist                         | check in guests with a particular room in our system                                                | can keep track of the rooms occupied.                                  |
 | `* * *`  | hotel receptionist                         | check out guests from a particular room in our system and make the room available again             | other guests can check in                                              |
-| `*`      | hotel receptionist                         | [EPIC] manage the rooms we have available in our system .                                           |                                                                        |
-| `*`      | hotel receptionist                         | edit the rooms’ type and price                                                                      | upgrade/downgrade a room                                               |
 | `* * *`  | hotel receptionist                         | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
 | `* * *`  | hotel receptionist                         | create new customer profiles as they book rooms                                                     | keep track of their past bookings                                      |
-| `* *`    | hotel receptionist                         | search the room he/she has booked with the name/phone number/passport no                            | locate details of persons without having to go through the entire list |
+| `* *`    | hotel receptionist                         | search the room he/she has booked with the guest's id                                               | locate details of persons without having to go through the entire list |
 | `* * *`  | hotel receptionist                         | [EPIC] keep track of guests’ billings                                                               |                                                                        |
-| `* * *`  | hotel receptionist                         | bill them by the number of nights they stay in a particular room                                    | I can bill them when they check out                                    |
+| `* * *`  | hotel receptionist                         | bill them by the number of nights they stay and room service ordered in a particular room           | I can bill them when they check out                                    |
+| `* * *`  | hotel receptionist                         | [EPIC] keep track of room services ordered by guests.                                               |                                                                        |
+| `* * *`  | hotel receptionist                         | provide `WIFI`, `DINING` and `MASSAGE` room services for guests.                                    |                                                                        |
 
 *{More to be added}*
 
@@ -555,96 +556,197 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ConciergeBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case `UC01`: Add a person profile**  
+**Use case `UC01`: Add a guest profile**  
 
 **MSS**
 
-1.  User inputs the person's information
-2.  ConciergeBook creates the person's profile
+1.  User inputs the guest's information
+2.  ConciergeBook creates the guest's profile
 
     Use case ends.
 
 **Extensions**
 
-1a. Person's information is invalid  
-    1a1. ConciergeBook requests for the correct data.  
-    1a2. User enters new data.
-    Steps 1a1-1a2 are repeated until the data entered are correct.
-    Use case resumes from step 2.
-
+1a. Guest's information is invalid  <br>
+1a1. ConciergeBook displays error message and requests for the correct data.  <br>
+1a2. User enters new data. <br>
+Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+Use case resumes from step 2.<br>
   Use case ends.
   
-**Use case `UC02`: Delete a person profile**
+**Use case:`UC02`: Find a guest profile**
 
 **MSS**
 
-1.  User finds the person to delete.
-2.  User inputs the person's information to delete him/her.
-3.  ConciergeBook deletes the person's profile
+1.  User enters a list of keywords. 
+2.  ConciergeBook shows a list of guests whose name contains any of the keywords. 
+    
+    Use case ends. 
+
+**Extensions**
+1a. User does not enter any input. 
+
+1a1. ConciergeBook shows an error message. <br>
+Use case resumes at step 1. 
+    
+2a. No guest match the keywords. <br>
+2a1. ConciergeBook shows an empty list. <br>
+Use case ends. 
+    
+**Use case `UC03`: Delete a guest profile**
+
+**MSS**
+
+1.  User requests to list or <ins>find guests (UC02)</ins>.
+2.  ConciergeBook shows a list of guests. 
+3.  User request to delete a specific guest in the list. 
+4.  ConciergeBook deletes the guest's profile
 
     Use case ends.
 
 **Extensions**
 
-2a. Person's information cannot be found.  
-  2a1. ConciergeBook alerts user that person's information cannot be found.  
-  
-Use case ends.
+2a. The list is empty. <br>
+Use case ends. 
+    
+3a. The given index is invalid.  <br>
+3a1. ConciergeBook shows an error message  <br>
+Use case resumes at step 3.
 
-**Use case `UC03`: Edit a person profile**
+**Use case `UC04`: Edit a guest profile**
 
 **MSS**
 
-1.  User finds the person to edit.
-2.  User inputs the person's updated information to edit his/her profile.
-3.  ConciergeBook updates the person's profile
+1.  User requests to list or <ins>find guests (UC02)</ins>.
+2.  ConciergeBook shows a list of guests. 
+3.  User request to edit a specific guest in the list and provides the new information. 
+4.  ConciergeBook updates the guest's profile
 
     Use case ends.
 
 **Extensions**
+2a. The list is empty. 
+    Use case ends. 
+    
+3a. The given index is invalid.  
+    3a1. ConciergeBook shows an error message.  
+    Use case resumes at step 3. 
+    
+3b. The information provided is invalid format or no new information is provided. <br>
+    3b1.  ConciergeBook requests for correct data. <br>
+    3b2.  User enters new data.<br>
+      Steps 3b1-3b2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 4.
 
-1a. Person's information cannot be found.  
-  1a1. ConciergeBook alerts user that person's information cannot be found.  
+**Use case `UC05`: Filter rooms**
 
-2a.  Updated information is invalid.  
-  2a1.  ConciergeBook requests for correct data.  
-  2a2.  User enters new data.
-  Steps 2a1-2a2 are repeated until the data entered are correct.
-  Use case resumes from step 3.
+**MSS**
 
-Use case ends.
+1. User inputs a start date, end date and a optional room type. 
+2. ConciergeBook lists out all the matching rooms which are available within the start and end date. 
 
-**Use case `UC04`: List room**  
+**Extension**
+1a. User inputs a start date that is after the end date. <br>
+    1a1. ConciergeBook throws a error message. <br>
+    Use case resumes at step 1. 
+    
+1b. User inputs an invalid room type. <br>
+    1b1. ConciergeBook throws an error message. <br>
+    Use case resumes at step 1. 
+    
+**Use case `UC06`: List rooms**  
 
 **MSS**  
 
-1. User inputs the start date and end date and optionally room type.  
-2. ConciergeBook lists out all the available rooms.  
+1. User inputs an optional room type.  
+2. ConciergeBook lists out all matching rooms.  
 
 Use case ends.
 
 **Extension**
-1a. Start date and/or end date is in invalid format.  
+1a. Room type is in invalid.  
 	1a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
-
-1b.  End date is earlier than start date.  
-	1b1: ConciergeBook throws error message.   
-	Use case resumes at step 1.  
 	
-1c. Room type is in invalid.  
-	1c1: ConciergeBook throws error message.   
-	Use case resumes at step 1.  
-
-
-**Use case `UC05`: Check in a person**  
+**Use case `UC07`: Find a booking**
 
 **MSS**
 
-1. User finds person.  
-2. User inputs the person’s name, phone number, room Id, start date and end date.  
-3. ConciergeBook searches the person in the database.  
-4. ConciergeBook creates a booking for the person and the room and saves it.  
+1. User enters a list of requirements. 
+2. ConciergeBook displays a list of bookings that match the requirements. 
+
+**Extension**
+1a. User enters invalid information or no new information. <br>
+    1a1. ConciergeBook throws an error message and request for correct information. <br>
+    1a2. User inputs correct information. <br>
+    Step 1a1-1a2 are repeated until the information is correct. <br>
+    Use case resumes at step 2. 
+
+2a. No bookings match the requirements. <br>
+    2a1. ConciergeBook shows an empty list. <br>
+    Use case ends. 
+
+**Use case `UC08`: Edit bookings**
+
+**MSS**
+
+1.  User requests to list or <ins>find bookings (UC07)</ins>.
+2.  ConciergeBook shows a list of bookings. 
+3.  User request to edit a specific booking in the list and provides the new information. 
+4.  ConciergeBook updates the booking
+
+    Use case ends.
+
+**Extensions**
+2a. The list is empty. 
+    Use case ends. 
+    
+3a. The given booking id is invalid.  
+    3a1. ConciergeBook shows an error message.  
+    Use case resumes at step 3. 
+
+3b. The start date is after the end date. <br>
+    3b1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 3. 
+    
+3c. The information provided is invalid format or no new information is provided. <br>
+    3c1.  ConciergeBook requests for correct data. <br>
+    3c2.  User enters new data. <br>
+      Steps 3c1-3c2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 4.
+      
+3d. The modified booking overlaps with another existing booking or is a duplicate booking. <br>
+    3d1. ConciergeBook shows an error message and requests for the correct data. <br>
+    3d2. User enters new data. <br>
+    Steps 3d1-3d2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 4.
+
+**Use case `UC09`: Delete a booking**
+
+**MSS**
+
+1.  User requests to list or <ins>find bookings (UC07)</ins>. 
+2.  ConciergeBook shows a list of bookings. 
+3.  User request to delete a booking. 
+4.  ConciergeBook deletes the booking and shows a success message. 
+
+**Extension**
+2a. There are no bookings in the ConciergeBook. <br>
+    Use case ends. <br>
+3a. User enters an invalid Booking Id. <br>
+    3a1. ConciergeBook shows an error message and request for the correct data. <br>
+    3a2. User enters new data. <br>
+    Steps 3a1-3a2 are repeated until the data entered is correct. <br>
+    Use case resumes from step 4.
+
+**Use case `UC10`: Check in a person**  
+
+**MSS**
+
+1. User <ins>finds a guest (UC02)</ins>.  
+2. User <ins>finds an available room (UC05)</ins>.
+3. User inputs the person’s id, room Id, start date and end date.  
+4. ConciergeBook creates a booking and saves it.  
 
 Use case ends.  
 
@@ -653,43 +755,80 @@ Use case ends.
 1a. Person cannot be found.  
     1a1: User <ins>creates a profile for the person (UC01)</ins>.  
 
-2a. User inputs invalid phone number.  
-    2a1: ConciergeBook throws error message.  
-	Use case resumes at step 1.  
-
-2b. User inputs name and phone number that do not exist in the database.  
-	2b1: ConciergeBook throws error message.  
-	Use case resumes at step 1.  
-
-2c. User inputs invalid roomId.  
+2a. User inputs invalid roomId.  
 	2c1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
-2d. User inputs invalid start date and/or end date.  
+3a. User inputs start date and/or end date in wrong format.  
 	2d1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
-2e.  End date is earlier than start date.  
+3b.  End date is earlier than start date.  
 	2e1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
-**Use case: `UC06` - List bookings**
+**Use case `UC11`: Find Booking ID associated with Guest**
+
+**MSS**
+1. User <ins>finds the guest id (UC02)</ins> associated with the guest. 
+2. User <ins>finds the booking (UC07)</ins> associated with the person. 
+
+**Extension**
+1a. No guest Id associated. <br>
+    Use case ends. 
+    
+2a. No booking Id found. <br>
+    Use case ends. 
+
+**Use case `UC12`: Order Room Service**
 
 **MSS**
 
-1. User inputs optional date, optional name, optional room.  
-2.  ConciergeBook lists all the booking on that date.
+1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
+<ins> finds the booking id associated with room Id (UC07)</ins>.
+3. User request for room service. 
+4. ConciergeBook saves the room service and shows a success message. 
 
-Use case ends.
+**Extension**
 
-**Extension**  
-1a. User inputs invalid date, name, room.  
-    1a1: ConciergeBook throws an error message.  
-    Use case resumes at step 1.  
+3a. User inputs an invalid booking id or room service type. <br>
+    3a1. ConciergeBook shows an error message and requests for correct information.<br>
+    3a2. User inputs correct information.<br>
+    Step 3a1-3a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 4. 
 
+**Use Case `UC13`: Get Bill**
 
+**MSS**
 
+1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
+<ins> finds the booking id associated with room Id (UC07)</ins>. 
+2. User requests for the bill for the booking. 
+3. ConciergeBook shows a receipt and displays the total bill. 
 
+**Extension**
+2a. User inputs invalid booking id. <br>
+    2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    2a2. User inputs correct information.<br>
+    Step 2a1-2a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 4. 
+
+**Use Case `UC14`: Check Out a guest**
+
+**MSS**
+
+1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
+<ins> finds the booking id associated with room Id (UC07)</ins>.
+2.  User requests to check out a guest. 
+3.  ConciergeBook shows a success message and displays the receipt for the booking. 
+
+**Extension**
+2a. User inputs invalid booking id. <br>
+    2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    2a2. User inputs correct information.<br>
+    Step 2a1-2a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 4. 
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
