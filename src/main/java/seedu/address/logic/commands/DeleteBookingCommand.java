@@ -32,7 +32,6 @@ public class DeleteBookingCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
 
-
     public DeleteBookingCommand(Integer bookingId) {
         this.bookingId = bookingId;
     }
@@ -45,7 +44,7 @@ public class DeleteBookingCommand extends Command {
         assert bookingId > 0;
         if (!model.hasBookingWithId(bookingId)) {
             logger.warning("Non-existent bookingId");
-            throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_ID);
+            throw new CommandException(Messages.MESSAGE_BOOKING_MISSING);
         }
 
         Booking bookingToDelete = model.getBookingWithId(bookingId);

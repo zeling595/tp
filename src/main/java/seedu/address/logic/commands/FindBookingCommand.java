@@ -51,8 +51,16 @@ public class FindBookingCommand extends Command {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-
-    public FindBookingCommand(List<Predicate<Booking>> predicates, Optional<Integer> roomId, Optional<Integer> personId) {
+    /**
+     * Constructs a FindBookingCommand with list of predicates.
+     * Optional roomId and personId is used to check if such room and person is present in roomBook and personBook.
+     *
+     * @param predicates a list of predicates.
+     * @param roomId an optional roomId if roomId is provided to filter the booking.
+     * @param personId an optional personId if personId is provided to filter the booking.
+     */
+    public FindBookingCommand(List<Predicate<Booking>> predicates, Optional<Integer> roomId,
+                              Optional<Integer> personId) {
         this.predicates = predicates;
         this.roomId = roomId;
         this.personId = personId;
@@ -82,7 +90,7 @@ public class FindBookingCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this ) {
+        if (other == this) {
             return true;
         }
 

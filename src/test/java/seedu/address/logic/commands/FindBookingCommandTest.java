@@ -102,7 +102,8 @@ public class FindBookingCommandTest {
                 Optional.empty());
         expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(1000));
         assertCommandFailure(command, model, expectedMessage);
-        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6), model.getFilteredBookingList());
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6),
+                model.getFilteredBookingList());
     }
 
     @Test
@@ -113,7 +114,8 @@ public class FindBookingCommandTest {
                 Optional.of(1000));
         expectedModel.updateFilteredBookingList(new BookingMatchesPersonIdPredicate(1000));
         assertCommandFailure(command, model, expectedMessage);
-        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6), model.getFilteredBookingList());
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6),
+                model.getFilteredBookingList());
     }
 
     @Test

@@ -46,7 +46,7 @@ public class DeleteBookingCommandTest {
         Integer outOfBoundBookingId = model.getBookingBook().getBookingList().size() + 1;
         DeleteBookingCommand deleteBookingCommand = new DeleteBookingCommand(outOfBoundBookingId);
 
-        assertCommandFailure(deleteBookingCommand, model, Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_ID);
+        assertCommandFailure(deleteBookingCommand, model, Messages.MESSAGE_BOOKING_MISSING);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class DeleteBookingCommandTest {
 
         DeleteBookingCommand deleteBookingCommand = new DeleteBookingCommand(outOfBoundId);
 
-        assertCommandFailure(deleteBookingCommand, model, Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_ID);
+        assertCommandFailure(deleteBookingCommand, model, Messages.MESSAGE_BOOKING_MISSING);
     }
 
     @Test
