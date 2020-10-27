@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindBookingCommand;
@@ -34,25 +35,23 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
      */
     public FindBookingCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
-
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookingCommand.MESSAGE_USAGE));
-        }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_IS_ACTIVE);
 
         List<Predicate<Booking>> predicates = new ArrayList<Predicate<Booking>>();
+        Optional<Integer> optionalRoomId = Optional.empty();
+        Optional<Integer> optionalPersonId = Optional.empty();
 
         if (argMultimap.getValue(PREFIX_ROOM_ID).isPresent()) {
             Integer roomId = ParserUtil.parseRoomId(argMultimap.getValue(PREFIX_ROOM_ID).get());
+            optionalRoomId = Optional.of(roomId);
             predicates.add(new BookingMatchesRoomIdPredicate(roomId));
         }
 
         if (argMultimap.getValue(PREFIX_PERSONAL_ID).isPresent()) {
             Integer personId = ParserUtil.parsePersonalId(argMultimap.getValue(PREFIX_PERSONAL_ID).get());
+            optionalPersonId = Optional.of(personId);
             predicates.add(new BookingMatchesPersonIdPredicate(personId));
         }
 
@@ -67,15 +66,16 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_IS_ACTIVE).isPresent()) {
-            boolean isActive = ParserUtil.parseBoolean(argMultimap.getValue(PREFIX_IS_ACTIVE).get());
+            boolean isActive = ParserUtil.parseIsActive(argMultimap.getValue(PREFIX_IS_ACTIVE).get());
             predicates.add(new BookingMatchesIsActivePredicate(isActive));
         }
 
         if (predicates.size() == 0) {
-            throw new ParseException(FindBookingCommand.MESSAGE_USAGE);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookingCommand.MESSAGE_USAGE));
         }
 
-        return new FindBookingCommand(predicates);
+        return new FindBookingCommand(predicates, optionalRoomId, optionalPersonId);
     }
 
 }
