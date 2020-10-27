@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CheckInCommand.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.logic.commands.CheckInCommand.MESSAGE_ROOM_ID_MISSING;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalBookings.BOOKING_1;
 import static seedu.address.testutil.TypicalBookings.BOOKING_2;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +36,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesEndDatePredicate;
 import seedu.address.model.booking.BookingMatchesIsActivePredicate;
+import seedu.address.model.booking.BookingMatchesPersonIdPredicate;
 import seedu.address.model.booking.BookingMatchesRoomIdPredicate;
 import seedu.address.model.booking.BookingMatchesStartDatePredicate;
 
@@ -46,19 +51,32 @@ public class FindBookingCommandTest {
     @Test
     public void equals() {
         BookingMatchesRoomIdPredicate firstPredicate =
-                new BookingMatchesRoomIdPredicate(1235);
+                new BookingMatchesRoomIdPredicate(2103);
         BookingMatchesRoomIdPredicate secondPredicate =
                 new BookingMatchesRoomIdPredicate(1236);
 
-        FindBookingCommand findFirstBookingCommand = new FindBookingCommand(Arrays.asList(firstPredicate));
-        FindBookingCommand findSecondBookingCommand = new FindBookingCommand(Arrays.asList(secondPredicate));
+        FindBookingCommand findFirstBookingCommand = new FindBookingCommand(Arrays.asList(firstPredicate),
+                Optional.of(2103), Optional.empty());
+        FindBookingCommand findSecondBookingCommand = new FindBookingCommand(Arrays.asList(secondPredicate),
+                Optional.of(1236), Optional.of(1));
 
         // same object -> returns true
         assertTrue(findFirstBookingCommand.equals(findFirstBookingCommand));
 
         // same values -> returns true
-        FindBookingCommand findFirstCommandCopy = new FindBookingCommand(Arrays.asList(firstPredicate));
+        FindBookingCommand findFirstCommandCopy = new FindBookingCommand(Arrays.asList(firstPredicate),
+                Optional.of(2103), Optional.empty());
         assertTrue(findFirstBookingCommand.equals(findFirstCommandCopy));
+
+        // different optional roomIdvalue -> returns false
+        FindBookingCommand findFirstCommandRoomIdModified = new FindBookingCommand(Arrays.asList(firstPredicate),
+                Optional.of(2102), Optional.empty());
+        assertFalse(findFirstBookingCommand.equals(findFirstCommandRoomIdModified));
+
+        // different optional personId value -> returns false
+        FindBookingCommand findFirstCommandPersonIdModified = new FindBookingCommand(Arrays.asList(firstPredicate),
+                Optional.of(2103), Optional.of(1));
+        assertFalse(findFirstBookingCommand.equals(findFirstCommandPersonIdModified));
 
         // different types -> returns false
         assertFalse(findFirstBookingCommand.equals(1));
@@ -75,18 +93,42 @@ public class FindBookingCommandTest {
     public void execute_oneRoomIdPredicate_multipleBookingFound() {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 2);
         BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("rid/2103");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.of(2103),
+                Optional.empty());
         expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(2103));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BOOKING_1, BOOKING_6), model.getFilteredBookingList());
     }
 
     @Test
+    public void execute_oneInvalidRoomIdPredicate_throwCommandException() {
+        String expectedMessage = MESSAGE_ROOM_ID_MISSING;
+        BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("rid/1000");
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.of(1000),
+                Optional.empty());
+        expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(1000));
+        assertCommandFailure(command, model, expectedMessage);
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6), model.getFilteredBookingList());
+    }
+
+    @Test
+    public void execute_oneInvalidPersonIdPredicate_throwCommandException() {
+        String expectedMessage = MESSAGE_PERSONAL_ID_MISSING;
+        BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("pid/1000");
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.empty(),
+                Optional.of(1000));
+        expectedModel.updateFilteredBookingList(new BookingMatchesPersonIdPredicate(1000));
+        assertCommandFailure(command, model, expectedMessage);
+        assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6), model.getFilteredBookingList());
+    }
+
+    @Test
     public void execute_oneRoomIdPredicate_noBookingFound() {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 0);
-        BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("rid/1000");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
-        expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(1000));
+        BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("rid/2107");
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.of(2107),
+                Optional.empty());
+        expectedModel.updateFilteredBookingList(new BookingMatchesRoomIdPredicate(2107));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookingList());
     }
@@ -95,7 +137,8 @@ public class FindBookingCommandTest {
     public void execute_oneIsActivePredicate_multipleBookingFound() {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 6);
         BookingMatchesIsActivePredicate predicate = prepareIsActivePredicate("ac/false");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.empty(),
+                Optional.empty());
         expectedModel.updateFilteredBookingList(new BookingMatchesIsActivePredicate(false));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BOOKING_1, BOOKING_2, BOOKING_3, BOOKING_4, BOOKING_5, BOOKING_6),
@@ -106,7 +149,8 @@ public class FindBookingCommandTest {
     public void execute_oneIsActivePredicate_noBookingFound() {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 0);
         BookingMatchesIsActivePredicate predicate = prepareIsActivePredicate("ac/true");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate));
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.empty(),
+                Optional.empty());
         expectedModel.updateFilteredBookingList(new BookingMatchesIsActivePredicate(true));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredBookingList());
@@ -117,7 +161,8 @@ public class FindBookingCommandTest {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 1);
         BookingMatchesRoomIdPredicate roomIdPredicate = prepareRoomIdPredicate("rid/2103");
         BookingMatchesStartDatePredicate startTimePredicate = prepareStartTimePredicate("sd/2020-10-20");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(roomIdPredicate, startTimePredicate));
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(roomIdPredicate, startTimePredicate),
+                Optional.of(2103), Optional.empty());
 
         List<Predicate<Booking>> predicates = new ArrayList<>();
         predicates.add(roomIdPredicate);
@@ -133,7 +178,8 @@ public class FindBookingCommandTest {
         String expectedMessage = String.format(MESSAGE_BOOKINGS_LISTED_OVERVIEW, 0);
         BookingMatchesRoomIdPredicate roomIdPredicate = prepareRoomIdPredicate("rid/2103");
         BookingMatchesEndDatePredicate endTimePredicate = prepareEndTimePredicate("ed/2020-10-20");
-        FindBookingCommand command = new FindBookingCommand(Arrays.asList(roomIdPredicate, endTimePredicate));
+        FindBookingCommand command = new FindBookingCommand(Arrays.asList(roomIdPredicate, endTimePredicate),
+                Optional.empty(), Optional.empty());
 
         List<Predicate<Booking>> predicates = new ArrayList<>();
         predicates.add(roomIdPredicate);

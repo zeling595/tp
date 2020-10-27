@@ -2,7 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
@@ -23,17 +27,23 @@ public class DeleteBookingCommand extends Command {
 
     private final Integer bookingId;
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
+
+
     public DeleteBookingCommand(Integer bookingId) {
         this.bookingId = bookingId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("=============================[ Executing deleteBooking ]===========================");
         requireNonNull(model);
 
         assert bookingId > 0;
         if (!model.hasBookingWithId(bookingId)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_ID);
+            logger.warning("Non-existent bookingId");
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_ID);
         }
 
         Booking bookingToDelete = model.getBookingWithId(bookingId);

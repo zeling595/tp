@@ -34,11 +34,11 @@ public class FilterRoomCommandTest {
         int roomType1 = 1;
         FilterRoomCommand command1 = new FilterRoomCommand(startDate, endDate, roomType1);
         ArrayList<Integer> expectedRoomId1 = new ArrayList<>();
+        expectedRoomId1.add(2103);
         expectedRoomId1.add(2104);
         expectedRoomId1.add(2105);
         expectedRoomId1.add(2106);
         expectedRoomId1.add(2107);
-        expectedRoomId1.add(2108);
         String expectedOutput1 = model.displaySingleRooms(FXCollections.observableArrayList(expectedRoomId1));
 
         assertEquals(String.format(FilterRoomCommand.MESSAGE_SUCCESS, expectedOutput1),
