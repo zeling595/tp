@@ -8,7 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
@@ -23,10 +26,10 @@ public class CheckInCommand extends Command {
     public static final String COMMAND_WORD = "checkIn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a person into the hotel. "
-            + "Dates should be in the format YYYY-MM-DD. \n"
+            + "Dates should be in the format yyyy-MM-dd. \n"
             + "Parameters: "
-            + PREFIX_PERSONAL_ID + "PERSONAL_ID (must be a positive integer) "
-            + PREFIX_ROOM_ID + "ROOM_ID (must be a valid room number) "
+            + PREFIX_PERSONAL_ID + "PERSONAL_ID (must be an existing personal Id) "
+            + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "
             + PREFIX_START_DATE + "START_DATE "
             + PREFIX_END_DATE + "END_DATE \n"
             + "Example: " + COMMAND_WORD + " "
@@ -37,12 +40,13 @@ public class CheckInCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
     public static final String MESSAGE_SUCCESS = "Successfully checked in: %s";
-    public static final String MESSAGE_PAST_BOOKING = "Cannot create bookings in the past!";
 
     private final int personalId;
     private final int roomId;
     private final LocalDate startDate;
     private final LocalDate endDate;
+
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
      * Creates a CheckInCommand.
@@ -64,18 +68,21 @@ public class CheckInCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Booking booking;
+        assert roomId > 0;
+        assert startDate.isBefore(endDate);
+        logger.info(String.format("Checking in person with id %s into room %s", personalId, roomId));
 
         if (!model.hasPersonWithId(personalId)) {
             throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
         }
 
+        assert model.hasPersonWithId(personalId);
+
         if (!model.hasRoom(roomId)) {
             throw new CommandException(MESSAGE_ROOM_ID_MISSING);
         }
 
-        if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(MESSAGE_PAST_BOOKING);
-        }
+        assert model.hasRoom(roomId);
 
         booking = new Booking(roomId, personalId, startDate, endDate, true);
         int bookingId = booking.getId();

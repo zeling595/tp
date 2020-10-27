@@ -1,4 +1,4 @@
-``---
+---
 layout: page
 title: User Guide
 ---
@@ -26,11 +26,11 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
    * **`listBooking`** : Lists all bookings.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`checkIn`**`pid/7 rid/2103 sd/2021-12-12 ed/2021-12-13` : Checks in a person with ID `7` to room `2103` from `2021-12-12` to `2021-12-13`.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`deleteBooking`**`bid/3` : Deletes the booking with booking ID 3.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all bookings and guests.
 
    * **`exit`** : Exits the app.
 
@@ -45,10 +45,10 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addPerson n/NAME`, `NAME` is a parameter which can be used as `addPerson n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `bid/BOOKING_ID [sd/START_DATE]` can be used for find booking command with optional parameter start date.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -74,8 +74,8 @@ Adds a person to the local guestbook.
 Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
-* `add n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
+* `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
+* `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
 
 
 ### Listing all persons : `listPerson`
@@ -133,48 +133,50 @@ Examples:
 * `listPerson` followed by `deletePerson 2` deletes the 2nd person in the guestbook.
 * `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
 
-### Viewing a bill: `getBill`
-
-Finds the bill with a room ID and a date (the last day of a booking).
-
-Format: `getBill id/ROOM_ID ed/BOOKING_END_DATE`
-
-* The room ID must be a valid room number
-* Dates have to be in the format YYYY-MM-DD
-
-Examples:
-* `getBill id/2103 ed/2020-09-15` shows the bill for the booking on Room 2103 which ends on 15 Sep 2020. 
-
-
 ### Checking in guest: `checkIn`
+
 Checks in a guest into the hotel.
+Format: `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-Format: checkIn checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE
+* Checks in the person with `PERSONAL_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The person with the specified `PERSONAL_ID` **must be a positive integer** and **must have been added to the local 
+guestbook prior to this.**  
+* The `ROOM_ID` **must be a positive integer** and **must be an existing roomId in the hotel.** 
+* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
+`ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
+are from `ROOM_ID` 2123 to 2132.  
+* The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
+* `START_DATE` must be before `END_DATE`  
+* All the fields must be provided.
 
-* Checks in the guest into the specified ROOM_ID
-* The roomId refers to the unique identifier of the room
-* The guest name and phone number and room ID must be unique.
-* The room ID must be a valid room number.
-* GUEST_IC needs to be a 5 lettered-string, with the first as a character and the remaining 4 as numbers
-Dates have to be in the format YYYY-MM-DD.
-
-Examples:
-* checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17 checks in a guest whose name is James Ho and phone number is 22224444 into room 4102 from 
-14 September 2020 to 17 September 2020.
-
+Example:
+*  `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Checks in person with personal Id `5` into room Id `2120`
+from 12 December 2020 to 25 December 2020.
 
 ### Checking out guest: `checkOut`
+
 Checks out a guest from the hotel.
 
-Format: checkOut ROOM_ID
+Format: `checkOut bid/BOOKING_ID`
 
-* Checks out the guest staying at ROOM_ID.
-* The room ID refers to the unique identifier of the room. 
-* The room ID must be a valid room number (4-digit number e.g. 2103, 1010, 3103)
+* Checks out the guest with the specified `BOOKING_ID`.  
+* The `BOOKING_ID` refers to the unique identifier of the booking. 
+* The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
 
-Examples:
-* checkOut 2103 checks out the guest who stays in room 2103.
+Example:
+* `checkOut bid/42` checks out the guest from his room with the valid booking Id of `42`.
 
+### Viewing a bill: `getBill`
+
+Finds the bill of a specified booking Id.  
+
+Format: `getBill bid/BOOKING_ID`
+
+* The `BOOKING_ID` refers to the unique identifier of the booking.  
+* The `BOOKING_ID` must be a valid booking Id in the BookingBook.  
+
+Example:
+* `getBill bid/6` shows the bill for the booking Id `6`.  
 
 ### Filtering hotel rooms: `filterRoom`
 Filters the hotel rooms with some optional filters.
@@ -204,15 +206,70 @@ Examples:
 * `listRoom typ/3` will list all the suite rooms in the Room Book. 
 
 ### Listing bookings: `listBooking`
-Lists the bookings with some optional filters.
+Lists the bookings sorted by most recent to least recent. Active bookings will be listed before inactive bookings.
 
-Format: `listBooking [sd/START_DATE] [ed/END_DATE]`
+Format: `listBooking`
 
-* Lists all the bookings if none of the arguments are provided.
-* Dates have to be in the format YYYY-MM-DD
+* Lists all the bookings.
 
 Examples:
-* listBooking sd/2020-09-14 ed/2020-09-17 lists all the bookings which are from Sept 14 2020 to Sept 17 2020.
+* listBooking lists all the bookings.
+
+### Editing a booking : `editBooking`
+
+Edits an existing booking in the booking book.
+
+Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
+
+* Edits the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* The edited booking cannot be a duplicate booking or conflicts with any existing booking.
+
+Examples:
+*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
+*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+
+### Deleting a booking : `deleteBooking`
+
+Deletes a booking in the booking book.
+
+Format: `deleteBooking bid/BOOKING_ID`
+
+* Deletes the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​ 
+ and must be present in the bookingBook.
+
+Examples:
+*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
+*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+
+### Locating bookings: `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
+
+Finds bookings which matches all the given predicates.
+
+Format: `findBooking KEYWORD [MORE_KEYWORDS]`
+
+* The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
+* the input room ID and person ID must be valid (registered in the database).
+* At least one parameter should be provided.
+
+Examples:
+* `findBooking pid/3` returns all the bookings related to the person with person Id 3.
+* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings starts from 12 Nov 2020 and ends on 16 Nov 2020.
+
+### Ordering Room Service : `orderRoomService`
+
+Order room service for a particular booking.
+
+Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
+
+* Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
+* The booking id must be the id of a currently active booking.
+* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
+
+Examples:
+*  `orderRoomService bid/1 rst/WIFI` Orders WIFI room service for booking with ID `1`.
+*  `orderRoomService bid/2 rst/DINING` Orders DINING room service for booking with ID `2`.
 
 ### Clearing all entries : `clear`
 
@@ -253,12 +310,16 @@ Action | Format, Examples
 **Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
-**Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
-**Check Out** | `checkOut ROOM_ID`
+**Check In** | `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
+**Check Out** | `checkOut bid/BOOKING_ID`<br> e.g., `checkOut bid/42`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`
-**list Booking** | `listBooking sd/START_DATE ed/END_DATE`<br> e.g., `listBooking sd/2020-09-14 ed/2020-09-17`
-**Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
+**List Booking** | `listBooking`<br> e.g., `listBooking`
+**Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
+**Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
+**Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`
+**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `FINDBooking pid/1 rid/2104`
+**Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 
 **Help** | `help`

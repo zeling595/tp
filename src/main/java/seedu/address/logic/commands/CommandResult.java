@@ -24,7 +24,7 @@ public class CommandResult {
     private final boolean showBookingList;
 
     /**
-     * Constructs a {@code CommandResult} with
+     * Constructs a {@code CommandResult} with additional fields for showing person and booking list.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
                          boolean showPersonList, boolean showBookingList) {

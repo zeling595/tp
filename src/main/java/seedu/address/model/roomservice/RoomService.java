@@ -15,7 +15,7 @@ public class RoomService {
      * Instantiates room service with booking id and type
      */
     public RoomService(Integer bookingId, RoomServiceType type) {
-        requireAllNonNull(bookingId);
+        requireAllNonNull(bookingId, type);
         this.bookingId = bookingId;
         this.type = type;
     }
@@ -24,7 +24,11 @@ public class RoomService {
         return this.bookingId;
     }
 
+    /**
+     * Checks whether this room service belongs to the booking with bookingId
+     */
     public boolean belongsToBooking(Integer bookingId) {
+        assert bookingId >= 0;
         return this.getBookingId().equals(bookingId);
     }
 

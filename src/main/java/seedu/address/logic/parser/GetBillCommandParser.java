@@ -22,7 +22,7 @@ public class GetBillCommandParser implements Parser<GetBillCommand> {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
 
-        if (argMultiMap.getValue(PREFIX_BOOKING_ID).isEmpty() || !argMultiMap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultiMap, PREFIX_BOOKING_ID) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE));
         }
 

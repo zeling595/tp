@@ -12,12 +12,15 @@ import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalBookings.CONFLICT_AMY_BOOKING_CHLOE;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
@@ -165,6 +168,19 @@ public class UniqueBookingListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void getUnavailableRooms_success() {
+        LocalDate sd = LocalDate.of(2020, 12, 9);
+        LocalDate ed = LocalDate.of(2020, 12, 14);
+        uniqueBookingList.add(new BookingBuilder(BOOKING_AMY).withIsActive(true).build());
+        uniqueBookingList.add(new BookingBuilder(BOOKING_BOB).withIsActive(true).build());
+        ObservableList<Integer> expectedOutput = FXCollections.observableArrayList(2104);
+
+        ObservableList<Integer> actualOutput = uniqueBookingList.getUnavailableRooms(sd, ed);
+
+        assertEquals(expectedOutput, actualOutput);
     }
 
 }

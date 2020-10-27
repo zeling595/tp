@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.BOOKING_DURATION_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NEXT_YEAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
@@ -27,18 +26,18 @@ public class BookingTest {
     public void hasConflict() {
         // other booking has same startDate, earlier endDate -> return true
         Booking conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 11)).build();
+                .withEndDate(LocalDate.of(2020, 10, 11)).build();
         assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // other booking has later startDate, same endDate -> return true
         conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 3)).build();
+                .withStartDate(LocalDate.of(2020, 10, 3)).build();
         assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // booking A starts on the day in which Booking B ends
         conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
                 .withStartDate(VALID_END_DATE_AMY)
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 11)).build();
+                .withEndDate(LocalDate.of(2020, 10, 11)).build();
         assertFalse(conflictedAmy1.hasConflict(BOOKING_AMY));
 
         // booking B starts on the day in which Booking A ends
@@ -49,57 +48,57 @@ public class BookingTest {
     public void hasOverlap() {
         // booking ends before startDate -> return False
         Booking overlapAmy1 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 12))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 16))
+                .withStartDate(LocalDate.of(2020, 10, 12))
+                .withEndDate(LocalDate.of(2020, 10, 16))
                 .withIsActive(true)
                 .build();
-        assertFalse(overlapAmy1.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 11)));
+        assertFalse(overlapAmy1.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 11)));
 
         // Case 1: booking ends after startDate but before endDate
         Booking overlapAmy2 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 7))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 12))
+                .withStartDate(LocalDate.of(2020, 10, 7))
+                .withEndDate(LocalDate.of(2020, 10, 12))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy2.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 14)));
+        assertTrue(overlapAmy2.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 2: booking starts after startDate and ends after endDate
         Booking overlapAmy3 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 11))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 16))
+                .withStartDate(LocalDate.of(2020, 10, 11))
+                .withEndDate(LocalDate.of(2020, 10, 16))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy3.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 14)));
+        assertTrue(overlapAmy3.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 3: booking is within the startDate and endDate
         Booking overlapAmy4 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 10))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 13))
+                .withStartDate(LocalDate.of(2020, 10, 10))
+                .withEndDate(LocalDate.of(2020, 10, 13))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy4.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 14)));
+        assertTrue(overlapAmy4.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // Case 4: booking is on the startDate and endDate
         Booking overlapAmy5 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 9))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 14))
+                .withStartDate(LocalDate.of(2020, 10, 9))
+                .withEndDate(LocalDate.of(2020, 10, 14))
                 .withIsActive(true)
                 .build();
-        assertTrue(overlapAmy5.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 14)));
+        assertTrue(overlapAmy5.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
 
         // booking starts after endDate
         Booking overlapAmy6 = new BookingBuilder(BOOKING_AMY)
-                .withStartDate(LocalDate.of(NEXT_YEAR, 10, 16))
-                .withEndDate(LocalDate.of(NEXT_YEAR, 10, 20))
+                .withStartDate(LocalDate.of(2020, 10, 16))
+                .withEndDate(LocalDate.of(2020, 10, 20))
                 .withIsActive(true)
                 .build();
-        assertFalse(overlapAmy6.hasOverlap(LocalDate.of(NEXT_YEAR, 10, 9),
-                LocalDate.of(NEXT_YEAR, 10, 14)));
+        assertFalse(overlapAmy6.hasOverlap(LocalDate.of(2020, 10, 9),
+                LocalDate.of(2020, 10, 14)));
     }
 
     @Test

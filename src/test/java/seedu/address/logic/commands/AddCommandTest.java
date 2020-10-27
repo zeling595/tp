@@ -205,7 +205,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Room getRoom(int roomId) {
+        public Room getRoom(Integer roomId) {
             throw new AssertionError("This method should not be called.");
         }
 

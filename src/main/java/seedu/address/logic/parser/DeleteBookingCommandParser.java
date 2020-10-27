@@ -19,14 +19,7 @@ public class DeleteBookingCommandParser implements Parser<DeleteBookingCommand> 
      */
     public DeleteBookingCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
 
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookingCommand.MESSAGE_USAGE));
-        }
-
-        assert !trimmedArgs.isEmpty();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BOOKING_ID);
 

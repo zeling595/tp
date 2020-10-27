@@ -24,9 +24,11 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_ROOM_ID = "Invalid Room Id";
-    public static final String MESSAGE_INVALID_BOOKING_ID = "Invalid Booking Id";
-    public static final String MESSAGE_INVALID_DATE = "Invalid Date";
+    public static final String MESSAGE_INVALID_ROOM_ID = "Room Id is entered in invalid format";
+    public static final String MESSAGE_INVALID_BOOKING_ID = "Booking Id is entered in invalid format";
+    public static final String MESSAGE_INVALID_DATE = "Date is entered in invalid format";
+    public static final String MESSAGE_INVALID_PERSONAL_ID = "Personal Id is entered in invalid format";
+    public static final String MESSAGE_INVALID_IS_ACTIVE = "Invalid IsActive State";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -114,7 +116,7 @@ public class ParserUtil {
             int personalId = Integer.parseInt(id);
             return personalId;
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid Personal Id");
+            throw new ParseException(MESSAGE_INVALID_PERSONAL_ID);
         }
     }
 
@@ -145,11 +147,9 @@ public class ParserUtil {
      */
     public static int parseBookingId(String id) throws ParseException {
         requireNonNull(id);
-        // trim used for deleteBooking
-        String trimmedId = id.trim();
 
         try {
-            return Integer.parseInt(trimmedId);
+            return Integer.parseInt(id);
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_BOOKING_ID);
         }
@@ -172,19 +172,29 @@ public class ParserUtil {
     }
 
     /**
+     * Checks if the input is a valid representation of a {@code boolean}, case-insensitive.
+     *
+     * @param input
+     * @return a boolean
+     */
+    private static boolean isValidBooleanString(String input) {
+        return "true".equalsIgnoreCase(input) || "false".equalsIgnoreCase(input);
+    }
+
+    /**
      * Parses a {@code String date} into a {@code boolean}
      *
      * @param bool the boolean entered by the user
      * @return the boolean as a boolean
      * @throws ParseException if the given {@code date} is invalid
      */
-    public static boolean parseBoolean(String bool) throws ParseException {
-        try {
-            boolean isActive = Boolean.parseBoolean(bool);
-            return isActive;
-        } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid Date");
+    public static boolean parseIsActive(String bool) throws ParseException {
+        if (!isValidBooleanString(bool)) {
+            throw new ParseException(MESSAGE_INVALID_IS_ACTIVE);
         }
+
+        boolean isActive = Boolean.parseBoolean(bool);
+        return isActive;
     }
 
     /**

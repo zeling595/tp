@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_ID;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ROOM_ID;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 
@@ -63,6 +64,8 @@ public class JsonAdaptedBooking {
 
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+        } else if (id <= 0) {
+            throw new IllegalValueException(MESSAGE_INVALID_PERSON_ID);
         }
         final Integer modelId = id;
 
@@ -75,6 +78,8 @@ public class JsonAdaptedBooking {
 
         if (personId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "personId"));
+        } else if (personId <= 0) {
+            throw new IllegalValueException(MESSAGE_INVALID_PERSON_ID);
         }
         final Integer modelPersonId = personId;
 

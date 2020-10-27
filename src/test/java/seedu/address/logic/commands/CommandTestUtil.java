@@ -33,15 +33,27 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_GENE = "Gene Xiao";
+    public static final String VALID_NAME_SINGLE_HARRY = "Harry SingleLover";
+    public static final String VALID_NAME_DOUBLE_HARRY = "Harry DoubleLover";
+    public static final String VALID_NAME_SUITE_HARRY = "Harry SuiteLover";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_GENE = "420420420";
+    public static final String VALID_PHONE_SINGLE_HARRY = "111222333";
+    public static final String VALID_PHONE_DOUBLE_HARRY = "222111333";
+    public static final String VALID_PHONE_SUITE_HARRY = "333111222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_GENE = "gene@nuscomputing.com";
+    public static final String VALID_EMAIL_SINGLE_HARRY = "singleharry@nus.com";
+    public static final String VALID_EMAIL_DOUBLE_HARRY = "doubleharry@nus.com";
+    public static final String VALID_EMAIL_SUITE_HARRY = "suiteharry@nus.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_GENE = "Streety McStreetFace";
+    public static final String VALID_ADDRESS_SINGLE_HARRY = "Block 111, Single Street";
+    public static final String VALID_ADDRESS_DOUBLE_HARRY = "Block 222, Double Street";
+    public static final String VALID_ADDRESS_SUITE_HARRY = "Block 333, Suite Street";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -52,41 +64,61 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
 
+    public static final int VALID_PERSONAL_ID_SINGLE_HARRY = 420;
+    public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
+    public static final int VALID_PERSONAL_ID_SUITE_HARRY = 422;
+
+    public static final int VALID_SINGLEROOM_ID1 = 2104;
+    public static final int VALID_SINGLEROOM_ID2 = 2110;
+    public static final int VALID_SINGLEROOM_ID3 = 2112;
+    public static final int VALID_DOUBLEROOM_ID1 = 2113;
+    public static final int VALID_DOUBLEROOM_ID2 = 2120;
+    public static final int VALID_DOUBLEROOM_ID3 = 2122;
+    public static final int VALID_SUITEROOM_ID1 = 2123;
+    public static final int VALID_SUITEROOM_ID2 = 2129;
+    public static final int VALID_SUITEROOM_ID3 = 2132;
+
     public static final int VALID_ROOM_ID_AMY = 2103;
     public static final int VALID_ROOM_ID_BOB = 2104;
     public static final int VALID_ROOM_ID_GENE = 2106;
     public static final int CONFLICT_AMY_ROOM_ID_CHLOE = 2103;
     public static final int VALID_ROOM_ID_DAN = 2104;
     public static final int INVALID_ROOM_ID = 1;
+    public static final int INVALID_ROOM_ID_HIGH = 9999;
 
-    public static final int CURRENT_YEAR = LocalDate.now().getYear();
-    public static final int NEXT_YEAR = CURRENT_YEAR + 1;
-
-    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-05",
+    public static final LocalDate VALID_START_DATE_AMY = LocalDate.parse("2020-10-05",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse(NEXT_YEAR + "-10-10",
+    public static final LocalDate VALID_END_DATE_AMY = LocalDate.parse("2020-10-10",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-12",
+    public static final LocalDate VALID_START_DATE_BOB = LocalDate.parse("2020-12-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse(NEXT_YEAR + "-12-13",
+    public static final LocalDate VALID_END_DATE_BOB = LocalDate.parse("2020-12-13",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-06",
+    public static final LocalDate CONFLICT_AMY_START_DATE_CHLOE = LocalDate.parse("2020-10-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse(NEXT_YEAR + "-10-09",
+    public static final LocalDate CONFLICT_AMY_END_DATE_CHLOE = LocalDate.parse("2020-10-09",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-11",
+    public static final LocalDate VALID_START_DATE_DAN = LocalDate.parse("2020-11-11",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse(NEXT_YEAR + "-11-21",
+    public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-01-30",
+    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-30",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse(NEXT_YEAR + "-06-06",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate PAST_START_DATE = LocalDate.parse("2001-05-06",
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate PAST_END_DATE = LocalDate.parse("2001-05-06",
+    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-06-06",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+    public static final LocalDate VALID_START_DATE_SINGLE_HARRY = LocalDate.parse("2020-03-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse("2020-05-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_DOUBLE_HARRY = LocalDate.parse("2020-06-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_DOUBLE_HARRY = LocalDate.parse("2020-07-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_START_DATE_SUITE_HARRY = LocalDate.parse("2020-08-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public static final LocalDate VALID_END_DATE_SUITE_HARRY = LocalDate.parse("2020-09-25",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 
     // Booking Values
@@ -96,6 +128,9 @@ public class CommandTestUtil {
     public static final int VALID_BOOKING_ID_DAN = 14;
     public static final int BOOKING_DURATION_AMY = 5;
 
+    public static final int VALID_BOOKING_ID_SINGLE_HARRY = 105;
+    public static final int VALID_BOOKING_ID_DOUBLE_HARRY = 205;
+    public static final int VALID_BOOKING_ID_SUITE_HARRY = 305;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
