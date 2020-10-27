@@ -350,3 +350,46 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#homePage .label {
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light"
+}
+
+#roomsAvailableGroup {
+    -fx-background-color: #22274B;
+    -fx-padding: 12;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#roomsAvailableTitle.label {
+    -fx-font-size: 18;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: "#50C878";
+    -fx-padding: 0 0 4 0;
+}
+
+#recentBookingsGroup {
+    -fx-background-color: #22274B;
+    -fx-padding: 12;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#recentBookingsTitle.label {
+    -fx-font-size: 18;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: "#50C878";
+    -fx-padding: 0 0 4 0;
+}
+
+#recentBookingsView.list-view {
+    -fx-background-color: transparent;
+}
+
+#recentBookingsView .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 1 0 1 0;
+}
