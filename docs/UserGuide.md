@@ -230,6 +230,33 @@ Examples:
 *  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
 *  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
 
+### Deleting a booking : `deleteBooking`
+
+Deletes a booking in the booking book.
+
+Format: `deleteBooking bid/BOOKING_ID`
+
+* Deletes the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​ 
+ and must be present in the bookingBook.
+
+Examples:
+*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
+*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+
+### Locating bookings: `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
+
+Finds bookings which matches all the given predicates.
+
+Format: `findBooking KEYWORD [MORE_KEYWORDS]`
+
+* The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
+* the input room ID and person ID must be valid (registered in the database).
+* At least one parameter should be provided.
+
+Examples:
+* `findBooking pid/3` returns all the bookings related to the person with person Id 3.
+* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings starts from 12 Nov 2020 and ends on 16 Nov 2020.
+
 ### Ordering Room Service : `orderRoomService`
 
 Order room service for a particular booking.
@@ -290,6 +317,8 @@ Action | Format, Examples
 **List Booking** | `listBooking`<br> e.g., `listBooking`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
+**Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`
+**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `FINDBooking pid/1 rid/2104`
 **Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 

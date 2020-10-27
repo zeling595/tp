@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,23 +25,27 @@ public class FindBookingCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // empty
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindBookingCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, " dd  ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindBookingCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
 
-        // no leading and trailing whitespaces
+        // one parameter
         BookingMatchesRoomIdPredicate predicate1 = new BookingMatchesRoomIdPredicate(2103);
         FindBookingCommand expectedFindBookingCommand =
-                new FindBookingCommand(Collections.singletonList(predicate1));
+                new FindBookingCommand(Collections.singletonList(predicate1), Optional.of(2103), Optional.empty());
         assertParseSuccess(parser, " rid/2103", expectedFindBookingCommand);
 
-        // multiple whitespaces between filter words
+        // two parameters
         BookingMatchesPersonIdPredicate predicate2 = new BookingMatchesPersonIdPredicate(1);
         FindBookingCommand expectedFindBookingCommand2 =
-                new FindBookingCommand(Arrays.asList(predicate1, predicate2));
+                new FindBookingCommand(Arrays.asList(predicate1, predicate2), Optional.of(2103), Optional.of(1));
         assertParseSuccess(parser, " \n rid/2103 \n \t pid/1  \t", expectedFindBookingCommand2);
 
         // different order of parameters should give the same result
@@ -51,7 +56,8 @@ public class FindBookingCommandParserTest {
         BookingMatchesEndDatePredicate predicate4 = new BookingMatchesEndDatePredicate(LocalDate.of(2020, 10, 25));
         BookingMatchesIsActivePredicate predicate5 = new BookingMatchesIsActivePredicate(false);
         FindBookingCommand expectedFindBookingCommand3 =
-                new FindBookingCommand(Arrays.asList(predicate1, predicate2, predicate3, predicate4, predicate5));
+                new FindBookingCommand(Arrays.asList(predicate1, predicate2, predicate3, predicate4, predicate5),
+                        Optional.of(2103), Optional.of(1));
         assertParseSuccess(parser, " \n pid/1 \t \n rid/2103 \t \n sd/2020-10-20 \t \n ed/2020-10-25 "
                         + "\t \n ac/false\t",
                 expectedFindBookingCommand3);
