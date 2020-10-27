@@ -55,7 +55,7 @@ public class TypicalRooms {
     }
 
     public static List<Room> getTypicalRooms() {
-        return new ArrayList<>(Arrays.asList(SINGLE_1, SINGLE_2, SINGLE_3, SINGLE_4,
+        return new ArrayList<>(Arrays.asList(DEFAULT_ROOM, SINGLE_1, SINGLE_2, SINGLE_3, SINGLE_4,
                 SINGLE_5, SINGLE_MIDDLE, SINGLE_END,
                 DOUBLE_1, DOUBLE_2, DOUBLE_3, DOUBLE_4, DOUBLE_5, DOUBLE_MIDDLE, DOUBLE_END,
                 SUITE_1, SUITE_2, SUITE_3, SUITE_4, SUITE_5, SUITE_MIDDLE, SUITE_END));

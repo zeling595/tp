@@ -130,7 +130,6 @@ public class UniqueRoomListTest {
                 SUITE_1.getRoomID(), SUITE_2.getRoomID());
         String actualOutput = uniqueRoomList.getSingleRooms(rooms);
         Integer[] singleRooms = {2104, 2105};
-
         String expectedOutput = "Single Rooms: " + singleRooms.length + " " + Arrays.toString(singleRooms) + "\n";
 
         assertEquals(expectedOutput, actualOutput);
