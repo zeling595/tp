@@ -41,7 +41,6 @@ public class CheckInCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
     public static final String MESSAGE_SUCCESS = "Successfully checked in: %s";
-    public static final String MESSAGE_PAST_BOOKING = "Cannot create bookings in the past!";
 
     private final int personalId;
     private final int roomId;
@@ -71,6 +70,7 @@ public class CheckInCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Booking booking;
         assert roomId > 0;
+        assert startDate.isBefore(endDate);
         logger.info(String.format("Checking in person with id %s into room %s", personalId, roomId));
 
         if (!model.hasPersonWithId(personalId)) {
@@ -84,10 +84,6 @@ public class CheckInCommand extends Command {
         }
 
         assert model.hasRoom(roomId);
-
-        if (startDate.isBefore(LocalDate.now())) {
-            throw new CommandException(MESSAGE_PAST_BOOKING);
-        }
 
         booking = new Booking(roomId, personalId, startDate, endDate, true);
         int bookingId = booking.getId();

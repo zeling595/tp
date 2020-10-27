@@ -133,48 +133,50 @@ Examples:
 * `listPerson` followed by `deletePerson 2` deletes the 2nd person in the guestbook.
 * `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
 
-### Viewing a bill: `getBill`
-
-Finds the bill with a room ID and a date (the last day of a booking).
-
-Format: `getBill id/ROOM_ID ed/BOOKING_END_DATE`
-
-* The room ID must be a valid room number
-* Dates have to be in the format yyyy-MM-dd
-
-Examples:
-* `getBill id/2103 ed/2020-09-15` shows the bill for the booking on Room 2103 which ends on 15 Sep 2020. 
-
-
 ### Checking in guest: `checkIn`
+
 Checks in a guest into the hotel.
+Format: `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-Format: checkIn checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE
+* Checks in the person with `PERSONAL_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The person with the specified `PERSONAL_ID` **must be a positive integer** and **must have been added to the local 
+guestbook prior to this.**  
+* The `ROOM_ID` **must be a positive integer** and **must be an existing roomId in the hotel.** 
+* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
+`ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
+are from `ROOM_ID` 2123 to 2132.  
+* The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
+* `START_DATE` must be before `END_DATE`  
+* All the fields must be provided.
 
-* Checks in the guest into the specified ROOM_ID
-* The roomId refers to the unique identifier of the room
-* The guest name and phone number and room ID must be unique.
-* The room ID must be a valid room number.
-* GUEST_IC needs to be a 5 lettered-string, with the first as a character and the remaining 4 as numbers
-Dates have to be in the format YYYY-MM-DD.
-
-Examples:
-* checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17 checks in a guest whose name is James Ho and phone number is 22224444 into room 4102 from 
-14 September 2020 to 17 September 2020.
-
+Example:
+*  `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Checks in person with personal Id `5` into room Id `2120`
+from 12 December 2020 to 25 December 2020.
 
 ### Checking out guest: `checkOut`
+
 Checks out a guest from the hotel.
 
-Format: checkOut ROOM_ID
+Format: `checkOut bid/BOOKING_ID`
 
-* Checks out the guest staying at ROOM_ID.
-* The room ID refers to the unique identifier of the room. 
-* The room ID must be a valid room number (4-digit number e.g. 2103, 1010, 3103)
+* Checks out the guest with the specified `BOOKING_ID`.  
+* The `BOOKING_ID` refers to the unique identifier of the booking. 
+* The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
 
-Examples:
-* checkOut 2103 checks out the guest who stays in room 2103.
+Example:
+* `checkOut bid/42` checks out the guest from his room with the valid booking Id of `42`.
 
+### Viewing a bill: `getBill`
+
+Finds the bill of a specified booking Id.  
+
+Format: `getBill bid/BOOKING_ID`
+
+* The `BOOKING_ID` refers to the unique identifier of the booking.  
+* The `BOOKING_ID` must be a valid booking Id in the BookingBook.  
+
+Example:
+* `getBill bid/6` shows the bill for the booking Id `6`.  
 
 ### Filtering hotel rooms: `filterRoom`
 Filters the hotel rooms with some optional filters.
@@ -308,15 +310,15 @@ Action | Format, Examples
 **Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
-**Check In** | `checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17`
-**Check Out** | `checkOut ROOM_ID`
+**Check In** | `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
+**Check Out** | `checkOut bid/BOOKING_ID`<br> e.g., `checkOut bid/42`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`
 **List Booking** | `listBooking`<br> e.g., `listBooking`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
+**Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
 **Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`
 **Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `FINDBooking pid/1 rid/2104`
-**Get Bill** | `getBill id/ROOM_ID ed/BOOKING_END_DATE`<br> e.g., `getBill id/2103 ed/2020-09-15`
 **Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 
