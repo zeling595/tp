@@ -12,10 +12,10 @@ public class Messages {
     // person
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_PERSONAL_ID_MISSING = "No valid personalId can be found.";
+    public static final String MESSAGE_PERSONAL_ID_MISSING = "No existing personalId can be found.";
 
     // room
-    public static final String MESSAGE_ROOM_ID_MISSING = "No valid roomId can be be found.";
+    public static final String MESSAGE_ROOM_ID_MISSING = "No existing roomId can be be found.";
     public static final String MESSAGE_INVALID_ROOM_ID = "Invalid roomId.";
 
     // booking

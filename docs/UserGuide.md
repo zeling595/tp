@@ -147,33 +147,36 @@ Examples:
 
 
 ### Checking in guest: `checkIn`
+
 Checks in a guest into the hotel.
+Format: `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-Format: checkIn checkIn n/NAME p/PHONE_NUMBER id/ROOM_ID sd/START_DATE ed/END_DATE
+* Checks in the person with `PERSONAL_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The person with the specified `PERSONAL_ID` **must be a positive integer** and **must have been added to the local 
+guestbook prior to this.**  
+* The `ROOM_ID` **must be a positive integer** and **must be an existing roomId in the hotel.** 
+* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
+`ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
+are from `ROOM_ID` 2123 to 2132.  
+* The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
 
-* Checks in the guest into the specified ROOM_ID
-* The roomId refers to the unique identifier of the room
-* The guest name and phone number and room ID must be unique.
-* The room ID must be a valid room number.
-* GUEST_IC needs to be a 5 lettered-string, with the first as a character and the remaining 4 as numbers
-Dates have to be in the format YYYY-MM-DD.
+* All the fields must be provided.
 
-Examples:
-* checkIn n/James Ho p/22224444 id/4102 sd/2020-09-14 ed/2020-09-17 checks in a guest whose name is James Ho and phone number is 22224444 into room 4102 from 
-14 September 2020 to 17 September 2020.
-
+Example:
+*  `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Checks in person with personal Id `5` into room Id `2120`
+from 12 December 2020 to 25 December 2020.
 
 ### Checking out guest: `checkOut`
 Checks out a guest from the hotel.
 
-Format: checkOut ROOM_ID
+Format: `checkOut bid/BOOKING_ID`
 
-* Checks out the guest staying at ROOM_ID.
-* The room ID refers to the unique identifier of the room. 
-* The room ID must be a valid room number (4-digit number e.g. 2103, 1010, 3103)
+* Checks out the guest with the specified `BOOKING_ID`.  
+* The `BOOKING_ID` refers to the unique identifier of the booking. 
+* The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
 
 Examples:
-* checkOut 2103 checks out the guest who stays in room 2103.
+* `checkOut bid/42` checks out the guest from his room with the valid booking Id of `42`.
 
 
 ### Filtering hotel rooms: `filterRoom`
