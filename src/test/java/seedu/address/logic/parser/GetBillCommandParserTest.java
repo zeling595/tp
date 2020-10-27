@@ -23,6 +23,14 @@ public class GetBillCommandParserTest {
     }
 
     @Test
+    public void parse_prefixMissing_failure() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE);
+        String userInput = "12";
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_missingBookingIdField_failure() {
 
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetBillCommand.MESSAGE_USAGE);

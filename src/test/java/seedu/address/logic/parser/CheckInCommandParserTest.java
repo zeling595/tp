@@ -28,13 +28,12 @@ import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class CheckInCommandParserTest {
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private CheckInCommandParser parser = new CheckInCommandParser();
     private final String nonEmptyPersonalId = "420";
     private final String nonEmptyRoomId = "2126";
     private final String startDate = "2020-03-15";
     private final String endDate = "2020-03-19";
-
-    Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     @Test
     public void parse_valuesSpecified_success() throws ParseException {
