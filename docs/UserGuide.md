@@ -56,6 +56,9 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* With the exception of ordering room service, if multiple parameters are inputted, the last instance will be accepted. <br>
+  e.g. if the command specifies `editBooking sd/2020-11-12 sd/2020-11-15`, the new date to be changed will be taken as `2020-11-15`. 
+
 </div>
 
 ### Viewing help : `help`
