@@ -27,6 +27,7 @@ public class Messages {
     public static final String MESSAGE_CONFLICTING_BOOKING = "The room has already been booked during this period.";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
+    public static final String MESSAGE_EXCEED_DURATION = "Booking duration cannot be longer than 30 days.";
 
 }
 

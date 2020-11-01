@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.booking.exception.BookingNotFoundException;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
@@ -73,6 +74,10 @@ public class UniqueBookingList implements Iterable<Booking> {
      */
     public void add(Booking toAdd) {
         requireNonNull(toAdd);
+        // check if exceed duration of 30-day stay
+        if (toAdd.getDuration() > 30) {
+            throw new ExceedDurationStayException();
+        }
         // check duplicate
         if (contains(toAdd)) {
             throw new DuplicateBookingException();
@@ -111,15 +116,18 @@ public class UniqueBookingList implements Iterable<Booking> {
 
     public void setBooking(Booking target, Booking editedBooking) {
         requireAllNonNull(target, editedBooking);
+        // Check if booking exists
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new BookingNotFoundException();
         }
 
+        // Check if duplicate booking
         if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
             throw new DuplicateBookingException();
         }
 
+        // Check conflict
         boolean hasConflict;
 
         hasConflict = internalList.stream()
@@ -127,6 +135,11 @@ public class UniqueBookingList implements Iterable<Booking> {
                 .anyMatch(booking -> booking.hasConflict(editedBooking));
         if (hasConflict) {
             throw new ConflictingBookingException();
+        }
+
+        // Check if exceed duration
+        if (editedBooking.getDuration() > 30) {
+            throw new ExceedDurationStayException();
         }
 
         internalList.set(index, editedBooking);

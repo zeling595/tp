@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
-import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_BOOKING;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
-import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
+import static seedu.address.commons.core.Messages.*;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
@@ -20,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 /**
  * Encapsulates the Check In feature.
@@ -99,6 +97,9 @@ public class CheckInCommand extends Command {
         } catch (DuplicateBookingException de) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
+        } catch (ExceedDurationStayException cde) {
+            Booking.setNextAvailableId(bookingId);
+            throw new CommandException(MESSAGE_EXCEED_DURATION);
         }
     }
 
