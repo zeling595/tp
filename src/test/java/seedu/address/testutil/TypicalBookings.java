@@ -22,6 +22,7 @@ public class TypicalBookings {
 
     public static final LocalDate EDITED_ENDDATE_1 = LocalDate.of(2020, 10, 24);
     public static final LocalDate START_DATE_AFTER_END_DATE_1 = STARTDATE_1.plusMonths(1);
+    public static final LocalDate EXCEED_1_MONTH_END_DATE_1 = STARTDATE_1.plusMonths(2);
 
     public static final Booking BOOKING_1 = new Booking(2103, 1, STARTDATE_1, ENDDATE_1,
             false, 1);
