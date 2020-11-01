@@ -55,15 +55,15 @@ Given below are my contributions to the project.
 ### Contributions to Developer Guide (Extracts)
 * Diagrams drawn for Filter Room Feature 
     * The following diagram is the Activity Diagram for Filter Room. <br>
-    ![FilterRoomActivityDiagram](images/FilterRoomActivityDiagram.png)
+    ![FilterRoomActivityDiagram](hazel_images/Hazel_FilterRoomActivityDiagram.png)
     * The following diagram is the Sequence Diagram for Filter Room for the optimal case. <br> 
-    ![FilterRoomSequenceDiagram](images/FilterRoomSequenceDiagram2.png)
+    ![FilterRoomSequenceDiagram](hazel_images/Hazel_FilterRoomSequenceDiagram2.png)
 * Diagrams drawn for Architecture Component 
     * The following diagram was used for the Model component in Architecture. 
-    ![Structure of the Model Component](images/ModelClassDiagram.png)
+    ![Structure of the Model Component](hazel_images/Hazel_ModelClassDiagram.png)
     * The following diagram was used for the Storage component in Architecture. 
-    ![Structure of the Storage Component](images/StorageClassDiagram.png)
+    ![Structure of the Storage Component](hazel_images/Hazel_StorageClassDiagram.png)
     * The following diagram was used for the UI component in Architecture. 
-    ![Structure of the UI Component](images/UiClassDiagram.png)
+    ![Structure of the UI Component](hazel_images/Hazel_UiClassDiagram.png)
     
     
