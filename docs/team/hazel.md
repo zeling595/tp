@@ -65,5 +65,3 @@ Given below are my contributions to the project.
     ![Structure of the Storage Component](hazel_images/Hazel_StorageClassDiagram.png)
     * The following diagram was used for the UI component in Architecture. 
     ![Structure of the UI Component](hazel_images/Hazel_UiClassDiagram.png)
-    
-    
