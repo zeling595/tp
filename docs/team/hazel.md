@@ -52,3 +52,18 @@ Given below are my contributions to the project.
         * Affected: addBooking and editBooking commands 
     * Made small tweaks to Home Page display under UI (Pull Request [\#194]())
     
+### Contributions to Developer Guide (Extracts)
+* Diagrams drawn for Filter Room Feature 
+    * The following diagram is the Activity Diagram for Filter Room. <br>
+    ![FilterRoomActivityDiagram](images/FilterRoomActivityDiagram.png)
+    * The following diagram is the Sequence Diagram for Filter Room for the optimal case. <br> 
+    ![FilterRoomSequenceDiagram](images/FilterRoomSequenceDiagram2.png)
+* Diagrams drawn for Architecture Component 
+    * The following diagram was used for the Model component in Architecture. 
+    ![Structure of the Model Component](images/ModelClassDiagram.png)
+    * The following diagram was used for the Storage component in Architecture. 
+    ![Structure of the Storage Component](images/StorageClassDiagram.png)
+    * The following diagram was used for the UI component in Architecture. 
+    ![Structure of the UI Component](images/UiClassDiagram.png)
+    
+    
