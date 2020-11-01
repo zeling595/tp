@@ -71,11 +71,11 @@ Format: `help`
 
 Adds a person to the local guestbook. 
 
-Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 Examples:
-* `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg`
-* `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg`
+* `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg a/NUS SOC t/VVIP`
+* `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg a/Orchard`
 
 
 ### Listing all persons : `listPerson`
@@ -88,7 +88,7 @@ Format: `listPerson`
 
 Edits an existing person in the guestbook.
 
-Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
+Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -305,7 +305,6 @@ ConciergeBook data are saved in the hard disk automatically after any command th
 Action | Format, Examples
 --------|------------------
 **Add Person** | `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addPerson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear Person** | `clearPerson`
 **Delete Person** | `deletePerson INDEX`<br> e.g., `deletePerson 3`
 **Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
