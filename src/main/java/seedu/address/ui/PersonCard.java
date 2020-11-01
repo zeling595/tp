@@ -33,8 +33,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -49,8 +47,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(String.format("%s (ID: %s)", person.getName().fullName, person.getId().toString()));
+        name.setText(String.format("(ID: %s) %s", person.getId().toString(), person.getName().fullName));
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
@@ -73,7 +70,6 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        return person.equals(card.person);
     }
 }
