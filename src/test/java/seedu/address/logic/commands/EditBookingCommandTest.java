@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertBookingBookCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
 import static seedu.address.testutil.TypicalBookings.EDITED_ENDDATE_1;
 import static seedu.address.testutil.TypicalBookings.EDITED_ROOM_ID_1;
 import static seedu.address.testutil.TypicalBookings.EXCEED_1_MONTH_END_DATE_1;

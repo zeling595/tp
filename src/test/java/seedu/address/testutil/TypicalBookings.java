@@ -1,6 +1,25 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_END_DATE_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_ROOM_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_START_DATE_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_VALID_BOOKING_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_DAN;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
