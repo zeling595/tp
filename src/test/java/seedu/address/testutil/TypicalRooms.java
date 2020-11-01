@@ -44,7 +44,7 @@ public class TypicalRooms {
 
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code PersonBook} with all the typical persons.
      */
     public static RoomBook getTypicalRoomBook() {
         RoomBook ab = new RoomBook();

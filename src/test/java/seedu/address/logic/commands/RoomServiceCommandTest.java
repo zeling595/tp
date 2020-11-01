@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
 import static seedu.address.testutil.TypicalBookings.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import seedu.address.model.roomservice.RoomServiceType;
  * Integration test for RoomServiceCommand
  */
 class RoomServiceCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
+    private Model model = new ModelManager(getTypicalPersonBook(), new UserPrefs(), getTypicalRoomBook(),
             getTypicalBookingBook(), new RoomServiceBook());
     private int bookingId = VALID_BOOKING_ID_DAN;
     private RoomServiceType type = RoomServiceType.WIFI;

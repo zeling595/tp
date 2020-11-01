@@ -16,7 +16,7 @@ import seedu.address.model.ReadOnlyRoomServiceBook;
 
 public class JsonRoomServiceBookStorage implements RoomServiceBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonPersonBookStorage.class);
 
     private Path filePath;
 
