@@ -21,41 +21,41 @@ import seedu.address.model.booking.Booking;
 import seedu.address.testutil.TypicalBookings;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for CheckOutCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ArchiveBookingCommand.
  */
-class CheckOutCommandTest {
+class ArchiveBookingCommandTest {
     private Model model = new ModelManager(getTypicalPersonBook(), new UserPrefs(),
             getTypicalRoomBook(), getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
     public void execute_success() throws CommandException {
         model.addBooking(TypicalBookings.ACTIVE_BOOKING_DAN);
-        CheckOutCommand command = new CheckOutCommand(CommandTestUtil.VALID_BOOKING_ID_DAN);
+        ArchiveBookingCommand command = new ArchiveBookingCommand(CommandTestUtil.VALID_BOOKING_ID_DAN);
         String result = command.execute(model).getFeedbackToUser();
         Booking booking = model.getBookingWithId(CommandTestUtil.VALID_BOOKING_ID_DAN);
-        assertEquals(String.format(CheckOutCommand.MESSAGE_SUCCESS, booking), result);
+        assertEquals(String.format(ArchiveBookingCommand.MESSAGE_SUCCESS, booking), result);
     }
 
     @Test
     public void execute_bookingMissing_failure() {
-        CheckOutCommand command = new CheckOutCommand(CommandTestUtil.VALID_BOOKING_ID_DAN);
+        ArchiveBookingCommand command = new ArchiveBookingCommand(CommandTestUtil.VALID_BOOKING_ID_DAN);
         assertCommandFailure(command, model, MESSAGE_BOOKING_MISSING);
     }
 
     @Test
     public void execute_bookingInactive_failure() {
         model.addBooking(BOOKING_AMY);
-        CheckOutCommand command = new CheckOutCommand(CommandTestUtil.VALID_BOOKING_ID_AMY);
-        assertCommandFailure(command, model, CheckOutCommand.MESSAGE_ALREADY_CHECKED_OUT);
+        ArchiveBookingCommand command = new ArchiveBookingCommand(CommandTestUtil.VALID_BOOKING_ID_AMY);
+        assertCommandFailure(command, model, ArchiveBookingCommand.MESSAGE_ALREADY_ARCHIVED);
     }
 
     @Test
     public void equals() {
         int roomId = 2103;
-        final CheckOutCommand standardCommand = new CheckOutCommand(roomId);
+        final ArchiveBookingCommand standardCommand = new ArchiveBookingCommand(roomId);
 
         // same values -> returns true
-        CheckOutCommand commandWithSameValues = new CheckOutCommand(roomId);
+        ArchiveBookingCommand commandWithSameValues = new ArchiveBookingCommand(roomId);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -68,6 +68,6 @@ class CheckOutCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different Room Id -> return false
-        assertFalse(standardCommand.equals(new CheckOutCommand(roomId + 1)));
+        assertFalse(standardCommand.equals(new ArchiveBookingCommand(roomId + 1)));
     }
 }

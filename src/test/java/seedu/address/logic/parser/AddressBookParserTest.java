@@ -120,12 +120,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_checkOut() throws Exception {
+    public void parseCommand_archiveBooking() throws Exception {
         final int roomId = 2103;
-        CheckOutCommand command = (CheckOutCommand) parser.parseCommand(CheckOutCommand.COMMAND_WORD + " "
+        ArchiveBookingCommand command = (ArchiveBookingCommand) parser.parseCommand(
+                ArchiveBookingCommand.COMMAND_WORD + " "
             + PREFIX_BOOKING_ID + roomId);
 
-        assertEquals(new CheckOutCommand(roomId), command);
+        assertEquals(new ArchiveBookingCommand(roomId), command);
     }
 
     @Test
