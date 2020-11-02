@@ -336,7 +336,7 @@ message indicating the correct usage for the `FilterRoomCommand`.
 
 ![FilterRoomSequenceDiagram](images/FilterRoomSequenceDiagram1.png)
 
-A similar flow will occur if the user provides an end date that is earlier that is earlier than the inputted start date. 
+A similar flow will occur if the user provides an end date that is earlier than the inputted start date. 
 The `FilterRoomCommandParser` will throw a `ParseException(“Start Date must be before End Date!”)`. The same will occur
 if the `typ` parameter is invalid (e.g. not 1, 2, or 3). It will throw a 
 `ParseException(“Invalid Room Type. Only 1, 2, 3 allowed.”)`
@@ -358,19 +358,18 @@ The following activity diagram summarises what happens when a user executes a `f
 
 ![FilterRoomActivityDiagram](images/FilterRoomActivityDiagram.png)
 
-
-
 #### Design consideration:
 ##### Aspect: Retrieving available rooms
 **Alternative 1 (current choice)**: Retrieve unavailable rooms from BookingBook first, then retrieve the 
 desired list from RoomBook. 
-* Pros: Ensures that less dependency on the RoomBook. 
+* Pros: Ensures that less dependency on the rooms in RoomBook. 
 * Cons: Have a slightly lower execution time. 
 
 **Alternative 2**: Rooms should have a field to indicate when they are occupied. 
 * Pros: Reduces a 2-step process into a 1-step process. 
 * Cons: Strong coupling between Room and Booking. 
-Increases the complexity of other commands, such as editBooking and CheckOut due to the increased dependency. 
+Increases the complexity of other commands, such as editBooking and archive due to the increased dependency. 
+We also concluded that there was no need for rooms to know when they are occupied - this should be handled by the Bookings. 
 
 <!-- Filter Room feature --> 
 
