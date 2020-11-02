@@ -58,7 +58,7 @@ ConciergeBook (CB) is a **desktop app for hotel receptionists to efficiently man
 
 * With the exception of ordering room service, if multiple parameters are inputted, the last instance will be accepted. <br>
   e.g. if the command specifies `editBooking sd/2020-11-12 sd/2020-11-15`, the new date to be changed will be taken as `2020-11-15`. 
-
+  
 </div>
 
 ### Viewing help : `help`
@@ -75,10 +75,13 @@ Format: `help`
 Adds a person to the local guestbook. 
 
 Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+* Prefixes that are not listed in the format of the command may be parsed as part of another. 
 
 Examples:
 * `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg a/NUS SOC t/VVIP`
 * `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg a/Orchard`
+* `addPerson n/Amy Tan p/91233344 e/amy@gmail.com a/Cinnamon College pid/2` will create a person with `Cinnamon College pid/2`
+as the address. 
 
 
 ### Listing all persons : `listPerson`
@@ -97,12 +100,13 @@ Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* Prefixes that are not listed in the format of the command may be parsed as part of another. 
 
 Examples:
 *  `editPerson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editPerson 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `editPerson 3 a/ pid/2 Tembusu College` Edits the address of the 3rd person to be `pid/2 Tembusu College`. 
 
 ### Locating persons by name: `findPerson`
 
