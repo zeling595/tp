@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showBookingAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showBookingWithId;
+import static seedu.address.testutil.TypicalBookings.BOOKING_ID_1;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOKING;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
@@ -22,9 +22,9 @@ public class ListBookingCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
+        model = new ModelManager(getTypicalPersonBook(), new UserPrefs(), getTypicalRoomBook(),
                 getTypicalBookingBook(), getTypicalRoomServiceBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(),
+        expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
                 model.getBookingBook(), model.getRoomServiceBook());
     }
 
@@ -35,7 +35,7 @@ public class ListBookingCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showBookingAtIndex(model, INDEX_FIRST_BOOKING);
+        showBookingWithId(model, BOOKING_ID_1);
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW,
                         expectedModel.getFilteredBookingList().size()),

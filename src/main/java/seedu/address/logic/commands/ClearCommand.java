@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.BookingBook;
 import seedu.address.model.Model;
+import seedu.address.model.PersonBook;
 import seedu.address.model.RoomServiceBook;
 
 /**
@@ -19,7 +19,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setPersonBook(new PersonBook());
         model.setBookingBook(new BookingBook());
         model.setRoomServiceBook(new RoomServiceBook());
         return new CommandResult(MESSAGE_SUCCESS);

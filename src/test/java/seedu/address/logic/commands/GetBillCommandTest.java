@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalBookings.ACTIVE_BOOKING_DAN;
 import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
@@ -30,7 +30,7 @@ import seedu.address.model.booking.exception.BookingNotFoundException;
  */
 public class GetBillCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
+    private Model model = new ModelManager(getTypicalPersonBook(), new UserPrefs(), getTypicalRoomBook(),
             getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
