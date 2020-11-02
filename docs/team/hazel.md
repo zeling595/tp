@@ -27,8 +27,8 @@ Given below are my contributions to the project.
     * User Guide:
         * Did cosmetic tweaks to existing documentation of features `addPerson`, `findPerson`, `deletePerson`, `editPerson` and `listPerson` 
             [\#18](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/18) [\#196]()
-        * Added documentation for new commands: `getBill` [\#18](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/18) 
-        * Modified `filterRoom` and `listRoom` [\#115](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/115)
+        * Added documentation for new command: `getBill` [\#18](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/18) 
+        * Modified `filterRoom` and `listRoom` documentation [\#115](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/115)
     * Developer Guide:
         * Updated UML Diagrams of Architecture [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files)
         * Added Filter Room Feature [\#105](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/105)
@@ -40,6 +40,7 @@ Given below are my contributions to the project.
         (Pull Request [\#112](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/112), [\#120](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/120))
     
 * **Contributions to team-based tasks**:
+    * Modified and refactored the names of AB3 Commands (Pull Request [\#117](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/117))
     * Standardised Error Messages across the application 
     (Pull Request [\#117](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/117), [\#121](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/121))
     * Created Rooms of different room types to be used as the premise for our application. 
@@ -50,7 +51,7 @@ Given below are my contributions to the project.
         * What it does: Prevents the user from creating or editing a booking to be longer than 30 days. 
         * Justification: This feature allows the app to model after reality better, where there are usually restrictions on the length of stay. 
         * Affected: addBooking and editBooking commands 
-    * Made small tweaks to Home Page display under UI (Pull Request [\#194]())
+    * Made small tweaks to Home Page display under UI (Pull Request [\#194](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/194))
     
 ### Contributions to Developer Guide (Extracts)
 * Diagrams drawn for Filter Room Feature 
