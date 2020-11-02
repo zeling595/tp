@@ -21,7 +21,7 @@ public class RoomServiceCommand extends Command {
     public static final String COMMAND_WORD = "orderRoomService";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Orders room service for booking.\n"
-            + "Valid room types are: "
+            + "Valid room service types are: "
             + RoomServiceType.getAllNames()
             + "\n"
             + "Parameters: "
