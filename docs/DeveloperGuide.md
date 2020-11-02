@@ -138,53 +138,11 @@ This section describes some noteworthy details on how certain features are imple
 <!-- Create Booking Class -->
 #### Booking Class
 A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
-series of other commands associated with Booking are also created. A `Booking` object is created using the `checjIn`
+series of other commands associated with Booking are also created. A `Booking` object is created using the `checkIn`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
 
 <!-- Create Booking Class -->
 
-<!-- Find Booking feature -->
-#### Find Booking feature
-1.1 Find Booking: finds booking(s) with the following parameters:
-`findBooking`
-FindBooking features will be used in different senarios:
-
-1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
-is he/she checked into. The user can find the room besed on the customer Id, the start date and the end date of the
- booking                                      
-2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For
-example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
-be provided. The user then can use the above information to find out about the booking id which is needed by
-other features.
-
-Given below is the example usage scenario:
-Step 1: As the user launch the App, the Booking book will load the data from memory, the filteredBookings includes all
-the bookings in the bookingList.
-
-Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
-associated with person id 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
-update the filteredList in the model so UI will update to only show the relevant bookings. 
-The user then can view the complete information about the booking(s), 
-including the booking id, the room id, the person id, the start and end date, and the isActive state.
-
-Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking
-which meet the parameters can be found, the filteredList will be empty hence no
-booking will be displayed in UI.
-
-The following sequence diagram shows how the findBooking operation works:
-![FindBookingDiagram](images/FindBookingDiagram.png)
-
-#### Design consideration:
-Aspect: which parameters should be allowed to use in find Booking?
-- Alternative 1 (current choice): roomId, personId, startDate, endDate, and isActive state
-    - Pros: Easy to implement.
-    - Cons: Not as convenient as the user would have to search up for the personId first
-- Alternative 2: person's name or phone number
-    - Pros: More user-friendly as the user only need to key in information once
-    - Cons: There are more complexity involved for one feature. When a booking cannot be found, it could be due to
-    there is no person information matches up with the given details (the person is not present in the database), or 
-    due to a field provided by the customer is incorrect so there is no matching.
-<!-- Find Booking feature -->
 
 <!-- Check In feature -->
 
@@ -242,6 +200,100 @@ The following activity diagram summarises what happens when a user executes a `c
   * Cons: Strong coupling between Person and Room. If we modify our Person object, we will have to modify Room.
 
 <!-- Check In feature -->
+
+
+<!-- Edit booking feature -->
+### Edit Booking feature 
+
+The edit booking feature is facilitated by:
+1. `Booking` class. `Booking` objects represent the target booking to be replaced and edited booking.
+2. `BookingBook`. BookingBook tracks all the bookings created. It implements the following
+operation that support the edit booking feature:
+    `BookingBook#setBooking()` - set the target booking to the edited booking    
+    
+These operation is exposed in the `Model` interface as `Model#setBooking()`.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+
+Step 2. (Optional) The user executes `listBooking` command to list out all the bookings and find out the booking ID of
+the booking to edit.
+
+Step 3. The user executes `editBooking bid/2 rid/2103 sd/2020-12-30 ed/2020-12-31` command to edit booking with booking
+ID 2. The room ID will be overwritten by 2103, start date by 30 December 2020, end date by 31 December 2020. Person ID
+and booking ID cannot be modified. 
+
+Step 4. If the booking ID exists and there is at least one other parameters to edit, the application will create a new
+`booking` to replace the old booking with the booking ID and store it in `Model`. Else, ConciergeBook will display
+error message to show sample usage.
+
+Given below is the sequence diagram that shows how the edit booking operation works (in step 5).
+
+![EditBookingSequenceDiagram](images/EditBookingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
+Also, if the only booking ID is specified, an error message will be shown to ask user to provide at least one field.
+If the edited booking duplicates or conflicts with existing booking, an error message will be shown as well. 
+
+</div>
+
+The following activity diagram summarises what happens when a user executes a `editBooking` command:
+
+![EditBookingActivityDiagram](images/EditBookingActivityDiagram.png)
+
+<!-- Edit booking feature -->
+
+<!-- Find Booking feature -->
+#### Find Booking feature
+1.1 Find Booking: finds booking(s) with the following parameters: person ID, room ID, start date, end date and isActive state - `findBooking`
+
+The Find Booking feature is facilitated by:
+1. `Booking` class. `Booking` objects represent the booking made by the person when checked in.
+2. `ModelManager`. ModelManager contains the filteredBookings which will be updated after `findBooking` command. It implements the following
+operation that support the find bookingg feature:
+    `updateFilteredBookingList()` - update filteredBookingList with a predicate.
+
+FindBooking features will be used in different scenarios:
+
+1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
+is he/she checked into. The user can find the room based on the customer Id, the start date and the end date of the booking.                                      
+2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For
+example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
+be provided. The user then can use the above information to find out about the booking id which is needed by
+other features.
+
+Given below is the example usage scenario:
+Step 1: As the user launch the App, the Booking book will load the data from memory, the filteredBookings includes all
+the bookings in the bookingList.
+
+Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
+associated with person id 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+update the filteredList in the model so UI will update to only show the relevant bookings. 
+The user then can view the complete information about the booking(s), 
+including the booking id, the room id, the person id, the start and end date, and the isActive state.
+
+Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking
+which meet the parameters can be found, the filteredList will be empty hence no
+booking will be displayed in UI.
+
+The following sequence diagram shows how the findBooking operation works:
+![FindBookingDiagram](images/FindBookingDiagram.png)
+
+#### Design consideration:
+Aspect: which parameters should be allowed to use in find Booking?
+- Alternative 1 (current choice): roomId, personId, startDate, endDate, and isActive state
+    - Pros: Easy to implement.
+    - Cons: Not as convenient as the user would have to search up for the personId first
+- Alternative 2: person's name or phone number
+    - Pros: More user-friendly as the user only need to key in information once
+    - Cons: There are more complexity involved for one feature. When a booking cannot be found, it could be due to
+    there is no person information matches up with the given details (the person is not present in the database), or 
+    due to a field provided by the customer is incorrect so there is no matching.
+<!-- Find Booking feature -->
+
 
 <!-- Room service feature -->
 ### Order Room Service feature 
@@ -372,50 +424,6 @@ Increases the complexity of other commands, such as editBooking and archive due 
 We also concluded that there was no need for rooms to know when they are occupied - this should be handled by the Bookings. 
 
 <!-- Filter Room feature --> 
-
-<!-- Edit booking feature -->
-### Edit Booking feature 
-
-The edit booking feature is facilitated by:
-1. `Booking` class. `Booking` objects represent the target booking to be replaced and edited booking.
-2. `BookingBook`. BookingBook tracks all the bookings created. It implements the following
-operation that support the edit booking feature:
-    `BookingBook#setBooking()` - set the target booking to the edited booking    
-    
-These operation is exposed in the `Model` interface as `Model#setBooking()`.
-
-Given below is an example usage scenario:
-
-Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
-memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
-
-Step 2. (Optional) The user executes `listBooking` command to list out all the bookings and find out the booking ID of
-the booking to edit.
-
-Step 3. The user executes `editBooking bid/2 rid/2103 sd/2020-12-30 ed/2020-12-31` command to edit booking with booking
-ID 2. The room ID will be overwritten by 2103, start date by 30 December 2020, end date by 31 December 2020. Person ID
-and booking ID cannot be modified. 
-
-Step 4. If the booking ID exists and there is at least one other parameters to edit, the application will create a new
-`booking` to replace the old booking with the booking ID and store it in `Model`. Else, ConciergeBook will display
-error message to show sample usage.
-
-Given below is the sequence diagram that shows how the edit booking operation works (in step 5).
-
-![EditBookingSequenceDiagram](images/EditBookingSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
-into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
-Also, if the only booking ID is specified, an error message will be shown to ask user to provide at least one field.
-If the edited booking duplicates or conflicts with existing booking, an error message will be shown as well. 
-
-</div>
-
-The following activity diagram summarises what happens when a user executes a `editBooking` command:
-
-![EditBookingActivityDiagram](images/EditBookingActivityDiagram.png)
-
-<!-- Edit booking feature -->
 
 ### \[Proposed\] Undo/redo feature
 

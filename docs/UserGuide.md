@@ -252,9 +252,9 @@ Examples:
 
 ### Locating bookings: `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
 
-Finds bookings which matches all the given predicates.
+Finds the bookings which matches all the given predicates.
 
-Format: `findBooking KEYWORD [MORE_KEYWORDS]`
+Format: `findBooking [bid/BOOKING_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
 
 * The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
 * the input room ID and person ID must be valid (registered in the database).
@@ -324,7 +324,7 @@ Action | Format, Examples
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
 **Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`
-**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `FINDBooking pid/1 rid/2104`
+**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `findBooking pid/1 rid/2104`
 **Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 
 

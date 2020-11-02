@@ -39,6 +39,9 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = model.getPersonWithId(personId);
         model.deletePerson(personToDelete);
+
+        model.deleteBookingByPersonId(personId);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
                 false, false, true, false);
     }
