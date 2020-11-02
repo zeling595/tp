@@ -40,7 +40,7 @@ public class EditBookingCommand extends Command {
             + "[" + PREFIX_ROOM_ID + "ROOM ID] "
             + "[" + PREFIX_START_DATE + "START DATE] "
             + "[" + PREFIX_END_DATE + "END DATE] \n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " pid/1 "
             + PREFIX_ROOM_ID + "2103 "
             + PREFIX_START_DATE + "2020-12-25";
 

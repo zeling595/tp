@@ -1,13 +1,14 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PERSONAL_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonWithId;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.VALID_PERSON_ID_ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
@@ -15,7 +16,6 @@ import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,9 +31,9 @@ public class DeleteCommandTest {
             getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void execute_validPersonIdUnfilteredList_success() {
+        Person personToDelete = model.getPersonWithId(VALID_PERSON_ID_ALICE);
+        DeleteCommand deleteCommand = new DeleteCommand(VALID_PERSON_ID_ALICE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -45,19 +45,17 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_nonExistPersonIdUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(INVALID_PERSONAL_ID);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSONAL_ID_MISSING);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void execute_validPersonIdFilteredList_success() {
+        showPersonWithId(model, VALID_PERSON_ID_ALICE);
+        Person personToDelete = model.getPersonWithId(VALID_PERSON_ID_ALICE);
+        DeleteCommand deleteCommand = new DeleteCommand(VALID_PERSON_ID_ALICE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -70,28 +68,23 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_nonExistPersonIdFilteredList_throwsCommandException() {
+        showPersonWithId(model, VALID_PERSON_ID_ALICE);
+        DeleteCommand deleteCommand = new DeleteCommand(INVALID_PERSONAL_ID);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getPersonBook().getPersonList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSONAL_ID_MISSING);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(VALID_PERSONAL_ID_AMY);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(VALID_PERSONAL_ID_BOB);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(VALID_PERSONAL_ID_AMY);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -138,6 +138,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getPersonWithId(Integer id) {
+        requireNonNull(id);
+        return personBook.getPersonWithId(id);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         personBook.removePerson(target);
     }

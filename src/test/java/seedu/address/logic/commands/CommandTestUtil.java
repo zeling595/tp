@@ -63,6 +63,7 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
+    public static final int INVALID_PERSONAL_ID = 1000; // use for non-existing personId test
 
     public static final int VALID_PERSONAL_ID_SINGLE_HARRY = 420;
     public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
@@ -264,6 +265,20 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonWithId(Model model, int personId) {
+        assert personId > 0;
+
+        Person person = model.getPersonWithId(personId);
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 

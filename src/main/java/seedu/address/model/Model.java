@@ -87,6 +87,11 @@ public interface Model {
     boolean hasPersonWithId(Integer id);
 
     /**
+     * Return person with matching id.
+     */
+    Person getPersonWithId(Integer id);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
