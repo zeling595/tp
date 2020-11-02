@@ -51,8 +51,8 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
-BookingCard ..> Model
+PersonCard .down.> Model
+BookingCard .down.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
