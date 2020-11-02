@@ -1,6 +1,25 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_END_DATE_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_ROOM_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_START_DATE_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.CONFLICT_AMY_VALID_BOOKING_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_DAN;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +41,7 @@ public class TypicalBookings {
 
     public static final LocalDate EDITED_ENDDATE_1 = LocalDate.of(2020, 10, 24);
     public static final LocalDate START_DATE_AFTER_END_DATE_1 = STARTDATE_1.plusMonths(1);
+    public static final LocalDate EXCEED_1_MONTH_END_DATE_1 = STARTDATE_1.plusMonths(2);
 
     public static final Booking BOOKING_1 = new Booking(2103, 1, STARTDATE_1, ENDDATE_1,
             false, 1);

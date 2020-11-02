@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_EXCEED_DURATION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 import static seedu.address.storage.JsonAdaptedBooking.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,6 +21,7 @@ public class JsonAdaptedBookingTest {
     private static final Integer INVALID_PERSON_ID = -1000;
     private static final LocalDate INVALID_START_DATE = LocalDate.of(2020, 10, 23);
     private static final LocalDate INVALID_END_DATE = LocalDate.of(2020, 10, 22);
+    private static final LocalDate INVALID_END_DATE_EXCEED = LocalDate.of(2020, 12, 11);
 
     private static final Integer VALID_ID = BOOKING_BOB.getId();
     private static final Integer VALID_ROOM_ID = BOOKING_BOB.getRoomId();
@@ -105,12 +107,17 @@ public class JsonAdaptedBookingTest {
 
     @Test
     public void toModelType_nullEndDate_throwsIllegalValueException() {
-        JsonAdaptedBooking person = new JsonAdaptedBooking(
+        JsonAdaptedBooking booking = new JsonAdaptedBooking(
                 VALID_ID, VALID_ROOM_ID, VALID_PERSON_ID, VALID_START_DATE, null, VALID_IS_ACTIVE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "endDate");
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, booking::toModelType);
     }
 
-
-
+    @Test
+    public void toModelType_endDateExceed_throwsIllegalValueException() {
+        JsonAdaptedBooking booking = new JsonAdaptedBooking(
+                VALID_ID, VALID_ROOM_ID, VALID_PERSON_ID, INVALID_START_DATE, INVALID_END_DATE_EXCEED, VALID_IS_ACTIVE);
+        String expectedMessage = MESSAGE_EXCEED_DURATION;
+        assertThrows(IllegalValueException.class, expectedMessage, booking::toModelType);
+    }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_BOOKING;
+import static seedu.address.commons.core.Messages.MESSAGE_EXCEED_DURATION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.exception.ConflictingBookingException;
 import seedu.address.model.booking.exception.DuplicateBookingException;
+import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 public class EditBookingCommand extends Command {
     public static final String COMMAND_WORD = "editBooking";
@@ -97,6 +99,9 @@ public class EditBookingCommand extends Command {
         } catch (DuplicateBookingException de) {
             logger.log(Level.WARNING, "duplicated booking");
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
+        } catch (ExceedDurationStayException cde) {
+            logger.log(Level.WARNING, "exceed 30 day limit");
+            throw new CommandException(MESSAGE_EXCEED_DURATION);
         }
 
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
