@@ -38,12 +38,12 @@ public class HomePagePanel extends UiPart<Region> {
         super(FXML);
         roomsAvailableTitle.setText("Number of Rooms Available:");
         singleRoomsText.setText(
-                "10 Single Rooms");
+                "Single Rooms: 2103 ~ 2112 (Price: $70/night)");
         doubleRoomsText.setText(
-                "10 Double Rooms");
+                "Double Rooms: 2113 ~ 2122 (Price: $100/night)");
         suiteRoomsText.setText(
-                "10 Suite Rooms");
-        recentBookingsTitle.setText("Recently Checked In:");
+                "Suite Rooms: 2123 ~ 2132 (Price: $150/night)");
+        recentBookingsTitle.setText("Recently Added Bookings:");
         SortedList<Booking> sortedBookingList = new SortedList<>(bookingList, (o1, o2)
             -> o2.getStartDate().compareTo(o1.getStartDate()));
         recentBookingsView.setItems(sortedBookingList);
