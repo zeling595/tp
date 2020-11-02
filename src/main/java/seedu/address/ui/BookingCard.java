@@ -27,8 +27,6 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label index;
-    @FXML
     private Label id;
     @FXML
     private Label personId;
@@ -45,7 +43,6 @@ public class BookingCard extends UiPart<Region> {
     public BookingCard(Booking booking, int displayedIndex) {
         super(FXML);
         this.booking = booking;
-        index.setText(displayedIndex + ". ");
         id.setText(String.format("Booking ID: %s", booking.getId().toString()));
         personId.setText(String.format("Person ID: %s", booking.getPersonId().toString()));
         roomId.setText(String.format("Room ID: %s", booking.getRoomId().toString()));

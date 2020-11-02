@@ -312,8 +312,8 @@ ConciergeBook data are saved in the hard disk automatically after any command th
 Action | Format, Examples
 --------|------------------
 **Add Person** | `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addPerson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Person** | `deletePerson pid/PERSON_ID`<br> e.g., `deletePerson pid/3`
-**Edit Person** | `editPerson pid/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson pid/2 n/James Lee e/jameslee@example.com`
+**Delete Person** | `deletePerson pid/PERSON_ID`<br> e.g., `deletePerson 3`
+**Edit Person** | `editPerson pid/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
 **Check In** | `checkIn pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
