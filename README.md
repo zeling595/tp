@@ -9,14 +9,15 @@ If you can type fast, ConciergeBook can help you optimise how you manage your ro
 your guests and all new and existing bookings - faster than traditional GUI apps.
 
 ## Quick Start
-* Ensure you have `java 11` installed.
-* Download the jar file.
-* Run `java -jar {jarFileName}.jar` in your terminal/cmd.
+* Ensure you have Java `11` or above installed in your Computer.
+* Download the latest `conciergebook.jar` from [here](https://github.com/AY2021S1-CS2103-W14-2/tp/releases).
+* Copy the file to the folder you want to use as the _home folder_ for your ConciergeBook.
+* Run `java -jar conciergebook.jar` in your terminal/cmd.
 
 ## Main features
-1. Check in and check out guests 
-2. Keep track of guests who have used the hotel
-3. Charge guests the bill upon checkout
+1. Manage hotel bookings
+2. Manage hotel guests
+3. Order room services and return total bill for a booking
 
 For more details on how to use the app, you can
 look at our [User Guide](https://ay2021s1-cs2103-w14-2.github.io/tp/UserGuide.html).
