@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showBookingWithId;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
@@ -24,7 +24,7 @@ import seedu.address.model.booking.Booking;
  */
 public class DeleteBookingCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalRoomBook(),
+    private Model model = new ModelManager(getTypicalPersonBook(), new UserPrefs(), getTypicalRoomBook(),
             getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test
@@ -34,7 +34,7 @@ public class DeleteBookingCommandTest {
 
         String expectedMessage = String.format(DeleteBookingCommand.MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(),
+        ModelManager expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
                 model.getBookingBook(), model.getRoomServiceBook());
         expectedModel.deleteBooking(bookingToDelete);
 
@@ -58,7 +58,7 @@ public class DeleteBookingCommandTest {
 
         String expectedMessage = String.format(DeleteBookingCommand.MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getRoomBook(),
+        Model expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
                 model.getBookingBook(), model.getRoomServiceBook());
         expectedModel.deleteBooking(bookingToDelete);
         showNoBooking(expectedModel);

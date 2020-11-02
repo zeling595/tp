@@ -24,12 +24,12 @@ import seedu.address.model.room.Room;
 import seedu.address.model.room.Single;
 import seedu.address.model.room.Suite;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.BookingBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonBookingBookStorage;
+import seedu.address.storage.JsonPersonBookStorage;
 import seedu.address.storage.JsonRoomServiceBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.PersonBookStorage;
 import seedu.address.storage.RoomServiceBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -54,7 +54,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=========================[ Initializing AddressBook & BookingBook ]=======================");
+        logger.info("=========================[ Initializing PersonBook & BookingBook ]=======================");
         logger.info("=============================[ Initializing RoomServiceBook ]===========================");
         super.init();
 
@@ -63,11 +63,11 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        PersonBookStorage personBookStorage = new JsonPersonBookStorage(userPrefs.getPersonBookFilePath());
         BookingBookStorage bookingBookStorage = new JsonBookingBookStorage(userPrefs.getBookingBookFilePath());
         RoomServiceBookStorage roomServiceBookStorage =
                 new JsonRoomServiceBookStorage(userPrefs.getRoomServiceBookFilePath());
-        storage = new StorageManager(addressBookStorage, bookingBookStorage, userPrefsStorage, roomServiceBookStorage);
+        storage = new StorageManager(personBookStorage, bookingBookStorage, userPrefsStorage, roomServiceBookStorage);
 
         initLogging(config);
 
@@ -104,20 +104,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyPersonBook> personBookOptional;
         Optional<ReadOnlyBookingBook> bookingBookOptional;
         Optional<ReadOnlyRoomServiceBook> roomServiceBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyPersonBook initialData;
         ReadOnlyBookingBook bookingData;
         ReadOnlyRoomServiceBook roomServiceData;
         ReadOnlyRoomBook roomData = initRooms();
 
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            personBookOptional = storage.readPersonBook();
+            if (!personBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample PersonBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = personBookOptional.orElseGet(SampleDataUtil::getSamplePersonBook);
 
             bookingBookOptional = storage.readBookingBook();
             if (!bookingBookOptional.isPresent()) {
@@ -126,11 +126,11 @@ public class MainApp extends Application {
             bookingData = bookingBookOptional.orElseGet(SampleDataUtil::getSampleBookingBook);
 
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty PersonBook");
+            initialData = new PersonBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty PersonBook");
+            initialData = new PersonBook();
         }
 
 
@@ -225,7 +225,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty PersonBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -247,7 +247,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Concierge Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

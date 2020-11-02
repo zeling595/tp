@@ -67,7 +67,7 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
 
         if (argMultimap.getValue(PREFIX_IS_ACTIVE).isPresent()) {
             boolean isActive = ParserUtil.parseIsActive(argMultimap.getValue(PREFIX_IS_ACTIVE).get());
-            predicates.add(new BookingMatchesIsActivePredicate(isActive));
+            predicates.add(new BookingMatchesIsActivePredicate(!isActive));
         }
 
         if (predicates.size() == 0) {
