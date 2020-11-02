@@ -40,6 +40,7 @@ public class DeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
                 model.getBookingBook(), model.getRoomServiceBook());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteBookingByPersonId(VALID_PERSON_ID_ALICE);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -62,6 +63,8 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
                 model.getBookingBook(), model.getRoomServiceBook());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteBookingByPersonId(VALID_PERSON_ID_ALICE);
+
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
