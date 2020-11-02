@@ -74,6 +74,11 @@ public class PersonBook implements ReadOnlyPersonBook {
         return persons.hasPersonWithId(id);
     }
 
+    public Person getPersonWithId(Integer id) {
+        requireNonNull(id);
+        return persons.getPersonWithId(id);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.

@@ -44,6 +44,17 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(person -> person.getId().equals(id));
     }
 
+    public Person getPersonWithId(Integer id) {
+        requireNonNull(id);
+        if (!hasPersonWithId(id)) {
+            throw new PersonNotFoundException();
+        }
+
+        return internalList.stream()
+                .filter(person -> person.getId().equals(id))
+                .findFirst().get();
+    }
+
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
