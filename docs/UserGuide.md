@@ -96,7 +96,7 @@ Edits an existing person in the guestbook.
 
 Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with ID `PERSON_ID`. The person ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -107,6 +107,7 @@ Examples:
 *  `editPerson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editPerson 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 *  `editPerson 3 a/ pid/2 Tembusu College` Edits the address of the 3rd person to be `pid/2 Tembusu College`. 
+
 
 ### Locating persons by name: `findPerson`
 
@@ -130,23 +131,22 @@ Examples:
 
 Deletes the specified person from the guestbook.
 
-Format: `deletePerson INDEX`
+Format: `deletePerson pid/PERSON_ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with ID `PERSON_ID`.
+* The person ID refers to the unique ID of the person.
+* The person ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listPerson` followed by `deletePerson 2` deletes the 2nd person in the guestbook.
-* `findPerson Betsy` followed by `deletePerson 1` deletes the 1st person in the results of the `findPerson` command.
+* `deletePerson pid/2` deletes the person with ID `2` in the guestbook.
 
 ### Checking in guest: `checkIn`
 
 Checks in a guest into the hotel.
-Format: `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
+Format: `checkIn pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-* Checks in the person with `PERSONAL_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
-* The person with the specified `PERSONAL_ID` **must be a positive integer** and **must have been added to the local 
+* Checks in the person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The person with the specified `PERSON_ID` **must be a positive integer** and **must have been added to the local 
 guestbook prior to this.**  
 * The `ROOM_ID` **must be a positive integer** and **must be an existing roomId in the hotel.** 
 * The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
@@ -312,11 +312,11 @@ ConciergeBook data are saved in the hard disk automatically after any command th
 Action | Format, Examples
 --------|------------------
 **Add Person** | `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addPerson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Person** | `deletePerson INDEX`<br> e.g., `deletePerson 3`
-**Edit Person** | `editPerson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
+**Delete Person** | `deletePerson pid/PERSON_ID`<br> e.g., `deletePerson pid/3`
+**Edit Person** | `editPerson pid/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson pid/2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
 **List Person** | `listPerson`
-**Check In** | `checkIn pid/PERSONAL_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
+**Check In** | `checkIn pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
 **Check Out** | `checkOut bid/BOOKING_ID`<br> e.g., `checkOut bid/42`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Room** | `listRoom`

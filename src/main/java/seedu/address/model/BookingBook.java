@@ -27,7 +27,7 @@ public class BookingBook implements ReadOnlyBookingBook {
     public BookingBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an PersonBook using the Persons in the {@code toBeCopied}
      */
     public BookingBook(ReadOnlyBookingBook toBeCopied) {
         this();
@@ -69,6 +69,10 @@ public class BookingBook implements ReadOnlyBookingBook {
 
     public void removeBooking(Booking booking) {
         bookings.removeBooking(booking);
+    }
+
+    public void removeBookingWithPersonId(Integer personId) {
+        bookings.removeBookingWithPersonId(personId);
     }
 
 

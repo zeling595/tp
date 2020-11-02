@@ -115,7 +115,7 @@ public class RoomBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyPersonBook whose persons list can violate interface constraints.
      */
     private static class RoomBookStub implements ReadOnlyRoomBook {
         private final ObservableList<Room> rooms = FXCollections.observableArrayList();

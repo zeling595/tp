@@ -54,7 +54,7 @@ public class FindBookingCommandParserTest {
         // even more parameters
         BookingMatchesStartDatePredicate predicate3 = new BookingMatchesStartDatePredicate(LocalDate.of(2020, 10, 20));
         BookingMatchesEndDatePredicate predicate4 = new BookingMatchesEndDatePredicate(LocalDate.of(2020, 10, 25));
-        BookingMatchesIsActivePredicate predicate5 = new BookingMatchesIsActivePredicate(false);
+        BookingMatchesIsActivePredicate predicate5 = new BookingMatchesIsActivePredicate(true);
         FindBookingCommand expectedFindBookingCommand3 =
                 new FindBookingCommand(Arrays.asList(predicate1, predicate2, predicate3, predicate4, predicate5),
                         Optional.of(2103), Optional.of(1));

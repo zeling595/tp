@@ -101,12 +101,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getPersonBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setPersonBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,12 +126,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setPersonBook(ReadOnlyPersonBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPersonBook getPersonBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -142,6 +142,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPersonWithId(Integer id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonWithId(Integer id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,6 +249,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void deleteBookingByPersonId(Integer personId) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasBooking(Booking booking) {
@@ -354,8 +363,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPersonBook getPersonBook() {
+            return new PersonBook();
         }
     }
 

@@ -1,8 +1,7 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_ID;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
-import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static seedu.address.commons.core.Messages.*;
 
 import java.time.LocalDate;
 
@@ -90,6 +89,14 @@ public class JsonAdaptedBooking {
         } else if (!startDate.isBefore(endDate)) {
             throw new IllegalValueException(MESSAGE_INVALID_START_END_DATE);
         }
+
+        long noOfDaysBetween = DAYS.between(startDate, endDate);
+        int duration = (int) noOfDaysBetween;
+
+        if (duration > 30) {
+            throw new IllegalValueException(MESSAGE_EXCEED_DURATION);
+        }
+
         final LocalDate modelStartDate = startDate;
         final LocalDate modelEndDate = endDate;
 

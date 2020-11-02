@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalBookings;
  * Contains integration tests (interaction with the Model) and unit tests for CheckOutCommand.
  */
 class CheckOutCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(getTypicalPersonBook(), new UserPrefs(),
             getTypicalRoomBook(), getTypicalBookingBook(), getTypicalRoomServiceBook());
 
     @Test

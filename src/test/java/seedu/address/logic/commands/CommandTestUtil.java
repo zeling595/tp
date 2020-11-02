@@ -13,9 +13,9 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.BookingBook;
 import seedu.address.model.Model;
+import seedu.address.model.PersonBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingMatchesBookingIdPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -63,6 +63,7 @@ public class CommandTestUtil {
     public static final int VALID_PERSONAL_ID_BOB = 12;
     public static final int VALID_PERSONAL_ID_CHLOE = 6;
     public static final int VALID_PERSONAL_ID_DAN = 4;
+    public static final int INVALID_PERSONAL_ID = 1000; // use for non-existing personId test
 
     public static final int VALID_PERSONAL_ID_SINGLE_HARRY = 420;
     public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
@@ -102,14 +103,14 @@ public class CommandTestUtil {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_END_DATE_DAN = LocalDate.parse("2020-11-21",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-30",
+    public static final LocalDate VALID_START_DATE_GENE = LocalDate.parse("2020-01-01",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-06-06",
+    public static final LocalDate VALID_END_DATE_GENE = LocalDate.parse("2020-01-30",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     public static final LocalDate VALID_START_DATE_SINGLE_HARRY = LocalDate.parse("2020-03-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse("2020-05-25",
+    public static final LocalDate VALID_END_DATE_SINGLE_HARRY = LocalDate.parse("2020-04-12",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate VALID_START_DATE_DOUBLE_HARRY = LocalDate.parse("2020-06-25",
             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -231,11 +232,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        PersonBook expectedAddressBook = new PersonBook(actualModel.getPersonBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedAddressBook, actualModel.getPersonBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
 
@@ -264,6 +265,20 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonWithId(Model model, int personId) {
+        assert personId > 0;
+
+        Person person = model.getPersonWithId(personId);
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
