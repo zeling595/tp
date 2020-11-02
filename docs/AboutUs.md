@@ -45,7 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/zeling595.png" width="200px">
 
 [[github](https://github.com/zeling595)] 
-[[portfolio](team/zeling.md)]
+[[portfolio](team/zeling595.md)]
 
 * Role: Developer (Ui)
 * Responsibilities: 
