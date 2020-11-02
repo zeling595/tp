@@ -68,6 +68,17 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
+     * Remove bookings associated with a personId from the List.
+     */
+    public void removeBookingWithPersonId(Integer personID) {
+        requireNonNull(personID);
+
+        setBookings(internalList.stream()
+                .filter(booking -> !booking.getPersonId().equals(personID))
+                .collect(Collectors.toList()));
+    }
+
+    /**
      * Adds a booking to the list.
      * The booking must not already exist in the list.
      */

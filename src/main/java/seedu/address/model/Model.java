@@ -41,14 +41,14 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' person book file path.
      */
-    Path getAddressBookFilePath();
+    Path getPersonBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' person book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPersonBookFilePath(Path addressBookFilePath);
 
     /**
      * Returns the user prefs' booking book file path.
@@ -63,10 +63,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setPersonBook(ReadOnlyPersonBook personBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the PersonBook */
+    ReadOnlyPersonBook getPersonBook();
 
     /**
      * Replaces booking book data with the data in {@code bookingBook}.
@@ -154,6 +154,12 @@ public interface Model {
      * The booking must exist in the booking book.
      */
     void deleteBooking(Booking target);
+
+    /**
+     * Deletes all booking associated with the personId.
+     * The booking must exist in the booking book.
+     */
+    void deleteBookingByPersonId(Integer personId);
 
     void addBooking(Booking b);
 

@@ -24,7 +24,7 @@ import seedu.address.model.roomservice.RoomService;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final PersonBook personBook;
     private final RoomBook roomBook;
     private final BookingBook bookingBook;
     private final RoomServiceBook roomServiceBook;
@@ -35,24 +35,24 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+    public ModelManager(ReadOnlyPersonBook personBook, ReadOnlyUserPrefs userPrefs,
                         ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook,
                         ReadOnlyRoomServiceBook roomServiceBook) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(personBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + personBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.personBook = new PersonBook(personBook);
         this.roomBook = new RoomBook(roomBook);
         this.bookingBook = new BookingBook(bookingBook);
         this.roomServiceBook = new RoomServiceBook(roomServiceBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.personBook.getPersonList());
         filteredBookings = new FilteredList<>(this.bookingBook.getBookingList());
 
         // Initialize the nextAvailableId of Person class so that each new person gets a unique id
-        Integer nextAvailableId = this.addressBook.getPersonList().stream()
+        Integer nextAvailableId = this.personBook.getPersonList().stream()
                 .mapToInt(Person::getId).max().orElse(0) + 1;
         Person.setNextAvailableId(nextAvailableId);
 
@@ -63,7 +63,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new RoomBook(), new BookingBook(), new RoomServiceBook());
+        this(new PersonBook(), new UserPrefs(), new RoomBook(), new BookingBook(), new RoomServiceBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -91,8 +91,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPersonBookFilePath() {
+        return userPrefs.getPersonBookFilePath();
     }
 
     @Override
@@ -101,9 +101,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setPersonBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setPersonBookFilePath(addressBookFilePath);
     }
 
     @Override
@@ -113,51 +113,51 @@ public class ModelManager implements Model {
     }
 
 
-    //=========== AddressBook ================================================================================
+    //=========== PersonBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setPersonBook(ReadOnlyPersonBook personBook) {
+        this.personBook.resetData(personBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyPersonBook getPersonBook() {
+        return personBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return personBook.hasPerson(person);
     }
 
     @Override
     public boolean hasPersonWithId(Integer id) {
         requireNonNull(id);
-        return addressBook.hasPersonWithId(id);
+        return personBook.hasPersonWithId(id);
     }
 
     @Override
     public Person getPersonWithId(Integer id) {
         requireNonNull(id);
-        return addressBook.getPersonWithId(id);
+        return personBook.getPersonWithId(id);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        personBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        personBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
+        personBook.setPerson(target, editedPerson);
     }
 
     //=========== RoomBook ===================================================================================
@@ -255,6 +255,11 @@ public class ModelManager implements Model {
     @Override
     public Booking getBookingWithId(Integer id) {
         return bookingBook.getBookingWithId(id);
+    }
+
+    @Override
+    public void deleteBookingByPersonId(Integer personId) {
+        bookingBook.removeBookingWithPersonId(personId);
     }
 
     @Override
@@ -363,7 +368,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
 
-        return addressBook.equals(other.addressBook)
+        return personBook.equals(other.personBook)
                 && bookingBook.equals(other.bookingBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)

@@ -23,11 +23,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPersonBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonBookingBookStorage;
+import seedu.address.storage.JsonPersonBookStorage;
 import seedu.address.storage.JsonRoomServiceBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -44,8 +44,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonPersonBookStorage addressBookStorage =
+                new JsonPersonBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonBookingBookStorage bookingBookStorage =
                 new JsonBookingBookStorage(temporaryFolder.resolve("bookingBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -57,13 +57,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAddressBook_success() {
-        assertEquals(logic.getAddressBook(), model.getAddressBook());
+    public void getPersonBook_success() {
+        assertEquals(logic.getPersonBook(), model.getPersonBook());
     }
 
     @Test
-    public void getAddressBookFilePath_success() {
-        assertEquals(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
+    public void getPersonBookFilePath_success() {
+        assertEquals(logic.getPersonBookFilePath(), model.getPersonBookFilePath());
     }
 
     @Test
@@ -91,9 +91,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonPersonBookIoExceptionThrowingStub
+        JsonPersonBookStorage addressBookStorage =
+                new JsonPersonBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonBookingBookStorage bookingBookStorage =
                 new JsonBookingBookStorage(temporaryFolder.resolve("bookingBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
@@ -160,7 +160,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+        Model expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(),
                 model.getRoomBook(), model.getBookingBook(), model.getRoomServiceBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -181,13 +181,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonPersonBookIoExceptionThrowingStub extends JsonPersonBookStorage {
+        private JsonPersonBookIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void savePersonBook(ReadOnlyPersonBook addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
