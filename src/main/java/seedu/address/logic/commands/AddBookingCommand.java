@@ -98,8 +98,8 @@ public class AddBookingCommand extends Command {
             model.addBooking(booking);
             return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
         } catch (ConflictingBookingException conflictE) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, booking), false, false,
-                    false, true);
+            Booking.setNextAvailableId(bookingId);
+            throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
         } catch (DuplicateBookingException duplicateE) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
