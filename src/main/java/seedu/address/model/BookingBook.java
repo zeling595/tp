@@ -89,6 +89,10 @@ public class BookingBook implements ReadOnlyBookingBook {
         bookings.setBookingInactive(bookingId);
     }
 
+    public void setBookingActive(int bookingId) {
+        bookings.setBookingActive(bookingId);
+    }
+
     /**
      * Returns true if a booking with the same identity as {@code booking} exists in the address book.
      */
