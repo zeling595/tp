@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ public class HomePagePanel extends UiPart<Region> {
      */
     public HomePagePanel(ObservableList<Booking> bookingList) {
         super(FXML);
-        roomsAvailableTitle.setText("Number of Rooms Available:");
+        roomsAvailableTitle.setText("Type of Rooms Available:");
         singleRoomsText.setText(
                 "Single Rooms: 2103 ~ 2112 (Price: $70/night)");
         doubleRoomsText.setText(
@@ -44,7 +45,8 @@ public class HomePagePanel extends UiPart<Region> {
         suiteRoomsText.setText(
                 "Suite Rooms: 2123 ~ 2132 (Price: $150/night)");
         recentBookingsTitle.setText("Recently Added Bookings:");
-        SortedList<Booking> sortedBookingList = new SortedList<>(bookingList, (o1, o2)
+        FilteredList<Booking> filteredBookingList = new FilteredList<>(bookingList, Booking::isActive);
+        SortedList<Booking> sortedBookingList = new SortedList<>(filteredBookingList, (o1, o2)
             -> o2.getStartDate().compareTo(o1.getStartDate()));
         recentBookingsView.setItems(sortedBookingList);
         recentBookingsView.setCellFactory(listView -> new RecentBookingCell());
