@@ -37,7 +37,6 @@ import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBoo
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +45,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
-import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for CheckInCommand.
@@ -270,14 +268,85 @@ public class AddBookingCommandTest {
     }
 
     @Test
-    public void execute_over30Nights_throwsCommandException() throws CommandException {
+    public void execute_thirtyOneNights_throwsCommandException() throws CommandException {
         model.addPerson(GENE);
 
-        //
-        LocalDate exceed30Days = VALID_START_DATE_GENE.plusDays(31);
+        // start of invalid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(31);
 
         assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
-                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, exceed30Days).execute(model));
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
+    }
+
+    @Test
+    public void execute_thirtyTwoNights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        // start of invalid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(32);
+
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
+    }
+
+    @Test
+    public void execute_thirtyThreeNights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        // second element on invalid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(33);
+
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
+    }
+
+    @Test
+    public void execute_oneHundredNights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        // far beyond start of invalid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(100);
+
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
+    }
+
+    @Test
+    public void execute_twentyNineNights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        final int testBookingId = 7;
+
+        // 2nd last valid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(29);
+
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+                VALID_START_DATE_GENE, endDate, true, testBookingId);
+
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate);
+
+        assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_thirtyNights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        final int testBookingId = 7;
+
+        // 2nd last valid boundary value
+        LocalDate endDate = VALID_START_DATE_GENE.plusDays(30);
+
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+                VALID_START_DATE_GENE, endDate, true, testBookingId);
+
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate);
+
+        assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
+                command.execute(model).getFeedbackToUser());
     }
 
     @Test
