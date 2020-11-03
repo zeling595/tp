@@ -24,12 +24,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.CheckInCommand;
+import seedu.address.logic.commands.AddBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class CheckInCommandParserTest {
+public class AddBookingCommandParserTest {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-    private CheckInCommandParser parser = new CheckInCommandParser();
+    private AddBookingCommandParser parser = new AddBookingCommandParser();
     private final String nonEmptyPersonalId = "420";
     private final String nonEmptyRoomId = "2126";
     private final String startDate = "2020-03-15";
@@ -43,7 +43,9 @@ public class CheckInCommandParserTest {
                 + START_DATE_DESC_AMY
                 + END_DATE_DESC_AMY;
 
-        CheckInCommand expectedCommand = new CheckInCommand(VALID_PERSONAL_ID_AMY,
+        logger.info(userInput);
+
+        AddBookingCommand expectedCommand = new AddBookingCommand(VALID_PERSONAL_ID_AMY,
                 VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY,
                 VALID_END_DATE_AMY);
@@ -65,34 +67,34 @@ public class CheckInCommandParserTest {
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, CheckInCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, AddBookingCommand.COMMAND_WORD, expectedMessage);
 
         // no personalId
-        assertParseFailure(parser, CheckInCommand.COMMAND_WORD + " "
+        assertParseFailure(parser, AddBookingCommand.COMMAND_WORD + " "
                         + PREFIX_ROOM_ID + nonEmptyRoomId + " "
                         + PREFIX_START_DATE + startDate + " "
                         + PREFIX_END_DATE + endDate,
                 expectedMessage);
 
         // no roomId
-        assertParseFailure(parser, CheckInCommand.COMMAND_WORD + " "
+        assertParseFailure(parser, AddBookingCommand.COMMAND_WORD + " "
                         + PREFIX_PERSONAL_ID + nonEmptyPersonalId + " "
                         + PREFIX_START_DATE + startDate + " "
                         + PREFIX_END_DATE + endDate,
                 expectedMessage);
 
         // no startDate
-        assertParseFailure(parser, CheckInCommand.COMMAND_WORD + " "
+        assertParseFailure(parser, AddBookingCommand.COMMAND_WORD + " "
                         + PREFIX_PERSONAL_ID + nonEmptyPersonalId + " "
                         + PREFIX_ROOM_ID + nonEmptyRoomId + " "
                         + PREFIX_END_DATE + endDate,
                 expectedMessage);
 
         // no endDate
-        assertParseFailure(parser, CheckInCommand.COMMAND_WORD + " "
+        assertParseFailure(parser, AddBookingCommand.COMMAND_WORD + " "
                         + PREFIX_PERSONAL_ID + nonEmptyPersonalId + " "
                         + PREFIX_ROOM_ID + nonEmptyRoomId + " "
                         + PREFIX_START_DATE + startDate,
