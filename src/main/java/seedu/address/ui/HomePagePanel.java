@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,6 +26,18 @@ public class HomePagePanel extends UiPart<Region> {
     private Label suiteRoomsText;
 
     @FXML
+    private Label roomServicesTitle;
+
+    @FXML
+    private Label wifiService;
+
+    @FXML
+    private Label diningService;
+
+    @FXML
+    private Label massageService;
+
+    @FXML
     private Label recentBookingsTitle;
 
     @FXML
@@ -36,15 +49,20 @@ public class HomePagePanel extends UiPart<Region> {
      */
     public HomePagePanel(ObservableList<Booking> bookingList) {
         super(FXML);
-        roomsAvailableTitle.setText("Number of Rooms Available:");
+        roomsAvailableTitle.setText("Type of Rooms Available:");
         singleRoomsText.setText(
                 "Single Rooms: 2103 ~ 2112 (Price: $70/night)");
         doubleRoomsText.setText(
                 "Double Rooms: 2113 ~ 2122 (Price: $100/night)");
         suiteRoomsText.setText(
                 "Suite Rooms: 2123 ~ 2132 (Price: $150/night)");
+        roomServicesTitle.setText("Room Services Available:");
+        wifiService.setText("WIFI: Get unlimited and fast wifi (Price: $40)");
+        diningService.setText("DINING: Order a meal delivered to your doorstep (Price: $50)");
+        massageService.setText("MASSAGE: Get a full body massage (Price: $70)");
         recentBookingsTitle.setText("Recently Added Bookings:");
-        SortedList<Booking> sortedBookingList = new SortedList<>(bookingList, (o1, o2)
+        FilteredList<Booking> filteredBookingList = new FilteredList<>(bookingList, Booking::isActive);
+        SortedList<Booking> sortedBookingList = new SortedList<>(filteredBookingList, (o1, o2)
             -> o2.getStartDate().compareTo(o1.getStartDate()));
         recentBookingsView.setItems(sortedBookingList);
         recentBookingsView.setCellFactory(listView -> new RecentBookingCell());

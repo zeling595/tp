@@ -64,7 +64,8 @@ public class RoomServiceCommand extends Command {
         assert model.getRoomServicesForBooking(roomService.getBookingId()).size() > 0;
 
         logger.info(String.format("Ordered room service: %s", roomService));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, roomService));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, roomService), false, false,
+                false, true);
     }
 
     @Override

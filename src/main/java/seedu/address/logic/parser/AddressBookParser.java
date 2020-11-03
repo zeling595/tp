@@ -21,6 +21,7 @@ import seedu.address.logic.commands.FindBookingCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetBillCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.ListBookingCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListRoomCommand;
@@ -107,6 +108,9 @@ public class AddressBookParser {
 
         case RoomServiceCommand.COMMAND_WORD:
             return new RoomServiceCommandParser().parse(arguments);
+
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

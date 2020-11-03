@@ -94,7 +94,8 @@ public class CheckInCommand extends Command {
 
         try {
             model.addBooking(booking);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, booking), false, false,
+                    false, true);
         } catch (ConflictingBookingException e) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
