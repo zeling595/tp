@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddBookingCommand.COMMAND_WORD:
-            return new CheckInCommandParser().parse(arguments);
+            return new AddBookingCommandParser().parse(arguments);
 
         case ArchiveBookingCommand.COMMAND_WORD:
             return new ArchiveBookingCommandParser().parse(arguments);

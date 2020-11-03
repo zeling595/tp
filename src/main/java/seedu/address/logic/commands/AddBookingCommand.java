@@ -24,7 +24,7 @@ import seedu.address.model.booking.exception.DuplicateBookingException;
 import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 /**
- * Encapsulates the Check In feature.
+ * Encapsulates the AddBooking feature.
  */
 public class AddBookingCommand extends Command {
 
@@ -56,10 +56,10 @@ public class AddBookingCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
-     * Creates a CheckInCommand.
+     * Creates a AddBookingCommand.
      *
-     * @param personalId the personalId of the person checking in
-     * @param roomId the roomId of the room that the person is checking into
+     * @param personalId the personalId of the person who is staying at the hotel
+     * @param roomId the roomId of the room that the person is going to stay in
      * @param startDate the start date of the booking
      * @param endDate the end date of the booking
      */

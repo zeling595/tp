@@ -36,6 +36,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
 import static seedu.address.testutil.TypicalRooms.getTypicalRoomBook;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,6 +46,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for CheckInCommand.
@@ -69,7 +73,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
@@ -88,7 +92,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SINGLEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -107,7 +111,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SINGLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -126,7 +130,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SINGLEROOM_ID3, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -145,7 +149,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_DOUBLEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -164,7 +168,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -183,7 +187,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -202,7 +206,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SUITEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -221,7 +225,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SUITEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -240,7 +244,7 @@ public class AddBookingCommandTest {
 
         // stub
         // when i create a new booking, my booking ID++
-        // so when i assertEquals, i fail because my checkInCommand will create a booking with the incremented ID
+        // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
         Booking booking = new Booking(VALID_SUITEROOM_ID3, VALID_PERSONAL_ID_SINGLE_HARRY,
@@ -263,6 +267,17 @@ public class AddBookingCommandTest {
     public void execute_invalidRoomIdTwo_throwsCommandException() {
         assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
                 INVALID_ROOM_ID_HIGH, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
+    }
+
+    @Test
+    public void execute_over30Nights_throwsCommandException() throws CommandException {
+        model.addPerson(GENE);
+
+        //
+        LocalDate exceed30Days = VALID_START_DATE_GENE.plusDays(31);
+
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+                VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, exceed30Days).execute(model));
     }
 
     @Test

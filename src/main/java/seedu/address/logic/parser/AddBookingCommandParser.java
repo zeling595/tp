@@ -15,12 +15,12 @@ import seedu.address.logic.commands.AddBookingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new {@code CheckInCommand} object
+ * Parses input arguments and creates a new {@code AddBookingCommand} object
  */
-public class CheckInCommandParser implements Parser<AddBookingCommand> {
+public class AddBookingCommandParser implements Parser<AddBookingCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code CheckInCommand}
-     * and returns a {@code CheckInCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code AddBookingCommand}
+     * and returns a {@code AddBookingCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddBookingCommand parse(String args) throws ParseException {

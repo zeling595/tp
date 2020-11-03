@@ -29,7 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddBookingCommandParserTest {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-    private CheckInCommandParser parser = new CheckInCommandParser();
+    private AddBookingCommandParser parser = new AddBookingCommandParser();
     private final String nonEmptyPersonalId = "420";
     private final String nonEmptyRoomId = "2126";
     private final String startDate = "2020-03-15";
@@ -42,6 +42,8 @@ public class AddBookingCommandParserTest {
                 + ROOM_ID_DESC_AMY
                 + START_DATE_DESC_AMY
                 + END_DATE_DESC_AMY;
+
+        logger.info(userInput);
 
         AddBookingCommand expectedCommand = new AddBookingCommand(VALID_PERSONAL_ID_AMY,
                 VALID_ROOM_ID_AMY,
