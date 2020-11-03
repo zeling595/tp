@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,11 +20,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_PERSON_ID);
 
 
-        if (argMultimap.getValue(PREFIX_PERSONAL_ID).isPresent()) {
-            Integer personId = ParserUtil.parsePersonalId(argMultimap.getValue(PREFIX_PERSONAL_ID).get());
+        if (argMultimap.getValue(PREFIX_PERSON_ID).isPresent()) {
+            Integer personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
             return new DeleteCommand(personId);
         } else {
             throw new ParseException(

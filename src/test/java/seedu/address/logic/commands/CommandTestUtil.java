@@ -58,16 +58,16 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
 
     // Check In Values
-    public static final int VALID_PERSONAL_ID_GENE = 69;
-    public static final int VALID_PERSONAL_ID_AMY = 23;
-    public static final int VALID_PERSONAL_ID_BOB = 12;
-    public static final int VALID_PERSONAL_ID_CHLOE = 6;
-    public static final int VALID_PERSONAL_ID_DAN = 4;
-    public static final int INVALID_PERSONAL_ID = 1000; // use for non-existing personId test
+    public static final int VALID_PERSON_ID_GENE = 69;
+    public static final int VALID_PERSON_ID_AMY = 23;
+    public static final int VALID_PERSON_ID_BOB = 12;
+    public static final int VALID_PERSON_ID_CHLOE = 6;
+    public static final int VALID_PERSON_ID_DAN = 4;
+    public static final int INVALID_PERSON_ID = 1000; // use for non-existing personId test
 
-    public static final int VALID_PERSONAL_ID_SINGLE_HARRY = 420;
-    public static final int VALID_PERSONAL_ID_DOUBLE_HARRY = 421;
-    public static final int VALID_PERSONAL_ID_SUITE_HARRY = 422;
+    public static final int VALID_PERSON_ID_SINGLE_HARRY = 420;
+    public static final int VALID_PERSON_ID_DOUBLE_HARRY = 421;
+    public static final int VALID_PERSON_ID_SUITE_HARRY = 422;
 
     public static final int VALID_SINGLEROOM_ID1 = 2104;
     public static final int VALID_SINGLEROOM_ID2 = 2110;
@@ -145,8 +145,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     // Check In Descriptions
-    public static final String PERSONAL_ID_DESC_AMY = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_AMY;
-    public static final String PERSONAL_ID_DESC_BOB = " " + PREFIX_PERSONAL_ID + VALID_PERSONAL_ID_BOB;
+    public static final String PERSON_ID_DESC_AMY = " " + PREFIX_PERSON_ID + VALID_PERSON_ID_AMY;
+    public static final String PERSON_ID_DESC_BOB = " " + PREFIX_PERSON_ID + VALID_PERSON_ID_BOB;
     public static final String ROOM_ID_DESC_AMY = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_AMY;
     public static final String ROOM_ID_DESC_BOB = " " + PREFIX_ROOM_ID + VALID_ROOM_ID_BOB;
     public static final String START_DATE_DESC_AMY = " " + PREFIX_START_DATE + VALID_START_DATE_AMY;
@@ -163,7 +163,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // Invalid Check In Descriptions
-    public static final String INVALID_PERSONAL_ID_DESC = " " + PREFIX_PERSONAL_ID + "a12"; // letter not allowed in PID
+    public static final String INVALID_PERSON_ID_DESC = " " + PREFIX_PERSON_ID + "a12"; // letter not allowed in PID
     public static final String INVALID_ROOM_ID_DESC = " " + PREFIX_ROOM_ID + "88"; // roomId supposed to be four digits
     public static final String INVALID_ROOM_ID_DESC2 = " " + PREFIX_ROOM_ID + "419&"; // '&' not allowed in roomIds
     public static final String INVALID_START_DATE_DESC = " " + PREFIX_START_DATE + "2020 02 02"; // 2020-02-02

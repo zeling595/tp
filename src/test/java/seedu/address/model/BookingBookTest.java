@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -49,7 +49,7 @@ public class BookingBookTest {
         Booking editedBookingAmy = new BookingBuilder(BOOKING_BOB)
                 .withId(VALID_BOOKING_ID_AMY)
                 .withRoomId(VALID_ROOM_ID_AMY)
-                .withPersonId(VALID_PERSONAL_ID_AMY)
+                .withPersonId(VALID_PERSON_ID_AMY)
                 .withStartDate(VALID_START_DATE_AMY)
                 .withEndDate(VALID_END_DATE_AMY).build();
 
@@ -82,7 +82,7 @@ public class BookingBookTest {
         Booking editedBookingAmy = new BookingBuilder(BOOKING_BOB)
                 .withId(VALID_BOOKING_ID_AMY)
                 .withRoomId(VALID_ROOM_ID_AMY)
-                .withPersonId(VALID_PERSONAL_ID_AMY)
+                .withPersonId(VALID_PERSON_ID_AMY)
                 .withStartDate(VALID_START_DATE_AMY)
                 .withEndDate(VALID_END_DATE_AMY).build();
 

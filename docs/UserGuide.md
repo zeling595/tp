@@ -157,7 +157,7 @@ are from `ROOM_ID` 2123 to 2132.
 * All the fields must be provided.
 
 Example:
-*  `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Checks in person with personal Id `5` into room Id `2120`
+*  `checkIn pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Checks in person with person Id `5` into room Id `2120`
 from 12 December 2020 to 25 December 2020.
 
 ### Checking out guest: `checkOut`
