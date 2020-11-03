@@ -68,8 +68,7 @@ ConciergeBook provides `CRUD` functionalities for the management of hotel bookin
 
 In addition, ConciergeBook also provides the following extension functionalities:
 * The receptionist can order `RoomService` for a particular booking if requested by the guest. There are various types of room services available with different prices.
-* The receptionist can easily compute the bill for a particular booking, so the guests can know how much they have to pay. The bill
-includes the price for the stay, as well as the cost of any additional room services ordered.
+* The receptionist can easily compute the bill for a particular booking, so the guests can know how much they have to pay for their stay. The bill includes the price for the stay, as well as the cost of any additional room services ordered.
 
 ### End of Walk-through
 We hope you now have a better understanding of how ConciergeBook works and are excited to get started. You should now head to the
@@ -111,16 +110,22 @@ with an additional section for miscellaneous features.
 
 ### Guest Management Features 
 
+This set of features allows you to manage the guests in the system. You will be able to Create, Read, Update and Delete the Person objects, and also search for any Person currently registered in the system. When using these features, the Person UI will be displayed
+and it should look like that:
+![Person list UI](images/personList.png)
+
 #### Listing all persons : `listPerson`
 
-Lists all persons in the address book.
+Lists all persons in ConciergeBook.<br/>
+This feature should be used when you want to switch to the Person UI, and view all the guests currently registered in the system.
 
 Format: `listPerson`
 
 
 #### Locating persons by name: `findPerson`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords.<br/>
+This feature is used when you want to check whether a particular person is already registered in the system before creating a booking for him/her with the person's ID. You can search via the person's name. If the person is not registered, you can look at the `addPerson` command to see how you can do so.
 
 Format: `findPerson KEYWORD [MORE_KEYWORDS]`
 
@@ -139,7 +144,7 @@ Examples:
 
 #### Adding a person: `addPerson`
 
-Adds a person to the local guestbook. 
+Adds a person to the ConciergeBook. After doing so, you will be able to create a booking for the person with the newly assigned person ID. 
 
 Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 * Prefixes that are not listed in the format of the command may be parsed as part of another. 
@@ -153,11 +158,13 @@ as the address.
 
 #### Editing a person : `editPerson`
 
-Edits an existing person in the guestbook.
+Edits an existing person in ConciergeBook to update the guest's personal information.
 
-Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `editPerson pid/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* Edits the person with ID `PERSON_ID`. The person ID **must be a positive integer** 1, 2, 3, …​
+* Edits the person with ID `PERSON_ID`.
+* The PERSON_ID refers to the unique ID of the person.
+* The PERSON_ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -165,9 +172,8 @@ Format: `editPerson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 * Prefixes that are not listed in the format of the command may be parsed as part of another. 
 
 Examples:
-*  `editPerson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `editPerson 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
-*  `editPerson 3 a/ pid/2 Tembusu College` Edits the address of the 3rd person to be `pid/2 Tembusu College`. 
+*  `editPerson pid/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with ID 1 to be `91234567` and `johndoe@example.com` respectively.
+*  `editPerson pid/2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 
 #### Deleting a person : `deletePerson`
@@ -177,8 +183,8 @@ Deletes the specified person from the guestbook.
 Format: `deletePerson pid/PERSON_ID`
 
 * Deletes the person with ID `PERSON_ID`.
-* The person ID refers to the unique ID of the person.
-* The person ID **must be a positive integer** 1, 2, 3, …​
+* The PERSON_ID refers to the unique ID of the person.
+* The PERSON_ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `deletePerson pid/2` deletes the person with ID `2` in the guestbook.
@@ -187,9 +193,11 @@ Examples:
 
 ### Hotel Rooms Features
 
+This set of features allows you to view the hotel rooms available in the system, so that you can find a suitable hotel room for the guest! The rooms will be listed as their unique room IDs, which can be used as the `ROOM_ID` in the `rid/ROOM_ID` parameter for managing the bookings.
+
 #### Listing hotel rooms: `listRoom`
 
-Shows a list of all rooms in the room book.
+Shows a list of all the rooms in the room book with their unique room IDs.
 
 Format: `listRoom [typ/ROOM_TYPE]`
 
@@ -197,13 +205,14 @@ Format: `listRoom [typ/ROOM_TYPE]`
   as parameters. 1 indicates Single Rooms, 2 indicates Double Rooms, 3 indicates Suite Rooms. 
 
 Examples:
-* `listRoom` will list all the rooms in the Room Book. 
-* `listRoom typ/3` will list all the suite rooms in the Room Book. 
+* `listRoom` will list all the rooms in the Room Book with their unique room IDs. 
+* `listRoom typ/3` will list all the suite rooms in the Room Book with their unique room IDs. 
 
 
 #### Filtering hotel rooms: `filterRoom`
 
-Filters the hotel rooms with some optional filters. Allows user to quickly search for the available rooms during a time period.
+Allows user to quickly search for the available rooms during a time period.<br/>
+This feature is used for you to find a suitable room for the guest who is planning to stay during a particular time period. The rooms available will be returned as an array of unique room IDs which can then be used to create the booking.
 
 Format: `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`
 
@@ -220,8 +229,13 @@ Examples:
 
 ### Booking Management Features
 
+This set of features allows you to manage the bookings in the system. You will be able to Create, Read, Update and Delete the Booking objects, and also search for any Booking currently created in the system. When using these features, the Booking UI will be displayed
+and it should look like that:
+![Booking list UI](images/bookingList.png)
+
 #### Listing bookings: `listBooking`
-Lists the bookings sorted by most recent to least recent. Archived bookings will be shown at the end.
+Lists the bookings sorted by most recent to least recent. Archived bookings will be shown at the end.<br/>
+This feature should be used when you want to switch to the Booking UI, and view all the bookings currently in the system.
 
 Format: `listBooking`
 
@@ -231,11 +245,12 @@ Examples:
 * `listBooking` lists all the bookings.
 
 
-#### Locating bookings: `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
+#### Locating bookings: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
 
-Finds the bookings which matches all the given predicates.
+Finds the bookings which matches all the given predicates. This feature is used when you want to find a booking related to a
+particular person, room, and/or for a particular period. 
 
-Format: `findBooking [bid/BOOKING_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]`
+Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
 
 * The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
 * the input room ID and person ID must be valid (registered in the database).
@@ -258,12 +273,11 @@ To add a booking, the recommended workflow is as follows:
 Format: `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
 * Add a booking for person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
-* The person with the specified `PERSON_ID` **must be a positive integer** and **must have been added to the local 
-guestbook prior to this.**  
-* The `ROOM_ID` **must be a positive integer** and **must be an existing roomId in the hotel.** 
+* The person with the specified `PERSON_ID` **must be a positive integer** and **must have been added to ConciergeBook**.
+* The `ROOM_ID` **must be a positive integer** and **must correspond to an existing room in the hotel.** 
 * The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
 `ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
-are from `ROOM_ID` 2123 to 2132.  
+are from `ROOM_ID` 2123 to 2132.
 * The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
 * `START_DATE` must be before `END_DATE`  
 * All the fields must be provided.
@@ -275,7 +289,8 @@ from 12 December 2020 to 25 December 2020.
 
 #### Editing a booking : `editBooking`
 
-Edits an existing booking in the booking book.
+Edits an existing booking in the booking book. You should search for the booking you want to edit first using `findBooking` and 
+note its BOOKING_ID.
 
 Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
 
@@ -291,7 +306,8 @@ Examples:
 
 #### Deleting a booking : `deleteBooking`
 
-Deletes a booking in the booking book.
+Deletes a booking in the booking book. You should search for the booking you want to edit first using `findBooking` and 
+note its BOOKING_ID.
 
 Format: `deleteBooking bid/BOOKING_ID`
 
@@ -299,8 +315,7 @@ Format: `deleteBooking bid/BOOKING_ID`
  and must be present in the bookingBook.
 
 Examples:
-*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
-*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+*  `deleteBooking bid/1` Deletes the booking with ID 1.
 
 
 #### Archiving a booking: `archiveBooking`
@@ -320,11 +335,14 @@ Example:
 
 ### Extension Features
 
+This set of features extend the Booking Management features, and provides additional functionalities related to Bookings.
+The Booking UI will be shown for these set of features.
 
 #### Ordering Room Service : `orderRoomService`
 
-Order room service for a particular booking.<br/>
-To find out the BOOKING_ID of the booking you want to order the room service for, you can use the `findBooking` command.
+Order room service for a particular booking to provide the guest with a more enjoyable stay.<br/>
+To find out the BOOKING_ID of the booking you want to order the room service for, you can use the `findBooking` command.<br/>
+Also, check out the home page via the `home` command to see the available list of room services and their prices.
 
 Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 
