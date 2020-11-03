@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ConciergeBook User Guide
+title: User Guide
 ---
 
 ## Introduction
