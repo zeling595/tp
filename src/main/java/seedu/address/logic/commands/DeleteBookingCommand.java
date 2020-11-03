@@ -20,10 +20,10 @@ public class DeleteBookingCommand extends Command {
     public static final String COMMAND_WORD = "deleteBooking";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the booking identified by bookingId.\n"
+            + ": Deletes the booking identified by the bookingId.\n"
             + "Parameters: "
             + PREFIX_BOOKING_ID + "BOOKING_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + PREFIX_BOOKING_ID + " 1";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_BOOKING_ID + " 1";
 
     public static final String MESSAGE_DELETE_BOOKING_SUCCESS = "Deleted Booking: %1$s";
 
