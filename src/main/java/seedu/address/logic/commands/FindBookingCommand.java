@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
@@ -32,15 +32,15 @@ public class FindBookingCommand extends Command {
             + "with one or more parameters including personId, roomId, start date, end date, isArchived state. \n"
             + "There must at least be 1 parameter. Dates should be in the format YYYY-MM-DD. \n"
             + "Parameters:"
-            + "[" + PREFIX_ROOM_ID + "ROOM_ID] (must be a valid room number) "
-            + "[" + PREFIX_PERSONAL_ID + "PERSON_ID] (must be a valid person ID) "
+            + "[" + PREFIX_ROOM_ID + "ROOM_ID] "
+            + "[" + PREFIX_PERSON_ID + "PERSON_ID] "
             + "[" + PREFIX_START_DATE + "START_DATE] "
             + "[" + PREFIX_END_DATE + "END_DATE] "
-            + "[" + PREFIX_IS_ACTIVE + "IS_ARCHIVED] (in the format true or false)\n"
+            + "[" + PREFIX_IS_ACTIVE + "IS_ARCHIVED] (\"true\" or \"false\")\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM_ID + "2104 "
+            + PREFIX_PERSON_ID + "2 "
             + PREFIX_START_DATE + "2020-09-14 "
-            + PREFIX_END_DATE + "2020-09-17"
             + PREFIX_IS_ACTIVE + "false";
 
 

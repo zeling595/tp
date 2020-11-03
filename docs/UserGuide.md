@@ -305,7 +305,7 @@ Examples:
 #### Locating bookings: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
 
 Finds the bookings which matches all the given predicates. This feature is used when you want to find a booking related to a
-particular person, room, and/or for a particular period. 
+particular person, room, for a particular period and whether it is archived. 
 
 Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
 
