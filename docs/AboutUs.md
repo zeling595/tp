@@ -30,7 +30,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/iamgenechua.png" width="200px">
 
 [[github](http://github.com/iamgenechua)]
-[[portfolio](team/gene.md)]
+[[portfolio](team/iamgenechua.md)]
 
 * Role: Developer (Logic and Model)
 * Responsibilities: 
