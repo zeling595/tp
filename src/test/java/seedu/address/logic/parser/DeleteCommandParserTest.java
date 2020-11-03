@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.PERSONAL_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,7 +23,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, PERSONAL_ID_DESC_AMY, new DeleteCommand(VALID_PERSONAL_ID_AMY));
+        assertParseSuccess(parser, PERSON_ID_DESC_AMY, new DeleteCommand(VALID_PERSON_ID_AMY));
     }
 
     @Test

@@ -10,10 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_DAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_CHLOE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_DAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_CHLOE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_DAN;
@@ -61,14 +61,14 @@ public class TypicalBookings {
     public static final Integer INVALID_BOOKING_ID = 100;
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Booking BOOKING_AMY = new Booking(VALID_ROOM_ID_AMY, VALID_PERSONAL_ID_AMY,
+    public static final Booking BOOKING_AMY = new Booking(VALID_ROOM_ID_AMY, VALID_PERSON_ID_AMY,
             VALID_START_DATE_AMY, VALID_END_DATE_AMY, false, VALID_BOOKING_ID_AMY);
-    public static final Booking BOOKING_BOB = new Booking(VALID_ROOM_ID_BOB, VALID_PERSONAL_ID_BOB,
+    public static final Booking BOOKING_BOB = new Booking(VALID_ROOM_ID_BOB, VALID_PERSON_ID_BOB,
             VALID_START_DATE_BOB, VALID_END_DATE_BOB, false, VALID_BOOKING_ID_BOB);
     public static final Booking CONFLICT_AMY_BOOKING_CHLOE = new Booking(CONFLICT_AMY_ROOM_ID_CHLOE,
-            VALID_PERSONAL_ID_CHLOE, CONFLICT_AMY_START_DATE_CHLOE, CONFLICT_AMY_END_DATE_CHLOE,
+            VALID_PERSON_ID_CHLOE, CONFLICT_AMY_START_DATE_CHLOE, CONFLICT_AMY_END_DATE_CHLOE,
             false, CONFLICT_AMY_VALID_BOOKING_ID_CHLOE);
-    public static final Booking ACTIVE_BOOKING_DAN = new Booking(VALID_ROOM_ID_DAN, VALID_PERSONAL_ID_DAN,
+    public static final Booking ACTIVE_BOOKING_DAN = new Booking(VALID_ROOM_ID_DAN, VALID_PERSON_ID_DAN,
             VALID_START_DATE_DAN, VALID_END_DATE_DAN, true, VALID_BOOKING_ID_DAN);
 
     private TypicalBookings() {} // prevents instantiation

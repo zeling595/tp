@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.PERSONAL_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -55,8 +55,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + PERSONAL_ID_DESC_AMY);
-        assertEquals(new DeleteCommand(VALID_PERSONAL_ID_AMY), command);
+                DeleteCommand.COMMAND_WORD + PERSON_ID_DESC_AMY);
+        assertEquals(new DeleteCommand(VALID_PERSON_ID_AMY), command);
     }
 
     @Test
@@ -64,8 +64,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + PERSONAL_ID_DESC_AMY + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(VALID_PERSONAL_ID_AMY, descriptor), command);
+                + PERSON_ID_DESC_AMY + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(VALID_PERSON_ID_AMY, descriptor), command);
     }
 
     @Test
@@ -101,19 +101,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_checkIn() throws Exception {
-        final int personalId = 123;
+        final int personId = 123;
         final int roomId = 2103;
         final String startDate = "2020-06-22";
         final String endDate = "2020-11-29";
 
 
-        CheckInCommand command = (CheckInCommand) parser.parseCommand(CheckInCommand.COMMAND_WORD + " "
-            + PREFIX_PERSONAL_ID + personalId + " "
+        AddBookingCommand command = (AddBookingCommand) parser.parseCommand(AddBookingCommand.COMMAND_WORD + " "
+            + PREFIX_PERSON_ID + personId + " "
             + PREFIX_ROOM_ID + roomId + " "
             + PREFIX_START_DATE + startDate + " "
             + PREFIX_END_DATE + endDate);
 
-        assertEquals(new CheckInCommand(personalId, roomId,
+        assertEquals(new AddBookingCommand(personId, roomId,
                 LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
                 command);
