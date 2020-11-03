@@ -85,7 +85,7 @@ public class GetBillCommand extends Command {
         }
         resultMessage += String.format(MESSAGE_SUCCESS_GET_BILL, bookingId, totalPrice);
 
-        return new CommandResult(resultMessage);
+        return new CommandResult(resultMessage, false, false, false, true);
     }
 
     @Override

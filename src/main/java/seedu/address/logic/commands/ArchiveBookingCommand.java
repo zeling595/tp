@@ -59,7 +59,8 @@ public class ArchiveBookingCommand extends Command {
         assert !model.getBookingWithId(bookingId).isActive();
         logger.info(String.format("Archived booking with id %s", bookingId));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getBookingWithId(bookingId)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getBookingWithId(bookingId)),
+                false, false, false, true);
     }
 
     @Override

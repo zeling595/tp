@@ -35,7 +35,7 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label period;
     @FXML
-    private FlowPane tags;
+    private FlowPane archivedTag;
 
     /**
      * Creates a {@code BookingCard} with the given {@code Booking} and index to display.
@@ -48,7 +48,9 @@ public class BookingCard extends UiPart<Region> {
         roomId.setText(String.format("Room ID: %s", booking.getRoomId().toString()));
         period.setText(String.format("Period: from %s to %s",
                 booking.getStartDate().toString(), booking.getEndDate().toString()));
-        tags.getChildren().add(new Label(booking.isActive() ? "ACTIVE" : "INACTIVE"));
+        if (!booking.isActive()) {
+            archivedTag.getChildren().add(new Label("ARCHIVED"));
+        }
     }
 
     @Override
