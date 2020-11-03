@@ -97,7 +97,7 @@ with an additional section for miscellaneous features.
   e.g `bid/BOOKING_ID [sd/START_DATE]` can be used for find booking command with optional parameter start date.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/VIP`, `t/VIP t/halal food` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -245,22 +245,6 @@ Examples:
 * `listBooking` lists all the bookings.
 
 
-#### Locating bookings: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
-
-Finds the bookings which matches all the given predicates. This feature is used when you want to find a booking related to a
-particular person, room, and/or for a particular period. 
-
-Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
-
-* The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
-* the input room ID and person ID must be valid (registered in the database).
-* At least one parameter should be provided.
-
-Examples:
-* `findBooking pid/3` returns all the bookings related to the person with person Id 3.
-* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings starts from 12 Nov 2020 and ends on 16 Nov 2020.
-
-
 #### Adding Booking: `addBooking`
 
 A Booking is tied to a person specified by the PERSON_ID and a room specified by the ROOM_ID, for a particular period of time.
@@ -311,12 +295,27 @@ note its BOOKING_ID.
 
 Format: `deleteBooking bid/BOOKING_ID`
 
-* Deletes the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​ 
+* Deletes the booking with booking ID `BOOKING_ID`. The ID **must be a positive integer** 1, 2, 3, …​ 
  and must be present in the bookingBook.
 
 Examples:
 *  `deleteBooking bid/1` Deletes the booking with ID 1.
 
+
+#### Locating bookings: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
+
+Finds the bookings which matches all the given predicates. This feature is used when you want to find a booking related to a
+particular person, room, and/or for a particular period. 
+
+Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
+
+* The order of the parameters does not matter. e.g. `findBooking pid/3 rid/2103` is the same as `findBooking rid/2103 pid/3 `
+* the input room ID and person ID must be valid (registered in the database).
+* At least one parameter should be provided.
+
+Examples:
+* `findBooking pid/3` returns all the bookings related to the person with person ID 3.
+* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings starts from 12 Nov 2020 and ends on 16 Nov 2020.
 
 #### Archiving a booking: `archiveBooking`
 
@@ -330,7 +329,7 @@ Format: `archiveBooking bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
 
 Example:
-* `archiveBooking bid/42` archives booking with the valid booking Id of `42`.
+* `archiveBooking bid/42` archives booking with the valid booking ID of `42`.
 
 
 ### Extension Features
@@ -415,7 +414,7 @@ Action | Format, Examples
 **List Room** | `listRoom`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Booking** | `listBooking`<br> e.g., `listBooking`
-**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ACTIVE]` <br> e.g. `findBooking pid/1 rid/2104`
+**Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]` <br> e.g. `findBooking pid/1 rid/2104`
 **Add Booking** | `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`

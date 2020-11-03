@@ -29,14 +29,14 @@ public class FindBookingCommand extends Command {
     public static final String COMMAND_WORD = "findBooking";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the booking(s) "
-            + "with one or more parameters including personId, roomId, start date, end date, isActive state. \n"
+            + "with one or more parameters including personId, roomId, start date, end date, isArchived state. \n"
             + "There must at least be 1 parameter. Dates should be in the format YYYY-MM-DD. \n"
             + "Parameters:"
             + "[" + PREFIX_ROOM_ID + "ROOM_ID] (must be a valid room number) "
             + "[" + PREFIX_PERSONAL_ID + "PERSON_ID] (must be a valid person ID) "
             + "[" + PREFIX_START_DATE + "START_DATE] "
             + "[" + PREFIX_END_DATE + "END_DATE] "
-            + "[" + PREFIX_IS_ACTIVE + "IS_ACTIVE] (in the format true or false)\n"
+            + "[" + PREFIX_IS_ACTIVE + "IS_ARCHIVED] (in the format true or false)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM_ID + "2104 "
             + PREFIX_START_DATE + "2020-09-14 "
