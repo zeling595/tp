@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -30,7 +30,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters " + PREFIX_PERSONAL_ID + "PERSON_ID (must be a positive integer) "
+            + "Parameters " + PREFIX_PERSON_ID + "PERSON_ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -65,7 +65,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasPersonWithId(personId)) {
-            throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
+            throw new CommandException(MESSAGE_PERSON_ID_MISSING);
         }
 
         Person personToEdit = model.getPersonWithId(personId);

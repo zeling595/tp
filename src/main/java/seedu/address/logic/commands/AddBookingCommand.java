@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_BOOKING;
 import static seedu.address.commons.core.Messages.MESSAGE_EXCEED_DURATION;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
@@ -35,20 +35,20 @@ public class AddBookingCommand extends Command {
             + "The start date should be before the end date and start and end dates should be "
             + "within 30 nights of each other.\n"
             + "Parameters: "
-            + PREFIX_PERSONAL_ID + "PERSONAL_ID (must be an existing personal Id) "
+            + PREFIX_PERSON_ID + "PERSON_ID (must be an existing person Id) "
             + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "
             + PREFIX_START_DATE + "START_DATE "
             + PREFIX_END_DATE + "END_DATE \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERSONAL_ID + "69 "
+            + PREFIX_PERSON_ID + "69 "
             + PREFIX_ROOM_ID + "2126 "
             + PREFIX_START_DATE + "2020-09-14 "
             + PREFIX_END_DATE + "2020-09-17";
 
-    public static final String MESSAGE_ARGUMENTS = "Personal id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
+    public static final String MESSAGE_ARGUMENTS = "Person id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
     public static final String MESSAGE_SUCCESS = "Successfully added booking: %s";
 
-    private final int personalId;
+    private final int personId;
     private final int roomId;
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -58,15 +58,15 @@ public class AddBookingCommand extends Command {
     /**
      * Creates a AddBookingCommand.
      *
-     * @param personalId the personalId of the person who is staying at the hotel
+     * @param personId the personId of the person who is staying at the hotel
      * @param roomId the roomId of the room that the person is going to stay in
      * @param startDate the start date of the booking
      * @param endDate the end date of the booking
      */
-    public AddBookingCommand(int personalId, int roomId, LocalDate startDate, LocalDate endDate) {
-        requireAllNonNull(personalId, roomId, startDate, endDate);
+    public AddBookingCommand(int personId, int roomId, LocalDate startDate, LocalDate endDate) {
+        requireAllNonNull(personId, roomId, startDate, endDate);
 
-        this.personalId = personalId;
+        this.personId = personId;
         this.roomId = roomId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -77,13 +77,13 @@ public class AddBookingCommand extends Command {
         Booking booking;
         assert roomId > 0;
         assert startDate.isBefore(endDate);
-        logger.info(String.format("adding a booking involving person with id %s and room %s", personalId, roomId));
+        logger.info(String.format("adding a booking involving person with id %s and room %s", personId, roomId));
 
-        if (!model.hasPersonWithId(personalId)) {
-            throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
+        if (!model.hasPersonWithId(personId)) {
+            throw new CommandException(MESSAGE_PERSON_ID_MISSING);
         }
 
-        assert model.hasPersonWithId(personalId);
+        assert model.hasPersonWithId(personId);
 
         if (!model.hasRoom(roomId)) {
             throw new CommandException(MESSAGE_ROOM_ID_MISSING);
@@ -91,7 +91,7 @@ public class AddBookingCommand extends Command {
 
         assert model.hasRoom(roomId);
 
-        booking = new Booking(roomId, personalId, startDate, endDate, true);
+        booking = new Booking(roomId, personId, startDate, endDate, true);
         int bookingId = booking.getId();
 
         try {
@@ -123,7 +123,7 @@ public class AddBookingCommand extends Command {
 
         // state check
         AddBookingCommand e = (AddBookingCommand) other;
-        return personalId == e.personalId
+        return personId == e.personId
                 && roomId == e.roomId
                 && startDate.isEqual(e.startDate)
                 && endDate.isEqual(e.endDate);

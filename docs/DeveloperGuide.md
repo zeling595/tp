@@ -174,7 +174,7 @@ indicating which of the parameter(s) are invalid.
 The following sequence diagram shows how the check in operation works:
 ![CheckInSequenceDiagram](images/CheckInSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the personal ID or room ID 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the person ID or room ID 
 that the user keys into the system does not exist, or the start date and end dates are not in the correct format,
 a CommandException will be thrown and the error will be displayed to the user. Also, if the start date is
 before today's date, or the start date is after the end date, an error message will be similarly shown as well.

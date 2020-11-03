@@ -11,10 +11,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_GENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_SINGLE_HARRY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_GENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_SINGLE_HARRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_GENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_SINGLE_HARRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_GENE;
@@ -55,13 +55,13 @@ public class AddBookingCommandTest {
 
     @Test
     public void constructor_nullStartDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+        assertThrows(NullPointerException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE, VALID_ROOM_ID_GENE,
                 null, VALID_END_DATE_GENE));
     }
 
     @Test
     public void constructor_nullEndDate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+        assertThrows(NullPointerException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE, VALID_ROOM_ID_GENE,
                 VALID_START_DATE_GENE, null));
     }
 
@@ -74,10 +74,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSON_ID_GENE,
                 VALID_START_DATE_GENE, VALID_END_DATE_GENE, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_GENE, VALID_ROOM_ID_GENE,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_GENE, VALID_ROOM_ID_GENE,
                 VALID_START_DATE_GENE, VALID_END_DATE_GENE);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -93,10 +93,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SINGLEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SINGLEROOM_ID1, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID1,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID1,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -112,10 +112,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SINGLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SINGLEROOM_ID2, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID2,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID2,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -131,10 +131,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SINGLEROOM_ID3, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SINGLEROOM_ID3, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID3,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SINGLEROOM_ID3,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -150,10 +150,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_DOUBLEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_DOUBLEROOM_ID1, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID1,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID1,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -169,10 +169,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID2,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID2,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -188,10 +188,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_DOUBLEROOM_ID2, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID2,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_DOUBLEROOM_ID2,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -207,10 +207,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SUITEROOM_ID1, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SUITEROOM_ID1, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID1,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SUITEROOM_ID1,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -226,10 +226,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SUITEROOM_ID2, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SUITEROOM_ID2, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID2,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SUITEROOM_ID2,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -245,10 +245,10 @@ public class AddBookingCommandTest {
         // so when i assertEquals, i fail because my addBookingCommand will create a booking with the incremented ID
         final int testBookingId = 7;
 
-        Booking booking = new Booking(VALID_SUITEROOM_ID3, VALID_PERSONAL_ID_SINGLE_HARRY,
+        Booking booking = new Booking(VALID_SUITEROOM_ID3, VALID_PERSON_ID_SINGLE_HARRY,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY, VALID_SUITEROOM_ID3,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY, VALID_SUITEROOM_ID3,
                 VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -257,13 +257,13 @@ public class AddBookingCommandTest {
 
     @Test
     public void execute_invalidRoomIdOne_throwsCommandException() {
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY,
                 INVALID_ROOM_ID, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
     }
 
     @Test
     public void execute_invalidRoomIdTwo_throwsCommandException() {
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_SINGLE_HARRY,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_SINGLE_HARRY,
                 INVALID_ROOM_ID_HIGH, VALID_START_DATE_SINGLE_HARRY, VALID_END_DATE_SINGLE_HARRY).execute(model));
     }
 
@@ -274,7 +274,7 @@ public class AddBookingCommandTest {
         // start of invalid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(31);
 
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
     }
 
@@ -285,7 +285,7 @@ public class AddBookingCommandTest {
         // start of invalid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(32);
 
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
     }
 
@@ -296,7 +296,7 @@ public class AddBookingCommandTest {
         // second element on invalid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(33);
 
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
     }
 
@@ -307,7 +307,7 @@ public class AddBookingCommandTest {
         // far beyond start of invalid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(100);
 
-        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        assertThrows(CommandException.class, () -> new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate).execute(model));
     }
 
@@ -320,10 +320,10 @@ public class AddBookingCommandTest {
         // 2nd last valid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(29);
 
-        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSON_ID_GENE,
                 VALID_START_DATE_GENE, endDate, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -339,10 +339,10 @@ public class AddBookingCommandTest {
         // 2nd last valid boundary value
         LocalDate endDate = VALID_START_DATE_GENE.plusDays(30);
 
-        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSONAL_ID_GENE,
+        Booking booking = new Booking(VALID_ROOM_ID_GENE, VALID_PERSON_ID_GENE,
                 VALID_START_DATE_GENE, endDate, true, testBookingId);
 
-        AddBookingCommand command = new AddBookingCommand(VALID_PERSONAL_ID_GENE,
+        AddBookingCommand command = new AddBookingCommand(VALID_PERSON_ID_GENE,
                 VALID_ROOM_ID_GENE, VALID_START_DATE_GENE, endDate);
 
         assertEquals(String.format(AddBookingCommand.MESSAGE_SUCCESS, booking),
@@ -351,11 +351,11 @@ public class AddBookingCommandTest {
 
     @Test
     public void equals() {
-        final AddBookingCommand standardCommand = new AddBookingCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
+        final AddBookingCommand standardCommand = new AddBookingCommand(VALID_PERSON_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY);
 
         // same values -> returns true
-        AddBookingCommand commandWithSameValues = new AddBookingCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
+        AddBookingCommand commandWithSameValues = new AddBookingCommand(VALID_PERSON_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -368,20 +368,20 @@ public class AddBookingCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different Personal Id -> return false
-        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSONAL_ID_BOB, VALID_ROOM_ID_AMY,
+        // different PERSON Id -> return false
+        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSON_ID_BOB, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY)));
 
         // different Room Id -> return false
-        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_BOB,
+        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSON_ID_AMY, VALID_ROOM_ID_BOB,
                 VALID_START_DATE_AMY, VALID_END_DATE_AMY)));
 
         // different start date -> return false
-        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
+        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSON_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_BOB, VALID_END_DATE_AMY)));
 
         // different end date -> return false
-        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSONAL_ID_AMY, VALID_ROOM_ID_AMY,
+        assertFalse(standardCommand.equals(new AddBookingCommand(VALID_PERSON_ID_AMY, VALID_ROOM_ID_AMY,
                 VALID_START_DATE_AMY, VALID_END_DATE_BOB)));
     }
 }

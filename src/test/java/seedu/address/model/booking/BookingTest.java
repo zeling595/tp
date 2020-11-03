@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.BOOKING_DURATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_BOB;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
@@ -132,7 +132,7 @@ public class BookingTest {
         assertFalse((BOOKING_AMY.equals(editedBookingAmy)));
 
         // different personId -> return false
-        editedBookingAmy = new BookingBuilder(BOOKING_AMY).withPersonId(VALID_PERSONAL_ID_BOB).build();
+        editedBookingAmy = new BookingBuilder(BOOKING_AMY).withPersonId(VALID_PERSON_ID_BOB).build();
         assertFalse((BOOKING_AMY.equals(editedBookingAmy)));
 
         // different startDate -> return false

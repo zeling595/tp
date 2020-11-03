@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_START_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
@@ -25,21 +25,21 @@ public class AddBookingCommandParser implements Parser<AddBookingCommand> {
      */
     public AddBookingCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE);
 
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID, PREFIX_START_DATE, PREFIX_END_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_ROOM_ID, PREFIX_START_DATE, PREFIX_END_DATE)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE));
         }
 
-        assert argMultimap.getValue(PREFIX_PERSONAL_ID).isPresent();
+        assert argMultimap.getValue(PREFIX_PERSON_ID).isPresent();
         assert argMultimap.getValue(PREFIX_ROOM_ID).isPresent();
         assert argMultimap.getValue(PREFIX_START_DATE).isPresent();
         assert argMultimap.getValue(PREFIX_END_DATE).isPresent();
 
-        int personalId = ParserUtil.parsePersonalId(argMultimap.getValue(PREFIX_PERSONAL_ID).get());
+        int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
         int roomId = ParserUtil.parseRoomId(argMultimap.getValue(PREFIX_ROOM_ID).get());
         LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
         LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
@@ -50,7 +50,7 @@ public class AddBookingCommandParser implements Parser<AddBookingCommand> {
 
         assert startDate.isBefore(endDate);
 
-        return new AddBookingCommand(personalId, roomId, startDate, endDate);
+        return new AddBookingCommand(personId, roomId, startDate, endDate);
     }
 
     /**

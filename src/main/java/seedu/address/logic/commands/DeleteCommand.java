@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: " + PREFIX_PERSONAL_ID + "PERSON_ID (must be a positive integer)\n"
+            + "Parameters: " + PREFIX_PERSON_ID + "PERSON_ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " pid/1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasPersonWithId(personId)) {
-            throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
+            throw new CommandException(MESSAGE_PERSON_ID_MISSING);
         }
 
         Person personToDelete = model.getPersonWithId(personId);

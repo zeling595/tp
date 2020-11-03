@@ -80,7 +80,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletePerson pid/9";
-        assertCommandException(deleteCommand, MESSAGE_PERSONAL_ID_MISSING);
+        assertCommandException(deleteCommand, MESSAGE_PERSON_ID_MISSING);
     }
 
     @Test
