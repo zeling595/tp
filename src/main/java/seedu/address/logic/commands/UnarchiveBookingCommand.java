@@ -61,4 +61,20 @@ public class UnarchiveBookingCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getBookingWithId(bookingId)),
                 false, false, false, true);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UnarchiveBookingCommand)) {
+            return false;
+        }
+
+        UnarchiveBookingCommand o = (UnarchiveBookingCommand) other;
+        return this.bookingId == o.bookingId;
+    }
 }
