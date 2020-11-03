@@ -107,13 +107,13 @@ public class AddressBookParserTest {
         final String endDate = "2020-11-29";
 
 
-        CheckInCommand command = (CheckInCommand) parser.parseCommand(CheckInCommand.COMMAND_WORD + " "
+        AddBookingCommand command = (AddBookingCommand) parser.parseCommand(AddBookingCommand.COMMAND_WORD + " "
             + PREFIX_PERSON_ID + personId + " "
             + PREFIX_ROOM_ID + roomId + " "
             + PREFIX_START_DATE + startDate + " "
             + PREFIX_END_DATE + endDate);
 
-        assertEquals(new CheckInCommand(personId, roomId,
+        assertEquals(new AddBookingCommand(personId, roomId,
                 LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
                 command);

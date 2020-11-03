@@ -24,14 +24,16 @@ import seedu.address.model.booking.exception.DuplicateBookingException;
 import seedu.address.model.booking.exception.ExceedDurationStayException;
 
 /**
- * Encapsulates the Check In feature.
+ * Encapsulates the AddBooking feature.
  */
-public class CheckInCommand extends Command {
+public class AddBookingCommand extends Command {
 
-    public static final String COMMAND_WORD = "checkIn";
+    public static final String COMMAND_WORD = "addBooking";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a person into the hotel. "
-            + "Dates should be in the format yyyy-MM-dd. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the hotel. "
+            + "Dates should be in the format yyyy-MM-dd. "
+            + "The start date should be before the end date and start and end dates should be "
+            + "within 30 nights of each other.\n"
             + "Parameters: "
             + PREFIX_PERSON_ID + "PERSON_ID (must be an existing person Id) "
             + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "
@@ -44,7 +46,7 @@ public class CheckInCommand extends Command {
             + PREFIX_END_DATE + "2020-09-17";
 
     public static final String MESSAGE_ARGUMENTS = "Person id: %1$d, Room Id: %2$d, Start date: %3$s, End date: %4$s";
-    public static final String MESSAGE_SUCCESS = "Successfully checked in: %s";
+    public static final String MESSAGE_SUCCESS = "Successfully added booking: %s";
 
     private final int personId;
     private final int roomId;
@@ -54,14 +56,14 @@ public class CheckInCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
-     * Creates a CheckInCommand.
+     * Creates a AddBookingCommand.
      *
-     * @param personId the personId of the person checking in
-     * @param roomId the roomId of the room that the person is checking into
+     * @param personId the personId of the person who is staying at the hotel
+     * @param roomId the roomId of the room that the person is going to stay in
      * @param startDate the start date of the booking
      * @param endDate the end date of the booking
      */
-    public CheckInCommand(int personId, int roomId, LocalDate startDate, LocalDate endDate) {
+    public AddBookingCommand(int personId, int roomId, LocalDate startDate, LocalDate endDate) {
         requireAllNonNull(personId, roomId, startDate, endDate);
 
         this.personId = personId;
@@ -75,7 +77,7 @@ public class CheckInCommand extends Command {
         Booking booking;
         assert roomId > 0;
         assert startDate.isBefore(endDate);
-        logger.info(String.format("Checking in person with id %s into room %s", personId, roomId));
+        logger.info(String.format("adding a booking involving person with id %s and room %s", personId, roomId));
 
         if (!model.hasPersonWithId(personId)) {
             throw new CommandException(MESSAGE_PERSON_ID_MISSING);
@@ -94,15 +96,14 @@ public class CheckInCommand extends Command {
 
         try {
             model.addBooking(booking);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, booking), false, false,
-                    false, true);
-        } catch (ConflictingBookingException e) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+        } catch (ConflictingBookingException conflictE) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
-        } catch (DuplicateBookingException de) {
+        } catch (DuplicateBookingException duplicateE) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
-        } catch (ExceedDurationStayException cde) {
+        } catch (ExceedDurationStayException exceedE) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_EXCEED_DURATION);
         }
@@ -116,12 +117,12 @@ public class CheckInCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CheckInCommand)) {
+        if (!(other instanceof AddBookingCommand)) {
             return false;
         }
 
         // state check
-        CheckInCommand e = (CheckInCommand) other;
+        AddBookingCommand e = (AddBookingCommand) other;
         return personId == e.personId
                 && roomId == e.roomId
                 && startDate.isEqual(e.startDate)
