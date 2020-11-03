@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PERSONAL_ID;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PERSON_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSONAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -113,9 +113,9 @@ public class EditCommandTest {
     public void execute_nonExistPersonIdUnfilteredList_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .build();
-        EditCommand editCommand = new EditCommand(INVALID_PERSONAL_ID, descriptor);
+        EditCommand editCommand = new EditCommand(INVALID_PERSON_ID, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_PERSONAL_ID_MISSING);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_PERSON_ID_MISSING);
     }
 
     /**
@@ -125,19 +125,19 @@ public class EditCommandTest {
     @Test
     public void execute_nonExistPersonIdFilteredList_failure() {
         showPersonWithId(model, VALID_PERSON_ID_ALICE);
-        EditCommand editCommand = new EditCommand(INVALID_PERSONAL_ID,
+        EditCommand editCommand = new EditCommand(INVALID_PERSON_ID,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_PERSONAL_ID_MISSING);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_PERSON_ID_MISSING);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(VALID_PERSONAL_ID_AMY, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(VALID_PERSON_ID_AMY, DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(VALID_PERSONAL_ID_AMY, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(VALID_PERSON_ID_AMY, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -150,10 +150,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(VALID_PERSONAL_ID_BOB, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(VALID_PERSON_ID_BOB, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(VALID_PERSONAL_ID_BOB, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(VALID_PERSON_ID_BOB, DESC_BOB)));
     }
 
 }

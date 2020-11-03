@@ -297,6 +297,11 @@ public class ModelManager implements Model {
         this.bookingBook.setBookingInactive(bookingId);
     }
 
+    @Override
+    public void setBookingActive(int bookingId) {
+        this.bookingBook.setBookingActive(bookingId);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

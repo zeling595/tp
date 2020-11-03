@@ -13,7 +13,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_INVALID_PERSON_ID = "PersonId must be a positive integer.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_PERSONAL_ID_MISSING = "No existing personalId can be found.";
+    public static final String MESSAGE_PERSON_ID_MISSING = "No existing personId can be found.";
 
     // room
     public static final String MESSAGE_ROOM_ID_MISSING = "No existing roomId can be be found. "
@@ -27,7 +27,7 @@ public class Messages {
     public static final String MESSAGE_CONFLICTING_BOOKING = "The room has already been booked during this period.";
     public static final String MESSAGE_BOOKING_MISSING = "No valid booking can be found.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
-    public static final String MESSAGE_EXCEED_DURATION = "Booking duration cannot be longer than 30 days.";
+    public static final String MESSAGE_EXCEED_DURATION = "Booking duration cannot be longer than 30 nights.";
 
 }
 
