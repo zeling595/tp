@@ -380,6 +380,20 @@
     -fx-padding: 0 0 4 0;
 }
 
+#roomServicesGroup {
+    -fx-background-color: #22274B;
+    -fx-padding: 12;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#roomServicesTitle.label {
+    -fx-font-size: 18;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: "#50C878";
+    -fx-padding: 0 0 4 0;
+}
+
 #recentBookingsGroup {
     -fx-background-color: #22274B;
     -fx-padding: 12;

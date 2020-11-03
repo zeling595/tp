@@ -26,6 +26,18 @@ public class HomePagePanel extends UiPart<Region> {
     private Label suiteRoomsText;
 
     @FXML
+    private Label roomServicesTitle;
+
+    @FXML
+    private Label wifiService;
+
+    @FXML
+    private Label diningService;
+
+    @FXML
+    private Label massageService;
+
+    @FXML
     private Label recentBookingsTitle;
 
     @FXML
@@ -44,6 +56,10 @@ public class HomePagePanel extends UiPart<Region> {
                 "Double Rooms: 2113 ~ 2122 (Price: $100/night)");
         suiteRoomsText.setText(
                 "Suite Rooms: 2123 ~ 2132 (Price: $150/night)");
+        roomServicesTitle.setText("Room Services Available:");
+        wifiService.setText("WIFI: Get unlimited and fast wifi (Price: $40)");
+        diningService.setText("DINING: Order a meal delivered to your doorstep (Price: $50)");
+        massageService.setText("MASSAGE: Get a full body massage (Price: $70)");
         recentBookingsTitle.setText("Recently Added Bookings:");
         FilteredList<Booking> filteredBookingList = new FilteredList<>(bookingList, Booking::isActive);
         SortedList<Booking> sortedBookingList = new SortedList<>(filteredBookingList, (o1, o2)

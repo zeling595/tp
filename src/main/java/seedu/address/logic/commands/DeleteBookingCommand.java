@@ -49,7 +49,8 @@ public class DeleteBookingCommand extends Command {
 
         Booking bookingToDelete = model.getBookingWithId(bookingId);
         model.deleteBooking(bookingToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete),
+                false, false, false, true);
     }
 
     @Override
