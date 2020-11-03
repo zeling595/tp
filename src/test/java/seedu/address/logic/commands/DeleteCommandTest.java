@@ -53,24 +53,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validPersonIdFilteredList_success() {
-        showPersonWithId(model, VALID_PERSON_ID_ALICE);
-        Person personToDelete = model.getPersonWithId(VALID_PERSON_ID_ALICE);
-        DeleteCommand deleteCommand = new DeleteCommand(VALID_PERSON_ID_ALICE);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        Model expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
-                model.getBookingBook(), model.getRoomServiceBook());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.deleteBookingByPersonId(VALID_PERSON_ID_ALICE);
-
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_nonExistPersonIdFilteredList_throwsCommandException() {
         showPersonWithId(model, VALID_PERSON_ID_ALICE);
         DeleteCommand deleteCommand = new DeleteCommand(INVALID_PERSON_ID);
@@ -98,14 +80,5 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }

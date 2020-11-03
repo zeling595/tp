@@ -50,7 +50,7 @@ public class DeleteBookingCommand extends Command {
 
         Booking bookingToDelete = model.getBookingWithId(bookingId);
         model.deleteBooking(bookingToDelete);
-        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);        
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete),
                 false, false, false, true);
     }

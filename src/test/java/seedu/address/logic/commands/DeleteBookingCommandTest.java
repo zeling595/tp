@@ -50,23 +50,6 @@ public class DeleteBookingCommandTest {
     }
 
     @Test
-    public void execute_validBookingIDdFilteredList_success() {
-        showBookingWithId(model, 1);
-
-        Booking bookingToDelete = model.getBookingWithId(1);
-        DeleteBookingCommand deleteBookingCommand = new DeleteBookingCommand(1);
-
-        String expectedMessage = String.format(DeleteBookingCommand.MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete);
-
-        Model expectedModel = new ModelManager(model.getPersonBook(), new UserPrefs(), model.getRoomBook(),
-                model.getBookingBook(), model.getRoomServiceBook());
-        expectedModel.deleteBooking(bookingToDelete);
-        showNoBooking(expectedModel);
-
-        assertCommandSuccess(deleteBookingCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showBookingWithId(model, 1);
 
@@ -97,14 +80,5 @@ public class DeleteBookingCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoBooking(Model model) {
-        model.updateFilteredBookingList(p -> false);
-
-        assertTrue(model.getFilteredBookingList().isEmpty());
     }
 }
