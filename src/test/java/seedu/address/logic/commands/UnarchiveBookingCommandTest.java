@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_DAN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
-import static seedu.address.testutil.TypicalBookings.INVALID_BOOKING_ID;
 import static seedu.address.testutil.TypicalBookings.getTypicalBookingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersonBook;
 import static seedu.address.testutil.TypicalRoomService.getTypicalRoomServiceBook;
