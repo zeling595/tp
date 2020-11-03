@@ -125,6 +125,18 @@ public class UniqueBookingList implements Iterable<Booking> {
         setBooking(booking, editedBooking);
     }
 
+    /**
+     * Set a booking to active. Create new booking and set.
+     * @param bookingId The booking id to be set inactive
+     */
+    public void setBookingActive(int bookingId) {
+        requireNonNull(bookingId);
+        Booking booking = getBookingWithId(bookingId);
+        Booking editedBooking = new Booking(booking.getRoomId(), booking.getPersonId(),
+                booking.getStartDate(), booking.getEndDate(), true, booking.getId());
+        setBooking(booking, editedBooking);
+    }
+
     public void setBooking(Booking target, Booking editedBooking) {
         requireAllNonNull(target, editedBooking);
         // Check if booking exists

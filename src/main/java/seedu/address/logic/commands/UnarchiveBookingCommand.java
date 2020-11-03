@@ -1,16 +1,20 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Unarchive (change an inactive booking back to active) the booking with a particular booking id
  */
-public class UnarchiveBookingCommand {
+public class UnarchiveBookingCommand extends Command {
     public static final String COMMAND_WORD = "unarchiveBooking";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unarchive a booking. \n"
             + "Parameters: "
@@ -20,4 +24,41 @@ public class UnarchiveBookingCommand {
 
     public static final String MESSAGE_SUCCESS = "Successfully unarchived booking: %s";
     public static final String MESSAGE_NOT_YET_ARCHIVED = "This booking is not archived yet.";
+
+    private final int bookingId;
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
+    /**
+     * Creates a UnarchiveBookingCommand
+     * @param bookingId booking to archive
+     */
+    public UnarchiveBookingCommand(int bookingId) {
+        requireAllNonNull(bookingId);
+        this.bookingId = bookingId;
+    }
+
+    /**
+     * Unarchive booking with the bookingId
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        assert bookingId >= 0;
+        logger.info(String.format("Unarchiving booking with id %s", bookingId));
+
+        if (!model.hasBookingWithId(bookingId)) {
+            throw new CommandException(MESSAGE_BOOKING_MISSING);
+        }
+
+        if (model.getBookingWithId(bookingId).isActive()) {
+            throw new CommandException(MESSAGE_NOT_YET_ARCHIVED);
+        }
+
+        model.setBookingActive(bookingId);
+
+        assert model.getBookingWithId(bookingId).isActive();
+        logger.info(String.format("Unarchived booking with id %s", bookingId));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getBookingWithId(bookingId)),
+                false, false, false, true);
+    }
 }
