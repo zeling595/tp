@@ -94,7 +94,7 @@ with an additional section for miscellaneous features.
   e.g. in `addPerson n/NAME`, `NAME` is a parameter which can be used as `addPerson n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `bid/BOOKING_ID [sd/START_DATE]` can be used for find booking command with optional parameter start date.
+  e.g in `findBooking [sd/START_DATE]`, the parameter start date is optional.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/VIP`, `t/VIP t/halal food` etc.
@@ -102,8 +102,8 @@ with an additional section for miscellaneous features.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* With the exception of ordering room service, if multiple parameters are inputted, the last instance will be accepted. <br>
-  e.g. if the command specifies `editBooking sd/2020-11-12 sd/2020-11-15`, the new date to be changed will be taken as `2020-11-15`. 
+* If parameters are inputted multiple times where only one is expected, the last instance will be accepted. <br>
+  e.g. if the command specifies `editBooking bid/2 sd/2020-11-12 sd/2020-11-15`, the new start date will be taken as `2020-11-15`. 
   
 </div>
 
@@ -150,7 +150,7 @@ Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 * Prefixes that are not listed in the format of the command may be parsed as part of another. 
 
 Examples:
-* `addPerson n/Damith C. Rajapakse p/90123456 e/dcsdcr@nus.edu.sg a/NUS SOC t/VVIP`
+* `addPerson n/Damith C Rajapakse p/90123456 e/dcsdcr@nus.edu.sg a/NUS SOC t/VVIP`
 * `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg a/Orchard`
 * `addPerson n/Amy Tan p/91233344 e/amy@gmail.com a/Cinnamon College pid/2` will create a person with `Cinnamon College pid/2`
 as the address. 
@@ -178,7 +178,7 @@ Examples:
 
 #### Deleting a person : `deletePerson`
 
-Deletes the specified person from the guestbook.
+Deletes the specified person from ConciergeBook.
 
 Format: `deletePerson pid/PERSON_ID`
 
@@ -187,7 +187,7 @@ Format: `deletePerson pid/PERSON_ID`
 * The PERSON_ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deletePerson pid/2` deletes the person with ID `2` in the guestbook.
+* `deletePerson pid/2` deletes the person with ID `2` in ConciergeBook.
 
 
 
@@ -234,7 +234,7 @@ and it should look like that:
 ![Booking list UI](images/bookingList.png)
 
 #### Listing bookings: `listBooking`
-Lists the bookings sorted by most recent to least recent. Archived bookings will be shown at the end.<br/>
+Lists the bookings sorted by most recent start date to least recent start date. Archived bookings will be shown at the end.<br/>
 This feature should be used when you want to switch to the Booking UI, and view all the bookings currently in the system.
 
 Format: `listBooking`
@@ -263,8 +263,9 @@ Format: `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 `ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
 are from `ROOM_ID` 2123 to 2132.
 * The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
-* `START_DATE` must be before `END_DATE`  
+* `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 days.
 * All the fields must be provided.
+* Note: only a single person should be tied to a booking, as we only require a single point-of-contact to be registered in the system. More than 1 person can definitely stay in the hotel room.
 
 Example:
 *  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person Id `5` into room Id `2120`
@@ -326,10 +327,23 @@ Format: `archiveBooking bid/BOOKING_ID`
 
 * Archives booking with the specified `BOOKING_ID`.  
 * The `BOOKING_ID` refers to the unique identifier of the booking. 
-* The `BOOKING_ID` must be a valid, active booking Id in the BookingBook.  
+* The `BOOKING_ID` must be a valid booking ID of an unarchived booking in the BookingBook.  
 
 Example:
 * `archiveBooking bid/42` archives booking with the valid booking ID of `42`.
+
+#### Unarchiving a booking: `unarchiveBooking`
+
+Unarchives an already archived booking (undos the previous command).
+
+Format: `unarchiveBooking bid/BOOKING_ID`
+
+* Unarchives booking with the specified `BOOKING_ID`.  
+* The `BOOKING_ID` refers to the unique identifier of the booking. 
+* The `BOOKING_ID` must be a valid booking ID of an archived booking in the BookingBook.  
+
+Example:
+* `unarchiveBooking bid/42` unarchives booking with the valid booking ID of `42`.
 
 
 ### Extension Features
@@ -346,7 +360,7 @@ Also, check out the home page via the `home` command to see the available list o
 Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 
 * Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
-* The booking id must be the id of a currently active booking.
+* The `BOOKING_ID` must be a valid booking ID in the BookingBook.
 * The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
 
 Examples:
@@ -356,16 +370,16 @@ Examples:
 
 #### Viewing a bill: `getBill`
 
-Finds the bill of a specified booking Id.  
+Finds the bill of a specified booking ID.  
 To find out the BOOKING_ID of the booking you want to order the room service for, you can use the `findBooking` command.
 
 Format: `getBill bid/BOOKING_ID`
 
 * The `BOOKING_ID` refers to the unique identifier of the booking.  
-* The `BOOKING_ID` must be a valid booking Id in the BookingBook.  
+* The `BOOKING_ID` must be a valid booking ID in the BookingBook.  
 
 Example:
-* `getBill bid/6` shows the bill for the booking Id `6`.  
+* `getBill bid/6` shows the bill for the booking ID `6`.  
 
 
 ### Miscellaneous Features
@@ -408,17 +422,18 @@ Action | Format, Examples
 --------|------------------
 **List Person** | `listPerson`
 **Find Person** | `findPerson KEYWORD [MORE_KEYWORDS]`<br> e.g., `findPerson James Jake`
-**Add Person** | `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addPerson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Edit Person** | `editPerson pid/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson 2 n/James Lee e/jameslee@example.com`
-**Delete Person** | `deletePerson pid/PERSON_ID`<br> e.g., `deletePerson 3`
+**Add Person** | `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addPerson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/vip t/vegetarian`
+**Edit Person** | `editPerson pid/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editPerson pid/2 n/James Lee e/jameslee@example.com`
+**Delete Person** | `deletePerson pid/PERSON_ID`<br> e.g., `deletePerson pid/3`
 **List Room** | `listRoom`
 **Filter Room** | `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`<br> e.g., `filterRoom sd/2020-09-14 ed/2020-09-17 typ/3`
 **List Booking** | `listBooking`<br> e.g., `listBooking`
 **Find Booking** | `findBooking [rid/ROOM_ID] [pid/PERSON_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]` <br> e.g. `findBooking pid/1 rid/2104`
-**Add Booking** | `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`
+**Add Booking** | `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`<br> e.g., `addBooking pid/5 rid/2105 sd/2020-12-12 ed/2020-12-25`
 **Edit Booking** | `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]` <br> e.g. `editBooking bid/1 rid/2104`
 **Delete Booking** | `deleteBooking bid/BOOKING_ID`<br> e.g., `deleteBooking bid/3`
-**Archive Booking** | `archiveBooking bid/BOOKING_ID`<br> e.g., `archiveBooking bid/42`
+**Archive Booking** | `archiveBooking bid/BOOKING_ID`<br> e.g., `archiveBooking bid/3`
+**Unarchive Booking** | `unarchiveBooking bid/BOOKING_ID`<br> e.g., `unarchiveBooking bid/3`
 **Order Room Service** | `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`<br> e.g., `orderRoomService bid/1 rst/WIFI`
 **Get Bill** | `getBill bid/BOOKING_ID`<br> e.g., `getBill bid/6`
 

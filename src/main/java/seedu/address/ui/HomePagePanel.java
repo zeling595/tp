@@ -63,7 +63,7 @@ public class HomePagePanel extends UiPart<Region> {
         recentBookingsTitle.setText("Recently Added Bookings:");
         FilteredList<Booking> filteredBookingList = new FilteredList<>(bookingList, Booking::isActive);
         SortedList<Booking> sortedBookingList = new SortedList<>(filteredBookingList, (o1, o2)
-            -> o2.getStartDate().compareTo(o1.getStartDate()));
+            -> o2.getId().compareTo(o1.getId()));
         recentBookingsView.setItems(sortedBookingList);
         recentBookingsView.setCellFactory(listView -> new RecentBookingCell());
     }

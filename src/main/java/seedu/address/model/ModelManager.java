@@ -270,6 +270,7 @@ public class ModelManager implements Model {
     @Override
     public void addBooking(Booking b) {
         this.bookingBook.addBooking(b);
+        updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
     }
 
     @Override

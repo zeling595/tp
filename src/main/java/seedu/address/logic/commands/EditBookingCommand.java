@@ -104,8 +104,8 @@ public class EditBookingCommand extends Command {
             throw new CommandException(MESSAGE_EXCEED_DURATION);
         }
 
-        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         logger.info("=============================[ editBooking success ]===========================");
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking),
                 false, false, false, true);
     }

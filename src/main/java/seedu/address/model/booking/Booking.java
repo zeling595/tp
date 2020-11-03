@@ -177,8 +177,8 @@ public class Booking {
                 .append(getStartDate())
                 .append(" End Date: ")
                 .append(getEndDate())
-                .append(" Active: ")
-                .append(isActive());
+                .append(" Archived: ")
+                .append(!isActive());
         return builder.toString();
     }
 

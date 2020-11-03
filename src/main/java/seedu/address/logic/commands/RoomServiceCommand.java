@@ -33,7 +33,7 @@ public class RoomServiceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Ordered room service:\n%s";
     public static final String MESSAGE_BOOKING_MISSING = "No booking with id %s can be found.";
-    public static final String MESSAGE_BOOKING_INVALID = "Booking with id %s is inactive.";
+    public static final String MESSAGE_BOOKING_INVALID = "Booking with id %s is archived.";
 
     private final RoomService roomService;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);

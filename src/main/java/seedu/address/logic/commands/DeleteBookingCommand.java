@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 
 import java.util.logging.Logger;
 
@@ -49,6 +50,7 @@ public class DeleteBookingCommand extends Command {
 
         Booking bookingToDelete = model.getBookingWithId(bookingId);
         model.deleteBooking(bookingToDelete);
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);        
         return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, bookingToDelete),
                 false, false, false, true);
     }

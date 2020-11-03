@@ -33,15 +33,15 @@ public class AddBookingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the hotel. "
             + "Dates should be in the format yyyy-MM-dd. "
             + "The start date should be before the end date and start and end dates should be "
-            + "within 30 nights of each other.\n"
+            + "within 30 days of each other.\n"
             + "Parameters: "
             + PREFIX_PERSON_ID + "PERSON_ID (must be an existing person Id) "
             + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "
             + PREFIX_START_DATE + "START_DATE "
             + PREFIX_END_DATE + "END_DATE \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERSON_ID + "69 "
-            + PREFIX_ROOM_ID + "2126 "
+            + PREFIX_PERSON_ID + "5 "
+            + PREFIX_ROOM_ID + "2121 "
             + PREFIX_START_DATE + "2020-09-14 "
             + PREFIX_END_DATE + "2020-09-17";
 
@@ -96,7 +96,7 @@ public class AddBookingCommand extends Command {
 
         try {
             model.addBooking(booking);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, booking), false, false, false, true);
         } catch (ConflictingBookingException conflictE) {
             Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
