@@ -35,11 +35,19 @@ public class RoomServiceCommandParser implements Parser<RoomServiceCommand> {
         Integer bookingId = ParserUtil.parseBookingId(argMultimap.getValue(PREFIX_BOOKING_ID).get());
         String type = argMultimap.getValue(PREFIX_ROOM_SERVICE_TYPE).get();
 
-        if (type.equals(RoomServiceType.DINING.getName())) {
+        // make user input case insensitive
+        String processedType = type.toLowerCase();
+
+        // matching case-insensitive room services
+        String dining = RoomServiceType.DINING.getName().toLowerCase();
+        String wifi = RoomServiceType.WIFI.getName().toLowerCase();
+        String massage = RoomServiceType.MASSAGE.getName().toLowerCase();
+
+        if (processedType.equals(dining)) {
             return new RoomServiceCommand(new RoomService(bookingId, RoomServiceType.DINING));
-        } else if (type.equals(RoomServiceType.WIFI.getName())) {
+        } else if (processedType.equals(wifi)) {
             return new RoomServiceCommand(new RoomService(bookingId, RoomServiceType.WIFI));
-        } else if (type.equals(RoomServiceType.MASSAGE.getName())) {
+        } else if (processedType.equals(massage)) {
             return new RoomServiceCommand(new RoomService(bookingId, RoomServiceType.MASSAGE));
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoomServiceCommand.MESSAGE_USAGE));

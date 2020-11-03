@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
@@ -78,7 +78,7 @@ public class FindBookingCommand extends Command {
 
         if (personId.isPresent() && !model.hasPersonWithId(personId.get())) {
             logger.warning("Missing personId");
-            throw new CommandException(MESSAGE_PERSONAL_ID_MISSING);
+            throw new CommandException(MESSAGE_PERSON_ID_MISSING);
         }
 
         Predicate<Booking> predicate = predicates.stream().reduce(x -> true, Predicate::and);

@@ -28,7 +28,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_ROOM_ID = "Room Id is entered in invalid format";
     public static final String MESSAGE_INVALID_BOOKING_ID = "Booking Id is entered in invalid format";
     public static final String MESSAGE_INVALID_DATE = "Date is entered in invalid format";
-    public static final String MESSAGE_INVALID_PERSONAL_ID = "Personal Id is entered in invalid format";
+    public static final String MESSAGE_INVALID_PERSON_ID = "Person Id is entered in invalid format";
     public static final String MESSAGE_INVALID_IS_ACTIVE = "Invalid IsActive State";
 
     /**
@@ -105,19 +105,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String personal Id} into a {@code int}.
+     * Parses a {@code String person Id} into a {@code int}.
      *
-     * @param id personal id as entered by user
-     * @return personal id as an integer
-     * @throws ParseException if the given {@code personal Id} is invalid
+     * @param id person id as entered by user
+     * @return person id as an integer
+     * @throws ParseException if the given {@code person Id} is invalid
      */
-    public static int parsePersonalId(String id) throws ParseException {
+    public static int parsePersonId(String id) throws ParseException {
         requireNonNull(id);
         try {
-            int personalId = Integer.parseInt(id);
-            return personalId;
+            int personId = Integer.parseInt(id);
+            return personId;
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_PERSONAL_ID);
+            throw new ParseException(MESSAGE_INVALID_PERSON_ID);
         }
     }
 

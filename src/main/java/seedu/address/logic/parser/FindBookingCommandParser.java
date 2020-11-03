@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IS_ACTIVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSONAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
@@ -36,7 +36,7 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
     public FindBookingCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSONAL_ID, PREFIX_ROOM_ID,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON_ID, PREFIX_ROOM_ID,
                 PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_IS_ACTIVE);
 
         List<Predicate<Booking>> predicates = new ArrayList<Predicate<Booking>>();
@@ -49,8 +49,8 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
             predicates.add(new BookingMatchesRoomIdPredicate(roomId));
         }
 
-        if (argMultimap.getValue(PREFIX_PERSONAL_ID).isPresent()) {
-            Integer personId = ParserUtil.parsePersonalId(argMultimap.getValue(PREFIX_PERSONAL_ID).get());
+        if (argMultimap.getValue(PREFIX_PERSON_ID).isPresent()) {
+            Integer personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
             optionalPersonId = Optional.of(personId);
             predicates.add(new BookingMatchesPersonIdPredicate(personId));
         }

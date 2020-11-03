@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONAL_ID_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_PERSON_ID_MISSING;
 import static seedu.address.commons.core.Messages.MESSAGE_ROOM_ID_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -108,7 +108,7 @@ public class FindBookingCommandTest {
 
     @Test
     public void execute_oneInvalidPersonIdPredicate_throwCommandException() {
-        String expectedMessage = MESSAGE_PERSONAL_ID_MISSING;
+        String expectedMessage = MESSAGE_PERSON_ID_MISSING;
         BookingMatchesRoomIdPredicate predicate = prepareRoomIdPredicate("pid/1000");
         FindBookingCommand command = new FindBookingCommand(Arrays.asList(predicate), Optional.empty(),
                 Optional.of(1000));
