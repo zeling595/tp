@@ -21,7 +21,7 @@ Given below are my contributions to the project.
 * **New Feature**: Implement the Booking class.
     * What it does: The Booking class keeps information about a booking in the form of person ID, room ID, start date and end date and archive state.
     * Justification: It is essential to the app's main purpose: manage bookings.
-    * Highlights: This enhancement include change to both model and storage
+    * Highlights: This enhancement include change to both model and storage, which require in-depth knowledge about the programme flow.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=W14-2&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=SherryWu178&tabRepo=AY2021S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
@@ -30,16 +30,15 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Modify delete person feature so that when a person is deleted, all the booking(s) related to her/him are deleted (cascading delete). (Pull requests [\#33](), [\#34]())
-
+  * Add tests for JsonAdaptedBooking, JsonBookingBookStorage, 
 
 * **Documentation**:
   * Developer Guide:
-    * Added Use Cases `UC01`, `UC02`, `UC03`
     * Added the section about findBooking and Booking class.
-  * Updated index.md
+    * Added the UML diagram for findBooking.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#24](), [\#25]()
+  * Coming Soon.
 
 
 * **Tools**:
