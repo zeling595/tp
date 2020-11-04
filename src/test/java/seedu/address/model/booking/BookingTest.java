@@ -24,24 +24,39 @@ public class BookingTest {
 
     @Test
     public void hasConflict() {
-        // other booking has same startDate, earlier endDate -> return true
+        // both booking are inactive -> return false
         Booking conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
                 .withEndDate(LocalDate.of(2020, 10, 11)).build();
-        assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
+        assertFalse(BOOKING_AMY.hasConflict(conflictedAmy1));
 
-        // other booking has later startDate, same endDate -> return true
-        conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
+        // both booking are active, booking do not overlap -> return false
+        Booking activeAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
+
+        Booking activeNoConflictAmy = new BookingBuilder(BOOKING_AMY)
+                .withStartDate(LocalDate.of(2020, 10, 12))
+                .withEndDate(LocalDate.of(2020, 10, 15)).build();
+        assertFalse(activeAmy.hasConflict(activeNoConflictAmy));
+
+        // both booking are active, other booking has same startDate, earlier endDate -> return true
+
+        Booking activeConflictedAmy = new BookingBuilder(activeAmy)
+                .withEndDate(LocalDate.of(2020, 10, 11)).build();
+
+        assertTrue(activeAmy.hasConflict(activeConflictedAmy));
+
+        // both booking are active, other booking has later startDate, same endDate -> return true
+        activeConflictedAmy = new BookingBuilder(activeAmy)
                 .withStartDate(LocalDate.of(2020, 10, 3)).build();
-        assertTrue(conflictedAmy1.hasConflict(BOOKING_AMY));
+        assertTrue(activeConflictedAmy.hasConflict(activeAmy));
 
-        // booking A starts on the day in which Booking B ends
-        conflictedAmy1 = new BookingBuilder(BOOKING_AMY)
+        // booking A starts on the day in which Booking B ends -> return false
+        activeConflictedAmy = new BookingBuilder(activeAmy)
                 .withStartDate(VALID_END_DATE_AMY)
                 .withEndDate(LocalDate.of(2020, 10, 11)).build();
-        assertFalse(conflictedAmy1.hasConflict(BOOKING_AMY));
+        assertFalse(conflictedAmy1.hasConflict(activeAmy));
 
         // booking B starts on the day in which Booking A ends
-        assertFalse(BOOKING_AMY.hasConflict(conflictedAmy1));
+        assertFalse(activeAmy.hasConflict(activeConflictedAmy));
     }
 
     @Test

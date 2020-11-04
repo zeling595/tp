@@ -59,8 +59,10 @@ public class UniqueBookingListTest {
 
     @Test
     public void add_conflictingBooking_throwsConflictingBookingException() {
-        uniqueBookingList.add(BOOKING_AMY);
-        assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.add(CONFLICT_AMY_BOOKING_CHLOE));
+        Booking activeAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
+        uniqueBookingList.add(activeAmy);
+        Booking activeChloe = new BookingBuilder(CONFLICT_AMY_BOOKING_CHLOE).withIsActive(true).build();
+        assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.add(activeChloe));
     }
 
     @Test
@@ -106,10 +108,14 @@ public class UniqueBookingListTest {
 
     @Test
     public void setBooking_editedBookingConflictWithBooking_throwsConflictBookingException() {
-        uniqueBookingList.add(BOOKING_AMY);
+        Booking activeAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
+        uniqueBookingList.add(activeAmy);
+
         uniqueBookingList.add(BOOKING_BOB);
+
+        Booking activeChloe = new BookingBuilder(CONFLICT_AMY_BOOKING_CHLOE).withIsActive(true).build();
         assertThrows(ConflictingBookingException.class, () -> uniqueBookingList.setBooking(
-                BOOKING_BOB, CONFLICT_AMY_BOOKING_CHLOE));
+                BOOKING_BOB, activeChloe));
     }
 
     @Test
