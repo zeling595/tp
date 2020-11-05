@@ -99,6 +99,10 @@ public class Booking {
             return false;
         }
 
+        if (isActive() == false || otherBooking.isActive() == false) {
+            return false;
+        }
+
         LocalDate start = getStartDate();
         LocalDate end = getEndDate();
         LocalDate otherBookingStart = otherBooking.getStartDate();
