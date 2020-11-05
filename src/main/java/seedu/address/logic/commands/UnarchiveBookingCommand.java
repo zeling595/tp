@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.core.Messages.MESSAGE_BOOKING_MISSING;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFLICTING_BOOKING;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_BOOKING;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_ID;
 
@@ -10,6 +12,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exception.ConflictingBookingException;
+import seedu.address.model.booking.exception.DuplicateBookingException;
 
 /**
  * Unarchive (change an inactive booking back to active) the booking with a particular booking id
@@ -53,7 +58,15 @@ public class UnarchiveBookingCommand extends Command {
             throw new CommandException(MESSAGE_NOT_YET_ARCHIVED);
         }
 
-        model.setBookingActive(bookingId);
+        try {
+            model.setBookingActive(bookingId);
+        } catch (ConflictingBookingException conflictE) {
+            Booking.setNextAvailableId(bookingId);
+            throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
+        } catch (DuplicateBookingException duplicateE) {
+            Booking.setNextAvailableId(bookingId);
+            throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
+        }
 
         assert model.getBookingWithId(bookingId).isActive();
         logger.info(String.format("Unarchived booking with id %s", bookingId));
