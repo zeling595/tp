@@ -61,10 +61,8 @@ public class UnarchiveBookingCommand extends Command {
         try {
             model.setBookingActive(bookingId);
         } catch (ConflictingBookingException conflictE) {
-            Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_CONFLICTING_BOOKING);
         } catch (DuplicateBookingException duplicateE) {
-            Booking.setNextAvailableId(bookingId);
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
         }
 
