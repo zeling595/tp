@@ -41,10 +41,10 @@ public class GetBillCommandTest {
                 + "Price per night: $70\n"
                 + "Room services ordered:\n"
                 + "Massaging service: $70\n"
-                + "Wifi service: $40\n"
+                + "Wifi service: $15\n"
                 + "Dining in service: $50\n"
                 + "\n"
-                + "Nett bill for booking id 14 = $860";
+                + "Nett bill for booking id 14 = $835";
 
         GetBillCommand command = new GetBillCommand(VALID_BOOKING_ID_DAN);
         assertEquals(expected, command.execute(model).getFeedbackToUser());
