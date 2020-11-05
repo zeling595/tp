@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public enum RoomServiceType {
-    WIFI("WIFI", "Wifi service", 40),
+    WIFI("WIFI", "Wifi service", 15),
     DINING("DINING", "Dining in service", 50),
     MASSAGE("MASSAGE", "Massaging service", 70);
 

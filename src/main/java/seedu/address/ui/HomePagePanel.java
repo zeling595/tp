@@ -57,7 +57,7 @@ public class HomePagePanel extends UiPart<Region> {
         suiteRoomsText.setText(
                 "Suite Rooms: 2123 ~ 2132 (Price: $150/night)");
         roomServicesTitle.setText("Room Services Available:");
-        wifiService.setText("WIFI: Get unlimited and fast wifi (Price: $40)");
+        wifiService.setText("WIFI: Get 1GB of fast wifi (Price: $15)");
         diningService.setText("DINING: Order a meal delivered to your doorstep (Price: $50)");
         massageService.setText("MASSAGE: Get a full body massage (Price: $70)");
         recentBookingsTitle.setText("Recently Added Bookings:");
