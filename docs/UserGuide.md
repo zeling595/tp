@@ -57,7 +57,7 @@ system.
 
 Another core entity in ConciergeBook is `Room`, which represents the hotel rooms available in the system.
 Each hotel room has a unique room ID. <br/>We have different types
-of rooms in the system, and they have different prices. Each room is available for only 1 guest to stay in for a particular period, and this is managed by the `Booking` entity which will be introduced in the next section.
+of rooms in the system, and they have different prices. Each room is only tied to 1 guest for easier management. Guest(s) can stay in the room for a particular period, and this is managed by the `Booking` entity which will be introduced in the next section.
 
 ### Bookings Management
 
@@ -129,17 +129,17 @@ This feature is used when you want to check whether a particular person is alrea
 
 Format: `findPerson KEYWORD [MORE_KEYWORDS]`
 
+* Only the name is searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `findPerson John` returns `john` and `John Doe`
-* `findPerson alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `findPerson tan ho` returns `Amy Tan`, `James Ho`, `Bob Tan`<br>
+  ![result for 'find tan ho'](images/findTanHoResult.png)
 
 
 #### Adding a person: `addPerson`
@@ -148,19 +148,21 @@ Adds a person to the ConciergeBook. After doing so, you will be able to create a
 
 Format: `addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 * Prefixes that are not listed in the format of the command may be parsed as part of another. 
+* Address allows special characters e.g. `/`, `#`.
 
 Examples:
 * `addPerson n/Damith C Rajapakse p/90123456 e/dcsdcr@nus.edu.sg a/NUS SOC t/VVIP`
 * `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg a/Orchard`
 * `addPerson n/Amy Tan p/91233344 e/amy@gmail.com a/Cinnamon College pid/2` will create a person with `Cinnamon College pid/2`
 as the address. 
+* `addPerson n/Amy Tan pid/2 p/91233344 e/amy@gmail.com a/Cinnamon College` will throw error as `/` is not allowed in name.
 
 
 #### Editing a person : `editPerson`
 
 Edits an existing person in ConciergeBook to update the guest's personal information.
 
-Format: `editPerson pid/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `editPerson pid/PERSON_ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person with ID `PERSON_ID`.
 * The PERSON_ID refers to the unique ID of the person.
@@ -321,7 +323,7 @@ Examples:
 #### Archiving a booking: `archiveBooking`
 
 Archives a booking - similar to deleting, but we still store it on the disk. The room for the booking can
-now be occupied by a guest in the same period.
+now be occupied by a guest in the same period. Bookings in the past are not necessarily archived as the data might still be used for hotel management purposes such as customer preference data analysis.
 
 Format: `archiveBooking bid/BOOKING_ID`
 
@@ -362,6 +364,7 @@ Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 * Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.
 * The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
+* Only one room service can be added at one time. If you inputs multiple room services, only the last one is added.
 
 Examples:
 *  `orderRoomService bid/1 rst/WIFI` Orders WIFI room service for booking with ID `1`.
