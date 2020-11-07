@@ -49,6 +49,6 @@ faster than traditional GUI apps.
         2. Documented usage for addBooking feature [#225](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/225)
         3. Improved Documentation usage for getBill feature [#225](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/225)
    2. Developer Guide:
-        1. Documented implementation for AddBooking feature        
+        1. Documented implementation for AddBooking feature         
         2. Documented implementation for UnarchiveBooking feature
    3. Updated project's README [\#24](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/24)
