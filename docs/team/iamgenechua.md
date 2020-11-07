@@ -28,24 +28,25 @@ faster than traditional GUI apps.
     for users who want to restore an archived booking back to an active booking. This provides an excellent opportunity
     for users to recover from mistakes, which is aligned with rule number #9 of Jakob Nielsen's 10 Usability Heuristics for User Interface Design.  
 
-* **New user feature**: Get Bill
-    1. What it does: allows the user to archive bookings, so that they can kind of delete a booking with the ability to
-    recover it again in the future should they change their mind.
-    2. Justification: this feature is a good-to-have for users, as an archive functionality is present in many applications
-    where deletion is allowed. This is because users may sometimes change their mind about
+* **New user feature**: Get Bill [#71](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/71)
+    1. What it does: allows the user to get the current bill of a particular booking.
+    2. Justification: this feature is essential users. A hotel is only profitable when it is able to bill its customers.
+    When the customer wants to enquire about their bill for that particular booking, or when the hotel intends to charge the 
+    customer. This feature allows them to see how much the customer owes the hotel so that the customer is being billed fairly.
+    3. Highlight: The bill displayed is broken down into the base cost (price of staying in the room) and the additional cost 
+    incurred when room services are ordered. This allows the user to understand how the bill is derived in case customer disputes
+    the costs.
 
-* **Enhancements to existing features**: Allowed user input for ordering room service to be case-insensitive
-    * Allowed user input for ordering room service to be case-insensitive
+* **Enhancements to existing features**: Allowed user input for ordering room service to be case-insensitive [#213](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/213)
+    * User may find it troublesome to have to type the room services fully in capital letters
 
-* **Contribution to team-based tasks**: Implemented Storage Feature for Room Service Book
-    
-* **Contribution to team-based tasks**: Refactored Person class [#44](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/44)
-    1. Refactored the Person class to have an ID field, and implemented the assignment of a unique ID to each person added.
+* **Contribution to team-based tasks**: Implemented Storage Feature for Room Service Book [#97](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/97)
+    * Ensure that room service details are saved even if the application is closed and reopened again
 
 #### Documentation
    1. User Guide:
         1. Revamped the user guide to remove multiple typos  
-        2. Documented usage for order room service [#132](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/132)
+        2. Documented usage for order room service
    2. Developer Guide:
         1. Documented implementation for AddBooking feature [\#100](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/100)        
         2. Documented implementation for ArchiveBooking feature
