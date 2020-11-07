@@ -12,11 +12,6 @@ faster than traditional GUI apps.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=iamgenechua&tabRepo=AY2021S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
-* **Project Management**:
-    1. Managed release `v1.3.trial` (1 release) on GitHub.
-    2. Managed release `v1.2` (1 release) on GitHub.
-    3. Set up GitHub team org/repo
-
 #### Implementation
 * **New user feature**: Add Booking
     1. What it does: allows the user to order room services of various types. Upon ordering a room service, we will add
