@@ -520,6 +520,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Effort**
+
+This section aims to document the effort that our team has put into creating ConciergeBook, which we estimate took
+more than twice the effort it takes to create AB3 due to the various complexities involved.
+
+### Challenges & Effort Required
+1. The most crucial challenge for ConciergeBook was the need to create and manage a lot more entities as compared to 
+AB3. We had to extend AB3, which only had the `Person` entity, and add other entities needed to be represented in a hotel booking: these includes the `Room` entity and the `Booking` entity itself. We thus required the following effort:
+    1. Creating these new entities entail creating the appropriate classes in the `model` package to manage these entities in memory.
+    1. We also had to create `storage` classes to save the bookings on the hard disk.
+1. To allow our user to manage the hotel bookings, we also have to create new user features which required us to manage complexities involved in dealing with multiple entities. For example,
+    1. To allow our user to see which rooms are available for booking, we have to manage both the `Room` and `Booking` entites, in order to find out which rooms are not booked at a particular time period.
+    1. Allowing users to manage Booking objects also span multiple entities - as a `Booking` is defined to have a `Room` and a `Person` as well. As such, we have to manage complexities such as checking whether the Person/Room exists before creating the Booking, and also complexities that come with dealing with dates, such as checking whether a booking is in conflict with another booking. i.e. they occupy the same room during the same period.
+1. To enhance the user experience, we also added extension functionalities that required significant effort from our end:
+    1. Notably, we added another entity `RoomService` (along with `model` and `storage` classes) to allow our user to track the room services ordered by the hotel guests. This entity combined with the `getBill` command allows the user to return the total bill for a booking - including the cost of stay and room services ordered.
+1. To support the management of bookings, we extended the AB3's UI to show the list of bookings as well. We also added in a home page to show useful information to the user. These required changes to the UI, and throughout the app as well to allow the `logic` of our app to switch between the different UIs available.
+
+### Achievements
+1. Added more than **12,000** lines of code to AB3.
+2. Added 3 more entities (`Room`, `Booking`, `RoomService`) on top of AB3's `Person` entity
+3. Have a total of 20 user commands (AB3 has 8)
+4. Have a total of 496 test cases (compared to the original 200+ in AB3) and increased test coverage to 74% despite adding a lot more code.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
