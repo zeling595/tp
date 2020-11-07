@@ -362,8 +362,8 @@ Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 
 * Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.
-* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
-* Only one room service can be added at one time. If you inputs multiple room services, only the last one is added.
+* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`. They are case-insensitive.
+* Only one room service can be added at one time. If you input multiple room services, only the last one is added.
 
 Examples:
 *  `orderRoomService bid/1 rst/WIFI` Orders WIFI room service for booking with ID `1`.
@@ -373,10 +373,13 @@ Examples:
 #### Viewing a bill: `getBill`
 
 Gets the bill of a specified booking ID.  
-To find out the BOOKING_ID of the booking you want to get the bill for, you can use the `findBooking` command.
+The bill displayed will show the details of the:
+* Number of nights stayed  
+* Price per night  
+* Room services ordered, if there is any. Else, it will show "No room services ordered"  
+* Nett bill for the BOOKING_ID queried
 
-The display result of the `getBill` command will depend on whether a room service has been added to that particular booking.  
-* If a room service has
+To find out the BOOKING_ID of the booking you want to get the bill for, you can use the `findBooking` command.
 
 Format: `getBill bid/BOOKING_ID`
 
@@ -384,7 +387,7 @@ Format: `getBill bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.    
 
 Example:
-* `getBill bid/6` shows the bill for the booking ID `6`.  
+* `getBill bid/6` shows the bill for the booking_ID `6`.  
 
 
 ### Miscellaneous Features
