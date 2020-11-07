@@ -136,7 +136,7 @@ This section describes some noteworthy details on how certain features are imple
 
 
 <!-- Create Booking Class -->
-#### Booking Class
+### Booking Class
 A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
 series of other commands associated with Booking are also created. A `Booking` object is created using the `checkIn`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
@@ -146,7 +146,7 @@ feature; it can be modified using editBooking and can be deleted from the databa
 
 <!-- Add Booking feature -->
 
-#### Add Booking feature  
+### Add Booking feature  
 1.1 Add Booking: adds a booking. A person, a particular room, and a specified range of dates is tied to that booking - `addBooking`
 
 The check in feature is facilitated by:
@@ -246,7 +246,7 @@ The following activity diagram summarises what happens when a user executes a `e
 <!-- Edit booking feature -->
 
 <!-- Find Booking feature -->
-#### Find Booking feature
+### Find Booking feature
 1.1 Find Booking: finds booking(s) with the following parameters: person ID, room ID, start date, end date and isActive state - `findBooking`
 
 The Find Booking feature is facilitated by:
