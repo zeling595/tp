@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Gene Chua's Project Portfolio Page
+title: Chua Eugene's Project Portfolio Page
 ---
 
 ## Project: ConciergeBook
@@ -21,7 +21,7 @@ faster than traditional GUI apps.
     profitable.
     3. Highlight: the implementation does multiple validation checking of dates, ensuring that the start date is before the end date, and that the dates are not more than 30 nights apart.
 
-* **New user feature**: Unarchive Booking 
+* **New user feature**: Unarchive Booking [#216](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/216)
     1. What it does: allows the user to unarchive bookings, so that they can restore an archived booking in the future 
     should they change their mind, or if they accidentally archived a booking that was not meant to be archived.  
     2. Justification: this feature is a good-to-have for users, as an unarchive functionality serves as an 'undo' function
@@ -46,8 +46,9 @@ faster than traditional GUI apps.
 #### Documentation
    1. User Guide:
         1. Revamped the user guide to remove multiple typos  
-        2. Documented usage for order room service
+        2. Documented usage for addBooking feature [#225](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/225)
+        3. Improved Documentation usage for getBill feature [#225](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/225)
    2. Developer Guide:
-        1. Documented implementation for AddBooking feature [\#100](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/100)        
-        2. Documented implementation for ArchiveBooking feature
+        1. Documented implementation for AddBooking feature        
+        2. Documented implementation for UnarchiveBooking feature
    3. Updated project's README [\#24](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/24)
