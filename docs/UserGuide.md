@@ -266,6 +266,7 @@ Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122. Suite rooms ($150/nig
 * Both the `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
 * `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 nights.
 * All the fields must be provided.
+* The added booking cannot be a duplicate booking or conflict with any existing bookings.  
 * Note: only a single person should be tied to a booking, as we only require a single point-of-contact to be registered in the system. More than 1 person can definitely stay in the hotel room.
 
 Example:
