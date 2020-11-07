@@ -362,7 +362,7 @@ Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 
 * Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.
-* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`. They are case-insensitive.
+* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`. These values are case-insensitive.
 * Only one room service can be added at one time. If you input multiple room services, only the last one is added.
 
 Examples:
@@ -420,7 +420,7 @@ Format: `exit`
 
 #### Saving the data
 
-ConciergeBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data will be saved in a `data/` folder inside the home folder for ConciergeBook.
+ConciergeBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data will be saved in a `data/` folder inside the home folder for ConciergeBook.
 
 --------------------------------------------------------------------------------------------------------------------
 
