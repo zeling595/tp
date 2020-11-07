@@ -33,7 +33,7 @@ public class AddBookingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the hotel. "
             + "Dates should be in the format yyyy-MM-dd. "
             + "The start date should be before the end date and start and end dates should be "
-            + "within 30 days of each other.\n"
+            + "within 30 nights of each other.\n"
             + "Parameters: "
             + PREFIX_PERSON_ID + "PERSON_ID (must be an existing person Id) "
             + PREFIX_ROOM_ID + "ROOM_ID (must be an existing room Id) "

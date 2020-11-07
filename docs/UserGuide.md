@@ -62,7 +62,7 @@ of rooms in the system, and they have different prices. Each room is only tied t
 ### Bookings Management
 
 The entity `Booking` ties the guest we have registered in our system to a room, thus representing a hotel booking. Each `Booking`
-has a unique ID and lasts for a specific duration which is capped at `30 days` (the maximum duration a guest can stay in a hotel room).
+has a unique ID and lasts for a specific duration which is capped at `30 nights` (the maximum duration a guest can stay in a hotel room).
 ConciergeBook provides `CRUD` functionalities for the management of hotel bookings in the system.
 <br/>
 
@@ -249,28 +249,30 @@ Examples:
 
 #### Adding Booking: `addBooking`
 
-A Booking is tied to a person specified by the PERSON_ID and a room specified by the ROOM_ID, for a particular period of time.
-To add a booking, the recommended workflow is as follows:
-1. If the person to be added is not registered yet, use `addPerson` command to register the person in the system.
-1. Use `findPerson` command to search for the person using his/her name and note the PERSON_ID.
-1. Use `filterRoom` to find all available rooms during the particular time period and note the ROOM_ID.
-1. Use the `addBooking` command to add the booking into the system with PERSON_ID and ROOM_ID.
+A Booking is tied to a person specified by the PERSON_ID and a room specified by the ROOM_ID, for a particular time period.
+To add a booking, this is the recommended workflow:
+1. If the person to be added has not been registered, use `addPerson` command to register the person in the system.
+2. Use `findPerson` command to search for the person using his/her name and take note of his/her PERSON_ID.
+3. Use `filterRoom` to find all available rooms during that particular time period and take note of the ROOM_ID.
+4. Use the `addBooking` command to add the booking into the system with PERSON_ID and ROOM_ID.
 
 Format: `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-* Add a booking for person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
-* The person with the specified `PERSON_ID` **must be a positive integer** and **must have been added to ConciergeBook**.
-* The `ROOM_ID` **must be a positive integer** and **must correspond to an existing room in the hotel.** 
-* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
-`ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
-are from `ROOM_ID` 2123 to 2132.
-* The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
-* `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 days.
+* Add a booking for a person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The specified `PERSON_ID` of the person **must be a positive integer** and **must have been added to ConciergeBook**.
+* The `ROOM_ID` **must be a positive integer** and **have to correspond to an existing room in the hotel.** 
+* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from `ROOM_ID` 2103 to 2112.
+Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122. Suite rooms ($150/night) are from `ROOM_ID` 2123 to 2132.
+* Both the `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
+* `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 nights.
 * All the fields must be provided.
+* The added booking cannot be a duplicate booking or conflict with any existing bookings.  
 * Note: only a single person should be tied to a booking, as we only require a single point-of-contact to be registered in the system. More than 1 person can definitely stay in the hotel room.
-
+* Note: ConciergeBook believes the user knows best. ConciergeBook will give users the autonomy to add bookings as he/she
+sees fit. Hence, users are allowed to add bookings far into the future or in the past if it is necessary for the user to do so.  
+ 
 Example:
-*  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person Id `5` into room Id `2120`
+*  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person ID `5` into room ID `2120`
 from 12 December 2020 to 25 December 2020.
 
 
@@ -363,7 +365,7 @@ Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 
 * Adds room service to booking with booking ID `BOOKING_ID`. The id **must be a valid integer** 1, 2, 3, …​
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.
-* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`
+* The room service type must be one of the following values: `WIFI`, `DINING`, `MASSAGE`. These values are case-insensitive.
 * Only one room service can be added at one time. If you input multiple room services, only the last one is added.
 
 Examples:
@@ -373,16 +375,22 @@ Examples:
 
 #### Viewing a bill: `getBill`
 
-Finds the bill of a specified booking ID.  
-To find out the BOOKING_ID of the booking you want to order the room service for, you can use the `findBooking` command.
+Gets the bill of a specified booking ID.  
+The bill displayed will show the details of the:
+* Number of nights stayed  
+* Price per night  
+* Room services ordered, if there is any. Else, it will show "No room services ordered"  
+* Nett bill for the BOOKING_ID queried
+
+To find out the BOOKING_ID of the booking you want to get the bill for, you can use the `findBooking` command.
 
 Format: `getBill bid/BOOKING_ID`
 
 * The `BOOKING_ID` refers to the unique identifier of the booking.  
-* The `BOOKING_ID` must be a valid booking ID in the BookingBook.  
+* The `BOOKING_ID` must be a valid booking ID in the BookingBook.    
 
 Example:
-* `getBill bid/6` shows the bill for the booking ID `6`.  
+* `getBill bid/6` shows the bill for the booking_ID `6`.  
 
 
 ### Miscellaneous Features
@@ -415,7 +423,7 @@ Format: `exit`
 
 #### Saving the data
 
-ConciergeBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data will be saved in a `data/` folder inside the home folder for ConciergeBook.
+ConciergeBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data will be saved in a `data/` folder inside the home folder for ConciergeBook.
 
 --------------------------------------------------------------------------------------------------------------------
 
