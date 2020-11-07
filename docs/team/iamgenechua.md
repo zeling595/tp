@@ -22,10 +22,11 @@ faster than traditional GUI apps.
     3. Highlight: the implementation does multiple validation checking of dates, ensuring that the start date is before the end date, and that the dates are not more than 30 nights apart.
 
 * **New user feature**: Unarchive Booking 
-    1. What it does: allows the user to archive bookings, so that they can kind of delete a booking with the ability to
-    recover it again in the future should they change their mind.
-    2. Justification: this feature is a good-to-have for users, as an archive functionality is present in many applications
-    where deletion is allowed. This is because users may sometimes change their mind about whether they want to delete an item.
+    1. What it does: allows the user to unarchive bookings, so that they can restore an archived booking in the future 
+    should they change their mind, or if they accidentally archived a booking that was not meant to be archived.  
+    2. Justification: this feature is a good-to-have for users, as an unarchive functionality serves as an 'undo' function
+    for users who want to restore an archived booking back to an active booking. This provides an excellent opportunity
+    for users to recover from mistakes, which is aligned with rule number #9 of Jakob Nielsen's 10 Usability Heuristics for User Interface Design.  
 
 * **New user feature**: Get Bill
     1. What it does: allows the user to archive bookings, so that they can kind of delete a booking with the ability to
@@ -33,7 +34,7 @@ faster than traditional GUI apps.
     2. Justification: this feature is a good-to-have for users, as an archive functionality is present in many applications
     where deletion is allowed. This is because users may sometimes change their mind about
 
-* **Enhancements to existing features**: 
+* **Enhancements to existing features**: Allowed user input for ordering room service to be case-insensitive
     * Allowed user input for ordering room service to be case-insensitive
 
 * **Contribution to team-based tasks**: Implemented Storage Feature for Room Service Book
