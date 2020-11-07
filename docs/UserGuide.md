@@ -62,7 +62,7 @@ of rooms in the system, and they have different prices. Each room is only tied t
 ### Bookings Management
 
 The entity `Booking` ties the guest we have registered in our system to a room, thus representing a hotel booking. Each `Booking`
-has a unique ID and lasts for a specific duration which is capped at `30 days` (the maximum duration a guest can stay in a hotel room).
+has a unique ID and lasts for a specific duration which is capped at `30 nights` (the maximum duration a guest can stay in a hotel room).
 ConciergeBook provides `CRUD` functionalities for the management of hotel bookings in the system.
 <br/>
 
@@ -249,23 +249,22 @@ Examples:
 
 #### Adding Booking: `addBooking`
 
-A Booking is tied to a person specified by the PERSON_ID and a room specified by the ROOM_ID, for a particular period of time.
-To add a booking, the recommended workflow is as follows:
-1. If the person to be added is not registered yet, use `addPerson` command to register the person in the system.
-1. Use `findPerson` command to search for the person using his/her name and note the PERSON_ID.
-1. Use `filterRoom` to find all available rooms during the particular time period and note the ROOM_ID.
-1. Use the `addBooking` command to add the booking into the system with PERSON_ID and ROOM_ID.
+A Booking is tied to a person specified by the PERSON_ID and a room specified by the ROOM_ID, for a particular time period.
+To add a booking, this is the recommended workflow:
+1. If the person to be added has not been registered, use `addPerson` command to register the person in the system.
+2. Use `findPerson` command to search for the person using his/her name and take note of his/her PERSON_ID.
+3. Use `filterRoom` to find all available rooms during that particular time period and take note of the ROOM_ID.
+4. Use the `addBooking` command to add the booking into the system with PERSON_ID and ROOM_ID.
 
 Format: `addBooking pid/PERSON_ID rid/ROOM_ID sd/START_DATE ed/END_DATE`
 
-* Add a booking for person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
-* The person with the specified `PERSON_ID` **must be a positive integer** and **must have been added to ConciergeBook**.
-* The `ROOM_ID` **must be a positive integer** and **must correspond to an existing room in the hotel.** 
-* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from
-`ROOM_ID` 2103 to 2112. Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122, Suite rooms ($150/night)
-are from `ROOM_ID` 2123 to 2132.
-* The `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
-* `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 days.
+* Add a booking for a person with `PERSON_ID` at the specified `ROOM_ID` from `START_DATE` to `END_DATE`.     
+* The specified `PERSON_ID` of the person **must be a positive integer** and **must have been added to ConciergeBook**.
+* The `ROOM_ID` **must be a positive integer** and **have to correspond to an existing room in the hotel.** 
+* The `ROOM_ID` determines what type of hotel room it is. Single rooms ($70/night) are from `ROOM_ID` 2103 to 2112.
+Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122. Suite rooms ($150/night) are from `ROOM_ID` 2123 to 2132.
+* Both the `START_DATE` and `END_DATE` **must be in valid date format in the format yyyy-MM-dd.**
+* `START_DATE` must be before `END_DATE`, and the maximum duration of stay must be less than or equal to 30 nights.
 * All the fields must be provided.
 * Note: only a single person should be tied to a booking, as we only require a single point-of-contact to be registered in the system. More than 1 person can definitely stay in the hotel room.
 
@@ -373,13 +372,16 @@ Examples:
 
 #### Viewing a bill: `getBill`
 
-Finds the bill of a specified booking ID.  
-To find out the BOOKING_ID of the booking you want to order the room service for, you can use the `findBooking` command.
+Gets the bill of a specified booking ID.  
+To find out the BOOKING_ID of the booking you want to get the bill for, you can use the `findBooking` command.
+
+The display result of the `getBill` command will depend on whether a room service has been added to that particular booking.  
+* If a room service has
 
 Format: `getBill bid/BOOKING_ID`
 
 * The `BOOKING_ID` refers to the unique identifier of the booking.  
-* The `BOOKING_ID` must be a valid booking ID in the BookingBook.  
+* The `BOOKING_ID` must be a valid booking ID in the BookingBook.    
 
 Example:
 * `getBill bid/6` shows the bill for the booking ID `6`.  
