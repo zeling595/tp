@@ -13,16 +13,13 @@ faster than traditional GUI apps.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=iamgenechua&tabRepo=AY2021S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
 #### Implementation
-* **New user feature**: Add Booking
-    1. What it does: allows the user to order room services of various types. Upon ordering a room service, we will add
-    the cost for the room service to their total bill as well.
-    2. Justification: this feature is essential, as room services are part and parcel of hotels - ensuring that guests have
-    an enjoyable stay. By enabling this functionality, we allow the receptionist to order and track room services
-    for the guests, and finally charge them the correct amount for their stay.
-    3. Highlight: the implementation allows us to easily extend the room services that we offer.
-    4. Challenges: this feature required the creation of a new class RoomService, as well as a class in model to track
-    all the room services and tie them to the correct booking. There was also the challenge of decoupling the implementation
-    from the Booking class.
+* **New user feature**: Add Booking [#51](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/51), [#213](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/213)
+    1. What it does: allows the user to add booking with various parameters tied to the booking.
+    These parameters are the person ID, room ID, start date and end date.
+    2. Justification: this feature is essential, as bookings need to be made to book the room for the hotel's guests
+    so that they can stay at the hotel. Without this service, the hotel would not be able to house guests and not be
+    profitable.
+    3. Highlight: the implementation does multiple validation checking of dates, ensuring that the start date is before the end date, and that the dates are not more than 30 nights apart.
 
 * **New user feature**: Unarchive Booking 
     1. What it does: allows the user to archive bookings, so that they can kind of delete a booking with the ability to
@@ -46,7 +43,7 @@ faster than traditional GUI apps.
 
 #### Documentation
    1. User Guide:
-        1. Revamped the user guide to make it more understandable and user-friendly
+        1. Revamped the user guide to remove multiple typos  
         2. Documented usage for order room service [#132](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/132)
    2. Developer Guide:
         1. Documented implementation for AddBooking feature [\#100](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/100)        
