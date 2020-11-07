@@ -268,9 +268,11 @@ Double rooms ($100/night) are from `ROOM_ID` 2113 to 2122. Suite rooms ($150/nig
 * All the fields must be provided.
 * The added booking cannot be a duplicate booking or conflict with any existing bookings.  
 * Note: only a single person should be tied to a booking, as we only require a single point-of-contact to be registered in the system. More than 1 person can definitely stay in the hotel room.
-
+* Note: ConciergeBook believes the user knows best. ConciergeBook will give users the autonomy to add bookings as he/she
+sees fit. Hence, users are allowed to add bookings far into the future or in the past if it is necessary for the user to do so.  
+ 
 Example:
-*  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person Id `5` into room Id `2120`
+*  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person ID `5` into room ID `2120`
 from 12 December 2020 to 25 December 2020.
 
 
