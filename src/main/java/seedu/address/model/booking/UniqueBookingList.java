@@ -29,6 +29,16 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
+     * Returns true if the list contains an equivalent active booking as the given argument.
+     */
+    public boolean containsActiveDuplicate(Booking toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream()
+                .filter(booking -> booking.isActive() == true)
+                .anyMatch(toCheck::isSameBooking);
+    }
+
+    /**
      * Returns true if the list contains a booking with the given id.
      */
     public boolean hasBookingWithId(Integer id) {
@@ -81,7 +91,7 @@ public class UniqueBookingList implements Iterable<Booking> {
 
     /**
      * Adds a booking to the list.
-     * The booking must not already exist in the list.
+     * The booking must not already exist in the list if the booking is active
      */
     public void add(Booking toAdd) {
         requireNonNull(toAdd);
@@ -89,8 +99,8 @@ public class UniqueBookingList implements Iterable<Booking> {
         if (toAdd.getDuration() > 30) {
             throw new ExceedDurationStayException();
         }
-        // check duplicate
-        if (contains(toAdd)) {
+        // check active duplicate
+        if (containsActiveDuplicate(toAdd)) {
             throw new DuplicateBookingException();
         }
         // check if conflict
@@ -137,6 +147,7 @@ public class UniqueBookingList implements Iterable<Booking> {
         setBooking(booking, editedBooking);
     }
 
+
     public void setBooking(Booking target, Booking editedBooking) {
         requireAllNonNull(target, editedBooking);
         // Check if booking exists
@@ -146,7 +157,8 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
 
         // Check if duplicate booking
-        if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
+        if (!target.isSameBooking(editedBooking) && containsActiveDuplicate(editedBooking)) {
+            System.out.println("containsActive");
             throw new DuplicateBookingException();
         }
 

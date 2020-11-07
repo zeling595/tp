@@ -54,7 +54,20 @@ public class UniqueBookingListTest {
     @Test
     public void add_duplicateBooking_throwsDuplicateBookingException() {
         uniqueBookingList.add(BOOKING_BOB);
-        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.add(BOOKING_BOB));
+        uniqueBookingList.add(BOOKING_BOB);
+
+        UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
+        expectedUniqueBookingList.add(BOOKING_BOB);
+        expectedUniqueBookingList.add(BOOKING_BOB);
+
+        assertEquals(expectedUniqueBookingList, uniqueBookingList);
+    }
+
+    @Test
+    public void add_duplicateActiveBooking_throwsDuplicateBookingException() {
+        Booking activeAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
+        uniqueBookingList.add(activeAmy);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.add(activeAmy));
     }
 
     @Test
@@ -100,10 +113,13 @@ public class UniqueBookingListTest {
     }
 
     @Test
-    public void setBooking_editedBookingsSameBooking_throwsDuplicateBookingException() {
-        uniqueBookingList.add(BOOKING_BOB);
-        uniqueBookingList.add(BOOKING_AMY);
-        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBooking(BOOKING_AMY, BOOKING_BOB));
+    public void setBooking_editedBookingsSameBookingBothActive_throwsDuplicateBookingException() {
+        Booking activeAmy = new BookingBuilder(BOOKING_AMY).withIsActive(true).build();
+        Booking activeBob = new BookingBuilder(BOOKING_BOB).withIsActive(true).build();
+
+        uniqueBookingList.add(activeAmy);
+        uniqueBookingList.add(activeBob);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBooking(activeAmy, activeBob));
     }
 
     @Test
