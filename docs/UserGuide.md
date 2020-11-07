@@ -11,7 +11,7 @@ booking management system that provides a core set of functionalities for guests
 
 The [Quick Start](#quick-start) section shows you how to quickly get ConciergeBook up and running on your computer.<br/>
 If you are a new user, it is recommended to start from the [Walk-through](#walk-through) section.<br/>
-If you are an experienced user, and just wants to refer to the list of features, you may head straight to 
+If you are an experienced user, and just want to refer to the list of features, you may head straight to 
 either the [Features](#features) section (which is more detailed) or the [Command Summary](#command-summary) section.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ In addition, ConciergeBook also provides the following extension functionalities
 
 ### End of Walk-through
 We hope you now have a better understanding of how ConciergeBook works and are excited to get started. You should now head to the
-[Features](#features) section, which specify the CLI commands you could use to access the various functionalities as introduced.
+[Features](#features) section, which specifies the CLI commands you could use to access the various functionalities as introduced.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,7 +155,7 @@ Examples:
 * `addPerson n/Amanda Leow p/82340582 e/amanda@yahoo.com.sg a/Orchard`
 * `addPerson n/Amy Tan p/91233344 e/amy@gmail.com a/Cinnamon College pid/2` will create a person with `Cinnamon College pid/2`
 as the address. 
-* `addPerson n/Amy Tan pid/2 p/91233344 e/amy@gmail.com a/Cinnamon College` will throw error as `/` is not allowed in name.
+* `addPerson n/Amy Tan pid/2 p/91233344 e/amy@gmail.com a/Cinnamon College` will throw an error as `/` is not allowed in name.
 
 
 #### Editing a person : `editPerson`
@@ -307,7 +307,7 @@ Examples:
 
 #### Locating bookings: `findBooking`
 
-Finds the bookings which matches all the given predicates. This feature is used when you want to find a booking related to a
+Finds the bookings which match all the given predicates. This feature is used when you want to find a booking related to a
 particular person, room, for a particular period and whether it is archived. 
 
 Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE] [ac/IS_ARCHIVED]`
@@ -318,7 +318,7 @@ Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]
 
 Examples:
 * `findBooking pid/3` returns all the bookings related to the person with person ID 3.
-* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings starts from 12 Nov 2020 and ends on 16 Nov 2020.
+* `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings which starts from 12 Nov 2020 and ends on 16 Nov 2020.
 
 #### Archiving a booking: `archiveBooking`
 
@@ -351,7 +351,7 @@ Example:
 ### Extension Features
 
 This set of features extend the Booking Management features, and provides additional functionalities related to Bookings.
-The Booking UI will be shown for these set of features.
+The Booking UI will be shown for this set of features.
 
 #### Ordering Room Service : `orderRoomService`
 
@@ -409,7 +409,7 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ConciergeBook. Use with caution.  
 
 Format: `clear`
 
@@ -456,4 +456,4 @@ Action | Format, Examples
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConciergeBook home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConciergeBook home folder.
