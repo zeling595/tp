@@ -536,7 +536,7 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Appendix: Effort**
 
 This section aims to document the effort that our team has put into creating ConciergeBook, which we estimate took
-more than twice the effort it takes to create AB3 due to the various complexities involved.
+more than the effort it takes to create AB3 due to the various complexities involved.
 
 ### Challenges & Effort Required
 1. The most crucial challenge for ConciergeBook was the need to create and manage a lot more entities as compared to 
