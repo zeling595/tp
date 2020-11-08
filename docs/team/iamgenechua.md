@@ -43,6 +43,9 @@ faster than traditional GUI apps.
 * **Contribution to team-based tasks**: Implemented Storage Feature for Room Service Book [#97](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/97)
     * Ensure that room service details are saved even if the application is closed and reopened again
 
+* **Community**:
+  * PRs reviewed (with non-trivial review comments): [#230](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/230#discussion_r519246460)
+
 #### Documentation
    1. User Guide:
         1. Revamped the user guide to remove multiple typos  
@@ -50,5 +53,6 @@ faster than traditional GUI apps.
         3. Improved Documentation usage for getBill feature [#225](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/225)
    2. Developer Guide:
         1. Documented implementation for AddBooking feature [#227](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/227)        
-        2. Documented implementation for UnarchiveBooking feature
-        3. Update Use Cases [#34](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/34)
+        2. Documented implementation for UnarchiveBooking feature to merge with ArchiveBooking feature [#233](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/233)
+        3. Made initial draft for Use Cases [#34](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/34)
+        4. Update Use Case for Archive and Unarchive feature [#233](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/233)
