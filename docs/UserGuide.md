@@ -338,7 +338,9 @@ Example:
 
 #### Unarchiving a booking: `unarchiveBooking`
 
-Unarchives an already archived booking (undos the previous command).
+Unarchives an already archived booking (undos the previous command).  
+For consistency, a booking cannot be unarchived if there is an existing active duplicate booking or an existing
+active conflicting booking.
 
 Format: `unarchiveBooking bid/BOOKING_ID`
 

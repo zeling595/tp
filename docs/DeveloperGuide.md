@@ -851,33 +851,37 @@ Use case ends.
 
 **MSS**
 
-1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room Id (UC07)</ins>. 
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking id associated with room ID (UC07)</ins>. 
 2. User requests for the bill for the booking. 
 3. ConciergeBook shows a receipt and displays the total bill. 
 
 **Extension**
-2a. User inputs invalid booking id. <br>
+2a. User inputs invalid booking ID. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 4. 
 
-**Use Case `UC14`: Check Out a guest**
+**Use Case `UC14`: Archive a booking**
 
 **MSS**
 
-1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room Id (UC07)</ins>.
-2.  User requests to check out a guest. 
-3.  ConciergeBook shows a success message and displays the receipt for the booking. 
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking ID associated with room Id (UC07)</ins>.
+2.  User requests to archive the booking with the booking ID found in step 1. 
+3.  ConciergeBook shows a success message and archives the booking. 
 
 **Extension**
 2a. User inputs invalid booking id. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
-    Use case resumes at step 4. 
+    Use case resumes at step 3. 
+    
+2b. User requests to archive a booking that has already been archived. <br>
+    2b1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
     
 ### Non-Functional Requirements
 
