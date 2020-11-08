@@ -464,6 +464,7 @@ The following activity diagram summarises what happens when a user executes a `g
 ![GetBillActivityDiagram](images/GetBillActivityDiagram.png)
 
 #### Design consideration:
+##### Aspect: Calculating the total price
 **Alternative 1 (current choice)**: Compute the final bill only when requested.
 * Pros: Ensures that there is less dependency on the bookings and allows for modifications to the duration of the stay.  
 * Cons: Have a slightly lower execution time. 
