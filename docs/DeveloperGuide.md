@@ -149,10 +149,10 @@ feature; it can be modified using editBooking and can be deleted from the databa
 ### Add Booking feature  
 1.1 Add Booking: adds a booking. A person, a particular room, and a specified range of dates is tied to that booking - `addBooking`
 
-The check in feature is facilitated by:
+The add booking feature is facilitated by:
 1. `Booking` class. `Booking` objects represent the booking made by the person when booking is added.
 2. `BookingBook`. BookingBook tracks all the bookings created. It implements the following
-operation that support the check in feature:
+operation that support the add booking feature:
     `BookingBook#addBooking()` - adds a new booking.
     
 This operation is exposed in the `Model` interface as `Model#addBooking()`.
@@ -171,7 +171,7 @@ booking ID that is stored in the `Model`.
 This `booking` stores the information entered by the user. Else, ConciergeBook will display an error message
 indicating that the user 
 
-The following sequence diagram shows how the check in operation works:  
+The following sequence diagram shows how the add booking operation works:  
 ![AddBookingSequenceDiagram](images/AddBookingSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the person ID or room ID 
@@ -375,11 +375,11 @@ will be similarly shown as well.
 
 <!-- Filter Room feature --> 
 ### Filter Room feature 
-ConciergeBook allows our user to run the `CheckIn` Command with a Room ID that is not being occupied 
+ConciergeBook allows our user to run the `addBooking` Command with a Room ID that is not being occupied 
 between the indicated start and end date. 
 
 Our user can find out which rooms of certain types are available within a stated start and end dates using the 
-`FilterRoom` Command. This room ID can subsequently be used for checking in a guest. 
+`FilterRoom` Command. This room ID can subsequently be used for adding a booking for a guest. 
 
 The Filter Room feature is facilitated by the `FilterRoomCommand`. It has the following fields: 
 * `sd`: The start date
@@ -520,13 +520,13 @@ AB3. We had to extend AB3, which only had the `Person` entity, and add other ent
 **Target user profile**:
 
 * receptionist at a small hotel
-* has to handle the checking in and checking out of hotel guests
+* has to handle the bookings of guests
 * has to manage other details of hotel stay (e.g. guest information, bill)
 * prefer desktop apps over other types
 * can type reasonably fast
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: allows receptionist to handle the checking in and out of hotel guests 
+**Value proposition**: allows receptionist to handle the bookings of guests 
 faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | hotel receptionist  | [EPIC] can manage the bookings in the hotel.                                                        |                                                                        |
 | `* * *`  | hotel receptionist  | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can check them in                                   |
 | `* * *`  | hotel receptionist  | add bookings associated with a particular room in our system                                        | can keep track of the rooms occupied.                                  |
-| `* * *`  | hotel receptionist  | archive cancelled bookings and make the room available again                                        | other guests can check in                                              |
+| `* * *`  | hotel receptionist  | archive cancelled bookings and make the room available again                                        | other guests can book the room                                             |
 | `* * *`  | hotel receptionist  | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
 | `* * *`  | hotel receptionist  | create new customer profiles as they book rooms                                                     | keep track of their past bookings                                      |
 | `* *`    | hotel receptionist  | search the room he/she has booked with the guest's id                                               | locate details of persons without having to go through the entire list |
@@ -841,7 +841,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Receptionist**: User of the application as defined in the target user profile.
-* **Hotel Guest**: The customer of the hotel who will be checking in and out of the hotel.
+* **Hotel Guest**: The customer of the hotel who will be making a booking with the hotel.
 * **Booking**: Records that track the information of a Hotel Guest's stay with the hotel.
 * **Room**: The hotel room that the Hotel Guest is staying in.
 
