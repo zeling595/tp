@@ -138,7 +138,7 @@ This section describes some noteworthy details on how certain features are imple
 <!-- Create Booking Class -->
 ### Booking Class
 A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
-series of other commands associated with Booking are also created. A `Booking` object is created using the `checkIn`
+series of other commands associated with Booking are also created. A `Booking` object is created using the `addBooking`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
 
 <!-- Create Booking Class -->
@@ -337,20 +337,20 @@ Aspect: Should user use display index or booking ID to locate the Booking
     Generally, referencing using ID is more reliable as ID is fixed and unique.
 <!-- Delete Booking feature -->
 
-
-
-<!-- Archive Booking feature -->
-### Archive Booking feature
+<!-- Archive and Unarchive Booking feature -->
+### Archive and Unarchive Booking feature
 
 The archive booking feature is facilitated by:
 1. `active` boolean flag in `Booking` class. When `active = false`, a booking is considered "archived".
-1. The archive booking feature simply sets this flag in the Booking class to false in order to archive a booking.
+1. The archive booking feature simply sets this flag in the Booking class to false in order to archive a booking. Similarly, 
+the unarchive booking feature would set this flag back to true to unarchive a booking.
 
 This operation is exposed in the `Model` interface as `Model#setBookingInactive()`.
 
-This operation is used when a user wants to "delete" a Booking, but still want to retain the Booking in the hard disk. This Booking will be considered "deleted", and another guest will be able to stay in the same room during the same period as this Booking.
+The archive operation is used when a user wants to "delete" a Booking, but still want to retain the Booking in the hard disk. This Booking will be considered "deleted", and another guest will be able to stay in the same room during the same period as this Booking.
+In case a booking had been mistakenly archived, or that an archived booking had to be unarchived to meet business requirements, the unarchive operation allows the user to reverse his/her decision and restore the archived booking.
 
-<!-- Archive Booking feature -->
+<!-- Archive and Unarchive Booking feature -->
 
 <!-- Room service feature -->
 ### Order Room Service feature 
@@ -380,7 +380,7 @@ Step 4. The user keys in the `orderRoomService` command, with parameters `bid/BO
 where BOOKING_ID is the id of the booking for that guest, and ROOM_SERVICE_TYPE is the type of room service
 to be ordered. 
 
-Step 5. The room service will be added and tracked in the RoomServiceBook. When the user checks out, the bill for
+Step 5. The room service will be added and tracked in the RoomServiceBook. When the user calls `getBill` , the bill for
 the room services ordered will be reflected as well.
 
 Given below is the sequence diagram that shows how the orderRoomService operation works (in step 5).
@@ -389,7 +389,7 @@ Given below is the sequence diagram that shows how the orderRoomService operatio
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
-Also, if the booking id that the user keys in is for a booking that has already been checked out, an error
+Also, if the booking id that the user keys in is for a booking that has already been archived, an error
 will be similarly shown as well. 
 
 </div>
@@ -781,13 +781,13 @@ Use case ends.
     Steps 3a1-3a2 are repeated until the data entered is correct. <br>
     Use case resumes from step 4.
 
-**Use case `UC10`: Add a Booking**  
+**Use case `UC10`: Add a booking**  
 
 **MSS**
 
 1. User <ins>finds a guest (UC02)</ins>.  
 2. User <ins>finds an available room (UC05)</ins>.
-3. User inputs the person’s id, room Id, start date and end date.  
+3. User inputs the person’s ID, room ID, start date and end date.  
 4. ConciergeBook creates a booking and saves it.  
 
 Use case ends.  
@@ -797,16 +797,20 @@ Use case ends.
 1a. Person cannot be found.  
     1a1: User <ins>creates a profile for the person (UC01)</ins>.  
 
-2a. User inputs invalid roomId.  
-	2c1: ConciergeBook throws error message.   
+2a. User inputs invalid room ID.  
+	2a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
 3a. User inputs start date and/or end date in wrong format.  
-	2d1: ConciergeBook throws error message. 
+	3a1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
-3b.  End date is earlier than start date.  
-	2e1: ConciergeBook throws error message. 
+3b. End date is earlier than start date.  
+	3b1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+	
+3c. Start date and end date are more than 30 nights apart.    
+	3c1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
 **Use case `UC11`: Find Booking ID associated with Guest**
@@ -843,26 +847,26 @@ Use case ends.
 
 **MSS**
 
-1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room Id (UC07)</ins>. 
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking id associated with room ID (UC07)</ins>. 
 2. User requests for the bill for the booking. 
 3. ConciergeBook shows a receipt and displays the total bill. 
 
 **Extension**
-2a. User inputs invalid booking id. <br>
+2a. User inputs invalid booking ID. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
 
-**Use Case `UC14`: Cancel a Booking**
+**Use Case `UC14`: Archive a booking**
 
 **MSS**
 
-1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room Id (UC07)</ins>.
-2.  User requests to archive the booking. 
-3.  ConciergeBook shows a success message. 
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking ID associated with room Id (UC07)</ins>.
+2.  User requests to archive the booking with the booking ID found in step 1. 
+3.  ConciergeBook shows a success message and archives the booking. 
 
 **Extension**
 2a. User inputs invalid booking id. <br>
@@ -870,6 +874,34 @@ Use case ends.
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
+    
+2b. User requests to archive a booking that has already been archived. <br>
+    2b1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
+    
+**Use Case `UC15`: Unarchive a booking**
+
+**MSS**
+
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking ID associated with room Id (UC07)</ins>.
+2.  User requests to unarchive the booking with the booking ID found in step 1. 
+3.  ConciergeBook shows a success message and unarchives the booking. 
+
+**Extension**
+2a. User inputs invalid booking id. <br>
+    2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    2a2. User inputs correct information.<br>
+    Step 2a1-2a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 3. 
+    
+2b. User requests to unarchive a booking that has not been archived. <br>
+    2b1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
+    
+2c. User requests to unarchive a booking even though an active duplicate or active conflicting booking exists. <br>
+    2c1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
     
 ### Non-Functional Requirements
 

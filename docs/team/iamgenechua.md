@@ -55,5 +55,5 @@ faster than traditional GUI apps.
         2. Documented usage for order room service [#132](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/132)
    2. Developer Guide:
         1. Documented implementation for AddBooking feature [\#100](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/100)        
-        2. Documented implementation for ArchiveBooking feature
+        2. Merged implementation for UnarchiveBooking feature together with Archive B
    3. Updated project's README [\#24](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/24)
