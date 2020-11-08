@@ -785,13 +785,13 @@ Use case ends.
     Steps 3a1-3a2 are repeated until the data entered is correct. <br>
     Use case resumes from step 4.
 
-**Use case `UC10`: Check in a person**  
+**Use case `UC10`: Add a booking**  
 
 **MSS**
 
 1. User <ins>finds a guest (UC02)</ins>.  
 2. User <ins>finds an available room (UC05)</ins>.
-3. User inputs the person’s id, room Id, start date and end date.  
+3. User inputs the person’s ID, room ID, start date and end date.  
 4. ConciergeBook creates a booking and saves it.  
 
 Use case ends.  
@@ -801,16 +801,20 @@ Use case ends.
 1a. Person cannot be found.  
     1a1: User <ins>creates a profile for the person (UC01)</ins>.  
 
-2a. User inputs invalid roomId.  
-	2c1: ConciergeBook throws error message.   
+2a. User inputs invalid room ID.  
+	2a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
 3a. User inputs start date and/or end date in wrong format.  
-	2d1: ConciergeBook throws error message. 
+	3a1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
-3b.  End date is earlier than start date.  
-	2e1: ConciergeBook throws error message. 
+3b. End date is earlier than start date.  
+	3b1: ConciergeBook throws error message. 
+	Use case resumes at step 1.  
+	
+3c. Start date and end date are more than 30 nights apart.    
+	3c1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
 **Use case `UC11`: Find Booking ID associated with Guest**
