@@ -883,6 +883,30 @@ Use case ends.
     2b1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
+**Use Case `UC15`: Unarchive a booking**
+
+**MSS**
+
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking ID associated with room Id (UC07)</ins>.
+2.  User requests to unarchive the booking with the booking ID found in step 1. 
+3.  ConciergeBook shows a success message and unarchives the booking. 
+
+**Extension**
+2a. User inputs invalid booking id. <br>
+    2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    2a2. User inputs correct information.<br>
+    Step 2a1-2a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 3. 
+    
+2b. User requests to unarchive a booking that has not been archived. <br>
+    2b1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
+    
+2c. User requests to unarchive a booking even though an active duplicate or active conflicting booking exists. <br>
+    2c1. ConciergeBook shows an error message.<br>
+    Use case resumes at step 1. 
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
