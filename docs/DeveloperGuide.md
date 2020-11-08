@@ -51,9 +51,9 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete pid/1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Sequence Diagram of the Architecture](images/ArchitectureSequenceDiagram.png)
 
 The sections below give more details of each component.
 
@@ -255,6 +255,8 @@ The Find Booking feature is facilitated by:
 operation that support the find bookingg feature:
     `updateFilteredBookingList()` - update filteredBookingList with a predicate.
 
+This operation is exposed in the `Model` interface as `Model#updateFilteredBookingList`.
+
 FindBooking features will be used in different scenarios:
 
 1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
@@ -269,7 +271,7 @@ Step 1: As the user launch the App, the Booking book will load the data from mem
 the bookings in the bookingList.
 
 Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
-associated with person id 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+associated with person id 3 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
 update the filteredList in the model so UI will update to only show the relevant bookings. 
 The user then can view the complete information about the booking(s), 
 including the booking id, the room id, the person id, the start and end date, and the isActive state.
@@ -304,7 +306,7 @@ The delete booking feature is facilitated by:
    operation that support the delete booking feature:
     `deleteBooking()` - delete the booking object provided argument.
 
-These operations are exposed in the `Model` interface as `Model#deleteBooking()`.
+This operation is exposed in the `Model` interface as `Model#deleteBooking()`.
 
 Given below is an example usage scenario:
 
@@ -581,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​              | I want to …​                                                                                         | So that I …​                                                            |
 | -------- | --------------------| ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
 | `* * *`  | hotel receptionist  | [EPIC] can manage the bookings in the hotel.                                                        |                                                                        |
-| `* * *`  | hotel receptionist  | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist  | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can book for them                                   |
 | `* * *`  | hotel receptionist  | add bookings associated with a particular room in our system                                        | can keep track of the rooms occupied.                                  |
 | `* * *`  | hotel receptionist  | archive cancelled bookings and make the room available again                                        | other guests can book the room                                             |
 | `* * *`  | hotel receptionist  | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
