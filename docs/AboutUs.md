@@ -14,7 +14,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/shermz-lim.png" width="200px">
 
 [[github](https://github.com/shermz-lim)]
-[[portfolio](team/sherman.md)]
+[[portfolio](team/shermz-lim.md)]
 
 * Role: Developer (Integration)
 * Responsibilities: 
