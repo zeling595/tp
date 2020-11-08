@@ -815,9 +815,7 @@ Use case ends.
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
 
-**Use Case `UC14`: Cancel a Booking**
-
-**Use Case `UC15`: Archive a booking**
+**Use Case `UC14`: Archive a booking**
 
 **MSS**
 
@@ -837,7 +835,7 @@ Use case ends.
     2b1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
-**Use Case `UC16`: Unarchive a booking**
+**Use Case `UC15`: Unarchive a booking**
 
 **MSS**
 
