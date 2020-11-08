@@ -138,7 +138,7 @@ This section describes some noteworthy details on how certain features are imple
 <!-- Create Booking Class -->
 ### Booking Class
 A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
-series of other commands associated with Booking are also created. A `Booking` object is created using the `checkIn`
+series of other commands associated with Booking are also created. A `Booking` object is created using the `addBooking`
 feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
 
 <!-- Create Booking Class -->
@@ -336,7 +336,7 @@ Step 4. The user keys in the `orderRoomService` command, with parameters `bid/BO
 where BOOKING_ID is the id of the booking for that guest, and ROOM_SERVICE_TYPE is the type of room service
 to be ordered. 
 
-Step 5. The room service will be added and tracked in the RoomServiceBook. When the user checks out, the bill for
+Step 5. The room service will be added and tracked in the RoomServiceBook. When the user calls `getBill` , the bill for
 the room services ordered will be reflected as well.
 
 Given below is the sequence diagram that shows how the orderRoomService operation works (in step 5).
@@ -345,7 +345,7 @@ Given below is the sequence diagram that shows how the orderRoomService operatio
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
-Also, if the booking id that the user keys in is for a booking that has already been checked out, an error
+Also, if the booking id that the user keys in is for a booking that has already been archived, an error
 will be similarly shown as well. 
 
 </div>
