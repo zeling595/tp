@@ -37,8 +37,8 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Developer Guide:
-    * Add the section on findBooking and Booking class.
-    * Add the UML diagram for findBooking.
+    * Add the section on findBooking, deleteBooking and Booking class.
+    * Add the UML sequence diagram for findBooking and deleteBooking.
     
   * User Guide:
     * Add the section on findBooking and deleteBooking command.
