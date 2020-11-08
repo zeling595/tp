@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="ConciergeBook" minWidth="650" minHeight="650" onCloseRequest="#handleExit">
+         title="ConciergeBook" minWidth="650" minHeight="680" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/hotel_icon.png" />
   </icons>

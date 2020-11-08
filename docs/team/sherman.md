@@ -42,7 +42,7 @@ faster than traditional GUI apps.
     2. Challenges: this enhancement required the creation of a right abstraction to join the logic and UI, in order
     to allow for the logic to easily switch between showing the person list and booking list in the UI.
     
-* **Enhancements**: Home page GUI [#135](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/135)
+* **Enhancements**: Home page GUI [#135](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/135), [#209](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/209)
     1. Implemented the home page of our app to provide the user with summarised information - namely the rooms that we have
     available, and the most recently added bookings.
     2. Challenges: this enhancement required the use of the Observer pattern to show the correct recently added bookings
@@ -56,8 +56,11 @@ faster than traditional GUI apps.
 
 #### Documentation
    1. User Guide:
-        1. Revamped the user guide to make it more understandable and user-friendly
+        1. Revamped the user guide to make it more understandable and user-friendly [#210](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/210)
         2. Documented usage for order room service [#132](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/132)
+        3. Documented usage for archive booking [#210](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/210)
    2. Developer Guide:
         1. Documented implementation for Order Room Service feature [\#100](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/100)        
+        2. Documented implementation for archiveBooking feature [#231](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/231)
+        3. Documented team's effort in Effort Appendix [#231](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/231)
    3. Updated project's README [\#24](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/24)
