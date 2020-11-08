@@ -102,13 +102,13 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book, booking book, room book and room service book data.
+* stores the person book, booking book, room book and room service book data.
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Booking>` that can be 'observed' 
 e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PersonBook`, which `Person` references. This allows `PersonBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -122,7 +122,7 @@ e.g. the UI can be bound to this list so that the UI automatically updates when 
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book, booking book and room service book data in json format and read it back.
+* can save the person book, booking book and room service book data in json format and read it back.
 
 ### Common classes
 
@@ -160,7 +160,7 @@ This operation is exposed in the `Model` interface as `Model#addBooking()`.
 Given below is the example usage scenario:
 
 Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application
-memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+memory. The `BookingBook` will be populated with `bookings` and the `PersonBook` will be populated with `persons`.
 
 Step 2. The user executes `addBooking pid/3641 rid/2105 sd/2020-12-25 ed/2020-12-28` command to add a booking. The booking
 contains several values, a person ID of 3641, a room ID of 2105, and start date and end date of 25th December 2020
@@ -215,7 +215,7 @@ These operation is exposed in the `Model` interface as `Model#setBooking()`.
 Given below is an example usage scenario:
 
 Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
-memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+memory. The `BookingBook` will be populated with `bookings` and the `PersonBook` will be populated with `persons`.
 
 Step 2. (Optional) The user executes `listBooking` command to list out all the bookings and find out the booking ID of
 the booking to edit.
@@ -292,6 +292,50 @@ Aspect: which parameters should be allowed to use in find Booking?
     there is no person information matches up with the given details (the person is not present in the database), or 
     due to a field provided by the customer is incorrect so there is no matching.
 <!-- Find Booking feature -->
+
+
+<!-- Delete Booking feature -->
+### Delete Booking feature
+1.1 Delete Booking: Delete the booking with the given booking ID `findBooking`
+
+The delete booking feature is facilitated by:
+1. `Booking` class. `Booking` objects represent the booking made by the person when checked in.
+2. `BookingBook` class. BookingBook tracks all the bookings created. It implements the following
+   operation that support the delete booking feature:
+    `deleteBooking()` - delete the booking object provided argument.
+
+These operations are exposed in the `Model` interface as `Model#deleteBooking()`.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+        memory. The `BookingBook` will be populated with `bookings`.
+
+Step 2. The user can add more bookings and each bookings will have an unique booking ID.
+
+Step 3. The user receives a request to cancel a booking, and the user deems that it is uncecessary to leave and data of the cancelled booking in the databese.
+
+Step 4. The user keys in the `deleteBooking` command, with parameters `bid/BOOKING_ID` where BOOKING_ID is the id of the booking for that guest.
+
+Step 5. Step 3. If the parameters entered by the user is valid, the booking will be removed from the booking book. 
+        When the input is invalid (e.g. no booking with booking ID can be found), ConciergeBook will display an error message.
+        
+The following sequence diagram shows how the findBooking operation works:
+![DeleteBookingSequenceDiagram](images/DeleteBookingSequenceDiagram.png)
+
+#### Design consideration:
+Aspect: Should user use display index or booking ID to locate the Booking
+- Alternative 1 (current choice): booking ID
+    - Pros: Since bid/Booking ID is also used in other command (e.g. addBooking and findBooking), its usage is standardised.  
+    - Cons: Not as convenient as the user would have to search up for the personId first
+- Alternative 2: display index
+    - Pros: Easy to implement: can reuse addressBook code
+    - Cons: Since we have miltiple lists in the app, it is possible that the user will be jumping between different lists. 
+    For example, a person might remember a booking to be deleted to be at index 4, but he then proceed to change the personBooking which results in change on sequence of bookingBooking (ed. deletePerson).
+    Generally, referencing using ID is more reliable as ID is fixed and unique.
+<!-- Delete Booking feature -->
+
+
 
 <!-- Archive Booking feature -->
 ### Archive Booking feature
