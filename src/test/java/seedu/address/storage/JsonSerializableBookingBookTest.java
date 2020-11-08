@@ -1,10 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_ID_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBookings.BOOKING_AMY;
-import static seedu.address.testutil.TypicalBookings.BOOKING_BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +20,8 @@ public class JsonSerializableBookingBookTest {
     private static final Path TYPICAL_BOOKINGS_FILE = TEST_DATA_FOLDER.resolve("typicalBookingsBookingBook.json");
     private static final Path INVALID_BOOKING_FILE = TEST_DATA_FOLDER.resolve("invalidBookingBookingBook.json");
     private static final Path DUPLICATE_BOOKING_FILE = TEST_DATA_FOLDER.resolve("duplicateBookingBookingBook.json");
-    private static final Path DUPLICATE_INACTIVE_BOOKING_FILE = TEST_DATA_FOLDER.resolve("duplicateInactiveBookingBookingBook.json");
+    private static final Path DUPLICATE_INACTIVE_BOOKING_FILE =
+            TEST_DATA_FOLDER.resolve("duplicateInactiveBookingBookingBook.json");
 
     @Test
     public void toModelType_typicalBookingFile_success() throws Exception {
