@@ -75,7 +75,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/sherrywu178.png" width="200px">
 
 [[github](https://github.com/SherryWu178)]
-[[portfolio](team/wuyujin.md)]
+[[portfolio](team/SherryWu178.md)]
 
 * Role: Developer (Logic and Model)
 * Responsibilities: 
