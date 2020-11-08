@@ -17,7 +17,7 @@ faster than traditional GUI apps.
     1. What it does: allows the user to add booking with various parameters tied to the booking.
     These parameters are the person ID, room ID, start date and end date.
     2. Justification: this feature is essential, as bookings need to be made to book the room for the hotel's guests
-    so that they can stay at the hotel. Without this service, the hotel would not be able to house guests and not be
+    so that they can stay at the hotel. Without this service, the hotel would not be able to house guests and be
     profitable.
     3. Highlight: the implementation does multiple validation checking of dates, ensuring that the start date is before the end date, and that the dates are not more than 30 nights apart.
 
