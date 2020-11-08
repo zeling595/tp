@@ -293,16 +293,18 @@ Aspect: which parameters should be allowed to use in find Booking?
     due to a field provided by the customer is incorrect so there is no matching.
 <!-- Find Booking feature -->
 
-<!-- Archive Booking feature -->
-### Archive Booking feature
+<!-- Archive and Unarchive Booking feature -->
+### Archive and Unarchive Booking feature
 
 The archive booking feature is facilitated by:
 1. `active` boolean flag in `Booking` class. When `active = false`, a booking is considered "archived".
-1. The archive booking feature simply sets this flag in the Booking class to false in order to archive a booking.
+1. The archive booking feature simply sets this flag in the Booking class to false in order to archive a booking. Similarly, 
+the unarchive booking feature would set this flag back to true to unarchive a booking.
 
 This operation is exposed in the `Model` interface as `Model#setBookingInactive()`.
 
-This operation is used when a user wants to "delete" a Booking, but still want to retain the Booking in the hard disk. This Booking will be considered "deleted", and another guest will be able to stay in the same room during the same period as this Booking.
+The archive operation is used when a user wants to "delete" a Booking, but still want to retain the Booking in the hard disk. This Booking will be considered "deleted", and another guest will be able to stay in the same room during the same period as this Booking.
+In case a booking had been mistakenly archived, or that an archived booking had to be unarchived to meet business requirements, the unarchive operation allows the user to reverse his/her decision and restore the archived booking.
 
 <!-- Archive Booking feature -->
 
