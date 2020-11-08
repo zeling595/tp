@@ -94,18 +94,25 @@ public class BookingBook implements ReadOnlyBookingBook {
     }
 
     /**
-     * Returns true if a booking with the same identity as {@code booking} exists in the address book.
+     * Returns true if a booking with the same identity as {@code booking} exists in the booking book.
      */
     public boolean hasBooking(Booking booking) {
         return bookings.contains(booking);
     }
 
     /**
-     * Returns true if a person with the id is in the address book.
+     * Returns true if a booking with the id is in the person book.
      */
     public boolean hasBookingWithId(Integer id) {
         requireNonNull(id);
         return bookings.hasBookingWithId(id);
+    }
+    /**
+     * Returns true if booking itself is active and there exists a duplicate of it.
+     */
+    public boolean containsActiveDuplicate(Booking booking) {
+        requireNonNull(booking);
+        return bookings.containsActiveDuplicate(booking);
     }
 
     public Booking getBookingWithId(Integer id) {
