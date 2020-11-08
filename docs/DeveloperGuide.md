@@ -448,6 +448,7 @@ Step 4. The user keys in `getBill` command, with the `bookingId` as the paramete
 Step 5. A receipt will be generated, informing the user of the total bill and a breakdown of the bill. <br>
 
 Given below is the sequence diagram that shows how the `getBill` operation works in Step 5. 
+![GetBillActivityDiagram](images/GetBillSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
