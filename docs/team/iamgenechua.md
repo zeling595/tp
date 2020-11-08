@@ -56,3 +56,4 @@ faster than traditional GUI apps.
         2. Documented implementation for UnarchiveBooking feature to merge with ArchiveBooking feature [#233](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/233)
         3. Made initial draft for Use Cases [#34](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/34)
         4. Update Use Case for Archive and Unarchive feature [#233](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/233)
+        
