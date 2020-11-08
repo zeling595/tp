@@ -30,11 +30,11 @@ faster than traditional GUI apps.
 
 * **New user feature**: Get Bill [#71](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/71)
     1. What it does: allows the user to get the current bill of a particular booking.
-    2. Justification: this feature is essential users. A hotel is only profitable when it is able to bill its customers.
-    When the customer wants to enquire about their bill for that particular booking, or when the hotel intends to charge the 
-    customer. This feature allows them to see how much the customer owes the hotel so that the customer is being billed fairly.
+    2. Justification: this feature is essential for users. A hotel is only profitable when it is able to bill its customers.
+    This feature is useful when the customer wants to enquire about their bill for that particular booking, or when the hotel intends to charge the 
+    customer. This feature allows users to see how much the customer owes the hotel so that the customer is being billed fairly.
     3. Highlight: The bill displayed is broken down into the base cost (price of staying in the room) and the additional cost 
-    incurred when room services are ordered. This allows the user to understand how the bill is derived in case customer disputes
+    incurred from ordering room services. This allows the user to understand how the bill is derived in case customers dispute
     the costs.
 
 * **Enhancements to existing features**: Allowed user input for ordering room service to be case-insensitive [#213](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/213)
