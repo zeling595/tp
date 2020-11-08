@@ -743,16 +743,16 @@ Use case ends.
 
 1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
 <ins> finds the booking id associated with room Id (UC07)</ins>.
-3. User request for room service. 
-4. ConciergeBook saves the room service and shows a success message. 
+2. User request for room service. 
+3. ConciergeBook saves the room service and shows a success message. 
 
 **Extension**
 
-3a. User inputs an invalid booking id or room service type. <br>
-    3a1. ConciergeBook shows an error message and requests for correct information.<br>
-    3a2. User inputs correct information.<br>
-    Step 3a1-3a2 are repeated until the data provided is correct. <br>
-    Use case resumes at step 4. 
+2a. User inputs an invalid booking id or room service type. <br>
+    2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    2a2. User inputs correct information.<br>
+    Step 2a1-2a2 are repeated until the data provided is correct. <br>
+    Use case resumes at step 3. 
 
 **Use Case `UC13`: Get Bill**
 
@@ -768,7 +768,7 @@ Use case ends.
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
-    Use case resumes at step 4. 
+    Use case resumes at step 3. 
 
 **Use Case `UC14`: Cancel a Booking**
 
@@ -784,7 +784,7 @@ Use case ends.
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
-    Use case resumes at step 4. 
+    Use case resumes at step 3. 
     
 ### Non-Functional Requirements
 
