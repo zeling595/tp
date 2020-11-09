@@ -28,14 +28,26 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     /// list level operations
+    /**
+     * Returns a {@code ObservableList} that gets all available rooms.
+     */
     public ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms) {
         return rooms.getComplementRooms(unavailableRooms);
     }
 
+    /**
+     * Adds a room to the room book.
+     * The room must not already exist in the room book.
+     */
     public void addRoom(Room r) {
         rooms.add(r);
     }
 
+
+    /**
+     * Replaces the contents of the room list with {@code rooms}.
+     * {@code rooms} must not contain duplicate rooms.
+     */
     public void setRooms(List<Room> rooms) {
         this.rooms.setRooms(rooms);
     }
@@ -78,10 +90,16 @@ public class RoomBook implements ReadOnlyRoomBook {
     }
 
     /// room level operations
+    /**
+     * Returns true if a room with the same roomId exists in the address book.
+     */
     public boolean hasRoom(Integer roomId) {
         return rooms.contains(roomId);
     }
 
+    /**
+     * Returns a room to the room book.
+     */
     public Room getRoom(int roomId) {
         return rooms.getRoom(roomId);
     }
