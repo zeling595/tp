@@ -37,7 +37,7 @@ public class EditBookingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the booking identified "
             + "by the index number used in the displayed booking list. \n"
             + "Existing values will be overwritten by the input values. "
-            + "Dates should be in the format YYYY-MM-DD. \n"
+            + "Dates should be in the format yyyy-MM-dd. \n"
             + "Parameters: " + PREFIX_BOOKING_ID + "BOOKING_ID (must be a valid booking id)"
             + "[" + PREFIX_ROOM_ID + "ROOM ID] "
             + "[" + PREFIX_START_DATE + "START DATE] "
