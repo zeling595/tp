@@ -295,7 +295,7 @@ The following sequence diagram shows how the findBooking operation works:
 ![FindBookingDiagram](images/FindBookingDiagram.png)
 
 #### Design consideration:
-Aspect: which parameters should be allowed to use in find Booking?
+##### Aspect: which parameters should be allowed to use in find Booking?
 - Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isActive state
     - Pros: Easy to implement.
     - Cons: Not as convenient as the user would have to search up for the person ID first.
@@ -335,7 +335,7 @@ The following sequence diagram shows how the findBooking operation works:
 ![DeleteBookingSequenceDiagram](images/DeleteBookingSequenceDiagram.png)
 
 #### Design consideration:
-Aspect: Should user use display index or booking ID to locate the Booking
+##### Aspect: Should user use display index or booking ID to locate the Booking
 - Alternative 1 (current choice): booking ID
     - Pros: Since bid/Booking ID is also used in other command (e.g. addBooking and findBooking), its usage is standardised.  
     - Cons: Not as convenient as the user need to look for the booking ID.
