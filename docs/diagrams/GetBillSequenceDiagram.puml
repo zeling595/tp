@@ -87,6 +87,6 @@ GetBillCommand --> LogicManager : Result
 deactivate GetBillCommand
 destroy GetBillCommand
 
- [<-- LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
