@@ -11,10 +11,10 @@ Interface UserPrefsStorage <<Interface>>
 Class StorageManager
 Class JsonUserPrefsStorage
 
-Package AddressBookStorage {
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBookStorage
+Package PersonBookStorage {
+Interface PersonBookStorage <<Interface>>
+Class JsonPersonBookStorage
+Class JsonSerializablePersonBookStorage
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
@@ -36,15 +36,15 @@ Class JsonAdaptedRoomService
 
 StorageManager .left.|> Storage
 StorageManager o-right-> UserPrefsStorage
-StorageManager o--> AddressBookStorage
+StorageManager o--> PersonBookStorage
 StorageManager o--> BookingBookStorage
 StorageManager o--> RoomServiceBookStorage
 
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage .down.> JsonSerializableAddressBookStorage
-JsonSerializableAddressBookStorage .down.> JsonAdaptedPerson
+JsonPersonBookStorage .up.|> PersonBookStorage
+JsonPersonBookStorage .down.> JsonSerializablePersonBookStorage
+JsonSerializablePersonBookStorage .down.> JsonAdaptedPerson
 JsonAdaptedPerson .right.> JsonAdaptedTag
 
 JsonBookingBookStorage .up.|> BookingBookStorage
