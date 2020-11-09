@@ -175,7 +175,8 @@ Format: `editPerson pid/PERSON_ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TA
 
 Examples:
 *  `editPerson pid/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with ID 1 to be `91234567` and `johndoe@example.com` respectively.
-*  `editPerson pid/2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `editPerson pid/3 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+  ![result for 'editPerson pid/3'](images/editPersonpid3.png)
 
 
 #### Deleting a person : `deletePerson`
@@ -190,7 +191,7 @@ Format: `deletePerson pid/PERSON_ID`
 
 Examples:
 * `deletePerson pid/2` deletes the person with ID `2` in ConciergeBook.
-
+  ![result for 'deletePerson pid/2'](images/deletePersonpid2.png)
 
 
 ### Hotel Rooms Features
@@ -209,7 +210,7 @@ Format: `listRoom [typ/ROOM_TYPE]`
 Examples:
 * `listRoom` will list all the rooms in the Room Book with their unique room IDs. 
 * `listRoom typ/3` will list all the suite rooms in the Room Book with their unique room IDs. 
-
+  ![result for 'listRoom typ/3'](images/listRoomTyp3.png)
 
 #### Filtering hotel rooms: `filterRoom`
 
@@ -226,7 +227,7 @@ as parameters. 1 indicates Single Rooms, 2 indicates Double Rooms, 3 indicates S
 Examples:
 * `filterRoom sd/2020-09-14 ed/2020-09-17` filters all the hotel rooms which are available from Sept 14 2020 to Sept 17 2020.
 * `filterRoom sd/2020-11-09 ed/2020-11-15 typ/2` filters all double rooms which are available from Nov 9 2020 to Nov 15 2020.
-
+  ![result for 'filterRoom'](images/filterRoom.png)
 
 
 ### Booking Management Features
@@ -274,6 +275,7 @@ sees fit. Hence, users are allowed to add bookings far into the future or in the
 Example:
 *  `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` Add booking for person with person ID `5` into room ID `2120`
 from 12 December 2020 to 25 December 2020.
+  ![result for 'addBooking'](images/addBooking.png)
 
 
 #### Editing a booking : `editBooking`
@@ -290,9 +292,9 @@ Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
 * The edited booking cannot be a duplicate booking or conflicts with any existing booking.
 
 Examples:
-*  `editBooking bid/1 rid/2105` Edits the room ID of the booking with ID `1` to be `2105`.
-*  `editBooking bid/2 sd/2021-12-13` Edits the start date of the booking with ID `2` to be `2021-12-13`.
-
+*  `editBooking bid/2 rid/2105` Edits the room ID of the booking with ID `2` to be `2105`.
+*  `editBooking bid/1 sd/2021-11-23` Edits the start date of the booking with ID `2` to be `2021-12-13`.
+  ![result for 'editBooking'](images/editBooking.png)
 
 #### Deleting a booking : `deleteBooking`
 
@@ -322,6 +324,7 @@ Format: `findBooking [pid/PERSON_ID] [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]
 Examples:
 * `findBooking pid/3` returns all the bookings related to the person with person ID 3.
 * `findBooking sd/2020-11-12 ed/2020-11-16` returns all the bookings which starts from 12 Nov 2020 and ends on 16 Nov 2020.
+  ![result for 'findBooking'](images/findBooking.png)
 
 #### Archiving a booking: `archiveBooking`
 
@@ -335,7 +338,8 @@ Format: `archiveBooking bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid booking ID of an unarchived booking in the BookingBook.  
 
 Example:
-* `archiveBooking bid/42` archives booking with the valid booking ID of `42`.
+* `archiveBooking bid/10` archives booking with the valid booking ID of `1`.
+  ![result for 'archive bid/10'](images/archivebid10.png)
 
 #### Unarchiving a booking: `unarchiveBooking`
 
@@ -350,8 +354,8 @@ Format: `unarchiveBooking bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid booking ID of an archived booking in the BookingBook.  
 
 Example:
-* `unarchiveBooking bid/42` unarchives booking with the valid booking ID of `42`.
-
+* `unarchiveBooking bid/10` unarchives booking with the valid booking ID of `10`.
+  ![result for 'unarchive bid/10'](images/unarchivebid10.png)
 
 ### Extension Features
 
@@ -372,9 +376,10 @@ Format: `orderRoomService bid/BOOKING_ID rst/ROOM_SERVICE_TYPE`
 * Only one room service can be added at one time. If you input multiple room services, only the last one is added.
 
 Examples:
-*  `orderRoomService bid/1 rst/WIFI` Orders WIFI room service for booking with ID `1`.
 *  `orderRoomService bid/2 rst/DINING` Orders DINING room service for booking with ID `2`.
+*  `orderRoomService bid/10 rst/WIFI` Orders WIFI room service for booking with ID `10`.
 
+  ![result for 'order wifi for bid/10'](images/orderRoomServicebid10.png)
 
 #### Viewing a bill: `getBill`
 
@@ -393,8 +398,8 @@ Format: `getBill bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.    
 
 Example:
-* `getBill bid/6` shows the bill for the booking ID `6`.  
-
+* `getBill bid/9` shows the bill for the booking ID `9`.  
+  ![result for 'getBill bid/9'](images/getBillbid9.png)
 
 ### Miscellaneous Features
 
