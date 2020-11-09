@@ -41,20 +41,20 @@ class JsonSerializablePersonBook {
     }
 
     /**
-     * Converts this address book into the model's {@code PersonBook} object.
+     * Converts this person book into the model's {@code PersonBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public PersonBook toModelType() throws IllegalValueException {
-        PersonBook addressBook = new PersonBook();
+        PersonBook personBook = new PersonBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (personBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            personBook.addPerson(person);
         }
-        return addressBook;
+        return personBook;
     }
 
 }

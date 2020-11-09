@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Booking> filteredBookings;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given personBook, bookingBook, roomBook and userPrefs.
      */
     public ModelManager(ReadOnlyPersonBook personBook, ReadOnlyUserPrefs userPrefs,
                         ReadOnlyRoomBook roomBook, ReadOnlyBookingBook bookingBook,

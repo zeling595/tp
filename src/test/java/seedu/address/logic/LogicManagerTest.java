@@ -45,7 +45,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonPersonBookStorage addressBookStorage =
-                new JsonPersonBookStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonPersonBookStorage(temporaryFolder.resolve("personBook.json"));
         JsonBookingBookStorage bookingBookStorage =
                 new JsonBookingBookStorage(temporaryFolder.resolve("bookingBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -93,7 +93,7 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonPersonBookIoExceptionThrowingStub
         JsonPersonBookStorage addressBookStorage =
-                new JsonPersonBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonPersonBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionPersonBook.json"));
         JsonBookingBookStorage bookingBookStorage =
                 new JsonBookingBookStorage(temporaryFolder.resolve("bookingBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
