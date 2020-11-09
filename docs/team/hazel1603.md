@@ -32,8 +32,9 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Updated UML Diagrams of Architecture [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files)
         * Added Filter Room Feature [\#105](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/105)
-        * Updated User Stories [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files)
-        * Updated Use Cases [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files)
+        * Added Get Bill Feature [\#230](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/230)
+        * Updated User Stories [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files), [\#230](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/230)
+        * Updated Use Cases [\#129](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/129/files), [\#230](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/230)
        
 * **Enhancements to Existing Features**:
     * Wrote additional test cases to increase test coverage of Room Book to 100% and UniqueRoomList to 93% 
@@ -54,15 +55,17 @@ Given below are my contributions to the project.
     * Made small tweaks to Home Page display under UI (Pull Request [\#194](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/194))
     
 ### Contributions to Developer Guide (Extracts)
-* Diagrams drawn for Filter Room Feature 
-    * The following diagram is the Activity Diagram for Filter Room. <br>
-    ![FilterRoomActivityDiagram](hazel_images/Hazel_FilterRoomActivityDiagram.png)
-    * The following diagram is the Sequence Diagram for Filter Room for the optimal case. <br> 
-    ![FilterRoomSequenceDiagram](hazel_images/Hazel_FilterRoomSequenceDiagram2.png)
+* Diagrams drawn for Get Bill Feature 
+    * The following diagram is the Activity Diagram for Get Bill. <br>
+    <img src="hazel_images/Hazel_GetBillActivityDiagram.png" width="800" />
+    * The following diagram is the Sequence Diagram for Get Bill. <br> 
+    <img src="hazel_images/Hazel_GetBillSequenceDiagram.png" width="800" />
+Similar Diagrams were drawn for the Filter Room Feature. 
+    
 * Diagrams drawn for Architecture Component 
     * The following diagram was used for the Model component in Architecture. 
-    ![Structure of the Model Component](hazel_images/Hazel_ModelClassDiagram.png)
+    <img src="hazel_images/Hazel_ModelClassDiagram.png" width="800" />
     * The following diagram was used for the Storage component in Architecture. 
-    ![Structure of the Storage Component](hazel_images/Hazel_StorageClassDiagram.png)
+    <img src="hazel_images/Hazel_StorageClassDiagram.png" width="800" />
     * The following diagram was used for the UI component in Architecture. 
-    ![Structure of the UI Component](hazel_images/Hazel_UiClassDiagram.png)
+    <img src="hazel_images/Hazel_UiClassDiagram.png" width="800" />
