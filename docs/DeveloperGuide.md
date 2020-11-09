@@ -699,7 +699,7 @@ Use case resumes at step 3.
 1. User inputs a start date, end date and a optional room type. 
 2. ConciergeBook lists out all the matching rooms which are available within the start and end date. 
 
-**Extension**
+**Extension** <br>
 1a. User inputs a start date that is after the end date. <br>
     * 1a1. ConciergeBook throws a error message. <br>
     Use case resumes at step 1. 
@@ -717,7 +717,7 @@ Use case resumes at step 3.
 
 Use case ends.
 
-**Extension**
+**Extension** <br>
 1a. Room type is in invalid.  
 	* 1a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
@@ -729,7 +729,7 @@ Use case ends.
 1. User enters a list of requirements. 
 2. ConciergeBook displays a list of bookings that match the requirements. 
 
-**Extension**
+**Extension** <br>
 1a. User enters invalid information or no new information. <br>
     * 1a1. ConciergeBook throws an error message and request for correct information. <br>
     * 1a2. User inputs correct information. <br>
@@ -804,7 +804,7 @@ Use case ends.
 
 Use case ends.  
 
-**Extension**  
+**Extension** <br>
 
 1a. Person cannot be found.  
     * 1a1: User <ins>creates a profile for the person (UC01)</ins>.  
@@ -831,7 +831,7 @@ Use case ends.
 1. User <ins>finds the guest id (UC02)</ins> associated with the guest. 
 2. User <ins>finds the booking (UC07)</ins> associated with the person. 
 
-**Extension**
+**Extension** <br>
 1a. No guest ID associated. <br>
     Use case ends. 
     
@@ -847,7 +847,7 @@ Use case ends.
 2. User request for room service. 
 3. ConciergeBook saves the room service and shows a success message. 
 
-**Extension**
+**Extension** <br>
 
 2a. User inputs an invalid booking ID or room service type. <br>
     * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
@@ -864,7 +864,7 @@ Use case ends.
 2. User requests for the bill for the booking. 
 3. ConciergeBook shows a receipt and displays the total bill. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
     * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
     * 2a2. User inputs correct information.<br>
@@ -880,7 +880,7 @@ Use case ends.
 2.  User requests to archive the booking with the booking ID found in step 1. 
 3.  ConciergeBook shows a success message and archives the booking. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
     * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
     * 2a2. User inputs correct information.<br>
@@ -900,7 +900,7 @@ Use case ends.
 2.  User requests to unarchive the booking with the booking ID found in step 1. 
 3.  ConciergeBook shows a success message and unarchives the booking. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
     * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
     * 2a2. User inputs correct information.<br>
@@ -924,8 +924,6 @@ Use case ends.
 4.  Should have a UI that looks like a modern desktop app.
 5.  A receptionist new to the app should be able to pick it up quickly.
 6.  Should provide helpful prompts and guides receptionist to accomplish tasks. 
-
-*{More to be added}*
 
 ## **Appendix F: Glossary**
 
