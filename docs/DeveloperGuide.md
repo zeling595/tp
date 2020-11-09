@@ -17,13 +17,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-![Architeacture Diagram](images/ArchitectureDiagram.png)
+![Architecture Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](hhttps://github.com/AY2021S1-CS2103-W14-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-W14-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
@@ -91,7 +91,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Interactions Inside the Logic Component for the `deletePerson pid/1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeletePersonCommandParser` 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -299,10 +299,10 @@ The following sequence diagram shows how the findBooking operation works:
 
 #### Design consideration:
 ##### Aspect: which parameters should be allowed to use in find Booking?
-- Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isArchived state
+* **Alternative 1 (current choice)**: room ID, person ID, startDate, endDate, and isArchived state
     - Pros: Easy to implement.
     - Cons: Not as convenient as the user would have to search up for the person ID first.
-- Alternative 2: person's name or phone number
+* **Alternative 2**: person's name or phone number
     - Pros: More user-friendly as the user only need to use one command.
     - Cons: There are more complexity involved for one feature. When a booking cannot be found, it could be due to
     there is no person information matches up with the given details (the person is not present in the database), or 
@@ -312,7 +312,7 @@ The following sequence diagram shows how the findBooking operation works:
 
 <!-- Delete Booking feature -->
 ### Delete Booking feature
-1.1 Delete Booking: Delete the booking with the given booking ID `deleteBooking`
+Delete Booking: Delete the booking with the given booking ID `deleteBooking`
 
 The delete booking feature is facilitated by:
 1. `Booking` class. 
@@ -339,10 +339,10 @@ The following sequence diagram shows how the deleteBooking operation works:
 
 #### Design consideration:
 ##### Aspect: Should user use display index or booking ID to locate the Booking
-- Alternative 1 (current choice): booking ID
+* **Alternative 1 (current choice)**: booking ID
     - Pros: Since bid/Booking ID is also used in other command (e.g. addBooking and findBooking), its usage is standardised.  
     - Cons: Not as convenient as the user need to look for the booking ID.
-- Alternative 2: display index
+* **Alternative 2**: display index
     - Pros: Easy to implement: can reuse addressBook code
     - Cons: Since we have multiple lists in the app, it is possible that the user will be jumping between different lists. 
     For example, a person might remember there is a booking to be deleted at index 4, but he proceeds to change the `personBook` which results in a change in the bookingBook (ed. deletePerson).
@@ -352,7 +352,7 @@ The following sequence diagram shows how the deleteBooking operation works:
 <!-- Archive and Unarchive Booking feature -->
 ### Archive and Unarchive Booking feature
 
-The archive booking feature is facilitated by:
+The archive and unarchive booking feature is facilitated by:
 1. `active` boolean flag in `Booking` class. When `active = false`, a booking is considered "archived".
 1. The archive booking feature simply sets this flag in the Booking class to false in order to archive a booking. Similarly, 
 the unarchive booking feature would set this flag back to true to unarchive a booking.

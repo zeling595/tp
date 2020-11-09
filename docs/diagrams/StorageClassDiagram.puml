@@ -14,7 +14,7 @@ Class JsonUserPrefsStorage
 Package PersonBookStorage {
 Interface PersonBookStorage <<Interface>>
 Class JsonPersonBookStorage
-Class JsonSerializablePersonBookStorage
+Class JsonSerializablePersonBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
@@ -22,7 +22,7 @@ Class JsonAdaptedTag
 Package BookingBookStorage {
 Interface BookingBookStorage <<Interface>>
 Class JsonBookingBookStorage
-Class JsonSerializableBookingBookStorage
+Class JsonSerializableBookingBook
 Class JsonAdaptedBooking
 }
 
@@ -43,13 +43,13 @@ StorageManager o--> RoomServiceBookStorage
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 
 JsonPersonBookStorage .up.|> PersonBookStorage
-JsonPersonBookStorage .down.> JsonSerializablePersonBookStorage
-JsonSerializablePersonBookStorage .down.> JsonAdaptedPerson
+JsonPersonBookStorage .down.> JsonSerializablePersonBook
+JsonSerializablePersonBook .down.> JsonAdaptedPerson
 JsonAdaptedPerson .right.> JsonAdaptedTag
 
 JsonBookingBookStorage .up.|> BookingBookStorage
-JsonBookingBookStorage .down.> JsonSerializableBookingBookStorage
-JsonSerializableBookingBookStorage .down.> JsonAdaptedBooking
+JsonBookingBookStorage .down.> JsonSerializableBookingBook
+JsonSerializableBookingBook .down.> JsonAdaptedBooking
 
 JsonRoomServiceBookStorage .up.|> RoomServiceBookStorage
 JsonRoomServiceBookStorage .down.> JsonSerializableRoomServiceBook
