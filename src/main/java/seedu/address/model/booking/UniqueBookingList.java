@@ -64,7 +64,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Remove a booking from the List.
+     * Removes a booking from the List.
      * The booking must already exist in the list.
      * Or BookingNotFoundException is thrown.
      */
@@ -79,7 +79,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Remove bookings associated with a personId from the List.
+     * Removes bookings associated with a personId from the List.
      */
     public void removeBookingWithPersonId(Integer personID) {
         requireNonNull(personID);
@@ -129,7 +129,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Set a booking to inactive. Create new booking and set.
+     * Sets a booking to inactive. Create new booking and set.
      * @param bookingId The booking id to be set inactive
      */
     public void setBookingInactive(int bookingId) {
@@ -141,7 +141,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Set a booking to active. Create new booking and set.
+     * Sets a booking to active. Create new booking and set.
      * @param bookingId The booking id to be set inactive
      */
     public void setBookingActive(int bookingId) {
@@ -154,7 +154,7 @@ public class UniqueBookingList implements Iterable<Booking> {
 
 
     /**
-     * Set a target booking to edited booking.
+     * Sets a target booking to edited booking.
      * @param target The booking to be replaced.
      * @param editedBooking The edited booking to be added to the unique booking list.
      */
@@ -191,7 +191,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
-     * Replace the bookings in the current list with bookings in replacement unique booking list.
+     * Replaces the bookings in the current list with bookings in replacement unique booking list.
      */
     public void setBookings(UniqueBookingList replacement) {
         requireNonNull(replacement);
