@@ -18,7 +18,7 @@ public class FilterRoomCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters rooms that are of the indicated room type "
             + "(if applicable) and are not occupied within the start and end date. \n"
             + "typ/1 filters single rooms; typ/2 filters double rooms; typ/3 filters suite rooms. "
-            + "Dates should be in the format YYYY-MM-DD. \n"
+            + "Dates should be in the format yyyy-MM-dd. \n"
             + "Parameters: "
             + PREFIX_START_DATE + "START_DATE "
             + PREFIX_END_DATE + "END_DATE "
