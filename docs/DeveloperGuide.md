@@ -295,7 +295,7 @@ The following sequence diagram shows how the findBooking operation works:
 ![FindBookingDiagram](images/FindBookingDiagram.png)
 
 #### Design consideration:
-Aspect: which parameters should be allowed to use in find Booking?
+##### Aspect: which parameters should be allowed to use in find Booking?
 - Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isActive state
     - Pros: Easy to implement.
     - Cons: Not as convenient as the user would have to search up for the person ID first.
@@ -335,7 +335,7 @@ The following sequence diagram shows how the findBooking operation works:
 ![DeleteBookingSequenceDiagram](images/DeleteBookingSequenceDiagram.png)
 
 #### Design consideration:
-Aspect: Should user use display index or booking ID to locate the Booking
+##### Aspect: Should user use display index or booking ID to locate the Booking
 - Alternative 1 (current choice): booking ID
     - Pros: Since bid/Booking ID is also used in other command (e.g. addBooking and findBooking), its usage is standardised.  
     - Cons: Not as convenient as the user need to look for the booking ID.
@@ -504,6 +504,8 @@ Step 5. A receipt will be generated, informing the user of the total bill and a 
 
 Given below is the sequence diagram that shows how the `getBill` operation works in Step 5. 
 
+![GetBillActivityDiagram](images/GetBillSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking ID that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
 </div>
@@ -519,6 +521,7 @@ The following activity diagram summarises what happens when a user executes a `g
 ![GetBillActivityDiagram](images/GetBillActivityDiagram.png)
 
 #### Design consideration:
+##### Aspect: Calculating the total price
 **Alternative 1 (current choice)**: Compute the final bill only when requested.
 * Pros: Ensures that there is less dependency on the bookings and allows for modifications to the duration of the stay.  
 * Cons: Have a slightly lower execution time. 
