@@ -295,7 +295,7 @@ Examples:
 
 #### Deleting a booking : `deleteBooking`
 
-Deletes a booking in the booking book. You should search for the booking you want to edit first using `findBooking` and 
+Deletes a booking in the booking book. You should search for the booking you want to delete first using `findBooking` and 
 note its BOOKING_ID.
 
 Format: `deleteBooking bid/BOOKING_ID`

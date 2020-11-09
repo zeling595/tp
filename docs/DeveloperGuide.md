@@ -147,7 +147,7 @@ feature; it can be modified using `editBooking` and can be deleted from the data
 <!-- Add Booking feature -->
 
 ### Add Booking feature  
-1.1 Add Booking: adds a booking. A person, a particular room, and a specified range of dates is tied to that booking - `addBooking`
+Add Booking: adds a booking. A person, a particular room, and a specified range of dates is tied to that booking - `addBooking`
 
 The add booking feature is facilitated by:
 1. `Booking` class. `Booking` objects represent the booking made by the person when booking is added.
@@ -259,7 +259,7 @@ The following activity diagram summarises what happens when a user executes a `e
 
 <!-- Find Booking feature -->
 ### Find Booking feature
-1.1 Find Booking: finds booking(s) with the following parameters: person ID, room ID, start date, end date and isActive state - `findBooking`
+Find Booking: finds booking(s) with the following parameters: person ID, room ID, start date, end date and isArchived state - `findBooking`
 
 The Find Booking feature is facilitated by:
 1. `Booking` class. 
@@ -272,21 +272,22 @@ This operation is exposed in the `Model` interface as `Model#updateFilteredBooki
 FindBooking features will be used in different scenarios:
 
 1. When the user wishes to know the detailed information about a booking. For example, a customer wishes to know which room
-is he/she allocated to. The user can find the room based on the customer ID, the start date and the end date of the booking.                                      
+is he/she allocated to. The user can find the room based on the person ID, the start date and the end date of the booking.                                      
 2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For
-example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
+example, if a customer wish to cancel his booking, the person ID, the start date and the end date of the booking will
 be provided. The user then can use the above information to find out about the booking ID which is needed by
 other features.
 
 Given below is the example usage scenario:
+
 Step 1: As the user launch the App, the Booking book will load the data from memory, the filteredBookings includes all
 the bookings in the bookingList.
 
-Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
-associated with person ID 3 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-13`, trying to find the Booking 
+associated with person ID 3 which starts on 2020-09-12 and end on 2020-09-13. If such booking exist, the Command will 
 update the filteredList in the model so UI will update to only show the relevant bookings. 
 The user then can view the complete information about the booking(s), 
-including the booking ID, the room ID, the person ID, the start and end date, and the isActive state.
+including the booking ID, the room ID, the person ID, the start and end date, and the isArchived state.
 
 Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking
 which meet the parameters can be found, the filteredList will be empty hence no booking will be displayed in UI.
@@ -296,7 +297,7 @@ The following sequence diagram shows how the findBooking operation works:
 
 #### Design consideration:
 ##### Aspect: which parameters should be allowed to use in find Booking?
-- Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isActive state
+- Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isArchived state
     - Pros: Easy to implement.
     - Cons: Not as convenient as the user would have to search up for the person ID first.
 - Alternative 2: person's name or phone number
@@ -309,7 +310,7 @@ The following sequence diagram shows how the findBooking operation works:
 
 <!-- Delete Booking feature -->
 ### Delete Booking feature
-1.1 Delete Booking: Delete the booking with the given booking ID `findBooking`
+1.1 Delete Booking: Delete the booking with the given booking ID `deleteBooking`
 
 The delete booking feature is facilitated by:
 1. `Booking` class. 
@@ -331,7 +332,7 @@ Step 3. The user keys in the `deleteBooking` command, with parameters `bid/BOOKI
 Step 4. If the parameters entered by the user is valid, the booking will be removed from the booking book. 
         When the input is invalid (e.g. no booking with booking ID can be found), ConciergeBook will display an error message.
         
-The following sequence diagram shows how the findBooking operation works:
+The following sequence diagram shows how the deleteBooking operation works:
 ![DeleteBookingSequenceDiagram](images/DeleteBookingSequenceDiagram.png)
 
 #### Design consideration:
