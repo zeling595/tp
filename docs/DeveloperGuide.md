@@ -678,8 +678,8 @@ Use case resumes at step 3.
 
     Use case ends.
 
-**Extensions**
-2a. The list is empty. 
+**Extensions** <br>
+2a. The list is empty. <br>
     Use case ends. 
     
 3a. The given index is invalid.  
