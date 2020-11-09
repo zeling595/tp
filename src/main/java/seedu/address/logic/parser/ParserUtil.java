@@ -29,7 +29,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_BOOKING_ID = "Booking Id is entered in invalid format";
     public static final String MESSAGE_INVALID_DATE = "Date is entered in invalid format";
     public static final String MESSAGE_INVALID_PERSON_ID = "Person Id is entered in invalid format";
-    public static final String MESSAGE_INVALID_IS_ACTIVE = "Invalid IsActive State";
+    public static final String MESSAGE_INVALID_IS_ACTIVE = "Invalid archived state";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
