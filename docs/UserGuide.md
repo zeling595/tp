@@ -236,7 +236,7 @@ and it should look like that:
 ![Booking list UI](images/bookingList.png)
 
 #### Listing bookings: `listBooking`
-Lists the bookings sorted by most recent start date to least recent start date. Archived bookings will be shown at the end.<br/>
+Lists the bookings sorted by start date. Bookings with latest start date will be shown first. Archived bookings will be shown at the end.<br/>
 This feature should be used when you want to switch to the Booking UI, and view all the bookings currently in the system.
 
 Format: `listBooking`
@@ -284,6 +284,7 @@ note its BOOKING_ID.
 Format: `editBooking bid/BOOKING_ID [rid/ROOM_ID] [sd/START_DATE] [ed/END_DATE]`
 
 * Edits the booking with booking ID `BOOKING_ID`. The id **must be a positive integer** 1, 2, 3, …​
+* Date must have the format of `yyyy-MM-dd`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The edited booking cannot be a duplicate booking or conflicts with any existing booking.
@@ -392,7 +393,7 @@ Format: `getBill bid/BOOKING_ID`
 * The `BOOKING_ID` must be a valid booking ID in the BookingBook.    
 
 Example:
-* `getBill bid/6` shows the bill for the booking_ID `6`.  
+* `getBill bid/6` shows the bill for the booking ID `6`.  
 
 
 ### Miscellaneous Features
