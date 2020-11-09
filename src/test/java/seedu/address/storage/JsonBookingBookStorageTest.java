@@ -93,7 +93,7 @@ public class JsonBookingBookStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code personBook} at the specified {@code filePath}.
      */
     private void saveBookingBook(ReadOnlyBookingBook addressBook, String filePath) {
         try {

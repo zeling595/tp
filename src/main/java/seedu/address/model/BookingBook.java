@@ -73,7 +73,7 @@ public class BookingBook implements ReadOnlyBookingBook {
 
     /**
      * Removes {@code booking} from this {@code BookingBook}.
-     * {@code booking} must exist in the address book.
+     * {@code booking} must exist in the booking book.
      */
     public void removeBooking(Booking booking) {
         bookings.removeBooking(booking);
