@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: Long Zeling's Project Portfolio Page
@@ -20,6 +19,9 @@ Given below are my contributions to the project.
     * What it does: list all the bookings.
     * Justification: This feature is simple but necessary. It allows user to see all the bookings and relevant booking information. The booking ID is a mandatory input for many other commands and therefore this command precedes most other booking-related commands.
     * Credit: I have reused and modified code in AB3 to suit my needs.
+ 
+* **Contribution to team-based project**: Implement BookingBook class 
+    * Implement UniqueBookingList
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=W14&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=zeling595&tabRepo=AY2021S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
