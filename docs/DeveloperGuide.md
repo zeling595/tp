@@ -169,7 +169,7 @@ and 28th December 2020 respectively.
 Step 3. If the parameters entered by the user is valid, the application will create a new `booking` with its own unique
 booking ID that is stored in the `Model`. 
 This `booking` stores the information entered by the user. Else, ConciergeBook will display an error message
-indicating that the user 
+indicating that the user did not type in the parameters correctly.
 
 The following sequence diagram shows how the add booking operation works:  
 ![AddBookingSequenceDiagram](images/AddBookingSequenceDiagram.png)
