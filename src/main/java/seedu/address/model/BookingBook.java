@@ -63,14 +63,25 @@ public class BookingBook implements ReadOnlyBookingBook {
         setBookings(newData.getBookingList());
     }
 
+    /**
+     * Adds a booking to the booking book.
+     * The booking must not already exist in the booking book and conflict with existing booking.
+     */
     public void addBooking(Booking bookingToAdd) {
         bookings.add(bookingToAdd);
     }
 
+    /**
+     * Removes {@code booking} from this {@code BookingBook}.
+     * {@code booking} must exist in the address book.
+     */
     public void removeBooking(Booking booking) {
         bookings.removeBooking(booking);
     }
 
+    /**
+     * Removes {@code booking} with matching {@code PersonId} from this {@code BookingBook}.
+     */
     public void removeBookingWithPersonId(Integer personId) {
         bookings.removeBookingWithPersonId(personId);
     }
@@ -85,10 +96,16 @@ public class BookingBook implements ReadOnlyBookingBook {
         return bookings.getBooking(roomID);
     }
 
+    /**
+     * Set the isActive state to false
+     */
     public void setBookingInactive(int bookingId) {
         bookings.setBookingInactive(bookingId);
     }
 
+    /**
+     * Set the isActive state to true
+     */
     public void setBookingActive(int bookingId) {
         bookings.setBookingActive(bookingId);
     }
@@ -115,11 +132,17 @@ public class BookingBook implements ReadOnlyBookingBook {
         return bookings.containsActiveDuplicate(booking);
     }
 
+    /**
+     * Returns the booking with matching ID.
+     */
     public Booking getBookingWithId(Integer id) {
         requireNonNull(id);
         return bookings.getBookingWithId(id);
     }
 
+    /**
+     * Returns a list of rooms that are available from the startDate to the endDate.
+     */
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return bookings.getUnavailableRooms(startDate, endDate);
     }

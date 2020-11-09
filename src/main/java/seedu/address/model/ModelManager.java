@@ -289,11 +289,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Booking getBooking(int roomId) {
-        return this.bookingBook.getBooking(roomId);
-    }
-
-    @Override
     public void setBookingInactive(int bookingId) {
         this.bookingBook.setBookingInactive(bookingId);
     }
