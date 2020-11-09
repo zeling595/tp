@@ -63,9 +63,9 @@ Given below are my contributions to the project.
 Similar Diagrams were drawn for the Filter Room Feature. 
     
 * Diagrams drawn for Architecture Component 
-    * The following diagram was used for the Model component in Architecture. 
-    <img src="hazel_images/Hazel_ModelClassDiagram.png" width="800" />
     * The following diagram was used for the Storage component in Architecture. 
     <img src="hazel_images/Hazel_StorageClassDiagram.png" width="800" />
+    * The following diagram was used for the Model component in Architecture. 
+    <img src="hazel_images/Hazel_ModelClassDiagram.png" height="800" />
     * The following diagram was used for the UI component in Architecture. 
     <img src="hazel_images/Hazel_UiClassDiagram.png" width="800" />
