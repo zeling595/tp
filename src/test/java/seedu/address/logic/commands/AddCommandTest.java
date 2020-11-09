@@ -270,11 +270,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Booking getBooking(int roomId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyBookingBook getBookingBook() {
             throw new AssertionError("This method should not be called.");
         }
