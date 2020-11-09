@@ -17,7 +17,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+![Architeacture Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -51,9 +51,9 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete pid/1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Sequence Diagram of the Architecture](images/ArchitectureSequenceDiagram.png)
 
 The sections below give more details of each component.
 
@@ -102,13 +102,13 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book, booking book, room book and room service book data.
+* stores the person book, booking book, room book and room service book data.
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Booking>` that can be 'observed' 
 e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PersonBook`, which `Person` references. This allows `PersonBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -122,7 +122,7 @@ e.g. the UI can be bound to this list so that the UI automatically updates when 
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book, booking book and room service book data in json format and read it back.
+* can save the person book, booking book and room service book data in json format and read it back.
 
 ### Common classes
 
@@ -139,7 +139,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Booking Class
 A `Booking` class is created as an association class of the Person and Room class. Accordingly, `BookingBook` and a
 series of other commands associated with Booking are also created. A `Booking` object is created using the `addBooking`
-feature; it can be modified using editBooking and can be deleted from the database using `deleteBooking`.
+feature; it can be modified using `editBooking` and can be deleted from the database using `deleteBooking`.
 
 <!-- Create Booking Class -->
 
@@ -160,7 +160,7 @@ This operation is exposed in the `Model` interface as `Model#addBooking()`.
 Given below is the example usage scenario:
 
 Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application
-memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+memory. The `BookingBook` will be populated with `bookings` and the `PersonBook` will be populated with `persons`.
 
 Step 2. The user executes `addBooking pid/3641 rid/2105 sd/2020-12-25 ed/2020-12-28` command to add a booking. The booking
 contains several values, a person ID of 3641, a room ID of 2105, and start date and end date of 25th December 2020
@@ -215,7 +215,7 @@ These operation is exposed in the `Model` interface as `Model#setBooking()`.
 Given below is an example usage scenario:
 
 Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
-memory. The `BookingBook` will be populated with `bookings` and the `AddressBook` will be populated with `persons`.
+memory. The `BookingBook` will be populated with `bookings` and the `PersonBook` will be populated with `persons`.
 
 Step 2. (Optional) The user executes `listBooking` command to list out all the bookings and find out the booking ID of
 the booking to edit.
@@ -228,11 +228,11 @@ Step 4. If the booking ID exists and there is at least one other parameters to e
 `booking` to replace the old booking with the booking ID and store it in `Model`. Else, ConciergeBook will display
 error message to show sample usage.
 
-Given below is the sequence diagram that shows how the edit booking operation works (in step 5).
+Given below is the sequence diagram that shows how the edit booking operation works.
 
 ![EditBookingSequenceDiagram](images/EditBookingSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking ID that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
 Also, if the only booking ID is specified, an error message will be shown to ask user to provide at least one field.
 If the edited booking duplicates or conflicts with existing booking, an error message will be shown as well. 
@@ -243,6 +243,18 @@ The following activity diagram summarises what happens when a user executes a `e
 
 ![EditBookingActivityDiagram](images/EditBookingActivityDiagram.png)
 
+#### Design consideration:
+
+##### Aspect: Whether to update the existing booking or create new booking with edited fields to replace the existing booking.
+
+* **Alternative 1 (current choice):** Create new booking with edited fields to replace the existing booking.
+  * Pros: Making `Booking` an immutable object increases the testability of the code and makes the command less error-prone.
+  * Cons: More work to create new booking and replace it in the list of bookings in model.
+
+* **Alternative 2:** Update the existing booking
+  * Pros: Easier to implement.
+  * Cons: More difficult to test.
+
 <!-- Edit booking feature -->
 
 <!-- Find Booking feature -->
@@ -250,18 +262,20 @@ The following activity diagram summarises what happens when a user executes a `e
 1.1 Find Booking: finds booking(s) with the following parameters: person ID, room ID, start date, end date and isActive state - `findBooking`
 
 The Find Booking feature is facilitated by:
-1. `Booking` class. `Booking` objects represent the booking made by the person when checked in.
-2. `ModelManager`. ModelManager contains the filteredBookings which will be updated after `findBooking` command. It implements the following
-operation that support the find bookingg feature:
+1. `Booking` class. 
+2. `BookingBook` class. BookingBook tracks all the bookings created. It implements the following
+      operation that supports delete booking feature:
     `updateFilteredBookingList()` - update filteredBookingList with a predicate.
+
+This operation is exposed in the `Model` interface as `Model#updateFilteredBookingList`.
 
 FindBooking features will be used in different scenarios:
 
-1. When the user wish to know the detailed information about a booking. For example, a customer wish to know which room
-is he/she checked into. The user can find the room based on the customer Id, the start date and the end date of the booking.                                      
+1. When the user wishes to know the detailed information about a booking. For example, a customer wishes to know which room
+is he/she allocated to. The user can find the room based on the customer ID, the start date and the end date of the booking.                                      
 2. When the user wish to delete/edit a Booking, the user will find the Booking with the relevant parameter first. For
 example, if a customer wish to cancel his booking, the customer Id, the start date and the end date of the booking will
-be provided. The user then can use the above information to find out about the booking id which is needed by
+be provided. The user then can use the above information to find out about the booking ID which is needed by
 other features.
 
 Given below is the example usage scenario:
@@ -269,29 +283,68 @@ Step 1: As the user launch the App, the Booking book will load the data from mem
 the bookings in the bookingList.
 
 Step 2: The user will execute `findBooking pid/3 sd/2020-09-12 ed/2020-09-12`, trying to find the Booking 
-associated with person id 1 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
+associated with person ID 3 which starts on 2020-09-12 and end on 2020-09-12. If such booking exist, the Command will 
 update the filteredList in the model so UI will update to only show the relevant bookings. 
 The user then can view the complete information about the booking(s), 
-including the booking id, the room id, the person id, the start and end date, and the isActive state.
+including the booking ID, the room ID, the person ID, the start and end date, and the isActive state.
 
 Step 3: If the user input is invalid, an error message will be displayed regarding the wrong fields. If no booking
-which meet the parameters can be found, the filteredList will be empty hence no
-booking will be displayed in UI.
+which meet the parameters can be found, the filteredList will be empty hence no booking will be displayed in UI.
 
 The following sequence diagram shows how the findBooking operation works:
 ![FindBookingDiagram](images/FindBookingDiagram.png)
 
 #### Design consideration:
 Aspect: which parameters should be allowed to use in find Booking?
-- Alternative 1 (current choice): roomId, personId, startDate, endDate, and isActive state
+- Alternative 1 (current choice): room ID, person ID, startDate, endDate, and isActive state
     - Pros: Easy to implement.
-    - Cons: Not as convenient as the user would have to search up for the personId first
+    - Cons: Not as convenient as the user would have to search up for the person ID first.
 - Alternative 2: person's name or phone number
-    - Pros: More user-friendly as the user only need to key in information once
+    - Pros: More user-friendly as the user only need to use one command.
     - Cons: There are more complexity involved for one feature. When a booking cannot be found, it could be due to
     there is no person information matches up with the given details (the person is not present in the database), or 
     due to a field provided by the customer is incorrect so there is no matching.
 <!-- Find Booking feature -->
+
+
+<!-- Delete Booking feature -->
+### Delete Booking feature
+1.1 Delete Booking: Delete the booking with the given booking ID `findBooking`
+
+The delete booking feature is facilitated by:
+1. `Booking` class. 
+2. `BookingBook` class. BookingBook tracks all the bookings created. It implements the following
+   operation that supports delete booking feature:
+    `deleteBooking()` - delete the booking object provided argument.
+
+This operation is exposed in the `Model` interface as `Model#deleteBooking()`.
+
+Given below is an example usage scenario:
+
+Step 1. The user launches the ConciergeBook application. Data will be loaded from the storage to the application 
+        memory. The `BookingBook` will be populated with bookings.
+
+Step 2. The user receives a request to cancel a booking, and the user deems that it is unnecessary to leave and data of the cancelled booking in the database.
+
+Step 3. The user keys in the `deleteBooking` command, with parameters `bid/BOOKING_ID` where BOOKING_ID is the id of the booking for that guest.
+
+Step 4. If the parameters entered by the user is valid, the booking will be removed from the booking book. 
+        When the input is invalid (e.g. no booking with booking ID can be found), ConciergeBook will display an error message.
+        
+The following sequence diagram shows how the findBooking operation works:
+![DeleteBookingSequenceDiagram](images/DeleteBookingSequenceDiagram.png)
+
+#### Design consideration:
+Aspect: Should user use display index or booking ID to locate the Booking
+- Alternative 1 (current choice): booking ID
+    - Pros: Since bid/Booking ID is also used in other command (e.g. addBooking and findBooking), its usage is standardised.  
+    - Cons: Not as convenient as the user need to look for the booking ID.
+- Alternative 2: display index
+    - Pros: Easy to implement: can reuse addressBook code
+    - Cons: Since we have multiple lists in the app, it is possible that the user will be jumping between different lists. 
+    For example, a person might remember there is a booking to be deleted at index 4, but he proceeds to change the `personBook` which results in a change in the bookingBook (ed. deletePerson).
+    Generally, referencing using ID is more reliable as ID is fixed and unique.
+<!-- Delete Booking feature -->
 
 <!-- Archive and Unarchive Booking feature -->
 ### Archive and Unarchive Booking feature
@@ -306,14 +359,14 @@ This operation is exposed in the `Model` interface as `Model#setBookingInactive(
 The archive operation is used when a user wants to "delete" a Booking, but still want to retain the Booking in the hard disk. This Booking will be considered "deleted", and another guest will be able to stay in the same room during the same period as this Booking.
 In case a booking had been mistakenly archived, or that an archived booking had to be unarchived to meet business requirements, the unarchive operation allows the user to reverse his/her decision and restore the archived booking.
 
-<!-- Archive Booking feature -->
+<!-- Archive and Unarchive Booking feature -->
 
 <!-- Room service feature -->
 ### Order Room Service feature 
 
 The order room service feature is facilitated by:
 1. `RoomService` class. `RoomService` objects represent the room service that a person has ordered. It is tied to a
-booking through the bookingId field.
+booking through the booking ID field.
 2. `RoomServiceBook`. RoomServiceBook tracks all the RoomService that has been ordered. It implements the following
 operations that support the order room service feature:
     1. `RoomServiceBook#addRoomService()` - adds a new room service.
@@ -328,7 +381,7 @@ Given below is an example usage scenario:
 Step 1. The user launches the application for the first time. The empty `RoomServiceBook`
 will be instantiated.
 
-Step 2. The user checks in a guest into a room. A new Booking object will be created with a bookingId.
+Step 2. The user checks in a guest into a room. A new Booking object will be created with a booking ID.
 
 Step 3. The user receives a request from that guest to order room service.
 
@@ -343,9 +396,9 @@ Given below is the sequence diagram that shows how the orderRoomService operatio
 
 ![RoomServiceSequenceDiagram](images/RoomServiceSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking ID that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
-Also, if the booking id that the user keys in is for a booking that has already been archived, an error
+Also, if the booking ID that the user keys in is for a booking that has already been archived, an error
 will be similarly shown as well. 
 
 </div>
@@ -443,31 +496,29 @@ The get bill feature is facilitated by:
 1. `RoomServiceBook`. The Room Service Book keeps track of all room services ordered by all rooms. 
 
 Given below is an example usage scenario: <br>
-Step 1. The user adds a booking to the system, which creates a new Booking with a bookingId. <br>
-Step 2. The user requests for several room services for the room using the bookingId. <br>
+Step 1. The user adds a booking to the system, which creates a new Booking with a booking ID. <br>
+Step 2. The user requests for several room services for the room using the booking ID. <br>
 Step 3. The user wants to calculate the total bill for the stay, including the room services ordered. <br>
-Step 4. The user keys in `getBill` command, with the `bookingId` as the parameter, where bookingId is the id of the booking for that guest. <br>
+Step 4. The user keys in `getBill` command, with the `booking ID` as the parameter, where booking ID is the id of the booking for that guest. <br>
 Step 5. A receipt will be generated, informing the user of the total bill and a breakdown of the bill. <br>
 
 Given below is the sequence diagram that shows how the `getBill` operation works in Step 5. 
-![GetBillActivityDiagram](images/GetBillSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking id that the user keys
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking ID that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
 </div>
 
 Obtaining the total price of the stay is achieved in a 5-step process. 
-1. Using the booking Id inputted by the user, the `BookingBook` will be accessed to retrieve the details of the booking.
+1. Using the booking ID inputted by the user, the `BookingBook` will be accessed to retrieve the details of the booking.
 1. The roomId of the booking will be used to access the `RoomBook`. The room associated with the booking will be retrieved. 
 1. The base price of the room is calculated using the price of the room and the number of nights stayed, which is taken from the details of the booking. 
-1. The booking Id will also be used to retrieve the list of room services ordered by the guest from the `RoomServiceBook`. 
+1. The booking ID will also be used to retrieve the list of room services ordered by the guest from the `RoomServiceBook`. 
 1. The total bill for the stay is then computed and a receipt is generated. 
 
 The following activity diagram summarises what happens when a user executes a `getBill` command: 
 ![GetBillActivityDiagram](images/GetBillActivityDiagram.png)
 
 #### Design consideration:
-##### Aspect: Calculating the total price
 **Alternative 1 (current choice)**: Compute the final bill only when requested.
 * Pros: Ensures that there is less dependency on the bookings and allows for modifications to the duration of the stay.  
 * Cons: Have a slightly lower execution time. 
@@ -491,7 +542,7 @@ Bookings can also be edited. Hence, editing the duration of the booking would af
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## **Appendix A: Effort**
 
 This section aims to document the effort that our team has put into creating ConciergeBook, which we estimate took
 more than the effort it takes to create AB3 due to the various complexities involved.
@@ -517,9 +568,7 @@ AB3. We had to extend AB3, which only had the `Person` entity, and add other ent
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix B: Product scope**
 
 **Target user profile**:
 
@@ -533,15 +582,14 @@ AB3. We had to extend AB3, which only had the `Person` entity, and add other ent
 **Value proposition**: allows receptionist to handle the bookings of guests 
 faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
-
-### User stories
+## **Appendix C: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​              | I want to …​                                                                                         | So that I …​                                                            |
 | -------- | --------------------| ----------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------- |
 | `* * *`  | hotel receptionist  | [EPIC] can manage the bookings in the hotel.                                                        |                                                                        |
-| `* * *`  | hotel receptionist  | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can check them in                                   |
+| `* * *`  | hotel receptionist  | answer guest queries about which rooms are available for a block of dates                           | know which rooms I can book for them                                   |
 | `* * *`  | hotel receptionist  | add bookings associated with a particular room in our system                                        | can keep track of the rooms occupied.                                  |
 | `* * *`  | hotel receptionist  | archive cancelled bookings and make the room available again                                        | other guests can book the room                                             |
 | `* * *`  | hotel receptionist  | [EPIC] keep track of the hotel’s customer profiles                                                  |                                                                        |
@@ -552,7 +600,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | hotel receptionist  | [EPIC] keep track of room services ordered by guests.                                               |                                                                        |
 | `* * *`  | hotel receptionist  | provide `WIFI`, `DINING` and `MASSAGE` room services for guests.                                    |                                                                        |
 
-### Use cases
+## **Appendix D: Use cases**
 
 (For all use cases below, the **System** is the `ConciergeBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -701,7 +749,7 @@ Use case ends.
 2a. The list is empty. 
     Use case ends. 
     
-3a. The given booking id is invalid.  
+3a. The given booking ID is invalid.  
     3a1. ConciergeBook shows an error message.  
     Use case resumes at step 3. 
 
@@ -778,24 +826,24 @@ Use case ends.
 2. User <ins>finds the booking (UC07)</ins> associated with the person. 
 
 **Extension**
-1a. No guest Id associated. <br>
+1a. No guest ID associated. <br>
     Use case ends. 
     
-2a. No booking Id found. <br>
+2a. No booking ID found. <br>
     Use case ends. 
 
 **Use case `UC12`: Order Room Service**
 
 **MSS**
 
-1. User <ins>finds the booking id associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room Id (UC07)</ins>.
+1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
+<ins> finds the booking ID associated with room Id (UC07)</ins>.
 2. User request for room service. 
 3. ConciergeBook saves the room service and shows a success message. 
 
 **Extension**
 
-2a. User inputs an invalid booking id or room service type. <br>
+2a. User inputs an invalid booking ID or room service type. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
@@ -806,7 +854,7 @@ Use case ends.
 **MSS**
 
 1. User <ins>finds the booking ID associated with a guest (UC11)</ins> or 
-<ins> finds the booking id associated with room ID (UC07)</ins>. 
+<ins> finds the booking ID associated with room ID (UC07)</ins>. 
 2. User requests for the bill for the booking. 
 3. ConciergeBook shows a receipt and displays the total bill. 
 
@@ -827,7 +875,7 @@ Use case ends.
 3.  ConciergeBook shows a success message and archives the booking. 
 
 **Extension**
-2a. User inputs invalid booking id. <br>
+2a. User inputs invalid booking ID. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
@@ -847,7 +895,7 @@ Use case ends.
 3.  ConciergeBook shows a success message and unarchives the booking. 
 
 **Extension**
-2a. User inputs invalid booking id. <br>
+2a. User inputs invalid booking ID. <br>
     2a1. ConciergeBook shows an error message and requests for correct information.<br>
     2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
@@ -861,7 +909,7 @@ Use case ends.
     2c1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
-### Non-Functional Requirements
+## **Appendix E: Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 records of bookings without a noticeable sluggishness in performance for typical usage.
@@ -873,7 +921,7 @@ Use case ends.
 
 *{More to be added}*
 
-### Glossary
+## **Appendix F: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Receptionist**: User of the application as defined in the target user profile.
@@ -883,7 +931,7 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix G: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -907,29 +955,146 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `listPerson` command. Multiple persons in the list. Choose a person to delete by noting down his/her person ID.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deletePerson pid/1`<br>
+      Expected: Person in the list with person ID `1` will be deleted from the list. Success message shown in the status message. All bookings associated with the person will be deleted at the same time.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deletePerson pid/x` (where x is non-existent person ID)<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `deletePerson pid/abc`<br>
+      Expected: Command not executed as person ID format is invalid. Error details shown in the status bar. Status bar remains unchanged.
+
+   1. Other incorrect delete commands to try: `deletePerson`, `deletePerson pid/`, `deletePerson bid/abc`<br>
+      Expected: Similar to previous.
+      
+### Add a booking
+1. Add a booking with provided details.
+   1. Prerequisite: `listPerson` to find out the ID of the person for the new booking.
+   
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`<br>
+      Expected: Add booking for person with person ID 5 into room ID 2120 from 12 December 2020 to 25 December 2020. Success message shown in the status message. A new booking will be shown in the booking list panel. 
+
+   1. Test case: `addBooking pid/5 rid/20 sd/2020-12-12 ed/2020-12-25`<br>
+      Expected: Error of invalid room ID shown in the status bar. No booking will be added.
+   
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12`<br>
+      Expected: Error of invalid command format and command usage shown in the status bar. No booking will be added.
+      
+   1. Other incorrect addBooking commands to try: `addBooking pid/5 rid/2120 sd/2020-12-13 ed/2020-12-10`(start date is after end date), `addBooking pid/x rid/2120 sd/2020-12-12 ed/2020-12-25`(where x is non-existent person ID).<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Edit a booking
+1. Edit the room ID, start date and/or end date of a booking.
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be edited.
+   
+   1. Test case: `editBooking bid/1 rid/2105`<br>
+      Expected: Edits the room ID of the booking with ID 1 to be 2105. Success message shown in status bar.
+      
+   1. Test case: `editBooking bid/x sd/2021-12-13`(where x is non-existent booking ID)<br>
+      Expected: Error of invalid booking ID shown in status bar. No booking is edited.
+    
+   1. Other incorrect editBooking commands to try: `editBooking bid/2 sd/2021-12-13 ed/2020-12-12`(start date after end date), `addBooking pid/1 rid/2120 sd/2020-12-12 ed/2020-12-25` followed by `editBooking bid/1 rid/2120 sd/2020-12-12 ed/2020-12-25`(duplicate booking).
+   
+### Delete a booking
+1. Delete a booking specified by booking ID.
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be deleted.
+   
+   1. Test case: `deleteBooking bid/1`<br>
+      Expected: Delete booking with booking ID 1. Success message shown in status bar.
+      
+   1. Test case: `deleteBooking bid/x` (where x is non-existent booking ID)<br>
+      Expected: No booking is deleted. Error of invalid booking ID shown in status bar.
+   
+   1. Other incorrect delete commands to try: `deleteBooking`, `deleteBooking bid/`, `deleteBooking pid/abc`<br>
+         Expected: Similar to previous.
+   
+### Find a booking
+1. Find the bookings which match all the given predicates, namely person ID, room ID, start date, end date and isArchived status.
+
+   1. No prerequisite.
+   
+   1. Test case: `findBooking pid/3`(provided booking ID 3 exists)<br>
+      Expected: List the booking with booking ID 3 in booking list panel. Success message shown in status bar.
+      
+   1. Test case: `findBooking sd/2020-11-12 ed/2020-11-16`<br>
+      Expected: List all the bookings which starts from 12 Nov 2020 and ends on 16 Nov 2020.
+      
+   1. Test case: `findBooking`<br>
+      Expected: Error of invalid command format and command usage shown in the status bar.
+      
+   1. Other incorrect commands to try `findBooking 1`, `findBooking bid/abc`<br>
+      Expected: Similar to previous.
+
+### Archive a booking
+1. Archive a booking marks the booking as archived. It is still stored in the hard disk.
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be archived.
+   
+   1. Test case: `archiveBooking bid/42`<br>
+      Expected: Booking with booking ID 42 is archived. Success message shown in status bar.
+      
+   1. Test case: `archiveBooking bid/x`(where x is non-existent booking ID)<br>
+      Expected: No booking is archived. Error details shown in the status bar.
+
+   1. Other incorrect commands to try `archiveBooking`, `archiveBooking pid/abc`<br>
+      Expected: Similar to the previous.
+  
+### Unarchive a booking
+1. Unarchive an already archived booking (undos the previous command).
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be unarchived.
+
+   1. Test case: `unarchiveBooking bid/42`<br>
+      Expected: Booking with booking ID 42 is unarchived. Success message shown in status bar.
+     
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates booking with booking ID 1, `archiveBooking bid/1` archives the booking, `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates a booking with same details as the previous booking but different booking ID. `unarchiveBooking bid/1` unarchives the previous booking <br>
+      Expected: The booking is not archived. Duplicate booking error shown in status bar.
+  
+   1. Other incorrect commands include unarchive a booking that conflicts with an existing booking.
+      Expected: Similar to the previous.
+
+### Order room service
+1. Order room service for a particular booking. Available room service types are WIFI, DINING and MASSAGE.
+    
+   1. Prerequisite: `listBooking` to find out the ID of the booking to order room service for.
+
+   1. Test case: `orderRoomService bid/1 rst/WIFI`<br>
+      Expected: Orders WIFI room service for booking with ID 1. Success message shown in status bar.
+      
+   1. Test case: `orderRoomService bid/1 rst/dining`<br>
+      Expected: Room service fails as room service type is case sensitive. Error details and correct command usage shown in status bar.
+      
+   1. Other incorrect commands to try `orderRoomService bid/2`, `orderRoomService pid/2`<br>
+      Expected: Similar to the previous.
+
+### View a bill
+1. Gets the bill of a specified booking ID. A bill will be display in the UI.
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to get bill.
+
+   1. Test case: `getBill bid/6`<br>
+      Expected: The bill for the booking ID 6 shown in status bar.
+   
+   1. Test case: `getBill bid/x`(where x is a non-existent booking ID)<br>
+      Expected: Error message of invalid booking ID shown in status bar. The bill is not displayed.
+   
+   1. Other incorrect commands to try `getBill pid/1`, `getBill 1`.
+      Expected: Similar to the previous.       
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Removing or Modifying files in data folder residing in same directory as ConciergeBook.jar.
+   
+   1. Test case: Deleting the entire data folder.
+      Expected: ConciergeBook will attempt to access the folder. If it does not exists, the data folder will be automatically created with default settings. Other jsons beside preferences.json will be created upon modification of sample data loaded.
 
-1. _{ more test cases …​ }_
+   1. Test case: Corrupting data files by modifying its entries.
+      Expected: ConciergeBook will try its best to parse the data. If it is not valid, it must be corrupted. Therefore the application will load up with default settings and sample data.

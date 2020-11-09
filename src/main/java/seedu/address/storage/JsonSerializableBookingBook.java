@@ -21,7 +21,7 @@ import seedu.address.model.booking.Booking;
 @JsonRootName(value = "bookingBook")
 class JsonSerializableBookingBook {
 
-    public static final String MESSAGE_DUPLICATE_BOOKING = "Bookings list contains duplicate booking(s).";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "Bookings list contains duplicate active booking(s).";
 
     private final List<JsonAdaptedBooking> bookings = new ArrayList<>();
 
@@ -51,7 +51,7 @@ class JsonSerializableBookingBook {
         BookingBook bookingBook = new BookingBook();
         for (JsonAdaptedBooking jsonAdaptedBooking : bookings) {
             Booking booking = jsonAdaptedBooking.toModelType();
-            if (bookingBook.hasBooking(booking)) {
+            if (bookingBook.containsActiveDuplicate(booking)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_BOOKING);
             }
             bookingBook.addBooking(booking);
