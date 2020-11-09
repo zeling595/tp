@@ -87,7 +87,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletePerson 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletePerson pid/1")` API call.
 
 ![Interactions Inside the Logic Component for the `deletePerson pid/1` Command](images/DeleteSequenceDiagram.png)
 
@@ -345,7 +345,7 @@ The following sequence diagram shows how the deleteBooking operation works:
 * **Alternative 2**: display index
     - Pros: Easy to implement: can reuse addressBook code
     - Cons: Since we have multiple lists in the app, it is possible that the user will be jumping between different lists. 
-    For example, a person might remember there is a booking to be deleted at index 4, but he proceeds to change the `personBook` which results in a change in the bookingBook (ed. deletePerson).
+    For example, a person might remember there is a booking to be deleted at index 4, but he proceeds to change the `personBook` which results in a change in the bookingBook (eg. deletePerson).
     Generally, referencing using ID is more reliable as ID is fixed and unique.
 <!-- Delete Booking feature -->
 
@@ -622,8 +622,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 1a. Guest's information is invalid  <br>
-1a1. ConciergeBook displays error message and requests for the correct data.  <br>
-1a2. User enters new data. <br>
+* 1a1. ConciergeBook displays error message and requests for the correct data.  <br>
+* 1a2. User enters new data. <br>
 Steps 1a1-1a2 are repeated until the data entered are correct. <br>
 Use case resumes from step 2.<br>
   Use case ends.
@@ -640,11 +640,11 @@ Use case resumes from step 2.<br>
 **Extensions**
 1a. User does not enter any input. 
 
-1a1. ConciergeBook shows an error message. <br>
+* 1a1. ConciergeBook shows an error message. <br>
 Use case resumes at step 1. 
     
 2a. No guest match the keywords. <br>
-2a1. ConciergeBook shows an empty list. <br>
+* 2a1. ConciergeBook shows an empty list. <br>
 Use case ends. 
     
 **Use case `UC03`: Delete a guest profile**
@@ -664,7 +664,7 @@ Use case ends.
 Use case ends. 
     
 3a. The given index is invalid.  <br>
-3a1. ConciergeBook shows an error message  <br>
+* 3a1. ConciergeBook shows an error message  <br>
 Use case resumes at step 3.
 
 **Use case `UC04`: Edit a guest profile**
@@ -678,17 +678,17 @@ Use case resumes at step 3.
 
     Use case ends.
 
-**Extensions**
-2a. The list is empty. 
+**Extensions** <br>
+2a. The list is empty. <br>
     Use case ends. 
     
 3a. The given index is invalid.  
-    3a1. ConciergeBook shows an error message.  
+    * 3a1. ConciergeBook shows an error message.  
     Use case resumes at step 3. 
     
 3b. The information provided is invalid format or no new information is provided. <br>
-    3b1.  ConciergeBook requests for correct data. <br>
-    3b2.  User enters new data.<br>
+    * 3b1.  ConciergeBook requests for correct data. <br>
+    * 3b2.  User enters new data.<br>
       Steps 3b1-3b2 are repeated until the data entered are correct.<br>
       Use case resumes from step 4.
 
@@ -699,13 +699,13 @@ Use case resumes at step 3.
 1. User inputs a start date, end date and a optional room type. 
 2. ConciergeBook lists out all the matching rooms which are available within the start and end date. 
 
-**Extension**
+**Extension** <br>
 1a. User inputs a start date that is after the end date. <br>
-    1a1. ConciergeBook throws a error message. <br>
+    * 1a1. ConciergeBook throws a error message. <br>
     Use case resumes at step 1. 
     
 1b. User inputs an invalid room type. <br>
-    1b1. ConciergeBook throws an error message. <br>
+    * 1b1. ConciergeBook throws an error message. <br>
     Use case resumes at step 1. 
     
 **Use case `UC06`: List rooms**  
@@ -717,9 +717,9 @@ Use case resumes at step 3.
 
 Use case ends.
 
-**Extension**
+**Extension** <br>
 1a. Room type is in invalid.  
-	1a1: ConciergeBook throws error message.   
+	* 1a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 	
 **Use case `UC07`: Find a booking**
@@ -729,15 +729,15 @@ Use case ends.
 1. User enters a list of requirements. 
 2. ConciergeBook displays a list of bookings that match the requirements. 
 
-**Extension**
+**Extension** <br>
 1a. User enters invalid information or no new information. <br>
-    1a1. ConciergeBook throws an error message and request for correct information. <br>
-    1a2. User inputs correct information. <br>
+    * 1a1. ConciergeBook throws an error message and request for correct information. <br>
+    * 1a2. User inputs correct information. <br>
     Step 1a1-1a2 are repeated until the information is correct. <br>
     Use case resumes at step 2. 
 
 2a. No bookings match the requirements. <br>
-    2a1. ConciergeBook shows an empty list. <br>
+    * 2a1. ConciergeBook shows an empty list. <br>
     Use case ends. 
 
 **Use case `UC08`: Edit bookings**
@@ -751,27 +751,27 @@ Use case ends.
 
     Use case ends.
 
-**Extensions**
+**Extensions** <br> 
 2a. The list is empty. 
     Use case ends. 
     
 3a. The given booking ID is invalid.  
-    3a1. ConciergeBook shows an error message.  
+    * 3a1. ConciergeBook shows an error message.  
     Use case resumes at step 3. 
 
 3b. The start date is after the end date. <br>
-    3b1. ConciergeBook shows an error message.<br>
+    * 3b1. ConciergeBook shows an error message.<br>
     Use case resumes at step 3. 
     
 3c. The information provided is invalid format or no new information is provided. <br>
-    3c1.  ConciergeBook requests for correct data. <br>
-    3c2.  User enters new data. <br>
+    * 3c1.  ConciergeBook requests for correct data. <br>
+    * 3c2.  User enters new data. <br>
       Steps 3c1-3c2 are repeated until the data entered are correct.<br>
       Use case resumes from step 4.
       
 3d. The modified booking overlaps with another existing booking or is a duplicate booking. <br>
-    3d1. ConciergeBook shows an error message and requests for the correct data. <br>
-    3d2. User enters new data. <br>
+    * 3d1. ConciergeBook shows an error message and requests for the correct data. <br>
+    * 3d2. User enters new data. <br>
     Steps 3d1-3d2 are repeated until the data entered are correct.<br>
     Use case resumes from step 4.
 
@@ -784,12 +784,12 @@ Use case ends.
 3.  User request to delete a booking. 
 4.  ConciergeBook deletes the booking and all associated room service ordered and shows a success message. 
 
-**Extension**
+**Extension** <br>
 2a. There are no bookings in the ConciergeBook. <br>
     Use case ends. <br>
 3a. User enters an invalid Booking Id. <br>
-    3a1. ConciergeBook shows an error message and request for the correct data. <br>
-    3a2. User enters new data. <br>
+    * 3a1. ConciergeBook shows an error message and request for the correct data. <br>
+    * 3a2. User enters new data. <br>
     Steps 3a1-3a2 are repeated until the data entered is correct. <br>
     Use case resumes from step 4.
 
@@ -804,25 +804,25 @@ Use case ends.
 
 Use case ends.  
 
-**Extension**  
+**Extension** <br>
 
 1a. Person cannot be found.  
-    1a1: User <ins>creates a profile for the person (UC01)</ins>.  
+    * 1a1: User <ins>creates a profile for the person (UC01)</ins>.  
 
 2a. User inputs invalid room ID.  
-	2a1: ConciergeBook throws error message.   
+	* 2a1: ConciergeBook throws error message.   
 	Use case resumes at step 1.  
 
 3a. User inputs start date and/or end date in wrong format.  
-	3a1: ConciergeBook throws error message. 
+	* 3a1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
 3b. End date is earlier than start date.  
-	3b1: ConciergeBook throws error message. 
+	* 3b1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 	
 3c. Start date and end date are more than 30 nights apart.    
-	3c1: ConciergeBook throws error message. 
+	* 3c1: ConciergeBook throws error message. 
 	Use case resumes at step 1.  
 
 **Use case `UC11`: Find Booking ID associated with Guest**
@@ -831,7 +831,7 @@ Use case ends.
 1. User <ins>finds the guest id (UC02)</ins> associated with the guest. 
 2. User <ins>finds the booking (UC07)</ins> associated with the person. 
 
-**Extension**
+**Extension** <br>
 1a. No guest ID associated. <br>
     Use case ends. 
     
@@ -847,11 +847,11 @@ Use case ends.
 2. User request for room service. 
 3. ConciergeBook saves the room service and shows a success message. 
 
-**Extension**
+**Extension** <br>
 
 2a. User inputs an invalid booking ID or room service type. <br>
-    2a1. ConciergeBook shows an error message and requests for correct information.<br>
-    2a2. User inputs correct information.<br>
+    * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    * 2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
 
@@ -864,10 +864,10 @@ Use case ends.
 2. User requests for the bill for the booking. 
 3. ConciergeBook shows a receipt and displays the total bill. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
-    2a1. ConciergeBook shows an error message and requests for correct information.<br>
-    2a2. User inputs correct information.<br>
+    * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    * 2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
 
@@ -880,15 +880,15 @@ Use case ends.
 2.  User requests to archive the booking with the booking ID found in step 1. 
 3.  ConciergeBook shows a success message and archives the booking. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
-    2a1. ConciergeBook shows an error message and requests for correct information.<br>
-    2a2. User inputs correct information.<br>
+    * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    * 2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
     
 2b. User requests to archive a booking that has already been archived. <br>
-    2b1. ConciergeBook shows an error message.<br>
+    * 2b1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
 **Use Case `UC15`: Unarchive a booking**
@@ -900,19 +900,19 @@ Use case ends.
 2.  User requests to unarchive the booking with the booking ID found in step 1. 
 3.  ConciergeBook shows a success message and unarchives the booking. 
 
-**Extension**
+**Extension** <br>
 2a. User inputs invalid booking ID. <br>
-    2a1. ConciergeBook shows an error message and requests for correct information.<br>
-    2a2. User inputs correct information.<br>
+    * 2a1. ConciergeBook shows an error message and requests for correct information.<br>
+    * 2a2. User inputs correct information.<br>
     Step 2a1-2a2 are repeated until the data provided is correct. <br>
     Use case resumes at step 3. 
     
 2b. User requests to unarchive a booking that has not been archived. <br>
-    2b1. ConciergeBook shows an error message.<br>
+    * 2b1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
 2c. User requests to unarchive a booking even though an active duplicate or active conflicting booking exists. <br>
-    2c1. ConciergeBook shows an error message.<br>
+    * 2c1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
 ## **Appendix E: Non-Functional Requirements**
@@ -924,8 +924,6 @@ Use case ends.
 4.  Should have a UI that looks like a modern desktop app.
 5.  A receptionist new to the app should be able to pick it up quickly.
 6.  Should provide helpful prompts and guides receptionist to accomplish tasks. 
-
-*{More to be added}*
 
 ## **Appendix F: Glossary**
 
@@ -952,7 +950,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample bookings. The window size may not be optimum.
 
 1. Saving window preferences
 
