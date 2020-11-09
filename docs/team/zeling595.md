@@ -33,6 +33,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * Developer Guide:
     * Added sections for list booking and edit booking features.
+    * Added appendix for manual testing.
   * About US:
     * Update information for team members.
 

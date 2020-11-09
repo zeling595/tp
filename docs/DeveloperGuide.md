@@ -228,7 +228,7 @@ Step 4. If the booking ID exists and there is at least one other parameters to e
 `booking` to replace the old booking with the booking ID and store it in `Model`. Else, ConciergeBook will display
 error message to show sample usage.
 
-Given below is the sequence diagram that shows how the edit booking operation works (in step 5).
+Given below is the sequence diagram that shows how the edit booking operation works.
 
 ![EditBookingSequenceDiagram](images/EditBookingSequenceDiagram.png)
 
@@ -242,6 +242,18 @@ If the edited booking duplicates or conflicts with existing booking, an error me
 The following activity diagram summarises what happens when a user executes a `editBooking` command:
 
 ![EditBookingActivityDiagram](images/EditBookingActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: Whether to update the existing booking or create new booking with edited fields to replace the existing booking.
+
+* **Alternative 1 (current choice):** Create new booking with edited fields to replace the existing booking.
+  * Pros: Making `Booking` an immutable object increases the testability of the code and makes the command less error-prone.
+  * Cons: More work to create new booking and replace it in the list of bookings in model.
+
+* **Alternative 2:** Update the existing booking
+  * Pros: Easier to implement.
+  * Cons: More difficult to test.
 
 <!-- Edit booking feature -->
 
@@ -532,7 +544,7 @@ Bookings can also be edited. Hence, editing the duration of the booking would af
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## **Appendix A: Effort**
 
 This section aims to document the effort that our team has put into creating ConciergeBook, which we estimate took
 more than the effort it takes to create AB3 due to the various complexities involved.
@@ -558,9 +570,7 @@ AB3. We had to extend AB3, which only had the `Person` entity, and add other ent
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix B: Product scope**
 
 **Target user profile**:
 
@@ -574,8 +584,7 @@ AB3. We had to extend AB3, which only had the `Person` entity, and add other ent
 **Value proposition**: allows receptionist to handle the bookings of guests 
 faster than a typical mouse/GUI driven app and gives both the receptionist and guests a pleasant experience.
 
-
-### User stories
+## **Appendix C: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -593,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | hotel receptionist  | [EPIC] keep track of room services ordered by guests.                                               |                                                                        |
 | `* * *`  | hotel receptionist  | provide `WIFI`, `DINING` and `MASSAGE` room services for guests.                                    |                                                                        |
 
-### Use cases
+## **Appendix D: Use cases**
 
 (For all use cases below, the **System** is the `ConciergeBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -902,7 +911,7 @@ Use case ends.
     2c1. ConciergeBook shows an error message.<br>
     Use case resumes at step 1. 
     
-### Non-Functional Requirements
+## **Appendix E: Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 records of bookings without a noticeable sluggishness in performance for typical usage.
@@ -914,7 +923,7 @@ Use case ends.
 
 *{More to be added}*
 
-### Glossary
+## **Appendix F: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Receptionist**: User of the application as defined in the target user profile.
@@ -924,7 +933,7 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix G: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -948,29 +957,146 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `listPerson` command. Multiple persons in the list. Choose a person to delete by noting down his/her person ID.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deletePerson pid/1`<br>
+      Expected: Person in the list with person ID `1` will be deleted from the list. Success message shown in the status message. All bookings associated with the person will be deleted at the same time.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deletePerson pid/x` (where x is non-existent person ID)<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `deletePerson pid/abc`<br>
+      Expected: Command not executed as person ID format is invalid. Error details shown in the status bar. Status bar remains unchanged.
+
+   1. Other incorrect delete commands to try: `deletePerson`, `deletePerson pid/`, `deletePerson bid/abc`<br>
+      Expected: Similar to previous.
+      
+### Add a booking
+1. Add a booking with provided details.
+   1. Prerequisite: `listPerson` to find out the ID of the person for the new booking.
+   
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25`<br>
+      Expected: Add booking for person with person ID 5 into room ID 2120 from 12 December 2020 to 25 December 2020. Success message shown in the status message. A new booking will be shown in the booking list panel. 
+
+   1. Test case: `addBooking pid/5 rid/20 sd/2020-12-12 ed/2020-12-25`<br>
+      Expected: Error of invalid room ID shown in the status bar. No booking will be added.
+   
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12`<br>
+      Expected: Error of invalid command format and command usage shown in the status bar. No booking will be added.
+      
+   1. Other incorrect addBooking commands to try: `addBooking pid/5 rid/2120 sd/2020-12-13 ed/2020-12-10`(start date is after end date), `addBooking pid/x rid/2120 sd/2020-12-12 ed/2020-12-25`(where x is non-existent person ID).<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Edit a booking
+1. Edit the room ID, start date and/or end date of a booking.
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be edited.
+   
+   1. Test case: `editBooking bid/1 rid/2105`<br>
+      Expected: Edits the room ID of the booking with ID 1 to be 2105. Success message shown in status bar.
+      
+   1. Test case: `editBooking bid/x sd/2021-12-13`(where x is non-existent booking ID)<br>
+      Expected: Error of invalid booking ID shown in status bar. No booking is edited.
+    
+   1. Other incorrect editBooking commands to try: `editBooking bid/2 sd/2021-12-13 ed/2020-12-12`(start date after end date), `addBooking pid/1 rid/2120 sd/2020-12-12 ed/2020-12-25` followed by `editBooking bid/1 rid/2120 sd/2020-12-12 ed/2020-12-25`(duplicate booking).
+   
+### Delete a booking
+1. Delete a booking specified by booking ID.
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be deleted.
+   
+   1. Test case: `deleteBooking bid/1`<br>
+      Expected: Delete booking with booking ID 1. Success message shown in status bar.
+      
+   1. Test case: `deleteBooking bid/x` (where x is non-existent booking ID)<br>
+      Expected: No booking is deleted. Error of invalid booking ID shown in status bar.
+   
+   1. Other incorrect delete commands to try: `deleteBooking`, `deleteBooking bid/`, `deleteBooking pid/abc`<br>
+         Expected: Similar to previous.
+   
+### Find a booking
+1. Find the bookings which match all the given predicates, namely person ID, room ID, start date, end date and isArchived status.
+
+   1. No prerequisite.
+   
+   1. Test case: `findBooking pid/3`(provided booking ID 3 exists)<br>
+      Expected: List the booking with booking ID 3 in booking list panel. Success message shown in status bar.
+      
+   1. Test case: `findBooking sd/2020-11-12 ed/2020-11-16`<br>
+      Expected: List all the bookings which starts from 12 Nov 2020 and ends on 16 Nov 2020.
+      
+   1. Test case: `findBooking`<br>
+      Expected: Error of invalid command format and command usage shown in the status bar.
+      
+   1. Other incorrect commands to try `findBooking 1`, `findBooking bid/abc`<br>
+      Expected: Similar to previous.
+
+### Archive a booking
+1. Archive a booking marks the booking as archived. It is still stored in the hard disk.
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be archived.
+   
+   1. Test case: `archiveBooking bid/42`<br>
+      Expected: Booking with booking ID 42 is archived. Success message shown in status bar.
+      
+   1. Test case: `archiveBooking bid/x`(where x is non-existent booking ID)<br>
+      Expected: No booking is archived. Error details shown in the status bar.
+
+   1. Other incorrect commands to try `archiveBooking`, `archiveBooking pid/abc`<br>
+      Expected: Similar to the previous.
+  
+### Unarchive a booking
+1. Unarchive an already archived booking (undos the previous command).
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to be unarchived.
+
+   1. Test case: `unarchiveBooking bid/42`<br>
+      Expected: Booking with booking ID 42 is unarchived. Success message shown in status bar.
+     
+   1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates booking with booking ID 1, `archiveBooking bid/1` archives the booking, `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates a booking with same details as the previous booking but different booking ID. `unarchiveBooking bid/1` unarchives the previous booking <br>
+      Expected: The booking is not archived. Duplicate booking error shown in status bar.
+  
+   1. Other incorrect commands include unarchive a booking that conflicts with an existing booking.
+      Expected: Similar to the previous.
+
+### Order room service
+1. Order room service for a particular booking. Available room service types are WIFI, DINING and MASSAGE.
+    
+   1. Prerequisite: `listBooking` to find out the ID of the booking to order room service for.
+
+   1. Test case: `orderRoomService bid/1 rst/WIFI`<br>
+      Expected: Orders WIFI room service for booking with ID 1. Success message shown in status bar.
+      
+   1. Test case: `orderRoomService bid/1 rst/dining`<br>
+      Expected: Room service fails as room service type is case sensitive. Error details and correct command usage shown in status bar.
+      
+   1. Other incorrect commands to try `orderRoomService bid/2`, `orderRoomService pid/2`<br>
+      Expected: Similar to the previous.
+
+### View a bill
+1. Gets the bill of a specified booking ID. A bill will be display in the UI.
+
+   1. Prerequisite: `listBooking` to find out the ID of the booking to get bill.
+
+   1. Test case: `getBill bid/6`<br>
+      Expected: The bill for the booking ID 6 shown in status bar.
+   
+   1. Test case: `getBill bid/x`(where x is a non-existent booking ID)<br>
+      Expected: Error message of invalid booking ID shown in status bar. The bill is not displayed.
+   
+   1. Other incorrect commands to try `getBill pid/1`, `getBill 1`.
+      Expected: Similar to the previous.       
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Removing or Modifying files in data folder residing in same directory as ConciergeBook.jar.
+   
+   1. Test case: Deleting the entire data folder.
+      Expected: ConciergeBook will attempt to access the folder. If it does not exists, the data folder will be automatically created with default settings. Other jsons beside preferences.json will be created upon modification of sample data loaded.
 
-1. _{ more test cases …​ }_
+   1. Test case: Corrupting data files by modifying its entries.
+      Expected: ConciergeBook will try its best to parse the data. If it is not valid, it must be corrupted. Therefore the application will load up with default settings and sample data.
