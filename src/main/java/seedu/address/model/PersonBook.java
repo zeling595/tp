@@ -74,6 +74,9 @@ public class PersonBook implements ReadOnlyPersonBook {
         return persons.hasPersonWithId(id);
     }
 
+    /**
+     * Returns a person to the address book.
+     */
     public Person getPersonWithId(Integer id) {
         requireNonNull(id);
         return persons.getPersonWithId(id);

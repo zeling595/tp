@@ -38,6 +38,10 @@ public class UniqueRoomList implements Iterable<Room> {
         internalRoomList.add(toAdd);
     }
 
+    /**
+     * Adds a Room to the list.
+     * The room must not already exist in the list.
+     */
     public Room getRoom(int roomId) {
         assert roomId >= 2103 && roomId < 2133;
         Room ret = EMPTY_ROOM;
@@ -67,11 +71,6 @@ public class UniqueRoomList implements Iterable<Room> {
         return ret;
     }
 
-    public void setRooms(UniqueRoomList replacement) {
-        requireNonNull(replacement);
-        internalRoomList.setAll(replacement.internalRoomList);
-    }
-
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -84,6 +83,12 @@ public class UniqueRoomList implements Iterable<Room> {
 
         internalRoomList.setAll(rooms);
     }
+
+    public void setRooms(UniqueRoomList replacement) {
+        requireNonNull(replacement);
+        internalRoomList.setAll(replacement.internalRoomList);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
