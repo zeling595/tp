@@ -118,8 +118,7 @@ public interface Model {
     void addRoom(Room r);
 
     /**
-     *
-     * @param rooms
+     * Replaces current room list with {@code rooms}.
      */
     void setRooms(List<Room> rooms);
 
