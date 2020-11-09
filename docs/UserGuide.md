@@ -219,7 +219,7 @@ This feature is used for you to find a suitable room for the guest who is planni
 Format: `filterRoom sd/START_DATE ed/END_DATE [typ/ROOM_TYPE]`
 
 * Both `START_DATE` and `END_DATE` have to be provided to list all the hotel rooms that are available within those dates.
-* Dates have to be in the format `YYYY-MM-DD`
+* Dates have to be in the format `yyyy-MM-dd`
 * An optional `ROOM_TYPE` can be provided to filter the list based on the hotel room’s type. Only 1, 2, and 3 are accepted 
 as parameters. 1 indicates Single Rooms, 2 indicates Double Rooms, 3 indicates Suite Rooms. 
 
