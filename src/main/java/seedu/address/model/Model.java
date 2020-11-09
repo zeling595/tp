@@ -111,28 +111,66 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     // Room Book Methods
+    /**
+     * Adds the given room.
+     * {@code rooom} must not already exist in the room book.
+     */
     void addRoom(Room r);
 
+    /**
+     *
+     * @param rooms
+     */
     void setRooms(List<Room> rooms);
 
+    /**
+     * Replaces current {@code ReadOnlyRoomBook} with {@code newData}.
+     */
     void resetData(ReadOnlyRoomBook newData);
 
+    /**
+     * Replaces current {@code ReadOnlyBookingBook} with {@code newData}.
+     */
     void resetData(ReadOnlyBookingBook newData);
 
+    /**
+     * Returns a {@code String} that displays all rooms.
+     */
     String displayRooms(ObservableList<Integer> rooms);
 
+    /**
+     * Returns a {@code String} that displays all Single rooms.
+     */
     String displaySingleRooms(ObservableList<Integer> rooms);
 
+    /**
+     * Returns a {@code String} that displays all Double rooms.
+     */
     String displayDoubleRooms(ObservableList<Integer> rooms);
 
+    /**
+     * Returns a {@code String} that displays all Suite rooms.
+     */
     String displaySuiteRooms(ObservableList<Integer> rooms);
 
+    /**
+     * Returns true if the roomId exist in the room book.
+     */
     boolean hasRoom(int roomId);
 
+    /**
+     * Returns a {@code Room} with the corresponding {@code roomId}.
+     */
     Room getRoom(Integer roomId);
 
+    /**
+     * Returns a {@code ObservableList} of all available rooms given a list of unavailable rooms.
+     */
     ObservableList<Integer> getAvailableRooms(ObservableList<Integer> unavailableRooms);
 
+    /**
+     * Returns a {@code ReadOnlyRoomBook}.
+     */
     ReadOnlyRoomBook getRoomBook();
 
     // Booking Book Methods
@@ -196,14 +234,24 @@ public interface Model {
     void updateFilteredBookingList(Predicate<Booking> predicate);
 
 
+    // Room Service Methods
     /**
-     * Room Service Book Methods
+     * Adds a Room Service.
      */
     void addRoomService(RoomService rs);
 
-    public ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId);
+    /**
+     * Returns a {@code ObservableList} of all room services.
+     */
+    ObservableList<RoomService> getRoomServicesForBooking(Integer bookingId);
 
-    public void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook);
+    /**
+     * Replaces room service book data with the data in {@code roomServiceBook}.
+     */
+    void setRoomServiceBook(ReadOnlyRoomServiceBook roomServiceBook);
 
-    public ReadOnlyRoomServiceBook getRoomServiceBook();
+    /**
+     * Returns a {@code ReadOnlyRoomServiceBook}.
+     */
+    ReadOnlyRoomServiceBook getRoomServiceBook();
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -44,6 +45,10 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(person -> person.getId().equals(id));
     }
 
+    /**
+     * Returns a {@code Person} with the corresponding id.
+     * @throws PersonNotFoundException if person does not exist.
+     */
     public Person getPersonWithId(Integer id) {
         requireNonNull(id);
         if (!hasPersonWithId(id)) {
@@ -98,11 +103,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -114,6 +114,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    public void setPersons(UniquePersonList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
