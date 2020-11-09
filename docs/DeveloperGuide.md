@@ -1023,7 +1023,7 @@ testers are expected to do more *exploratory* testing.
 
    1. No prerequisite.
    
-   1. Test case: `findBooking pid/3`(provided booking ID 3 exists)<br>
+   1. Test case: `findBooking pid/3`(provided person ID 3 exists)<br>
       Expected: List the booking with booking ID 3 in booking list panel. Success message shown in status bar.
       
    1. Test case: `findBooking sd/2020-11-12 ed/2020-11-16`<br>
@@ -1060,7 +1060,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates booking with booking ID 1, `archiveBooking bid/1` archives the booking, `addBooking pid/5 rid/2120 sd/2020-12-12 ed/2020-12-25` creates a booking with same details as the previous booking but different booking ID. `unarchiveBooking bid/1` unarchives the previous booking <br>
       Expected: The booking is not archived. Duplicate booking error shown in status bar.
   
-   1. Other incorrect commands include unarchive a booking that conflicts with an existing booking.
+   1. Other incorrect commands include unarchive a booking that conflicts with an existing booking.<br>
       Expected: Similar to the previous.
 
 ### Order room service
@@ -1070,9 +1070,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `orderRoomService bid/1 rst/WIFI`<br>
       Expected: Orders WIFI room service for booking with ID 1. Success message shown in status bar.
-      
-   1. Test case: `orderRoomService bid/1 rst/dining`<br>
-      Expected: Room service fails as room service type is case sensitive. Error details and correct command usage shown in status bar.
       
    1. Other incorrect commands to try `orderRoomService bid/2`, `orderRoomService pid/2`<br>
       Expected: Similar to the previous.
@@ -1088,7 +1085,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `getBill bid/x`(where x is a non-existent booking ID)<br>
       Expected: Error message of invalid booking ID shown in status bar. The bill is not displayed.
    
-   1. Other incorrect commands to try `getBill pid/1`, `getBill 1`.
+   1. Other incorrect commands to try `getBill pid/1`, `getBill 1`.<br>
       Expected: Similar to the previous.       
 
 ### Saving data
@@ -1097,8 +1094,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Removing or Modifying files in data folder residing in same directory as ConciergeBook.jar.
    
-   1. Test case: Deleting the entire data folder.
+   1. Test case: Deleting the entire data folder.<br>
       Expected: ConciergeBook will attempt to access the folder. If it does not exists, the data folder will be automatically created with default settings. Other jsons beside preferences.json will be created upon modification of sample data loaded.
 
-   1. Test case: Corrupting data files by modifying its entries.
+   1. Test case: Corrupting data files by modifying its entries.<br>
       Expected: ConciergeBook will try its best to parse the data. If it is not valid, it must be corrupted. Therefore the application will load up with default settings and sample data.
