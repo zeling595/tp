@@ -55,17 +55,12 @@ Given below are my contributions to the project.
     * Made small tweaks to Home Page display under UI (Pull Request [\#194](https://github.com/AY2021S1-CS2103-W14-2/tp/pull/194))
     
 ### Contributions to Developer Guide (Extracts)
-* Diagrams drawn for Filter Room Feature 
-    * The following diagram is the Activity Diagram for Filter Room. <br>
-    <img src="hazel_images/Hazel_FilterRoomActivityDiagram.png" width="800" />
-    * The following diagram is the Sequence Diagram for Filter Room for the optimal case. <br> 
-    <img src="hazel_images/Hazel_FilterRoomSequenceDiagram2.png" width="800" />
-    
 * Diagrams drawn for Get Bill Feature 
     * The following diagram is the Activity Diagram for Get Bill. <br>
     <img src="hazel_images/Hazel_GetBillActivityDiagram.png" width="800" />
     * The following diagram is the Sequence Diagram for Get Bill. <br> 
     <img src="hazel_images/Hazel_GetBillSequenceDiagram.png" width="800" />
+Similar Diagrams were drawn for the Filter Room Feature. 
     
 * Diagrams drawn for Architecture Component 
     * The following diagram was used for the Model component in Architecture. 
