@@ -114,6 +114,11 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
     }
 
+    /**
+     * Returns a booking with the room ID
+     * @param roomId The room ID of the booking
+     * @return The booking that contains the room ID
+     */
     public Booking getBooking(int roomId) {
         requireNonNull(roomId);
         return internalList.stream()
@@ -148,6 +153,11 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
 
+    /**
+     * Set a target booking to edited booking.
+     * @param target The booking to be replaced.
+     * @param editedBooking The edited booking to be added to the unique booking list.
+     */
     public void setBooking(Booking target, Booking editedBooking) {
         requireAllNonNull(target, editedBooking);
         // Check if booking exists
@@ -180,6 +190,9 @@ public class UniqueBookingList implements Iterable<Booking> {
         internalList.set(index, editedBooking);
     }
 
+    /**
+     * Replace the bookings in the current list with bookings in replacement unique booking list.
+     */
     public void setBookings(UniqueBookingList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -212,6 +225,9 @@ public class UniqueBookingList implements Iterable<Booking> {
         return true;
     }
 
+    /**
+     * Returns a list of unavailable rooms that overlap with the period from start date to end date.
+     */
     public ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate) {
         return FXCollections.observableArrayList(internalList.stream().filter(x -> x.hasOverlap(startDate, endDate))
                                     .map(Booking::getRoomId)
