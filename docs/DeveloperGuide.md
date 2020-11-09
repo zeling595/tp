@@ -503,7 +503,6 @@ Step 4. The user keys in `getBill` command, with the `booking ID` as the paramet
 Step 5. A receipt will be generated, informing the user of the total bill and a breakdown of the bill. <br>
 
 Given below is the sequence diagram that shows how the `getBill` operation works in Step 5. 
-![GetBillActivityDiagram](images/GetBillSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the booking ID that the user keys
 into the system does not exist, a CommandException will be thrown and the error will be displayed to the user.
@@ -520,7 +519,6 @@ The following activity diagram summarises what happens when a user executes a `g
 ![GetBillActivityDiagram](images/GetBillActivityDiagram.png)
 
 #### Design consideration:
-##### Aspect: Calculating the total price
 **Alternative 1 (current choice)**: Compute the final bill only when requested.
 * Pros: Ensures that there is less dependency on the bookings and allows for modifications to the duration of the stay.  
 * Cons: Have a slightly lower execution time. 

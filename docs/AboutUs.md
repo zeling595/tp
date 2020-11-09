@@ -62,7 +62,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/hazel1603.png" width="200px">
 
 [[github](http://github.com/Hazel1603)]
-[[portfolio](team/hazel1603.md)]
+[[portfolio](team/hazel.md)]
 
 * Role: Developer (Model)
 * Responsibilities: 
