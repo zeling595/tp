@@ -30,7 +30,7 @@ public class FindBookingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the booking(s) "
             + "with one or more parameters including personId, roomId, start date, end date, isArchived state. \n"
-            + "There must at least be 1 parameter. Dates should be in the format YYYY-MM-DD. \n"
+            + "There must at least be 1 parameter. Dates should be in the format yyyy-MM-dd. \n"
             + "Parameters:"
             + "[" + PREFIX_ROOM_ID + "ROOM_ID] "
             + "[" + PREFIX_PERSON_ID + "PERSON_ID] "

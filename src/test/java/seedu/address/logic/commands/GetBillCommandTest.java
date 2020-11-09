@@ -67,7 +67,6 @@ public class GetBillCommandTest {
     public void execute_invalid_booking() throws CommandException {
         assertThrows(BookingNotFoundException.class, () -> {
             int bookingId = ACTIVE_BOOKING_DAN.getId();
-            Booking booking = model.getBooking(bookingId);
         });
     }
 

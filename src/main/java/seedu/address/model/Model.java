@@ -61,7 +61,7 @@ public interface Model {
     void setBookingBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces person book data with the data in {@code personBook}.
      */
     void setPersonBook(ReadOnlyPersonBook personBook);
 
@@ -77,12 +77,12 @@ public interface Model {
     ReadOnlyBookingBook getBookingBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the person book.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with the id is in the address book.
+     * Returns true if a person with the id is in the person book.
      */
     boolean hasPersonWithId(Integer id);
 
@@ -93,20 +93,20 @@ public interface Model {
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the person book.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the person book.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the person book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the person book.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -161,20 +161,34 @@ public interface Model {
      */
     void deleteBookingByPersonId(Integer personId);
 
+    /**
+     * Adds the given booking.
+     * The booking must not exist in the booking book.
+     */
     void addBooking(Booking b);
 
+    /**
+     * Replaces bookings in the booking book with the list.
+     */
     void setBookings(List<Booking> bookings);
 
+    /**
+     * Replaces the given booking {@code target} with {@code editedBooking}.
+     * {@code target} must exist in the address book.
+     * The {@code editedBooking} must not conflict with existing bookings.
+     */
     void setBooking(Booking target, Booking editedBooking);
 
     ObservableList<Integer> getUnavailableRooms(LocalDate startDate, LocalDate endDate);
 
-    // boolean hasBooking(int roomId);
-
-    Booking getBooking(int roomId);
-
+    /**
+     * Sets the isActive state to be false.
+     */
     void setBookingInactive(int bookingId);
 
+    /**
+     * Sets the isActive state to be true.
+     */
     void setBookingActive(int bookingId);
 
     /** Returns an unmodifiable view of the filtered person list */
